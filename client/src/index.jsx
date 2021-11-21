@@ -1,12 +1,24 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
-import Transcribe from './components/Transcribe.jsx';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from './components/Layout.jsx';
+import Home from './components/Home.jsx';
+import Workspace from './components/Workspace/index.jsx';
+import Guide from './components/Guide/index.jsx';
+import About from './components/About.jsx'
 
 const root = document.getElementById("app");
 ReactDOM.render(
   <BrowserRouter>
-    <Transcribe />
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="workspace" element={<Workspace />} />
+        <Route path="guide" element={<Guide />} />
+        <Route path="about" element={<About />} />
+        <Route path="*" element={<Home />} />
+      </Route>
+    </Routes>
   </BrowserRouter>,
   root
 );

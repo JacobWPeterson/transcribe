@@ -6,6 +6,14 @@ export const AppWrapper = styled.div`
   font-family: 'Noto Sans', sans-serif;
 `;
 
+export const Definition = styled.p`
+  margin: 0 0 0 10px;
+`;
+
+export const Word = styled.h3`
+  font-weight: 700;
+`;
+
 export const MiradorWrapper = styled.div`
   flex: 3;
   height: 100%;
@@ -87,7 +95,7 @@ export const StyledNavLink = styled(Link)`
 
 export const StyledSubmitIcon = styled.div`
   color: #fff;
-  background: ${props => props.submitMessage === "√" ? 'green' : 'red'};
+  background: ${props => props.submitMessage === "√" ? '#4a9455' : '#e43621'};
   border-radius: 50%;
   height: 20px;
   width: 20px;
