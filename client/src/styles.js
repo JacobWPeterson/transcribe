@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 import {
-  Badge, Container, Navbar, NavDropdown, Popover,
+  Alert, Badge, Container, Navbar, NavDropdown, Popover,
 } from 'react-bootstrap';
 
 export const AppWrapper = styled.div`
@@ -43,6 +43,17 @@ export const PopoverHeader = styled(Popover.Header)`
   border-bottom: 1px solid rgba(0,0,0,.2);
   border-top-left-radius: calc(0.3rem - 1px);
   border-top-right-radius: calc(0.3rem - 1px);
+`;
+
+export const StyledAlert = styled(Alert)`
+  position: absolute;
+  z-index: 100;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background: #c9ac5f;
+  padding: 12px 16px;
 `;
 
 export const StyledBadge = styled(Badge)`
