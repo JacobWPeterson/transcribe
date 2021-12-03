@@ -8,7 +8,7 @@ export const AppWrapper = styled.div`
   font-family: 'Noto Sans', sans-serif;
 `;
 
-export const HelpHeading = styled.h1`
+export const StyledHeading = styled.h1`
   color: #c9ac5f;
 `;
 
