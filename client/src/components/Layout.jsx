@@ -20,8 +20,6 @@ import {
 const Layout = () => {
   const [modalShow, setModalShow] = useState(false);
 
-  const handleOpenContactModal = () => setModalShow(!modalShow);
-
   return (
     <AppWrapper>
       <StyledNavbar bordertop="5px solid #c9ac5f" collapseOnSelect expand="lg">
@@ -53,13 +51,13 @@ const Layout = () => {
           color="#3e5276"
           role="link"
           tabIndex={0}
-          onClick={() => handleOpenContactModal()}
-          onKeyPress={() => handleOpenContactModal()}
+          onClick={() => setModalShow(true)}
+          onKeyPress={() => setModalShow(true)}
         >
           Contact
         </StyledNavLink>
       </StyledFooter>
-      <ContactModal onHide={() => handleOpenContactModal()} show={modalShow} />
+      <ContactModal onHide={() => setModalShow(false)} show={modalShow} />
     </AppWrapper>
   );
 };
