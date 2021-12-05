@@ -42,11 +42,6 @@ const Layout = () => {
       </StyledNavbar>
       <Outlet />
       <StyledFooter>
-        <Copyright>
-          © 2022 Jacob W. Peterson
-        </Copyright>
-        |
-        {' '}
         <StyledNavLink
           color="#3e5276"
           role="link"
@@ -56,6 +51,11 @@ const Layout = () => {
         >
           Contact
         </StyledNavLink>
+        <span style={{ color: '#c9ac5f' }}>|</span>
+        <Copyright>© 2022 Jacob W. Peterson</Copyright>
+        <a href="https://twitter.com/jacobwpeterson" target="_blank" rel="noreferrer">
+          <img src="./images/twitter.svg" alt="twitter icon" width="18" height="18" style={{ margin: '0 0 3px 0' }} />
+        </a>
       </StyledFooter>
       <ContactModal onHide={() => setModalShow(false)} show={modalShow} />
     </AppWrapper>
