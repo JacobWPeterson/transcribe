@@ -12,6 +12,7 @@ export const AppWrapper = styled.div`
 
 export const Copyright = styled.div`
   padding: 8px 16px;
+  color: #3e5276;
 `;
 
 export const HelpSection = styled.div`
