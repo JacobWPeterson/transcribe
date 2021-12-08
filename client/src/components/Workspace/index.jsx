@@ -47,6 +47,7 @@ const Workspace = () => {
           changeManuscript={handleManifestChange}
           manifestLength={manifestLength}
           manuscriptId={manuscript}
+          showAlert={setShowWrongPageAlert}
         />
       </TranscriptionPanel>
     </PageWrapper>

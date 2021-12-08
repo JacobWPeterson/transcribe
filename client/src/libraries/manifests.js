@@ -61,6 +61,7 @@ const manifests = {
       text: 'λογοσαυτωνκατανυκτικοσλογοσα',
       key: 'title',
       length: 28,
+      newConcepts: ['Abbreviations'],
     },
     lines: [
       {
@@ -138,7 +139,7 @@ const manifests = {
   },
   3: {
     manifestId: 'https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json',
-    canvasIndex: 1446,
+    canvasIndex: 14,
     lines: [
       {
         text: 'αρχητουευαγγελιουιυχυυυτουθυ',
