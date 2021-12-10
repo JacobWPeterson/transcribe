@@ -23,7 +23,7 @@ const Layout = () => {
   return (
     <AppWrapper>
       <StyledNavbar bordertop="5px solid #c9ac5f" collapseOnSelect expand="lg">
-        <StyledContainer className="container-fluid" nav-fill w-100>
+        <StyledContainer className="container-fluid">
           <StyledNavbarBrand href="/">Heirographa</StyledNavbarBrand>
           <StyledNavbarToggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
