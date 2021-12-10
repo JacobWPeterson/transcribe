@@ -10,7 +10,7 @@ const Glossary = () => (
     <HelpSection id="glossary">
       <StyledH1 textAlign="center">Glossary</StyledH1>
       {Object.keys(glosses).map((word) => (
-        <GlossaryEntry word={word} gloss={glosses[word]} />
+        <GlossaryEntry key={word} word={word} gloss={glosses[word]} />
       ))}
     </HelpSection>
   </PageWrapper>

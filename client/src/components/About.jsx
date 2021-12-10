@@ -57,7 +57,7 @@ const About = () => (
       </Partners>
     </AboutPageMiddle>
     <AboutPageLower>
-      <img style={{ 'border-radius': '50%' }} height="325" width="325" src="./images/me.jpg" alt="creator" />
+      <img style={{ borderRadius: '50%' }} height="325" width="325" src="./images/me.jpg" alt="creator" />
       <AboutPageLowerSection>
         <StyledH1 textAlign="center">About Me</StyledH1>
         {/* eslint-disable-next-line max-len */}
