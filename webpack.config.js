@@ -8,6 +8,7 @@ module.exports = {
     path: path.join(__dirname, 'client/dist'),
   },
   watch: false,
+  resolve: {fallback: { "url": false }},
   module: {
     rules: [
       {
