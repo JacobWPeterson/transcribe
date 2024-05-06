@@ -6,7 +6,11 @@ const manifests = {
     manifestId: 'https://cudl.lib.cam.ac.uk/iiif/MS-ADD-06594',
     // manifestId: '',
     canvasIndex: 160,
-    title: 'ευαγγελιοvκαταμαρκον',
+    title: {
+      text: 'ευαγγελιοvκαταμαρκον',
+      key: 'title',
+      length: 20,
+    },
     lines: [
       {
         text: 'αρχητουευαγγελιουιυχυυυτουθυ',
