@@ -26,7 +26,7 @@
     "express": "^4.19.2",
     "mirador": "^3.3.0",
     "mirador-image-tools": "^0.11.0",
-    "nodemon": "^2.0.20",
+    "nodemon": "^3.1.0",
     "pluralize": "^8.0.0",
     "react": "^16.8.3",
     "react-bootstrap": "^2.0.2",
