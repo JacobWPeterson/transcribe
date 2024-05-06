@@ -45,7 +45,6 @@ export const AppWrapper = styled.div`
 `;
 
 export const Copyright = styled.div`
-  padding: 8px 16px;
   color: #3e5276;
 `;
 
@@ -266,6 +265,7 @@ export const StyledFooter = styled.footer`
   align-items: center;
   justify-content: center;
   border-bottom: 5px solid #c9ac5f;
+  gap: 12px;
 `;
 
 export const StyledForm = styled.form`
@@ -399,8 +399,7 @@ export const StyledNavLink = styled(Nav.Link)`
   &&& {
     color: ${(props) => (props.color ? props.color : '#fff')};
     text-decoration: none;
-    padding: 8px 16px;
-
+    padding: 0;
     &:hover, &:focus {
       outline: none;
       cursor: pointer;
