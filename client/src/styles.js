@@ -360,7 +360,8 @@ export const StyledNavbarToggle = styled(Navbar.Toggle)`
 `;
 
 export const StyledNavDropdown = styled(NavDropdown)`
-  &&& > a {
+&&& > a {
+    padding: 0;
     color: #fff;
     text-decoration: none;
 
@@ -393,6 +394,11 @@ export const StyledNavDropdownItem = styled(NavDropdown.Item)`
   &:hover {
     transition: 500ms ease;
   }
+`;
+
+export const StyledNav = styled(Nav)`
+  align-items: center;
+  gap: 18px;
 `;
 
 export const StyledNavLink = styled(Nav.Link)`

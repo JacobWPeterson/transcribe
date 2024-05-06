@@ -14,6 +14,7 @@ import {
   StyledNavbarToggle,
   StyledNavDropdown,
   StyledNavDropdownItem,
+  StyledNav,
   StyledNavLink,
 } from '../styles.js';
 
@@ -27,7 +28,7 @@ const Layout = () => {
           <StyledNavbarBrand href="/">Heirographa</StyledNavbarBrand>
           <StyledNavbarToggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
-            <Nav className="justify-content-end">
+            <StyledNav className="justify-content-end">
               <StyledNavLink href="/">Home</StyledNavLink>
               <StyledNavLink href="/workspace">Workspace</StyledNavLink>
               <StyledNavDropdown title="Help" id="collapsible-nav-dropdown">
@@ -36,7 +37,7 @@ const Layout = () => {
                 <StyledNavDropdownItem href="/glossary">Glossary</StyledNavDropdownItem>
               </StyledNavDropdown>
               <StyledNavLink href="/about">About</StyledNavLink>
-            </Nav>
+            </StyledNav>
           </Navbar.Collapse>
         </StyledContainer>
       </StyledNavbar>
