@@ -21,7 +21,7 @@ const TranscriptionArea = ({
         Transcription Workspace
       </TranscriptionHeader>
       <StyledLink href="/guide" marginBottom={10} target="_blank">
-        See transcription guide
+        Transcription guide
       </StyledLink>
       {title && <SingleLine title={title} line={title} />}
       {lines.map((line) => (
