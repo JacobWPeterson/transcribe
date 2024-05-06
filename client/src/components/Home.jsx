@@ -45,7 +45,7 @@ const Home = () => {
       <HomeLowerWrapper>
         <StyledP fontStyle="italic" textAlign="center" width="50vw">
           {/* eslint-disable-next-line max-len */}
-          Heirographa currently offers several different features for learners to ease the transition from reading printed Greek texts to manuscripts of any period. Although in development, there are numerous planned features for instructors, such as creating custom lessons and tracking student progress.
+          Xeirographa currently offers several different features for learners to ease the transition from reading printed Greek texts to manuscripts of any period. Although in development, there are numerous planned features for instructors, such as creating custom lessons and tracking student progress.
         </StyledP>
         <HomeFeatureWrapper>
           <SectionHalf background="#d3d3d3">

@@ -133,9 +133,9 @@ export const MiradorWrapper = styled.div`
 
 export const NavButtonHolder = styled.div`
   display: flex;
-  width: 400px;
-  margin: 1vh 10px;
+  width: 100%;
   justify-content: space-between;
+  padding-top: 12px;
 `;
 
 export const PageWrapper = styled.div`
@@ -305,7 +305,7 @@ export const StyledInputWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   min-width: 250px;
-  width: 20vw;
+  width: 25vw;
   margin: 0 10px;
 `;
 
