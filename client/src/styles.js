@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 import {
-  Alert, Badge, Container, Navbar, NavDropdown, Popover,
+  Alert, Badge, Container, Form, Navbar, NavDropdown, Popover,
 } from 'react-bootstrap';
 
 export const AboutPageLower = styled.div`
@@ -129,13 +129,6 @@ export const MiradorWrapper = styled.div`
   flex: 3;
   height: 100%;
   position: relative;
-`;
-
-export const NavButtonHolder = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  padding-top: 12px;
 `;
 
 export const PageWrapper = styled.div`
@@ -273,6 +266,18 @@ export const StyledForm = styled.form`
   width: 100%;
   display: flex;
   align-items: flex-start;
+`;
+
+export const StyledFormSwitch = styled(Form.Switch)`
+  input {
+    border-color: #3E5276;
+    color: #3E5276;
+
+    &:checked {
+      background-color: #3E5276;
+      border-color: #3E5276;
+    }
+  }
 `;
 
 export const StyledH1 = styled.h1`
@@ -454,6 +459,21 @@ export const TranscriptionContainer = styled.div`
 export const TranscriptionHeader = styled.h2`
   color: #3e5276;
   margin-bottom: 5px;
+`;
+
+export const TranscriptionSubsection = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 8px 0;
+  gap: 24px;
+  color: #6c757d;
+`;
+
+export const TranscriptionNavButtons = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-top: 12px;
 `;
 
 export const TranscriptionPanel = styled.div`
