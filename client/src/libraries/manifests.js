@@ -7,7 +7,7 @@ const manifests = {
     // manifestId: '',
     canvasIndex: 160,
     title: {
-      text: 'ευαγγελιοvκαταμαρκον',
+      text: 'ευαγγελιονκαταμαρκον',
       key: 'title',
       length: 20,
     },

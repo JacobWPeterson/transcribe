@@ -68,7 +68,7 @@ const SingleLine = ({ title, line }) => {
       placement="top-end"
       rootClose
       transition
-      trigger="click"
+      trigger={['hover', 'focus']}
       overlay={(
         <Popover id="popover-concepts">
           <PopoverHeader as="h3">{`New Concept: ${concepts[0]}`}</PopoverHeader>
@@ -80,7 +80,7 @@ const SingleLine = ({ title, line }) => {
         </Popover>
       )}
     >
-      <StyledCustomPillBadge background="#c9ac5f">NC</StyledCustomPillBadge>
+      <StyledCustomPillBadge tabIndex={0} background="#c9ac5f">NC</StyledCustomPillBadge>
     </OverlayTrigger>
   );
 
@@ -100,7 +100,7 @@ const SingleLine = ({ title, line }) => {
           </Popover>
       )}
       >
-        <StyledBadge pill bg="danger">
+        <StyledBadge tabIndex={0} pill bg="danger">
           X
         </StyledBadge>
       </OverlayTrigger>
@@ -136,7 +136,7 @@ const SingleLine = ({ title, line }) => {
         </Popover>
     )}
     >
-      <StyledCustomPillBadge background="#3e5276">?</StyledCustomPillBadge>
+      <StyledCustomPillBadge tabIndex={0} background="#3e5276">?</StyledCustomPillBadge>
     </OverlayTrigger>
   );
 
@@ -156,7 +156,7 @@ const SingleLine = ({ title, line }) => {
         </Popover>
     )}
     >
-      <StyledCustomPillBadge background="#3e5276" margin="0 0 0 3px" padding="2px 5px">?</StyledCustomPillBadge>
+      <StyledCustomPillBadge tabIndex={0} background="#3e5276" margin="0 0 0 3px" padding="2px 5px">?</StyledCustomPillBadge>
     </OverlayTrigger>
   );
 
@@ -167,7 +167,7 @@ const SingleLine = ({ title, line }) => {
         {title && titleHelp()}
       </StyledLabel>
       <StyledInputWrapper>
-        <StyledInput id={title ? 'title' : line.key} type="text" value={lineContent} onChange={handleChange} />
+        <StyledInput id={title ? 'title' : line.key} type="text" value={lineContent} onChange={handleChange} autocomplete="off" />
         {line.caption && <StyledSmall>{line.caption}</StyledSmall>}
       </StyledInputWrapper>
       <StyledButton marginTop="2px" type="submit">Check</StyledButton>

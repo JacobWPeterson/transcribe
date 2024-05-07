@@ -305,7 +305,7 @@ export const StyledInputWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   min-width: 250px;
-  width: 25vw;
+  width: 22vw;
   margin: 0 10px;
 `;
 
