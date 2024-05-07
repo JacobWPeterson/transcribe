@@ -16,7 +16,7 @@ import {
   StyledSmall,
 } from '../../../styles.js';
 
-const SingleLine = ({ title, line }) => {
+const SingleLine = ({ title, line, requireSpaces }) => {
   const [lineContent, setLineContent] = useState('');
   const [submissionStatus, setSubmissionStatus] = useState(null);
   const [showHint, setShowHint] = useState(false);
@@ -36,10 +36,10 @@ const SingleLine = ({ title, line }) => {
     }
     /* On the offchance they got all the letters and were seeing the hint,
     * but then deleted a letter, this turns off the hint icon. This also
-    * has the effect of re-rendering the hint tooltip when it elibile again.
+    * has the effect of re-rendering the hint tooltip when it eligible again.
     */
-    if (lineContent.length !== line.length) {
-      setShowHint(false);
+   if (requireSpaces ? lineContent.length !== line.text.length : lineContent.replace(/\s/g, '').length !== line.text.replace(/\s/g, '').length) {
+     setShowHint(false);
       return;
     }
     /*
@@ -57,10 +57,10 @@ const SingleLine = ({ title, line }) => {
     setLineContent(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = () => {
     event.preventDefault();
-    setSubmissionStatus(evaluateSubmission(lineContent, line.text, line.length));
-  };
+    setSubmissionStatus(evaluateSubmission(lineContent, line.text, requireSpaces));
+  }
 
   const newConcept = (concepts) => (
     <OverlayTrigger
@@ -112,10 +112,12 @@ const SingleLine = ({ title, line }) => {
   );
 
   const getHint = (guess, answer) => {
+    const reformattedAnswer = requireSpaces ? answer : answer.replace(/\s/g, '')
+    const reformattedGuess = requireSpaces ? guess.replace(/ς|ϲ/gi, 'σ').toLowerCase() : guess.replace(/\s/g, '').replace(/ς|ϲ/gi, 'σ').toLowerCase();
     const mismatches = [];
-    for (let i = 0; i < guess.length; i += 1) {
-      if (guess[i] !== answer[i]) {
-        mismatches.push(`${guess[i]}(${i + 1})`);
+    for (let i = 0; i < reformattedGuess.length; i += 1) {
+      if (reformattedGuess[i] !== reformattedAnswer[i]) {
+        mismatches.push(`${reformattedGuess[i]}(${i + 1})`);
       }
     }
     return `Incorrect ${pluralize('letter', mismatches.length)}: ${[...mismatches].join(', ')}.`;
@@ -167,10 +169,10 @@ const SingleLine = ({ title, line }) => {
         {title && titleHelp()}
       </StyledLabel>
       <StyledInputWrapper>
-        <StyledInput id={title ? 'title' : line.key} type="text" value={lineContent} onChange={handleChange} autocomplete="off" />
+        <StyledInput id={title ? 'title' : line.key} type="text" value={lineContent} onChange={handleChange} autoComplete="off" />
         {line.caption && <StyledSmall>{line.caption}</StyledSmall>}
       </StyledInputWrapper>
-      <StyledButton marginTop="2px" type="submit">Check</StyledButton>
+      <StyledButton margintop="2px" type="submit">Check</StyledButton>
       {line.newConcepts && newConcept(line.newConcepts)}
       {submissionStatus && renderIncorrectAnswerMessaging()}
       {showHint && hint()}

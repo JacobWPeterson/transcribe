@@ -7,53 +7,44 @@ const manifests = {
     // manifestId: '',
     canvasIndex: 160,
     title: {
-      text: 'ευαγγελιονκαταμαρκον',
+      text: 'ευαγγελιον κατα μαρκον',
       key: 'title',
-      length: 20,
     },
     lines: [
       {
-        text: 'αρχητουευαγγελιουιυχυυυτουθυ',
+        text: 'αρχη του ευαγγελιου ιυ χυ υυ του θυ',
         key: 1,
-        length: 28,
         newConcepts: ['Ekthesis'],
         caption: 'The red αρ with superscript χ is shorthand for αρχη and marks the start of a section. Exclude it from your transcription.',
       },
       {
         text: 'ωσγεγραπταιεντοισπροφηταισ',
         key: 2,
-        length: 26,
       },
       {
         text: 'ιδουεγωαποστελλωτοναγγε',
         key: 3,
-        length: 23,
       },
       {
         text: 'λονμουπροπροσωπουσουοσ',
         key: 4,
-        length: 22,
       },
       {
         text: 'κατασκευασειτηνοδονσουεμπρο',
         key: 5,
-        length: 27,
       },
       {
         text: 'σθενσουφωνηβοωντοσεντηερημω',
         key: 6,
-        length: 27,
         caption: 'You\'ll notice a superscript ω at the end of the line. This is part of the final word.',
       },
       {
         text: 'ετοιμασατετηνοδονκυευθειασποι',
         key: 7,
-        length: 29,
       },
       {
         text: 'ειτεταστριβουσαυτουεγενετοιω',
         key: 8,
-        length: 28,
       },
     ],
   },
@@ -64,80 +55,65 @@ const manifests = {
     title: {
       text: 'λογοσαυτωνκατανυκτικοσλογοσα',
       key: 'title',
-      length: 28,
       newConcepts: ['Abbreviations'],
     },
     lines: [
       {
         text: 'ενμιαουντωνημερων',
         key: 1,
-        length: 17,
       },
       {
         text: 'ορθρουμιαναστασεπορευομην',
         key: 2,
-        length: 25,
         newConcepts: ['Ligatures'],
       },
       {
         text: '',
         key: 3,
-        length: 28,
       },
       {
         text: '',
         key: 4,
-        length: 26,
       },
       {
         text: '',
         key: 5,
-        length: 28,
       },
       {
         text: '',
         key: 6,
-        length: 26,
       },
       {
         text: '',
         key: 7,
-        length: 28,
       },
       {
         text: '',
         key: 8,
-        length: 26,
       },
       {
         text: '',
         key: 9,
-        length: 28,
       },
       {
         text: '',
         key: 10,
-        length: 26,
       },
       {
         text: '',
         key: 11,
-        length: 28,
       },
       {
         text: '',
         key: 12,
-        length: 26,
       },
       {
         text: '',
         key: 13,
-        length: 28,
       },
       {
         text: '',
         key: 14,
-        length: 26,
       },
     ],
   },
@@ -148,43 +124,35 @@ const manifests = {
       {
         text: 'αρχητουευαγγελιουιυχυυυτουθυ',
         key: 1,
-        length: 28,
         newConcepts: ['Ekthesis'],
       },
       {
         text: 'ωσγεγραπταιεντοισπροφηταισ',
         key: 2,
-        length: 26,
       },
       {
         text: 'αρχητουευαγγελιουιυχυυυτουθυ',
         key: 3,
-        length: 28,
       },
       {
         text: 'ωσγεγραπταιεντοισπροφηταισ',
         key: 4,
-        length: 26,
       },
       {
         text: 'αρχητουευαγγελιουιυχυυυτουθυ',
         key: 5,
-        length: 28,
       },
       {
         text: 'ωσγεγραπταιεντοισπροφηταισ',
         key: 6,
-        length: 26,
       },
       {
         text: 'αρχητουευαγγελιουιυχυυυτουθυ',
         key: 7,
-        length: 28,
       },
       {
         text: 'ωσγεγραπταιεντοισπροφηταισ',
         key: 8,
-        length: 26,
       },
     ],
   },
