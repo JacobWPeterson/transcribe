@@ -9,8 +9,8 @@ const Glossary = () => (
   <PageWrapper flexDirection="column">
     <HelpSection id="glossary">
       <StyledH1 textAlign="center">Glossary</StyledH1>
-      {Object.keys(glosses).map((word) => (
-        <GlossaryEntry key={word} word={word} gloss={glosses[word]} />
+      {Object.keys(glosses).map((word, index) => (
+       <GlossaryEntry key={index} word={word} gloss={glosses[word].long ? glosses[word].long : glosses[word].short} />
       ))}
     </HelpSection>
   </PageWrapper>
