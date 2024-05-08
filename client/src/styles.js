@@ -411,6 +411,7 @@ export const StyledNavLink = styled(Nav.Link)`
     color: ${(props) => (props.color ? props.color : '#fff')};
     text-decoration: none;
     padding: 0;
+    font-size: ${(props) => (props.fontSize ? `${props.fontSize}px` : '16px')};
     &:hover, &:focus {
       outline: none;
       cursor: pointer;

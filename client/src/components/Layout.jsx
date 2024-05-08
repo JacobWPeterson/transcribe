@@ -35,6 +35,8 @@ const Layout = () => {
                 <StyledNavDropdownItem href="/guide">Guide</StyledNavDropdownItem>
                 <NavDropdown.Divider />
                 <StyledNavDropdownItem href="/glossary">Glossary</StyledNavDropdownItem>
+                <NavDropdown.Divider />
+                <StyledNavDropdownItem href="/resources">Resources</StyledNavDropdownItem>
               </StyledNavDropdown>
               <StyledNavLink href="/about">About</StyledNavLink>
             </StyledNav>
