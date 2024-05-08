@@ -1,86 +1,42 @@
-// Terms and definitions borrowed and adapted from https://sourcebooks.fordham.edu/byz/paleoggloss.asp#cont
-
 const glosses = {
   Abbreviations: {
-    short: 'Abbreviations were commonly used in Greek MSS for common words, frequently repeated words and some names.',
-    long: 'Abbreviations were commonly used in Greek MSS for common words, frequently repeated words and some names. Abbreviation could be done by giving the first letter or first few letters of a word, or by omitting word endings. Other abbreviations were more complex, did not look at all like usual letters and derived from shorthand usages. When the word-shortening was done by omitting all the middle letters, it is a contraction.',
+    short: 'Abbreviations were used for common or repeated words and some names.',
+    long: 'Abbreviations were used for common or repeated words and some names. Abbreviation could be done by writing only the first letter or first few letters of a word, or by omitting word endings. One example is "και compendium" (ϗ) where a kappa with a trailing flourish stands for και. When the shortening is done by omitting the middle letters it is called a contraction (see below).',
   },
-  'Book Hands': {
-    short: 'Types of writing used for literary texts meant to last.',
-    long: 'Types of writing used for literary texts meant to last. The aim was clarity and regularity. In the antiquity, when a book trade existed this copying might be done to dictation. In the Byzantine period, copying seems to have been the work of individual scribes. The major division is between the uncial book hands used until the 9th century and the minuscule book hands used thereafter.',
-  },
-  Catena: {
-    short: 'A Scholia-type commentary on patristic texts.',
-  },
-  Compendia: {
-    short: 'Another term for abbreviations.',
+  Compendium: {
+    short: '(pl. compendia) Another word for abbreviation.',
   },
   Contraction: {
-    short: 'A type of abbreviation where the word is shortened by ommitting all the middle letters.',
+    short: 'A type of abbreviation where the word is shortened by omitting the middle letters.',
   },
   Cursive: {
-    short: 'A writing style derived from the running action of the pen.',
-    long: 'A writing style derived from the running action of the pen. It was used throughout antiquity, for private and public documents, and its letter forms were used as the basis of the more formal minuscule. A fundamental school taught alphabet of 24 letters remained behind all the letter forms.',
-  },
-  'Documentary Hands': {
-    short: 'Types of writing used to write official documents. Often written rapidly without lifting the pen.',
+    short: 'A style of writing that allows the scribe to only infrequently lift the pen from the page.',
   },
   Ekthesis: {
-    short: 'A large, decorative letter at the beginning of a line.',
-  },
-  Foliation: {
-    short: 'The numbering of folios within MSS.',
-  },
-  Glosses: {
-    short: 'Synonyms of words added by scribes or commentators.',
-  },
-  Lemma: {
-    short: 'The title of a work or chapter within a work.',
-    long: 'The title of a work or chapter within a work. Commonly in later MSS it was written in Uncial letters, and often in red ink.',
+    short: 'A large, decorative letter at the beginning of a line that is often in the margin.',
   },
   Ligatures: {
-    short: 'Two or three letters which are joined together, but where the form of each letter is preserved.',
-    long: 'Two or three letters which are joined together, but where the form of each letter is preserved. They were uncommon in uncial MSS, but very common in minuscule MSS. Since they make reading harder, although writing faster, it is unfortunate that many were taken over an preserved in early Greek printer\'s fonts.',
+    short: 'Where two or more letters are combined together to form a new glyph.',
+    long: 'Where two or more letters are combined together to form a new glyph, such as ȣ for ου. They become increasingly common in later minuscule manuscripts.',
   },
-  'Literary Hands': {
-    short: 'See book hands.',
+  'Majuscule needs new def': {
+    short: 'A writing style characterized by unconnected, capital letters of a consistent height.',
+    long: 'The script deriving from the common letter forms of antiquity, used in most Greek books until the 9th century, when it was largely replaced by minuscule. It was used after that in headings (lemmata) within minuscule manuscripts and in liturgical manuscripts. The letters were unconnected, and all of the same hight. No word division was used.'
   },
-  Majuscule: {
-    short: 'An alternative term for Uncial script.',
-  },
-  Miniscule: {
+  'Miniscule needs new def': {
     short: 'A writing style characterized by rounded, connected letters and, often, ligatures.',
-    long: 'The form of letters used in Greek changed from about 800 CE. The letter forms are quite distinct from the older uncial forms. Sometimes this change is traced to the Stoudion monastery, but in fact the letter-forms derive from previous cursive usage, although the scriptorium of the Stoudion monastery may have propagated the script. It was much faster to write than the older uncial script and the vast majority of Byzantine MSS are in minuscule. Minuscule MSS do not separate words, but do add breathings and accents, increasing legibility. The use of ligatures and abbreviations, however, counters ease of legibility. At first only the pure minuscule forms were used, but within a century, uncial letter forms began to be used alongside the pure minuscule (modern type fonts reflect both sources). To begin with, minuscule was written on the ruled lines of parchment, but later the fashion was to have the letters "hanging" from the line. Another later development was the use of a variety of different sizes for various letters. Although MSS dating is not perfect, distinct fashions in minuscule script do enable some dating of otherwise undated MSS.',
-  },
-  Monocondyle: {
-    short: 'A word or sentence written without lifting pen from paper.',
+    long: 'The form of letters used in Greek changed from about 800 CE. The letter forms are quite distinct from the older majuscule forms. Sometimes this change is traced to the Stoudion monastery, but in fact the letter-forms derive from previous cursive usage, although the scriptorium of the Stoudion monastery may have propagated the script. It was much faster to write than the older majuscule script and the vast majority of Byzantine manuscripts are in minuscule. Minuscule manuscripts do not separate words, but do add breathings and accents, increasing legibility. The use of ligatures and abbreviations, however, counters ease of legibility. At first only the pure minuscule forms were used, but within a century, majuscule letter forms began to be used alongside the pure minuscule (modern type fonts reflect both sources). To begin with, minuscule was written on the ruled lines of parchment, but later the fashion was to have the letters "hanging" from the line. Another later development was the use of a variety of different sizes for various letters. Although manuscripts dating is not perfect, distinct fashions in minuscule script do enable some dating of otherwise undated manuscripts.',
   },
   Monogram: {
-    short: 'A symbol in which a number of letters, usually of a name or title, are arranged together without any consideration for order.',
-    long: 'A symbol in which a number of letters, usually of a name or title, are arranged together without any consideration for order. The common "Chi-Rho" symbol for Christ [a P (rho) imposed on a X (Chi)] is one example. In Byzantine MSS, they were used on monuments, coinss, ivories, etc. to indicate the owner.',
+    short: 'A pictographic symbol in which a number of letters are arranged together without consideration for order.',
+    long: 'A pictographic symbol in which a number of letters are arranged together without consideration for order. Examples include the chi-rho symbol (☧) where a rho is imposed over a chi to stand for "Christ" and the staurogram (⳨), a christogram comprised of tau and rho.',
   },
   'Nomina Sacra': {
     short: 'Names of sacred persons reduced by contraction and marked by a line over the letters',
-    long: 'Latin for "Sacred Names" A limited number of names of sacred persons were often reduced by contraction - for instance "IC" for Jesus, "KS" for "Kyrios". Often the name is marked by a line over the letters used.',
-  },
-  Pagination: {
-    short: 'The numbering of pages. This was a fairly late development and is feature of printed books not MSS.',
-  },
-  Punctuation: {
-    short: 'Typically a high dot marking a pause or end of sentence, may also be a comma (,), semi-colon (·), or period (.)',
-    long: 'Greek punctuation is a relatively modern invention. It consists of the comma (,), the semi-colon (·), the period (.) and the interrogation mark (;). Many MSS lack punctuation; in others the main punctuation mark is a high dot, which may indicate a complete sentence or merely a pause.',
-  },
-  Scholia: {
-    short: 'Commentaries and annotations on a text.',
-    long: 'Commentaries and annotations on a text. Byzantine scholars loved to comment on older texts. A common way to do this was by making line-by-line marginal notes to a base manuscript. Such comments were often not original but compiled from earlier commentaries. They were common in Byzantium in 9th- and 10th-century MSS.',
-  },
-  Tachygraphy: {
-    short: 'A form of shorthand used in antiquity and by some Byzantine scribes.',
-    long: 'A form of shorthand used in antiquity and by some Byzantine scribes. A number of the signs were used as abbreviations in non-tachygraphical MSS.',
+    long: 'Latin for "sacred names", where names of sacred persons were reduced by contraction and marked by a line over the letters. In biblical manuscripts these typically take two or three letter forms and are most often used for κυριος (κ\u{0305}ς\u{0305}), ιησους (ι\u{0305}ς\u{0305}), χριστος (χ\u{0305}ς\u{0305}), υιος (υ\u{0305}ς\u{0305}), θεος (θ\u{0305}ς\u{0305}), and πνευμα (μ\u{0305}ν\u{0305}α\u{0305}).',
   },
   Uncial: {
-    short: 'A writing style characterized by unconnected, capital letters of a consistent height.',
-    long: 'The script deriving from the common letter forms of antiquity, used in most Greek books until the 9th century, when it was largely replaced by minuscule. It was used after that in headings (lemmata) within minuscule MSS and in liturgical MSS. The letters were unconnected, and all of the same hight. No word division was used. There are only few Uncial MSS which survive from the Byzantine period.',
+    short: 'An alternative term for majuscule script.',
   },
 };
 
