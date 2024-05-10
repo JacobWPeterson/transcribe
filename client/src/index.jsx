@@ -20,7 +20,7 @@ ReactDOM.render(
         <Route path="workspace" element={<Workspace />} />
         <Route path="glossary" element={<Glossary />} />
         <Route path="guide" element={<Guide />} />
-        <Route path="resources" element={<Resources />} />
+        <Route path="online-resources" element={<Resources />} />
         <Route path="about" element={<About />} />
         <Route path="*" element={<E404 />} />
       </Route>

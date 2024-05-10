@@ -178,6 +178,12 @@ export const PopoverHeader = styled(Popover.Header)`
   border-top-right-radius: calc(0.3rem - 1px);
 `;
 
+export const ResourceNameAndCreator = styled.div`
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+`;
+
 export const SectionHalf = styled.div`
   width: 42%;
   background: ${(props) => (props.background)};
@@ -281,13 +287,14 @@ export const StyledFormSwitch = styled(Form.Switch)`
 `;
 
 export const StyledH1 = styled.h1`
+font-weight: 600;
   color: ${(props) => (props.color ? props.color : '#c9ac5f')};
   text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')}
 `;
 
 export const StyledH2 = styled.h2`
-  font-weight: 700;
-  text-align: center;
+  font-weight: 600;
+  text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')};
   color: ${(props) => (props.color ? props.color : 'inherit')};
 `;
 
@@ -436,17 +443,18 @@ export const StyledP = styled.p`
   letter-spacing: .03em;
 `;
 
+export const StyledSpan = styled.span`
+  color: #606060;
+  font-size: ${(props) => (props.fontSize ? props.fontSize : '24')}px;
+  font-style: ${(props) => (props.fontStyle ? props.fontStyle : 'normal')};
+  text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')};
+  letter-spacing: .03em;
+`;
+
 export const StyledSmall = styled.small`
   color: #6c757d;
   margin-top: 0.25rem;
   font-size: .8em;
-`;
-
-export const StyledSpan = styled.span`
-  color: ${(props) => (props.color ? props.color : '#3c444d')};
-  font-size: 48px;
-  padding-right: ${(props) => (props.paddingRight ? props.paddingRight : 0)}px;
-  padding-left: ${(props) => (props.paddingLeft ? props.paddingLeft : 0)}px;
 `;
 
 export const TranscriptionContainer = styled.div`
