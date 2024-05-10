@@ -10,6 +10,8 @@ import Guide from './components/Help/Guide.jsx';
 import Resources from './components/Help/Resources.jsx';
 import About from './components/About.jsx';
 import E404 from './components/E404.jsx';
+import onlineResources from './libraries/onlineResources.js';
+import furtherReading from './libraries/furtherReading.js';
 
 const root = document.getElementById('app');
 ReactDOM.render(
@@ -20,7 +22,8 @@ ReactDOM.render(
         <Route path="workspace" element={<Workspace />} />
         <Route path="glossary" element={<Glossary />} />
         <Route path="guide" element={<Guide />} />
-        <Route path="online-resources" element={<Resources />} />
+        <Route path="online-resources" element={<Resources resource={onlineResources} title="Online resources" />} />
+        <Route path="further-reading" element={<Resources resource={furtherReading} title="Further reading" />} />
         <Route path="about" element={<About />} />
         <Route path="*" element={<E404 />} />
       </Route>
