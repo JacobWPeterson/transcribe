@@ -389,6 +389,11 @@ export const StyledNavDropdown = styled(NavDropdown)`
       transition: 500ms ease;
     }
   }
+
+  &&& > div {
+    left: unset;
+    right: 0;
+  }
 `;
 
 export const StyledNavDropdownItem = styled(NavDropdown.Item)`
