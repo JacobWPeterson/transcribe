@@ -202,7 +202,7 @@ export const StyledAlert = styled(Alert)`
 `;
 
 export const StyledBadge = styled(Badge)`
-  margin: 5px 0 0 10px;
+  margin: ${(props) => (props.margin ? props.margin : '0 0 0 10px')};
 `;
 
 export const StyledButton = styled.button`
@@ -241,7 +241,7 @@ export const StyledCustomPillBadge = styled.div`
   color: #3e5276;
   background: ${(props) => (props.background ? props.background : '#3e5276')};
   display: inline-block;
-  margin: ${(props) => (props.margin ? props.margin : '5px 0 0 10px')};
+  margin: ${(props) => (props.margin ? props.margin : '0 0 0 10px')};
   padding: ${(props) => (props.padding ? props.padding : '0.35em 0.65em')};
   font-size: .75em;
   font-weight: 700;
@@ -271,7 +271,7 @@ export const StyledForm = styled.form`
   padding: 10px 0;
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
 `;
 
 export const StyledFormSwitch = styled(Form.Switch)`
@@ -460,6 +460,16 @@ export const StyledSmall = styled.small`
   color: #6c757d;
   margin-top: 0.25rem;
   font-size: .8em;
+`;
+
+export const StyledTable = styled.table`
+  border: none;
+  border-collapse: collapse;
+`;
+
+export const SymbolCell = styled.td`
+  width: 100px;
+  text-align: center;
 `;
 
 export const TranscriptionContainer = styled.div`
