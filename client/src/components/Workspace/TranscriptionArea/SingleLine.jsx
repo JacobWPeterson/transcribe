@@ -38,8 +38,8 @@ const SingleLine = ({ title, line, requireSpaces }) => {
     * but then deleted a letter, this turns off the hint icon. This also
     * has the effect of re-rendering the hint tooltip when it eligible again.
     */
-   if (requireSpaces ? lineContent.length !== line.text.length : lineContent.replace(/\s/g, '').length !== line.text.replace(/\s/g, '').length) {
-     setShowHint(false);
+    if (requireSpaces ? lineContent.length !== line.text.length : lineContent.replace(/\s/g, '').length !== line.text.replace(/\s/g, '').length) {
+      setShowHint(false);
       return;
     }
     /*
@@ -98,7 +98,7 @@ const SingleLine = ({ title, line, requireSpaces }) => {
               {submissionStatus[1]}
             </Popover.Body>
           </Popover>
-      )}
+        )}
       >
         <StyledBadge tabIndex={0} pill bg="danger">
           X
@@ -136,7 +136,7 @@ const SingleLine = ({ title, line, requireSpaces }) => {
             {getHint(lineContent, line.text)}
           </Popover.Body>
         </Popover>
-    )}
+      )}
     >
       <StyledCustomPillBadge tabIndex={0} background="#3e5276">?</StyledCustomPillBadge>
     </OverlayTrigger>
@@ -153,12 +153,12 @@ const SingleLine = ({ title, line, requireSpaces }) => {
         <Popover id="popover-hint">
           <Popover.Body>
             {/* eslint-disable-next-line max-len */}
-            Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so they do not count toward your progress. Type them as a single line.
+            Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don't worry about them as much early on. Type them as a single line.
           </Popover.Body>
         </Popover>
-    )}
+      )}
     >
-      <StyledCustomPillBadge tabIndex={0} background="#3e5276" margin="0 0 0 3px" padding="2px 5px">?</StyledCustomPillBadge>
+      <StyledCustomPillBadge tabIndex={0} background="#6c757d" margin="0 0 0 3px" padding="2px 5px">?</StyledCustomPillBadge>
     </OverlayTrigger>
   );
 
