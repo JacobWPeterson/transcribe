@@ -295,7 +295,14 @@ font-weight: 600;
 export const StyledH2 = styled.h2`
   font-weight: 600;
   text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')};
-  color: ${(props) => (props.color ? props.color : 'inherit')};
+  color: ${(props) => (props.color ? props.color : '#333')};
+`;
+
+export const StyledH3 = styled.h3`
+  font-weight: 500;
+  text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')};
+  font-style: italic;
+  color: ${(props) => (props.color ? props.color : '#333')};
 `;
 
 export const StyledImage = styled.img`
@@ -440,11 +447,12 @@ export const StyledNavLink = styled(Nav.Link)`
 
 export const StyledP = styled.p`
   width: ${(props) => (props.width ? props.width : '100%')};
-  margin: 0 auto;
+  margin: ${(props) => (props.margin ? props.margin : '0 auto')};
   color: #606060;
   font-size: ${(props) => (props.fontSize ? props.fontSize : '24')}px;
   font-style: ${(props) => (props.fontStyle ? props.fontStyle : 'normal')};
   text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')};
+  text-indent: ${(props) => (props.textIndent ? props.textIndent : '0')};
   letter-spacing: .03em;
 `;
 

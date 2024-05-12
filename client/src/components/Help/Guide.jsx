@@ -1,7 +1,7 @@
 import React from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 import {
-  StyledH1, StyledH2, HelpSection, HelpText, PageWrapper, PopoverHeader, StyledBadge, StyledCustomPillBadge, StyledLink, StyledP, StyledTable, SymbolCell
+  StyledH1, StyledH2, StyledH3, HelpSection, HelpText, PageWrapper, PopoverHeader, StyledBadge, StyledCustomPillBadge, StyledLink, StyledP, StyledTable, SymbolCell
 } from '../../styles.js';
 
 const Guide = () => (
@@ -130,6 +130,32 @@ const Guide = () => (
         </tr>
       </StyledTable>
       <StyledH2 color="#333" textAlign="left">How-to</StyledH2>
+      <StyledP fontSize={16} textIndent="24px" margin="6px auto">
+        The lesson page features two main areas, the image viewer and the transcription workspace.
+      </StyledP>
+      <StyledH3>Image viewer</StyledH3>
+      <StyledP fontSize={16} textIndent="24px" margin="6px auto">
+        The image viewer loads with the image of the page for that lesson. Basic controls for zooming in and out of the image are located at the bottom. You can also click the image or use swipe actions to zoom in and out. There you will also find "previous" and "next" buttons that will take you to different pages of the manuscript, which can be useful for getting a better idea of that particular scribe's letter formations. If you navigate away from the target image, a message will pop up to remind you which image the lesson covers so you can navigate back.
+      </StyledP>
+      <StyledP fontSize={16} textIndent="24px" margin="6px auto">
+        At the top right is a circular button. Clicking this opens a menu of options for altering the appearance of the image, such as adjusting the brightness or contrast. <br />
+      </StyledP>
+      <StyledP fontSize={16} textIndent="24px" margin="6px auto">
+        In the top left next to the name of the manuscript is another button you can click to learn all about the manuscript. Each one has different information, but you can often learn about contents, owner(s), location, scripts, and find a bibliography of resources about that manuscript.
+      </StyledP>
+      <StyledH3>Transcription workspace</StyledH3>
+      <StyledP fontSize={16} textIndent="24px" margin="6px auto">
+        The overall concept is pretty straightforward. Each line of the manuscript, excepting titles (see the help icon for those), corresponds to one line of the transcription viewer. <i>Using a Greek unicode font</i>, type your answer into the relevant line, click the "check" button, and you should then see one of the symbols listed above.
+      </StyledP>
+      <StyledP fontSize={16} textIndent="24px" margin="6px auto">
+        Most Greek manuscripts do not have spaces, or at least do not use them in the same way as modern English writers, so there are two ways of completing the lessons. The normal evaluation mode does not care whether or not spaces are included, so you can just type the letters as you see them on the line. Clicking the "Require spaces" toggle at the top of the editor, however, switches it so that you have to correctly insert spaces into the text in order to get the correct answer.
+      </StyledP>
+      <StyledP fontSize={16} textIndent="24px" margin="6px auto">
+        Underneath some of the line inputs you may find additional information about a feature present on that line in the manuscript. Pay attention to these as they may tell you things to ignore from that line or help make sense of content above or below the main text line that is needed for the answer.
+      </StyledP>
+      <StyledP fontSize={16} textIndent="24px" margin="6px auto">
+        Once you've correctly answered all the lines in that lesson, click the "Next" button at the bottom of the page to move on to the next, harder manuscript with more new concepts.
+      </StyledP>
     </HelpSection>
   </PageWrapper>
 );
