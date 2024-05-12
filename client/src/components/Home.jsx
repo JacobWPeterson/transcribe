@@ -18,7 +18,7 @@ import {
 
 const Home = () => {
   const handleGetStarted = () => {
-    window.location.href = 'workspace';
+    window.location.href = 'lessons';
   };
 
   return (

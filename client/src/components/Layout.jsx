@@ -30,7 +30,7 @@ const Layout = () => {
           <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
             <StyledNav className="justify-content-end">
               <StyledNavLink href="/">Home</StyledNavLink>
-              <StyledNavLink href="/workspace">Workspace</StyledNavLink>
+              <StyledNavLink href="/lessons">Lessons</StyledNavLink>
               <StyledNavDropdown title="Help" id="collapsible-nav-dropdown">
                 <StyledNavDropdownItem href="/guide">Guide</StyledNavDropdownItem>
                 <NavDropdown.Divider />
