@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Mirador from './Mirador/index.jsx';
+import { Mirador } from './Mirador/index.jsx';
 import TranscriptionArea from './TranscriptionArea/index.jsx';
 
 import {
