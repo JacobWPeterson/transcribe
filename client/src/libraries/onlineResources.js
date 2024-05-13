@@ -52,13 +52,13 @@ const onlineResources = [
         resources: [
             {
                 name: "New Testament Virtual Manuscript Room (NT.VMR)",
-                creator: 'Institut für Neutestamentliche Textforschung (INTF)',
+                creator: 'the Institut für Neutestamentliche Textforschung (INTF)',
                 description: 'A collaborative research environment where New Testament textual scholars come to use and share resources and to contribute to the ongoing efforts for cataloging, imaging, indexing, and transcribing all known New Testament manuscript resources worldwide.',
                 url: 'https://ntvmr.uni-muenster.de/manuscript-workspace'
             },
             {
                 name: "Codex Sinaiticus",
-                creator: 'The Codex Sinaiticus Project',
+                creator: 'the Codex Sinaiticus Project',
                 description: 'The Codex Sinaiticus Project is an international collaboration to reunite the entire manuscript in digital form and make it accessible to a global audience for the first time.',
                 url: 'https://codexsinaiticus.org/en/manuscript.aspx'
             }
