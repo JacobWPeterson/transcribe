@@ -1,7 +1,7 @@
-import React from 'react';
+
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 import {
-  StyledH1, StyledH2, StyledH3, HelpSection, HelpText, PageWrapper, PopoverHeader, StyledBadge, StyledCustomPillBadge, StyledLink, StyledP, StyledTable, SymbolCell
+  StyledH1, StyledH2, StyledH3, HelpSection, PageWrapper, PopoverHeader, StyledBadge, StyledCustomPillBadge, StyledLink, StyledP, StyledTable, SymbolCell
 } from '../../styles.js';
 
 const Guide = () => (
@@ -21,7 +21,7 @@ const Guide = () => (
               overlay={(
                 <Popover id="popover-hint">
                   <Popover.Body>
-                    Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don't worry about them as much early on. Type them as a single line.
+                    Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don&apos;t worry about them as much early on. Type them as a single line.
                   </Popover.Body>
                 </Popover>
               )}
@@ -32,7 +32,7 @@ const Guide = () => (
           <td>
 
             <StyledP fontSize={14}>
-              This icon appears next to titles in the transcription workspace. Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don't worry about them as much early on. Type them as a single line.
+              This icon appears next to titles in the transcription workspace. Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don&apos;t worry about them as much early on. Type them as a single line.
             </StyledP>
           </td>
         </tr>
@@ -48,7 +48,7 @@ const Guide = () => (
                 <Popover id="popover-concepts">
                   <PopoverHeader as="h3">New Concept</PopoverHeader>
                   <Popover.Body>
-                    Here you'll find some useful information
+                    Here you&apos;ll find some useful information
                     &nbsp;
                     <StyledLink href={`/glossary`} target="_blank">And maybe a link to the glossary</StyledLink>
                   </Popover.Body>
@@ -124,7 +124,7 @@ const Guide = () => (
           </SymbolCell>
           <td>
             <StyledP fontSize={14}>
-              Congrats, you've answered correctly.
+              Congrats, you&apos;ve answered correctly.
             </StyledP>
           </td>
         </tr>
@@ -135,7 +135,7 @@ const Guide = () => (
       </StyledP>
       <StyledH3>Image viewer</StyledH3>
       <StyledP fontSize={16} textIndent="24px" margin="6px auto">
-        The image viewer loads with the image of the page for that lesson. Basic controls for zooming in (+) and out (-) on the image are located at the bottom. You can also click the image or use swipe actions to zoom in and out. There you will also find left (◀) and right (▶) arrow buttons that will take you to different pages of the manuscript, which can be useful for getting a better idea of that particular scribe's letter formations. If you navigate away from the target image, a message will pop up to remind you which image the lesson covers so you can navigate back.
+        The image viewer loads with the image of the page for that lesson. Basic controls for zooming in (+) and out (-) on the image are located at the bottom. You can also click the image or use swipe actions to zoom in and out. There you will also find left (◀) and right (▶) arrow buttons that will take you to different pages of the manuscript, which can be useful for getting a better idea of that particular scribe&apos;s letter formations. If you navigate away from the target image, a message will pop up to remind you which image the lesson covers so you can navigate back.
       </StyledP>
       <StyledP fontSize={16} textIndent="24px" margin="6px auto">
         At the top right is a circular button. Clicking this opens a menu of options for altering the appearance of the image, such as adjusting the brightness or contrast. <br />
@@ -145,16 +145,16 @@ const Guide = () => (
       </StyledP>
       <StyledH3>Transcription workspace</StyledH3>
       <StyledP fontSize={16} textIndent="24px" margin="6px auto">
-        The overall concept is pretty straightforward. Each line of the manuscript, excepting titles (see the help icon for those), corresponds to one line of the transcription viewer. <i>Using a Greek unicode font</i>, type your answer into the relevant line, click the "Check" button, and you should then see one of the symbols listed above. How to add languages to your computer: <StyledLink href="https://support.apple.com/en-gb/guide/mac-help/mchlp1406/mac" target="_blank">Mac</StyledLink> | <StyledLink href="https://support.microsoft.com/en-gb/windows/manage-the-input-and-display-language-settings-in-windows-12a10cb4-8626-9b77-0ccb-5013e0c7c7a2#:~:text=Select%20the%20Start%20%3E%20Settings%20%3E%20Time,keyboard%20you%20want%20to%20add." target="_blank">Windows</StyledLink>
+        The overall concept is pretty straightforward. Each line of the manuscript, excepting titles (see the help icon for those), corresponds to one line of the transcription viewer. <i>Using a Greek unicode font</i>, type your answer into the relevant line, click the &quot;Check&quot; button, and you should then see one of the symbols listed above. How to add languages to your computer: <StyledLink href="https://support.apple.com/en-gb/guide/mac-help/mchlp1406/mac" target="_blank">Mac</StyledLink> | <StyledLink href="https://support.microsoft.com/en-gb/windows/manage-the-input-and-display-language-settings-in-windows-12a10cb4-8626-9b77-0ccb-5013e0c7c7a2#:~:text=Select%20the%20Start%20%3E%20Settings%20%3E%20Time,keyboard%20you%20want%20to%20add." target="_blank">Windows</StyledLink>
       </StyledP>
       <StyledP fontSize={16} textIndent="24px" margin="6px auto">
-        Most Greek manuscripts do not have spaces, or at least do not use them in the same way as modern writers, so there are two ways of completing the lessons. The normal evaluation mode does not care whether or not spaces are included, so you can just type the letters as you see them on the line. Clicking the "Require spaces" toggle at the top of the editor, however, switches it so that you have to correctly insert spaces into the text in order to get the correct answer.
+        Most Greek manuscripts do not have spaces, or at least do not use them in the same way as modern writers, so there are two ways of completing the lessons. The normal evaluation mode does not care whether or not spaces are included, so you can just type the letters as you see them on the line. Clicking the &quot;Require spaces&quot; toggle at the top of the editor, however, switches it so that you have to correctly insert spaces into the text in order to get the correct answer.
       </StyledP>
       <StyledP fontSize={16} textIndent="24px" margin="6px auto">
         Underneath some of the line inputs you may find additional information about a feature present on that line in the manuscript. Pay attention to these as they may tell you things to ignore from that line or help make sense of content above or below the main text line.
       </StyledP>
       <StyledP fontSize={16} textIndent="24px" margin="6px auto">
-        Once you've correctly answered all the lines in a lesson, click the "Next" button at the bottom of the page to move on to the next, harder manuscript with more new concepts.
+        Once you&apos;ve correctly answered all the lines in a lesson, click the &quot;Next&quot; button at the bottom of the page to move on to the next, harder manuscript with more new concepts.
       </StyledP>
       <StyledH3>Found an issue?</StyledH3>
       <StyledP fontSize={16} textIndent="24px" margin="6px auto">

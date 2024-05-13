@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import mirador from 'mirador';
 import { miradorImageToolsPlugin } from 'mirador-image-tools';
 import config from './config.js';
@@ -6,7 +6,6 @@ import config from './config.js';
 const Mirador = ({
   manifest, index, setPageNumber,
 }) => {
-  let miradorInstance;
   useEffect(() => {
     config.windows[0] = {
       manifestId: manifest,
@@ -14,7 +13,7 @@ const Mirador = ({
       view: 'single',
     };
 
-    miradorInstance = mirador.viewer(config, miradorImageToolsPlugin);
+    const miradorInstance = mirador.viewer(config, miradorImageToolsPlugin);
 
     miradorInstance.store.subscribe(() => {
       const state = miradorInstance.store.getState();
@@ -23,7 +22,7 @@ const Mirador = ({
         setPageNumber(Number(canvasIndex.slice(canvasIndex.lastIndexOf('/') + 1).replace(/[^\d.-]/g, '')));
       }
     });
-  }, [manifest]);
+  }, [manifest, index, setPageNumber]);
 
   return <div id={config.id} />;
 };

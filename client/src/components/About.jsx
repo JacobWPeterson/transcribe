@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 import {
   AboutPageLower,
@@ -20,7 +20,7 @@ const About = () => (
   <PageWrapper flexDirection="column">
     <AboutPageUpper>
       <StyledH1 textAlign="center">Why Xeirographa</StyledH1>
-      <StyledP fontSize={20} width="90%">Xeirographa—from the Greek χειρόγραφα, meaning "manuscripts"—was created to bridge the skill gap between being able to read a print or critical edition and struggling to read original source material, whether for research purposes or personal interest. One of the major barriers to reading from manuscripts is that for most classical works the majority of surviving manuscripts are relatively late and these are often the most difficult manuscripts to read. The script in them is replete with cursive letters and ligatures that can bewilder newcomers. Accordingly, Xeirographa eases the learner into manuscripts by starting with relatively easy-to-read majuscule scripts. Then new and more complex concepts are slowly introduced over a series of lessons that accumulate into an ability to work with more difficult minuscule texts.</StyledP>
+      <StyledP fontSize={20} width="90%">Xeirographa—from the Greek χειρόγραφα, meaning &quot;manuscripts&quot;—was created to bridge the skill gap between being able to read a print or critical edition and struggling to read original source material, whether for research purposes or personal interest. One of the major barriers to reading from manuscripts is that for most classical works the majority of surviving manuscripts are relatively late and these are often the most difficult manuscripts to read. The script in them is replete with cursive letters and ligatures that can bewilder newcomers. Accordingly, Xeirographa eases the learner into manuscripts by starting with relatively easy-to-read majuscule scripts. Then new and more complex concepts are slowly introduced over a series of lessons that accumulate into an ability to work with more difficult minuscule texts.</StyledP>
       <br />
       <StyledP fontSize={20} fontStyle="italic" textAlign="center" width="90%">Please use the contact form to send questions or suggestions for improvement. Also consider <StyledLink href="https://www.venmo.com/jacobwpeterson" target="_blank">buying me a coffee</StyledLink> (or two).</StyledP>
     </AboutPageUpper>

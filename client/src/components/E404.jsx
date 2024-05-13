@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {
   E404Wrapper,
   E404Section,
@@ -7,7 +7,7 @@ import {
   StyledP,
 } from '../styles.js';
 
-const E404 = () => {
+export const E404 = () => {
   const handleGoHome = () => {
     window.location.href = '/';
   };
@@ -30,5 +30,3 @@ const E404 = () => {
     </E404Wrapper>
   );
 };
-
-export default E404;
