@@ -11,7 +11,7 @@ export const AboutPageLower = styled.div`
   height: 400px;
   align-items: center;
   justify-content: space-evenly;
-  margin: 5vh auto;
+  margin: 20px auto;
 `;
 
 export const AboutPageMiddle = styled.div`
@@ -29,7 +29,7 @@ export const AboutPageUpper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  margin: 5vh auto;
+  margin: 30px auto;
 `;
 
 export const AboutPageLowerSection = styled.div`
@@ -71,12 +71,13 @@ export const E404Wrapper = styled.div`
 `;
 
 export const HelpSection = styled.div`
-  margin: 5vh auto;
+  margin: 30px auto;
   width: 70%;
 `;
 
 export const HelpText = styled.p`
   color: #606060;
+  text-align: justify;
   margin: 0 0 12px 25px;
   letter-spacing: .03rem;
 `;
@@ -84,24 +85,17 @@ export const HelpText = styled.p`
 export const HomeFeatureWrapper = styled.div`
   display: flex;
   color: #3e5276;
-  margin: 7vh 0 5vh;
+  margin: 30px 0;
   justify-content: space-evenly;
 `;
 
-export const HomeLowerWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  color: #3e5276;
-  margin: 5vh 0;
-`;
-
 export const HomeMiddleWrapper = styled.div`
-  height: 20vh;
+  height: 140px;
   color: #fff;
   font-size: 28px;
   display: flex;
   flex-direction: column;
-  margin: 2vh 0;
+  margin: 12px 0;
   background-color: #c9ac5f;
   justify-content: space-evenly;
   align-items: center;
@@ -120,7 +114,7 @@ export const HomeTextContainer = styled.div`
 
 export const HomeUpperWrapper = styled.div`
   display: flex;
-  margin: 5vh 0;
+  margin: 30px 0;
   justify-content: center;
   align-items: center;
 `;
@@ -142,18 +136,17 @@ export const PageWrapper = styled.div`
 export const Partner = styled.div`
   display: flex;
   flex-direction: column;
-  height: 200px;
+  height: 180px;
   width: 200px;
   align-items: center;
-  margin: 20px;
 `;
 
 export const Partners = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  min-width: 50vw;
-  padding: 20px 0 0 0;
+  min-width: 800px;
+  padding: 30px 0 0 0;
 `;
 
 export const PartnerText = styled.p`
@@ -185,7 +178,7 @@ export const ResourceNameAndCreator = styled.div`
 `;
 
 export const SectionHalf = styled.div`
-  width: 42%;
+  width: 55%;
   background: ${(props) => (props.background)};
   padding: 25px;
   border-radius: 20px;
@@ -324,7 +317,7 @@ export const StyledInputWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   min-width: 250px;
-  width: 22vw;
+  width: 23vw;
   margin: 0 10px;
 `;
 
@@ -451,7 +444,7 @@ export const StyledP = styled.p`
   color: #606060;
   font-size: ${(props) => (props.fontSize ? props.fontSize : '24')}px;
   font-style: ${(props) => (props.fontStyle ? props.fontStyle : 'normal')};
-  text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')};
+  text-align: ${(props) => (props.textAlign ? props.textAlign : 'justify')};
   text-indent: ${(props) => (props.textIndent ? props.textIndent : '0')};
   letter-spacing: .03em;
 `;
@@ -485,7 +478,7 @@ export const TranscriptionContainer = styled.div`
   width: 100%;
   flex-direction: column;
   overflow-y: scroll;
-  padding: 2vh 0 2vh 2vw;
+  padding: 12px 0 12px 24px;
 `;
 
 export const TranscriptionHeader = styled.h2`
@@ -511,7 +504,6 @@ export const TranscriptionNavButtons = styled.div`
 export const TranscriptionPanel = styled.div`
   flex: 2;
   display: flex;
-  border: 2xp solid #3D3D3D;
 `;
 
 export const UnorderedList = styled.ul`
