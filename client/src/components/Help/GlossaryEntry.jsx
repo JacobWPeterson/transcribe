@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { HelpText, Word } from '../../styles.js';
 
 const GlossaryEntry = ({ word, gloss }) => (

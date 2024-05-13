@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 import pluralize from 'pluralize';
 import evaluateSubmission from './validators.js';
@@ -50,7 +50,7 @@ const SingleLine = ({ title, line, requireSpaces }) => {
     if (!showHint && guesses.current >= 3) {
       setShowHint(true);
     }
-  }, [submissionStatus]);
+  }, [submissionStatus, lineContent, line.text, line.content, requireSpaces]);
 
   const handleChange = (event) => {
     event.persist();
@@ -153,7 +153,7 @@ const SingleLine = ({ title, line, requireSpaces }) => {
         <Popover id="popover-hint">
           <Popover.Body>
             {/* eslint-disable-next-line max-len */}
-            Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don't worry about them as much early on. Type them as a single line.
+            Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don&apos;t worry about them as much early on. Type them as a single line.
           </Popover.Body>
         </Popover>
       )}
