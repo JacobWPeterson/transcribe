@@ -17,7 +17,8 @@ module.exports = {
     'jsx-a11y',
     '@typescript-eslint',
     'react-refresh',
-    "compat"
+    "compat",
+    "deprecation"
   ],
   overrides: [
     {
@@ -45,7 +46,7 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': 'error',
         '@typescript-eslint/no-unnecessary-type-arguments': 'error',
         '@typescript-eslint/prefer-nullish-coalescing': 'off',
-        '@typescript-eslint/prefer-optional-chains': 'error',
+        '@typescript-eslint/prefer-optional-chain': 'error',
         '@typescript-eslint/no-use-before-define': 'off',
         '@typescript-eslint/no-var-requires': 'off',
         '@typescript-eslint/no-unsafe-call': 'off',
@@ -54,7 +55,7 @@ module.exports = {
         '@typescript-eslint/no-unsafe-assignment': 'off',
         '@typescript-eslint/no-unsafe-return': 'off',
         '@typescript-eslint/no-floating-promises': 'off',
-        '@typescript-eslint/no-misuses-promises': [
+        '@typescript-eslint/no-misused-promises': [
           'warn',
           {
             checksVoidReturn: {

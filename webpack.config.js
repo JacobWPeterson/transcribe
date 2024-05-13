@@ -2,15 +2,20 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './client/src/index.jsx',
+  entry: './client/src/index.tsx',
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'client/dist'),
   },
   watch: false,
-  resolve: {fallback: { "url": false }},
+  resolve: { fallback: { "url": false } },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.jsx?/,
         include: path.join(__dirname, 'client/src'),
