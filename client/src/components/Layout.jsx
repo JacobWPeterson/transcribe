@@ -19,7 +19,7 @@ import {
 } from '../styles.js';
 
 const Layout = () => {
-  const [modalShow, setModalShow] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <AppWrapper>
@@ -51,8 +51,8 @@ const Layout = () => {
           color="#3e5276"
           role="link"
           tabIndex={0}
-          onClick={() => setModalShow(true)}
-          onKeyPress={() => setModalShow(true)}
+          onClick={() => setShowModal(true)}
+          onKeyPress={() => setShowModal(true)}
         >
           Contact
         </StyledNavLink>
@@ -68,7 +68,7 @@ const Layout = () => {
           <img src="./images/academia.svg" alt="academia.edu icon" width="16" height="16" />
         </a>
       </StyledFooter>
-      <ContactModal onHide={() => setModalShow(false)} show={modalShow} />
+      <ContactModal onHide={() => setShowModal(false)} show={showModal} />
     </AppWrapper>
   );
 };

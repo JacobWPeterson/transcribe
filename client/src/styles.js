@@ -84,12 +84,15 @@ export const HelpText = styled.p`
 
 export const HomeFeatureWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   color: #3e5276;
-  margin: 30px 0;
+  margin: 12px 0 24px 0;
+  align-items: center;
   justify-content: space-evenly;
+  gap: 24px;
 `;
 
-export const HomeMiddleWrapper = styled.div`
+export const HomeLowerWrapper = styled.div`
   height: 140px;
   color: #fff;
   font-size: 28px;
@@ -178,7 +181,7 @@ export const ResourceNameAndCreator = styled.div`
 `;
 
 export const SectionHalf = styled.div`
-  width: 55%;
+  width: 80%;
   background: ${(props) => (props.background)};
   padding: 25px;
   border-radius: 20px;
@@ -508,6 +511,9 @@ export const TranscriptionPanel = styled.div`
 
 export const UnorderedList = styled.ul`
   list-style-type: square;
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
 `;
 
 export const ListItem = styled.li`
