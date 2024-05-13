@@ -1,4 +1,4 @@
-import React from 'react';
+
 import GlossaryEntry from './GlossaryEntry.jsx';
 import glosses from '../../libraries/glosses.js';
 import {
@@ -10,7 +10,7 @@ const Glossary = () => (
     <HelpSection id="glossary">
       <StyledH1 textAlign="center">Glossary</StyledH1>
       {Object.keys(glosses).map((word, index) => (
-       <GlossaryEntry key={index} word={word} gloss={glosses[word].long ? glosses[word].long : glosses[word].short} />
+        <GlossaryEntry key={index} word={word} gloss={glosses[word].long ? glosses[word].long : glosses[word].short} />
       ))}
     </HelpSection>
   </PageWrapper>

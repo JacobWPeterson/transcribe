@@ -1,5 +1,4 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
@@ -9,7 +8,7 @@ import Glossary from './components/Help/Glossary.jsx';
 import Guide from './components/Help/Guide.jsx';
 import Resources from './components/Help/Resources.jsx';
 import About from './components/About.jsx';
-import E404 from './components/E404.jsx';
+import { E404 } from './components/E404.jsx';
 import onlineResources from './libraries/onlineResources.js';
 import furtherReading from './libraries/furtherReading.js';
 
