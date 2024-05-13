@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -13,8 +13,9 @@ import { E404 } from './components/E404.jsx';
 import onlineResources from './libraries/onlineResources.js';
 import furtherReading from './libraries/furtherReading.js';
 
-const root = document.getElementById('app');
-ReactDOM.render(
+const container = document.getElementById('app');
+const root = createRoot(container);
+root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -28,6 +29,5 @@ ReactDOM.render(
         <Route path="*" element={<E404 />} />
       </Route>
     </Routes>
-  </BrowserRouter>,
-  root,
+  </BrowserRouter>
 );
