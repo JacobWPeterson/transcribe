@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import {
   Navbar, NavDropdown,
 } from 'react-bootstrap';
-import ContactModal from './ContactModal.jsx';
+import { ContactModal } from './ContactModal';
 import {
   AppWrapper,
   Copyright,
@@ -16,14 +16,14 @@ import {
   StyledNavDropdownItem,
   StyledNav,
   StyledNavLink,
-} from '../styles.js';
+} from '../styles';
 
-const Layout = () => {
+export const Layout = (): ReactElement => {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <AppWrapper>
-      <StyledNavbar bordertop="5px solid #c9ac5f" collapseOnSelect expand="lg">
+      <StyledNavbar borderTop="5px solid #c9ac5f" collapseOnSelect expand="lg">
         <StyledContainer className="container-fluid">
           <StyledNavbarBrand href="/">Xeirographa</StyledNavbarBrand>
           <StyledNavbarToggle aria-controls="responsive-navbar-nav" />
@@ -52,7 +52,7 @@ const Layout = () => {
           role="link"
           tabIndex={0}
           onClick={() => setShowModal(true)}
-          onKeyPress={() => setShowModal(true)}
+          onKeyDown={() => setShowModal(true)}
         >
           Contact
         </StyledNavLink>
@@ -72,5 +72,3 @@ const Layout = () => {
     </AppWrapper>
   );
 };
-
-export default Layout;

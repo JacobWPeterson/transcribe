@@ -2,9 +2,10 @@
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 import {
   StyledH1, StyledH2, StyledH3, HelpSection, PageWrapper, PopoverHeader, StyledBadge, StyledCustomPillBadge, StyledLink, StyledP, StyledTable, SymbolCell
-} from '../../styles.js';
+} from '../../styles';
+import type { ReactElement } from 'react';
 
-const Guide = () => (
+export const Guide = (): ReactElement => (
   <PageWrapper flexDirection="column">
     <HelpSection id="guide">
       <StyledH1 textAlign="center">Guide</StyledH1>
@@ -163,5 +164,3 @@ const Guide = () => (
     </HelpSection>
   </PageWrapper>
 );
-
-export default Guide;

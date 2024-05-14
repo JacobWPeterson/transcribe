@@ -1,6 +1,6 @@
-import { longMessage, shortMessage } from './constants.js';
+import { longMessage, shortMessage } from './constants';
 
-const evaluateSubmission = (guess, answer, requireSpaces) => {
+const evaluateSubmission = (guess: string, answer: string, requireSpaces: boolean): (boolean | string)[] => {
   const reformattedAnswer = requireSpaces ? answer : answer.replace(/\s/g, '')
   const reformattedGuess = requireSpaces ? guess.replace(/ς|ϲ/gi, 'σ').toLowerCase() : guess.replace(/\s/g, '').replace(/ς|ϲ/gi, 'σ').toLowerCase();
 
