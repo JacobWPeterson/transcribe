@@ -1,4 +1,4 @@
-const config = {
+const config: any = {
   id: 'transcribe',
   window: {
     allowClose: false, // Configure if windows can be closed or not
