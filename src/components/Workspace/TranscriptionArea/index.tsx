@@ -10,10 +10,11 @@ import {
   TranscriptionNavButtons,
   TranscriptionSubsection,
 } from '../../../styles';
+import { Line, Manifest } from '../../../libraries/manifests';
 
 interface TranscriptionAreaProps {
   changeManuscript: (type: 'next' | 'previous') => void,
-  manifest: any, ////to improve
+  manifest: Manifest
   manifestLength: number,
   manuscriptId: number
 }
@@ -22,7 +23,7 @@ export const TranscriptionArea = ({
   changeManuscript, manifest, manifestLength, manuscriptId,
 }: TranscriptionAreaProps) => {
   const [requireSpaces, setRequireSpaces] = useState(false)
-  const { lines, title } = manifest;
+  const { lines } = manifest;
   const handleClick = (type: 'next' | 'previous') => {
     changeManuscript(type);
   };
@@ -45,9 +46,8 @@ export const TranscriptionArea = ({
           Transcription guide
         </StyledLink>
       </TranscriptionSubsection>
-      {title && <SingleLine title={title} line={title} requireSpaces={requireSpaces} />}
-      {lines.map((line) => (
-        <SingleLine key={`${manifest}.${line.key}`} line={line} requireSpaces={requireSpaces} />
+      {lines.map((line: Line, index) => (
+        <SingleLine key={`${manifest}.${index}`} passedIndex={index} line={line} requireSpaces={requireSpaces} isTitle={line.isTitle} />
       ))}
       <TranscriptionNavButtons>
         {manuscriptId > 1 ? <StyledButton background="#d3d3d3" color="#3e5276" height={38} padding="6px 12px" onClick={() => handleClick('previous')}>Previous</StyledButton> : <div />}

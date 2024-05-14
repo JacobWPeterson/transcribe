@@ -15,21 +15,16 @@ import {
   StyledCustomPillBadge,
   StyledSmall,
 } from '../../../styles';
-
-type LineType = {
-  key: string,
-  text: string,
-  caption?: string,
-  newConcept?: string,
-}
+import { Line } from '../../../libraries/manifests';
 
 interface SingleLineProps {
-  title?: string,
-  line: LineType,
+  isTitle?: boolean,
+  line: Line,
+  passedIndex: number,
   requireSpaces?: boolean
 }
 
-export const SingleLine = ({ title, line, requireSpaces = false }: SingleLineProps): ReactElement => {
+export const SingleLine = ({ isTitle, line, passedIndex, requireSpaces = false }: SingleLineProps): ReactElement => {
   const [lineContent, setLineContent] = useState<string>('');
   const [submissionStatus, setSubmissionStatus] = useState<(boolean | string)[] | null>(null);
   const [showHint, setShowHint] = useState<boolean>(false);
@@ -138,7 +133,7 @@ export const SingleLine = ({ title, line, requireSpaces = false }: SingleLinePro
 
   const hint = () => (
     <OverlayTrigger
-      key={`hint${line.key}`}
+      key={`hint-for-line-${passedIndex}`}
       placement="top-end"
       rootClose
       transition
@@ -157,7 +152,7 @@ export const SingleLine = ({ title, line, requireSpaces = false }: SingleLinePro
 
   const titleHelp = () => (
     <OverlayTrigger
-      key={`hint${line.key}`}
+      key={`title-help`}
       placement="top"
       rootClose
       transition
@@ -177,12 +172,12 @@ export const SingleLine = ({ title, line, requireSpaces = false }: SingleLinePro
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <StyledLabel htmlFor={title ? 'title' : line.key} style={{ display: 'flex', alignItems: 'center', marginTop: '3px' }}>
-        {title ? 'Title' : `Line ${line.key}`}
-        {title && titleHelp()}
+      <StyledLabel htmlFor={isTitle ? 'title' : `Line ${passedIndex}`} style={{ display: 'flex', alignItems: 'center', marginTop: '3px' }}>
+        {isTitle ? 'Title' : `Line ${passedIndex}`}
+        {isTitle && titleHelp()}
       </StyledLabel>
       <StyledInputWrapper>
-        <StyledInput id={title ? 'title' : line.key} type="text" value={lineContent} onChange={handleChange} autoComplete="off" />
+        <StyledInput id={isTitle ? 'title' : `Line ${passedIndex}`} type="text" value={lineContent} onChange={handleChange} autoComplete="off" />
         {line.caption && <StyledSmall>{line.caption}</StyledSmall>}
       </StyledInputWrapper>
       <StyledButton marginTop="2px" type="submit">Check</StyledButton>
