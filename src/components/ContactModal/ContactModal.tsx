@@ -1,6 +1,6 @@
 import { type ReactElement, useState } from 'react';
 import { Form, Modal } from 'react-bootstrap';
-import { StyledButton } from '../styles';
+import { StyledButton } from '../../styles';
 
 interface ContactModalProps {
   show: boolean,

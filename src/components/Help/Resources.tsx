@@ -1,9 +1,10 @@
 
 import { Fragment, type ReactElement } from 'react';
-import {
-  HelpSection, HelpText, ResourceNameAndCreator, StyledH1, StyledH2, StyledNavLink, StyledSpan, PageWrapper,
-} from '../../styles';
+import { NavLink } from 'react-bootstrap';
+
 import { ResourceCategories } from '../../libraries/onlineResources';
+
+import styles from './Help.module.scss'
 
 interface ResourcesProps {
   resource: ResourceCategories[],
@@ -11,30 +12,30 @@ interface ResourcesProps {
 }
 
 export const Resources = ({ resource, title }: ResourcesProps): ReactElement => (
-  <PageWrapper flexDirection="column">
-    <HelpSection id="resources">
-      <StyledH1 textAlign="center">{title}</StyledH1>
+  <div className={styles.PageWrapper}>
+    <div className={styles.HelpSection} id="resources">
+      <h1 className={styles.H1}>{title}</h1>
       {
         resource.map(({ heading, resources }) => (
           <>
-            <StyledH2 color="#333" textAlign="left">{heading}</StyledH2>
+            <h2 className={styles.H2}>{heading}</h2>
             {resources?.map(({ name, creator, description, journal, journalDetails, url }, index) => (
               <Fragment key={index}>
-                <ResourceNameAndCreator>
-                  <StyledNavLink target="_blank" href={url} color="#3e5276" fontSize={24}>{name}</StyledNavLink>
-                  {creator && <StyledSpan fontSize={14}>{`by ${creator}`}</StyledSpan>}
-                </ResourceNameAndCreator>
+                <div className={styles.NameAndCreator}>
+                  <NavLink className={styles.Link} target="_blank" href={url}>{name}</NavLink>
+                  {creator && <span className={styles.Span}>{`by ${creator}`}</span>}
+                </div>
                 {(description || journal) && (
-                  <HelpText>
+                  <div className={styles.HelpText}>
                     {journal && (<><i>{`${journal}`}</i>{`${journalDetails}`}<br /></>)}
                     {description && <>{description}</>}
-                  </HelpText>
+                  </div>
                 )}
               </Fragment>
             ))}
           </>
         ))
       }
-    </HelpSection>
-  </PageWrapper>
+    </div>
+  </div>
 );
