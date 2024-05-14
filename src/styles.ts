@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 import {
-  Alert, Badge, Container, Form, Navbar, NavDropdown, Popover,
+  Container, Form, Navbar, NavDropdown, Popover,
 } from 'react-bootstrap';
 
 export const AboutPageLower = styled.div`
@@ -69,18 +69,6 @@ export const E404Wrapper = styled.div`
   justify-content: center;
 `;
 
-export const HelpSection = styled.div`
-  margin: 30px auto;
-  width: 70%;
-`;
-
-export const HelpText = styled.p`
-  color: #606060;
-  text-align: justify;
-  margin: 0 0 12px 25px;
-  letter-spacing: .03rem;
-`;
-
 export const HomeFeatureWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -121,20 +109,6 @@ export const HomeUpperWrapper = styled.div`
   align-items: center;
 `;
 
-export const MiradorWrapper = styled.div`
-  flex: 3;
-  height: 100%;
-  position: relative;
-`;
-
-export const PageWrapper = styled.div < { height?: string, flexDirection?: string } > `
-  height: ${(props) => (props.height ? props.height : '100%')};
-  width: 98vw;
-  margin: auto;
-  display: flex;
-  flex-direction: ${(props) => (props.flexDirection ? props.flexDirection : 'row')};
-`;
-
 export const Partner = styled.div`
   display: flex;
   flex-direction: column;
@@ -173,31 +147,11 @@ export const PopoverHeader = styled(Popover.Header)`
   border-top-right-radius: calc(0.3rem - 1px);
 `;
 
-export const ResourceNameAndCreator = styled.div`
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-`;
-
 export const SectionHalf = styled.div < { background?: string } > `
   width: 80%;
   background: ${(props) => (props.background)};
   padding: 25px;
   border-radius: 20px;
-`;
-
-export const StyledAlert = styled(Alert)`
-  position: absolute;
-  z-index: 100;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #c9ac5f;
-  padding: 12px 16px;
-`;
-
-export const StyledBadge = styled(Badge) < { margin?: string } > `
-  margin: ${(props) => (props.margin ? props.margin : '0 0 0 10px')};
 `;
 
 export const StyledButton = styled.button < { background?: string, fontSize?: number, padding?: string, marginTop?: string, height?: number } > `
@@ -279,25 +233,6 @@ export const StyledFormSwitch = styled(Form.Switch)`
       border-color: #3E5276;
     }
   }
-`;
-
-export const StyledH1 = styled.h1 < { color?: string, textAlign?: string } > `
-font-weight: 600;
-  color: ${(props) => (props.color ? props.color : '#c9ac5f')};
-  text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')}
-`;
-
-export const StyledH2 = styled.h2 < { color?: string, textAlign?: string } > `
-  font-weight: 600;
-  color: ${(props) => (props.color ? props.color : '#333')};
-  text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')};
-`;
-
-export const StyledH3 = styled.h3 < { color?: string, textAlign?: string } > `
-  font-weight: 500;
-  color: ${(props) => (props.color ? props.color : '#333')};
-  text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')};
-  font-style: italic;
 `;
 
 export const StyledImage = styled.img < { borderColor?: string, maxWidth?: number } > `
@@ -420,26 +355,6 @@ export const StyledNav = styled(Nav)`
   gap: 18px;
 `;
 
-export const StyledNavLink = styled(Nav.Link) < { color?: string, fontSize?: number } > `
-  &&& {
-    color: ${(props) => (props.color ? props.color : '#fff')};
-    text-decoration: none;
-    padding: 0;
-    font-size: ${(props) => (props.fontSize ? `${props.fontSize}px` : '16px')};
-    &:hover, &:focus {
-      outline: none;
-      cursor: pointer;
-      color: #c9ac5f;
-    }
-    &:focus {
-      text-decoration: underline;
-    }
-    &:hover {
-      transition: 500ms ease;
-    }
-  }
-`;
-
 export const StyledP = styled.p < { width?: string, margin?: string, fontSize?: number, fontStyle?: string, textAlign?: string, textIndent?: string } > `
   width: ${(props) => (props.width ? props.width : '100%')};
   margin: ${(props) => (props.margin ? props.margin : '0 auto')};
@@ -448,14 +363,6 @@ export const StyledP = styled.p < { width?: string, margin?: string, fontSize?: 
   font-style: ${(props) => (props.fontStyle ? props.fontStyle : 'normal')};
   text-align: ${(props) => (props.textAlign ? props.textAlign : 'justify')};
   text-indent: ${(props) => (props.textIndent ? props.textIndent : '0')};
-  letter-spacing: .03em;
-`;
-
-export const StyledSpan = styled.span < { fontSize?: number, fontStyle?: string, textAlign?: string } > `
-  color: #606060;
-  font-size: ${(props) => (props.fontSize ? props.fontSize : '24')}px;
-  font-style: ${(props) => (props.fontStyle ? props.fontStyle : 'normal')};
-  text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')};
   letter-spacing: .03em;
 `;
 
@@ -503,11 +410,6 @@ export const TranscriptionNavButtons = styled.div`
   padding-top: 12px;
 `;
 
-export const TranscriptionPanel = styled.div`
-  flex: 2;
-  display: flex;
-`;
-
 export const UnorderedList = styled.ul`
   list-style-type: square;
   columns: 2;
@@ -523,10 +425,4 @@ export const ListItem = styled.li < { color?: string } > `
   > span {
       color: ${(props) => (props.color ? props.color : '#3e5276')};
   }
-`;
-
-export const Word = styled.h4`
-  color: #3e5276;
-  font-weight: 700;
-  margin-bottom: 4px;
 `;

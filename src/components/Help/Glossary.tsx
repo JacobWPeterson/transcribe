@@ -1,19 +1,18 @@
 
+import type { ReactElement } from 'react';
 import { GlossaryEntry } from './GlossaryEntry';
 import glosses from '../../libraries/glosses';
-import {
-  StyledH1, HelpSection, PageWrapper,
-} from '../../styles';
-import type { ReactElement } from 'react';
+
+import styles from './Help.module.scss';
 
 export const Glossary = (): ReactElement => (
-  <PageWrapper flexDirection="column">
-    <HelpSection id="glossary">
-      <StyledH1 textAlign="center">Glossary</StyledH1>
+  <div className={styles.PageWrapper}>
+    <div className={styles.HelpSection} id="glossary">
+    <h1 className={styles.H1}>Glossary</h1>
       {Object.keys(glosses).map((word, index) => (
         <GlossaryEntry key={index} word={word} gloss={glosses[word].long ? glosses[word].long : glosses[word].short} />
       ))}
-    </HelpSection>
-  </PageWrapper>
+    </div>
+  </div>
 );
 

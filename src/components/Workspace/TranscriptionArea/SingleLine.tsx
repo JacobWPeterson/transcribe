@@ -1,12 +1,11 @@
 import { type ReactElement, useEffect, useRef, useState, ChangeEvent } from 'react';
-import { OverlayTrigger, Popover } from 'react-bootstrap';
+import { Badge, OverlayTrigger, Popover } from 'react-bootstrap';
 import pluralize from 'pluralize';
 import evaluateSubmission from './validators';
 import glosses from '../../../libraries/glosses';
 import {
   StyledInputWrapper,
   PopoverHeader,
-  StyledBadge,
   StyledButton,
   StyledForm,
   StyledInput,
@@ -16,6 +15,8 @@ import {
   StyledSmall,
 } from '../../../styles';
 import { Line } from '../../../libraries/manifests';
+
+import styles from './SingleLine.module.scss';
 
 interface SingleLineProps {
   isTitle?: boolean,
@@ -108,14 +109,14 @@ export const SingleLine = ({ isTitle, line, passedIndex, requireSpaces = false }
           </Popover>
         )}
       >
-        <StyledBadge tabIndex={0} pill bg="danger">
+        <Badge className={styles.Badge} tabIndex={0} pill bg="danger">
           X
-        </StyledBadge>
+        </Badge>
       </OverlayTrigger>
     ) : (
-      <StyledBadge pill bg="success">
+      <Badge className={styles.Badge} pill bg="success">
         Correct!
-      </StyledBadge>
+      </Badge>
     )
   );
 
