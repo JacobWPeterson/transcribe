@@ -1,11 +1,9 @@
 import { type ReactElement, useEffect, useState } from 'react';
-import { Mirador } from './Mirador/index';
+import { Alert } from 'react-bootstrap';
 import { TranscriptionArea } from './TranscriptionArea/index';
-
-import {
-  MiradorWrapper, PageWrapper, StyledAlert, TranscriptionPanel,
-} from '../../styles';
+import { Mirador } from './Mirador/index';
 import manifests from '../../libraries/manifests';
+import styles from './Workspace.module.scss'
 
 export const Workspace = (): ReactElement => {
   const [manuscript, setManuscript] = useState(1);
@@ -39,29 +37,29 @@ export const Workspace = (): ReactElement => {
   };
 
   return (
-    <PageWrapper height="85vh">
+    <div className={styles.WorkspacePageWrapper}>
       {showWrongPageAlert && (
-        <StyledAlert variant="warning" onClose={() => setShowWrongPageAlert(false)}>
+        <Alert className={styles.Alert} variant="warning" onClose={() => setShowWrongPageAlert(false)}>
           Feel free to explore, but you have left the target image (
           {canvasIndex + 1}
           ).
-        </StyledAlert>
+        </Alert>
       )}
-      <MiradorWrapper>
+      <div className={styles.MiradorWrapper}>
         <Mirador
           setPageNumber={setPageNumber}
           manifest={manifests[manuscript].manifestId}
           index={canvasIndex}
         />
-      </MiradorWrapper>
-      <TranscriptionPanel>
+      </div>
+      <div className={styles.TranscriptionPanel}>
         <TranscriptionArea
           changeManuscript={handleManifestChange}
           manifest={manifests[manuscript]}
           manifestLength={manifestLength}
           manuscriptId={manuscript}
         />
-      </TranscriptionPanel>
-    </PageWrapper>
+      </div>
+    </div>
   );
 };

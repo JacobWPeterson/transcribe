@@ -2,8 +2,9 @@ import { ReactElement, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import {
   Navbar, NavDropdown,
+  NavLink,
 } from 'react-bootstrap';
-import { ContactModal } from './ContactModal';
+import { ContactModal } from '../ContactModal/ContactModal';
 import {
   AppWrapper,
   Copyright,
@@ -15,8 +16,9 @@ import {
   StyledNavDropdown,
   StyledNavDropdownItem,
   StyledNav,
-  StyledNavLink,
-} from '../styles';
+} from '../../styles';
+
+import styles from './Layout.module.scss';
 
 export const Layout = (): ReactElement => {
   const [showModal, setShowModal] = useState(false);
@@ -29,8 +31,8 @@ export const Layout = (): ReactElement => {
           <StyledNavbarToggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
             <StyledNav className="justify-content-end">
-              <StyledNavLink href="/">Home</StyledNavLink>
-              <StyledNavLink href="/lessons">Lessons</StyledNavLink>
+              <NavLink id={styles.Link} href="/">Home</NavLink>
+              <NavLink id={styles.Link} href="/lessons">Lessons</NavLink>
               <StyledNavDropdown title="Help" id="collapsible-nav-dropdown">
                 <StyledNavDropdownItem href="/guide">Guide</StyledNavDropdownItem>
                 <NavDropdown.Divider />
@@ -40,14 +42,15 @@ export const Layout = (): ReactElement => {
                 <NavDropdown.Divider />
                 <StyledNavDropdownItem href="/further-reading">Further reading</StyledNavDropdownItem>
               </StyledNavDropdown>
-              <StyledNavLink href="/about">About</StyledNavLink>
+              <NavLink id={styles.Link} href="/about">About</NavLink>
             </StyledNav>
           </Navbar.Collapse>
         </StyledContainer>
       </StyledNavbar>
       <Outlet />
       <StyledFooter>
-        <StyledNavLink
+        <NavLink
+          id={styles.Link}
           color="#3e5276"
           role="link"
           tabIndex={0}
@@ -55,7 +58,7 @@ export const Layout = (): ReactElement => {
           onKeyDown={() => setShowModal(true)}
         >
           Contact
-        </StyledNavLink>
+        </NavLink>
         <span style={{ color: '#c9ac5f' }}>|</span>
         <Copyright>© 2024 Jacob W. Peterson</Copyright>
         <a href="https://www.threads.net/@jacobwpeterson" target="_blank" rel="noreferrer">
