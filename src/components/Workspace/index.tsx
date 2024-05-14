@@ -5,7 +5,7 @@ import { TranscriptionArea } from './TranscriptionArea/index';
 import {
   MiradorWrapper, PageWrapper, StyledAlert, TranscriptionPanel,
 } from '../../styles';
-import manifests from '../../libraries/manifests.js';
+import manifests from '../../libraries/manifests';
 
 export const Workspace = (): ReactElement => {
   const [manuscript, setManuscript] = useState(1);
