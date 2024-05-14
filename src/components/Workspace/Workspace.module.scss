@@ -1,0 +1,27 @@
+.WorkspacePageWrapper {
+    height: 85vh;
+    width: 98vw;
+    margin: auto;
+    display: flex;
+
+    .Alert {
+        position: absolute;
+        z-index: 100;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #c9ac5f;
+        padding: 12px 16px;
+    }
+
+    .MiradorWrapper {
+        flex: 3;
+        height: 100%;
+        position: relative;
+    }
+
+    .TranscriptionPanel {
+        display: flex;
+        flex: 2;
+    }
+}

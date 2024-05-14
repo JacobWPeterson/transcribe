@@ -6,15 +6,15 @@ import {
   SectionHalf,
   HomeLowerWrapper,
   HomeUpperWrapper,
-  PageWrapper,
   StyledButton,
-  StyledH2,
   StyledImage,
   StyledLine,
   StyledP,
   UnorderedList,
   ListItem,
-} from '../styles';
+} from '../../styles';
+
+import styles from './Home.module.scss';
 
 export const Home = (): ReactElement => {
   const handleGetStarted = () => {
@@ -22,7 +22,7 @@ export const Home = (): ReactElement => {
   };
 
   return (
-    <PageWrapper flexDirection="column">
+    <div className="PageWrapper">
       <HomeUpperWrapper>
         <StyledImage borderColor="#c9ac5f" maxWidth={500} src="src/assets/Aristophanes-Critical-Edition.png" alt="Greek printed edition text" />
         <HomeTextContainer>
@@ -43,7 +43,7 @@ export const Home = (): ReactElement => {
           Xeirographa currently offers several different features for learners to ease the transition from reading printed Greek texts to manuscripts of any period.
         </StyledP>
         <SectionHalf background="#3e5276" color="#fff">
-          <StyledH2 color="#c9ac5f" textAlign="center">Features</StyledH2>
+          <h2 className={styles.H2}>Features</h2>
           <UnorderedList>
             <ListItem color="#fff"><span>manuscripts get progressively more difficult to read</span></ListItem>
             <ListItem color="#fff"><span>answers checked line-by-line</span></ListItem>
@@ -63,6 +63,6 @@ export const Home = (): ReactElement => {
         Go from reading printed texts to manuscripts of any period in a few lessons
         <StyledButton onClick={handleGetStarted} height={50} fontSize={24} padding="5px 12px" type="button">Get started</StyledButton>
       </HomeLowerWrapper>
-    </PageWrapper>
+    </div>
   );
 };

@@ -6,7 +6,7 @@ import {
   StyledButton,
   StyledLine,
   StyledP,
-} from '../styles';
+} from '../../styles';
 
 export const E404 = (): ReactElement => {
   const handleGoHome = () => {

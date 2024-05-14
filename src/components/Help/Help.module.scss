@@ -1,0 +1,79 @@
+.Badge {
+    margin: 0;
+}
+
+.GlossContainer {
+    margin: '0 0 0 30px';
+
+    .Word {
+        color: #3e5276;
+        font-weight: 700;
+        margin-bottom: 4px;
+    }
+}
+
+.H1 {
+    font-weight: 600;
+    color: #c9ac5f;
+    text-align: center;
+}
+
+.H2 {
+    font-weight: 600;
+    color: #333;
+    text-align: left;
+}
+
+.H3 {
+    font-weight: 500;
+    color: #333;
+    text-align: left;
+    font-style: italic;
+}
+
+.HelpSection {
+    margin: 30px auto;
+    width: 70%;
+}
+
+.HelpText {
+    color: #606060;
+    text-align: justify;
+    margin: 0 0 12px 24px;
+    letter-spacing: .03rem;
+}
+
+.Link {
+    color: #3e5276;
+    text-decoration: none;
+    padding: 0;
+    font-size: 18px;
+
+    &:hover,
+    &:focus {
+        outline: none;
+        cursor: pointer;
+        color: #c9ac5f;
+    }
+
+    &:focus {
+        text-decoration: underline;
+    }
+
+    &:hover {
+        transition: 500ms ease;
+    }
+}
+
+.NameAndCreator {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.Span {
+    color: #606060;
+    font-size: 14px;
+    text-align: left;
+    letter-spacing: .03em;
+}

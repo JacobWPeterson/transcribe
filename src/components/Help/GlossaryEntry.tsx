@@ -1,6 +1,7 @@
 
 import type { ReactElement } from 'react';
-import { HelpText, Word } from '../../styles';
+
+import styles from './Help.module.scss';
 
 interface GlossaryEntryProps {
   word: string,
@@ -8,8 +9,8 @@ interface GlossaryEntryProps {
 }
 
 export const GlossaryEntry = ({ word, gloss }: GlossaryEntryProps): ReactElement => (
-  <div style={{ margin: '0 0 0 30px' }}>
-    <Word id={word}>{word}</Word>
-    <HelpText>{gloss}</HelpText>
+  <div className={styles.GlossContainer}>
+    <h4 className={styles.Word} id={word}>{word}</h4>
+    <p className={styles.HelpText}>{gloss}</p>
   </div>
 );
