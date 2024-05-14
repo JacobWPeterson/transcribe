@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
-import { Mirador } from './Mirador/index.jsx';
-import TranscriptionArea from './TranscriptionArea/index.jsx';
+import { type ReactElement, useEffect, useState } from 'react';
+import { Mirador } from './Mirador/index';
+import { TranscriptionArea } from './TranscriptionArea/index';
 
 import {
   MiradorWrapper, PageWrapper, StyledAlert, TranscriptionPanel,
-} from '../../styles.js';
+} from '../../styles';
 import manifests from '../../libraries/manifests.js';
 
-const Workspace = () => {
+export const Workspace = (): ReactElement => {
   const [manuscript, setManuscript] = useState(1);
   const [pageNumber, setPageNumber] = useState(null);
   const [showWrongPageAlert, setShowWrongPageAlert] = useState(false);
@@ -23,7 +23,7 @@ const Workspace = () => {
     }
   }, [pageNumber, canvasIndex, manuscript]);
 
-  const handleManifestChange = (type) => {
+  const handleManifestChange = (type: 'next' | 'previous') => {
     switch (type) {
       case 'next':
         setManuscript(manuscript + 1);
@@ -65,5 +65,3 @@ const Workspace = () => {
     </PageWrapper>
   );
 };
-
-export default Workspace;

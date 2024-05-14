@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import SingleLine from './SingleLine.jsx';
+import { SingleLine } from './SingleLine';
 import Form from 'react-bootstrap/Form';
 import {
   StyledButton,
@@ -9,14 +9,21 @@ import {
   TranscriptionHeader,
   TranscriptionNavButtons,
   TranscriptionSubsection,
-} from '../../../styles.js';
+} from '../../../styles';
 
-const TranscriptionArea = ({
+interface TranscriptionAreaProps {
+  changeManuscript: (type: 'next' | 'previous') => void,
+  manifest: any, ////to improve
+  manifestLength: number,
+  manuscriptId: number
+}
+
+export const TranscriptionArea = ({
   changeManuscript, manifest, manifestLength, manuscriptId,
-}) => {
+}: TranscriptionAreaProps) => {
   const [requireSpaces, setRequireSpaces] = useState(false)
   const { lines, title } = manifest;
-  const handleClick = (type) => {
+  const handleClick = (type: 'next' | 'previous') => {
     changeManuscript(type);
   };
 
@@ -34,7 +41,7 @@ const TranscriptionArea = ({
             onChange={() => setRequireSpaces(!requireSpaces)}
           />
         </Form>
-        <StyledLink href="/guide" marginbottom={10} target="_blank">
+        <StyledLink href="/guide" marginBottom={10} target="_blank">
           Transcription guide
         </StyledLink>
       </TranscriptionSubsection>
@@ -49,5 +56,3 @@ const TranscriptionArea = ({
     </TranscriptionContainer>
   );
 };
-
-export default TranscriptionArea;

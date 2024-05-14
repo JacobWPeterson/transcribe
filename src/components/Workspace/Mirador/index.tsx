@@ -1,11 +1,17 @@
-import { useEffect } from 'react';
+import { type ReactElement, useEffect } from 'react';
 import mirador from 'mirador';
 // import { miradorImageToolsPlugin } from 'mirador-image-tools'; // currently not available for Mirador v4 alpha; track progress and reinstall https://github.com/ProjectMirador/mirador-image-tools
 import config from './config.js';
 
+interface MiradorProps {
+  manifest: any, /// to improve
+  index: number,
+  setPageNumber: (number: number) => void
+}
+
 export const Mirador = ({
   manifest, index, setPageNumber,
-}) => {
+}: MiradorProps): ReactElement => {
   useEffect(() => {
     config.windows[0] = {
       manifestId: manifest,
