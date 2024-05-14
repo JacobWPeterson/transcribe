@@ -48,7 +48,7 @@ export const Copyright = styled.div`
   color: #3e5276;
 `;
 
-export const E404Section = styled.div`
+export const E404Section = styled.div < { left?: number, z?: number } > `
   display: flex;
   flex-direction: column;
   height: 400px;
@@ -57,7 +57,6 @@ export const E404Section = styled.div`
   position: fixed;
   top: 50%;
   left: ${(props) => props.left}%;
-  /* bring your own prefixes */
   transform: translate(-50%, -50%);
   z-index: ${(props) => props.z};
 `;
@@ -128,7 +127,7 @@ export const MiradorWrapper = styled.div`
   position: relative;
 `;
 
-export const PageWrapper = styled.div`
+export const PageWrapper = styled.div < { height?: string, flexDirection?: string } > `
   height: ${(props) => (props.height ? props.height : '100%')};
   width: 98vw;
   margin: auto;
@@ -152,9 +151,9 @@ export const Partners = styled.div`
   padding: 30px 0 0 0;
 `;
 
-export const PartnerText = styled.p`
+export const PartnerText = styled.p < { color?: string, fontSize?: number, fontFamily?: string, fontStyle?: string, letterSpacing?: string, padding?: string } > `
   color: ${(props) => (props.color ? props.color : '#606060')};
-  font-size: ${(props) => (props.fontSize ? props.fontSize : '24px')};
+  font-size: ${(props) => (props.fontSize ? `${props.fontSize}px` : '24px')};
   font-family: ${(props) => (props.fontFamily ? props.fontFamily : 'inherit')};
   font-style: ${(props) => (props.fontStyle ? props.fontStyle : 'normal')};
   letter-spacing: ${(props) => (props.letterSpacing ? props.letterSpacing : 'normal')};
@@ -180,7 +179,7 @@ export const ResourceNameAndCreator = styled.div`
   gap: 8px;
 `;
 
-export const SectionHalf = styled.div`
+export const SectionHalf = styled.div < { background?: string } > `
   width: 80%;
   background: ${(props) => (props.background)};
   padding: 25px;
@@ -197,11 +196,11 @@ export const StyledAlert = styled(Alert)`
   padding: 12px 16px;
 `;
 
-export const StyledBadge = styled(Badge)`
+export const StyledBadge = styled(Badge) < { margin?: string } > `
   margin: ${(props) => (props.margin ? props.margin : '0 0 0 10px')};
 `;
 
-export const StyledButton = styled.button`
+export const StyledButton = styled.button < { background?: string, fontSize?: number, padding?: string, marginTop?: string, height?: number } > `
   color: ${(props) => (props.color ? props.color : '#fff')};
   background: ${(props) => (props.background ? props.background : '#3e5276')};
   font-size: ${(props) => (props.fontSize ? `${props.fontSize}px` : 'inherit')};
@@ -233,7 +232,7 @@ export const StyledContainer = styled(Container)`
   }
 `;
 
-export const StyledCustomPillBadge = styled.div`
+export const StyledCustomPillBadge = styled.div < { background?: string, padding?: string, margin?: string } > `
   color: #3e5276;
   background: ${(props) => (props.background ? props.background : '#3e5276')};
   display: inline-block;
@@ -282,26 +281,26 @@ export const StyledFormSwitch = styled(Form.Switch)`
   }
 `;
 
-export const StyledH1 = styled.h1`
+export const StyledH1 = styled.h1 < { color?: string, textAlign?: string } > `
 font-weight: 600;
   color: ${(props) => (props.color ? props.color : '#c9ac5f')};
   text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')}
 `;
 
-export const StyledH2 = styled.h2`
+export const StyledH2 = styled.h2 < { color?: string, textAlign?: string } > `
   font-weight: 600;
-  text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')};
   color: ${(props) => (props.color ? props.color : '#333')};
+  text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')};
 `;
 
-export const StyledH3 = styled.h3`
+export const StyledH3 = styled.h3 < { color?: string, textAlign?: string } > `
   font-weight: 500;
+  color: ${(props) => (props.color ? props.color : '#333')};
   text-align: ${(props) => (props.textAlign ? props.textAlign : 'left')};
   font-style: italic;
-  color: ${(props) => (props.color ? props.color : '#333')};
 `;
 
-export const StyledImage = styled.img`
+export const StyledImage = styled.img < { borderColor?: string, maxWidth?: number } > `
   width: 100%;
   max-width: ${(props) => (props.maxWidth ? props.maxWidth : 400)}px;
   height: auto;
@@ -329,15 +328,15 @@ export const StyledLabel = styled.label`
   width: 55px;
 `;
 
-export const StyledLine = styled.div`
+export const StyledLine = styled.div < { color?: string, fontSize?: number, paddingLeft?: number, alignSelf?: string } > `
   display: flex;
   color: ${(props) => (props.color ? props.color : '#606060')};
-  font-size: ${(props) => (props.fontSize ? props.fontSize : 'inherit')};
+  font-size: ${(props) => (props.fontSize ? `${props.fontSize}px` : 'inherit')};
   padding-left: ${(props) => (props.paddingLeft ? props.paddingLeft : 0)}px;
   align-self: ${(props) => (props.alignSelf ? props.alignSelf : 'auto')}
 `;
 
-export const StyledLink = styled.a`
+export const StyledLink = styled.a < { marginBottom?: number } > `
   color: #c9ac5f;
   width: 250px;
   margin-bottom: ${(props) => (props.marginBottom ? props.marginBottom : 0)}px;
@@ -352,8 +351,8 @@ export const StyledLink = styled.a`
   }
 `;
 
-export const StyledNavbar = styled(Navbar)`
-  border-top: ${(props) => (props.bordertop ? props.bordertop : 'none')};
+export const StyledNavbar = styled(Navbar) < { borderTop?: string } > `
+  border-top: ${(props) => (props.borderTop ? props.borderTop : 'none')};
   padding-top: 0;
 `;
 
@@ -421,7 +420,7 @@ export const StyledNav = styled(Nav)`
   gap: 18px;
 `;
 
-export const StyledNavLink = styled(Nav.Link)`
+export const StyledNavLink = styled(Nav.Link) < { color?: string, fontSize?: number } > `
   &&& {
     color: ${(props) => (props.color ? props.color : '#fff')};
     text-decoration: none;
@@ -441,7 +440,7 @@ export const StyledNavLink = styled(Nav.Link)`
   }
 `;
 
-export const StyledP = styled.p`
+export const StyledP = styled.p < { width?: string, margin?: string, fontSize?: number, fontStyle?: string, textAlign?: string, textIndent?: string } > `
   width: ${(props) => (props.width ? props.width : '100%')};
   margin: ${(props) => (props.margin ? props.margin : '0 auto')};
   color: #606060;
@@ -452,7 +451,7 @@ export const StyledP = styled.p`
   letter-spacing: .03em;
 `;
 
-export const StyledSpan = styled.span`
+export const StyledSpan = styled.span < { fontSize?: number, fontStyle?: string, textAlign?: string } > `
   color: #606060;
   font-size: ${(props) => (props.fontSize ? props.fontSize : '24')}px;
   font-style: ${(props) => (props.fontStyle ? props.fontStyle : 'normal')};
@@ -516,7 +515,7 @@ export const UnorderedList = styled.ul`
   -moz-columns: 2;
 `;
 
-export const ListItem = styled.li`
+export const ListItem = styled.li < { color?: string } > `
   color: #c9ac5f;
   margin-left: 20px;
   padding: 10px 0 10px 10px;

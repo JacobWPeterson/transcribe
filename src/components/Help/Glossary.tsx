@@ -1,11 +1,12 @@
 
-import GlossaryEntry from './GlossaryEntry.jsx';
-import glosses from '../../libraries/glosses.js';
+import { GlossaryEntry } from './GlossaryEntry';
+import glosses from '../../libraries/glosses';
 import {
   StyledH1, HelpSection, PageWrapper,
-} from '../../styles.js';
+} from '../../styles';
+import type { ReactElement } from 'react';
 
-const Glossary = () => (
+export const Glossary = (): ReactElement => (
   <PageWrapper flexDirection="column">
     <HelpSection id="glossary">
       <StyledH1 textAlign="center">Glossary</StyledH1>
@@ -16,4 +17,3 @@ const Glossary = () => (
   </PageWrapper>
 );
 
-export default Glossary;

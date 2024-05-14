@@ -14,7 +14,7 @@ const manifests = {
       {
         text: 'αρχη του ευαγγελιου ιυ χυ υυ του θυ',
         key: 1,
-        newConcepts: ['Ekthesis'],
+        newConcept: 'Ekthesis',
         caption: 'The red αρ with superscript χ is shorthand for αρχη and marks the start of a section. Exclude it from your transcription.',
       },
       {
@@ -55,7 +55,7 @@ const manifests = {
     title: {
       text: 'λογοσαυτωνκατανυκτικοσλογοσα',
       key: 'title',
-      newConcepts: ['Abbreviations'],
+      newConcept: 'Abbreviation',
     },
     lines: [
       {
@@ -65,7 +65,7 @@ const manifests = {
       {
         text: 'ορθρουμιαναστασεπορευομην',
         key: 2,
-        newConcepts: ['Ligatures'],
+        newConcept: 'Ligature',
       },
       {
         text: '',
@@ -124,7 +124,7 @@ const manifests = {
       {
         text: 'αρχητουευαγγελιουιυχυυυτουθυ',
         key: 1,
-        newConcepts: ['Ekthesis'],
+        newConcept: 'Ekthesis',
       },
       {
         text: 'ωσγεγραπταιεντοισπροφηταισ',

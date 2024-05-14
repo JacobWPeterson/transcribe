@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { type ReactElement, useEffect, useRef, useState, ChangeEvent } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 import pluralize from 'pluralize';
-import evaluateSubmission from './validators.js';
-import glosses from '../../../libraries/glosses.js';
+import evaluateSubmission from './validators';
+import glosses from '../../../libraries/glosses';
 import {
   StyledInputWrapper,
   PopoverHeader,
@@ -14,12 +14,25 @@ import {
   StyledLink,
   StyledCustomPillBadge,
   StyledSmall,
-} from '../../../styles.js';
+} from '../../../styles';
 
-const SingleLine = ({ title, line, requireSpaces }) => {
-  const [lineContent, setLineContent] = useState('');
-  const [submissionStatus, setSubmissionStatus] = useState(null);
-  const [showHint, setShowHint] = useState(false);
+type LineType = {
+  key: string,
+  text: string,
+  caption?: string,
+  newConcept?: string,
+}
+
+interface SingleLineProps {
+  title?: string,
+  line: LineType,
+  requireSpaces?: boolean
+}
+
+export const SingleLine = ({ title, line, requireSpaces = false }: SingleLineProps): ReactElement => {
+  const [lineContent, setLineContent] = useState<string>('');
+  const [submissionStatus, setSubmissionStatus] = useState<(boolean | string)[] | null>(null);
+  const [showHint, setShowHint] = useState<boolean>(false);
   const guesses = useRef(0);
 
   useEffect(() => {
@@ -29,7 +42,7 @@ const SingleLine = ({ title, line, requireSpaces }) => {
   }, [line]);
 
   useEffect(() => {
-    if (lineContent.length > 0 && submissionStatus[0]) {
+    if (lineContent.length > 0 && submissionStatus?.[0]) {
       guesses.current = 0;
       setShowHint(false);
       return;
@@ -38,7 +51,7 @@ const SingleLine = ({ title, line, requireSpaces }) => {
     * but then deleted a letter, this turns off the hint icon. This also
     * has the effect of re-rendering the hint tooltip when it eligible again.
     */
-    if (requireSpaces ? lineContent.length !== line.text.length : lineContent.replace(/\s/g, '').length !== line.text.replace(/\s/g, '').length) {
+    if (requireSpaces ? lineContent?.length !== line.text.length : lineContent.replace(/\s/g, '').length !== line.text.replace(/\s/g, '').length) {
       setShowHint(false);
       return;
     }
@@ -50,9 +63,9 @@ const SingleLine = ({ title, line, requireSpaces }) => {
     if (!showHint && guesses.current >= 3) {
       setShowHint(true);
     }
-  }, [submissionStatus, lineContent, line.text, line.content, requireSpaces]);
+  }, [submissionStatus, lineContent, line.text, requireSpaces]);
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event.persist();
     setLineContent(event.target.value);
   };
@@ -62,20 +75,20 @@ const SingleLine = ({ title, line, requireSpaces }) => {
     setSubmissionStatus(evaluateSubmission(lineContent, line.text, requireSpaces));
   }
 
-  const newConcept = (concepts) => (
+  const newConcept = (concept: string) => (
     <OverlayTrigger
-      key={concepts}
+      key={`${concept}-tooltip`}
       placement="top-end"
       rootClose
       transition
       trigger='click'
       overlay={(
         <Popover id="popover-concepts">
-          <PopoverHeader as="h3">{`New Concept: ${concepts[0]}`}</PopoverHeader>
+          <PopoverHeader as="h3">{`New Concept: ${concept}`}</PopoverHeader>
           <Popover.Body>
-            {glosses[concepts[0]].short}
+            {glosses?.[concept]?.short}
             &nbsp;
-            <StyledLink href={`/glossary#${concepts[0]}`} target="_blank">Learn more</StyledLink>
+            <StyledLink href={`/glossary#${concept}`} target="_blank">Learn more</StyledLink>
           </Popover.Body>
         </Popover>
       )}
@@ -111,7 +124,7 @@ const SingleLine = ({ title, line, requireSpaces }) => {
     )
   );
 
-  const getHint = (guess, answer) => {
+  const getHint = (guess: string, answer: string) => {
     const reformattedAnswer = requireSpaces ? answer : answer.replace(/\s/g, '')
     const reformattedGuess = requireSpaces ? guess.replace(/ς|ϲ/gi, 'σ').toLowerCase() : guess.replace(/\s/g, '').replace(/ς|ϲ/gi, 'σ').toLowerCase();
     const mismatches = [];
@@ -172,12 +185,10 @@ const SingleLine = ({ title, line, requireSpaces }) => {
         <StyledInput id={title ? 'title' : line.key} type="text" value={lineContent} onChange={handleChange} autoComplete="off" />
         {line.caption && <StyledSmall>{line.caption}</StyledSmall>}
       </StyledInputWrapper>
-      <StyledButton margintop="2px" type="submit">Check</StyledButton>
-      {line.newConcepts && newConcept(line.newConcepts)}
+      <StyledButton marginTop="2px" type="submit">Check</StyledButton>
+      {line.newConcept && newConcept(line.newConcept)}
       {submissionStatus && renderIncorrectAnswerMessaging()}
       {showHint && hint()}
     </StyledForm>
   );
 };
-
-export default SingleLine;

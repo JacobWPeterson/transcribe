@@ -1,5 +1,6 @@
 
 
+import type { ReactElement } from 'react';
 import {
   AboutPageLower,
   AboutPageMiddle,
@@ -14,9 +15,9 @@ import {
   StyledLink,
   StyledP,
   StyledSmall
-} from '../styles.js';
+} from '../styles';
 
-const About = () => (
+export const About = (): ReactElement => (
   <PageWrapper flexDirection="column">
     <AboutPageUpper>
       <StyledH1 textAlign="center">Why Xeirographa</StyledH1>
@@ -32,16 +33,16 @@ const About = () => (
       <Partners>
         <Partner>
           <img src="src/assets/mirador.png" alt="mirador logo" />
-          <PartnerText color="#3c444d" fontFamily="'Yanone Kaffeesatz', sans-serif" fontSize="48px" letterSpacing=".05em">
+          <PartnerText color="#3c444d" fontFamily="'Yanone Kaffeesatz', sans-serif" fontSize={48} letterSpacing=".05em">
             mirador
           </PartnerText>
         </Partner>
         <Partner>
           <img src="src/assets/library.svg" height="60" alt="library logo" />
-          <PartnerText color="#3e5276" fontSize="18px" fontStyle="italic" padding="20px 0 0 0">
+          <PartnerText color="#3e5276" fontSize={18} fontStyle="italic" padding="20px 0 0 0">
             Holding Institutions
           </PartnerText>
-          <PartnerText color="#3e5276" fontSize="12px" padding="2px 0">
+          <PartnerText color="#3e5276" fontSize={12} padding="2px 0">
             Biblioteca Apostolica Vaticana
             <br />
             Cambridge University Library
@@ -49,7 +50,7 @@ const About = () => (
         </Partner>
         <Partner>
           <img src="src/assets/iiif.png" height="60" alt="iiif logo" />
-          <PartnerText color="#006eb0" fontFamily="Playfair Display" fontSize="18px">
+          <PartnerText color="#006eb0" fontFamily="Playfair Display" fontSize={18}>
             International Image Interoperability Framework
           </PartnerText>
         </Partner>
@@ -65,5 +66,3 @@ const About = () => (
     </AboutPageLower>
   </PageWrapper>
 );
-
-export default About;

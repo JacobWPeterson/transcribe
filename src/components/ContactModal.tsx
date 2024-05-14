@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { type ReactElement, useState } from 'react';
 import { Form, Modal } from 'react-bootstrap';
-import { StyledButton } from '../styles.js';
+import { StyledButton } from '../styles';
 
-const ContactModal = ({ show, onHide }) => {
+interface ContactModalProps {
+  show: boolean,
+  onHide: () => void
+}
+
+export const ContactModal = ({ show, onHide }: ContactModalProps): ReactElement => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -16,7 +21,7 @@ const ContactModal = ({ show, onHide }) => {
   };
 
   const send = () => {
-    if (name.length > 2 && isValidEmail(email) && message.length > 10) {
+    if (name.length > 2 && isValidEmail() && message.length > 10) {
       // TODO - send mail
       // See bookmark 'React Contact Form' https://www.webtips.dev/react-contact-form-without-backend
       setAlert(null);
@@ -29,7 +34,7 @@ const ContactModal = ({ show, onHide }) => {
         setAlert('Please enter your name');
         return;
       }
-      if (!isValidEmail(email)) {
+      if (!isValidEmail()) {
         setAlert('Enter a valid email');
         return;
       }
@@ -102,12 +107,10 @@ const ContactModal = ({ show, onHide }) => {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        {alert && <span style={{ color: 'red', 'padding-right': '10px' }}>{alert}</span>}
+        {alert && <span style={{ color: 'red', 'paddingRight': '10px' }}>{alert}</span>}
         <StyledButton background="#d3d3d3" color="#3e5276" height={38} padding="6px 12px" onClick={onHide}>{emailSent ? 'Close' : 'Cancel'}</StyledButton>
         <StyledButton disabled={emailSent} height={38} padding="6px 12px" onClick={send}>{emailSent ? 'Email Sent' : 'Send'}</StyledButton>
       </Modal.Footer>
     </Modal>
   );
 };
-
-export default ContactModal;

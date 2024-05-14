@@ -1,4 +1,6 @@
-const furtherReading = [
+import { ResourceCategories } from "./onlineResources";
+
+const furtherReading: ResourceCategories[] = [
     {
         heading: "Books",
         resources: [

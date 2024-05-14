@@ -1,4 +1,5 @@
 
+import { ReactElement } from 'react';
 import {
   HomeTextContainer,
   HomeFeatureWrapper,
@@ -13,9 +14,9 @@ import {
   StyledP,
   UnorderedList,
   ListItem,
-} from '../styles.js';
+} from '../styles';
 
-const Home = () => {
+export const Home = (): ReactElement => {
   const handleGetStarted = () => {
     window.location.href = 'lessons';
   };
@@ -25,13 +26,13 @@ const Home = () => {
       <HomeUpperWrapper>
         <StyledImage borderColor="#c9ac5f" maxWidth={500} src="src/assets/Aristophanes-Critical-Edition.png" alt="Greek printed edition text" />
         <HomeTextContainer>
-          <StyledLine alignSelf="flex-start" color="#3e5276" fontSize="40px">
+          <StyledLine alignSelf="flex-start" color="#3e5276" fontSize={40}>
             Guided lessons
           </StyledLine>
           <StyledLine alignSelf="flex-start" paddingLeft={36}>
             for learning to read
           </StyledLine>
-          <StyledLine alignSelf="flex-end" color="#c9ac5f" fontSize="40px">
+          <StyledLine alignSelf="flex-end" color="#c9ac5f" fontSize={40}>
             Greek manuscripts
           </StyledLine>
         </HomeTextContainer>
@@ -65,5 +66,3 @@ const Home = () => {
     </PageWrapper>
   );
 };
-
-export default Home;
