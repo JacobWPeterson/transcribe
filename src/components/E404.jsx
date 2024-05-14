@@ -25,7 +25,7 @@ export const E404 = () => {
         <StyledButton onClick={handleGoHome} height={40} fontSize={20} marginTop="25px" padding="5px 12px" type="button">Back Home</StyledButton>
       </E404Section>
       <E404Section left={65} z={-2}>
-        <img src="./images/E404.svg" alt="Error 404 Drawing" width="1200" />
+        <img src="src/assets/E404.svg" alt="Error 404 Drawing" width="1200" />
       </E404Section>
     </E404Wrapper>
   );
