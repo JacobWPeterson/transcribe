@@ -1,5 +1,14 @@
-const glosses = {
-  Abbreviations: {
+type Gloss = {
+  short: string,
+  long?: string
+}
+
+export type Glosses = {
+  [key: string]: Gloss
+}
+
+const glosses: Glosses = {
+  Abbreviation: {
     short: 'Abbreviations were used for common or repeated words and some names.',
     long: 'Abbreviations were used for common or repeated words and some names. Abbreviation could be done by writing only the first letter or first few letters of a word, or by omitting word endings. One example is "και compendium" (ϗ) where a kappa with a trailing flourish stands for και. When the shortening is done by omitting the middle letters it is called a contraction (see below).',
   },
@@ -15,7 +24,7 @@ const glosses = {
   Ekthesis: {
     short: 'A large, decorative letter at the beginning of a line that is often in the margin.',
   },
-  Ligatures: {
+  Ligature: {
     short: 'Where two or more letters are combined together to form a new glyph.',
     long: 'Where two or more letters are combined together to form a new glyph, such as ȣ for ου. They become increasingly common in later minuscule manuscripts.',
   },

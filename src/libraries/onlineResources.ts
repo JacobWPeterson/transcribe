@@ -1,4 +1,18 @@
-const onlineResources = [
+type Resources = {
+    name: string,
+    creator: string,
+    description: string,
+    url: string,
+    journal?: string,
+    journalDetails?: string,
+}
+
+export type ResourceCategories = {
+    heading: string,
+    resources: Resources[]
+}
+
+const onlineResources: ResourceCategories[] = [
     {
         heading: "Overviews",
         resources: [

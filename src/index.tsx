@@ -2,16 +2,16 @@ import { createRoot } from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 
-import Layout from './components/Layout.jsx';
-import Home from './components/Home.jsx';
-import Workspace from './components/Workspace/index.jsx';
-import Glossary from './components/Help/Glossary.jsx';
-import Guide from './components/Help/Guide.jsx';
-import Resources from './components/Help/Resources.jsx';
-import About from './components/About.jsx';
-import { E404 } from './components/E404.jsx';
-import onlineResources from './libraries/onlineResources.js';
-import furtherReading from './libraries/furtherReading.js';
+import { Layout } from './components/Layout';
+import { Home } from './components/Home';
+import { Workspace } from './components/Workspace/index';
+import { Glossary } from './components/Help/Glossary';
+import { Guide } from './components/Help/Guide';
+import { Resources } from './components/Help/Resources';
+import { About } from './components/About';
+import { E404 } from './components/E404';
+import onlineResources from './libraries/onlineResources';
+import furtherReading from './libraries/furtherReading';
 
 const container = document.getElementById('app');
 const root = createRoot(container);
