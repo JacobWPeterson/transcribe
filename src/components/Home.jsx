@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <PageWrapper flexDirection="column">
       <HomeUpperWrapper>
-        <StyledImage borderColor="#c9ac5f" maxWidth={500} src="./images/Aristophanes-Critical-Edition.png" alt="Greek printed edition text" />
+        <StyledImage borderColor="#c9ac5f" maxWidth={500} src="src/assets/Aristophanes-Critical-Edition.png" alt="Greek printed edition text" />
         <HomeTextContainer>
           <StyledLine alignSelf="flex-start" color="#3e5276" fontSize="40px">
             Guided lessons
@@ -35,7 +35,7 @@ const Home = () => {
             Greek manuscripts
           </StyledLine>
         </HomeTextContainer>
-        <StyledImage borderColor="#3e5276" maxWidth={450} src="./images/Aristophanes-Barocci-127.jpg" alt="Greek manuscript text" />
+        <StyledImage borderColor="#3e5276" maxWidth={450} src="src/assets/Aristophanes-Barocci-127.jpg" alt="Greek manuscript text" />
       </HomeUpperWrapper>
       <HomeFeatureWrapper>
         <StyledP fontStyle="italic" textAlign="center" width="70%">

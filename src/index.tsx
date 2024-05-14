@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 
 import Layout from './components/Layout.jsx';
 import Home from './components/Home.jsx';
@@ -15,9 +15,10 @@ import furtherReading from './libraries/furtherReading.js';
 
 const container = document.getElementById('app');
 const root = createRoot(container);
-root.render(
-  <BrowserRouter>
-    <Routes>
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="lessons" element={<Workspace />} />
@@ -28,6 +29,10 @@ root.render(
         <Route path="about" element={<About />} />
         <Route path="*" element={<E404 />} />
       </Route>
-    </Routes>
-  </BrowserRouter>
+    </Route>
+  )
+)
+
+root.render(
+  <RouterProvider router={router} />
 );

@@ -59,13 +59,13 @@ const Layout = () => {
         <span style={{ color: '#c9ac5f' }}>|</span>
         <Copyright>© 2024 Jacob W. Peterson</Copyright>
         <a href="https://www.threads.net/@jacobwpeterson" target="_blank" rel="noreferrer">
-          <img src="./images/threads.svg" alt="threads icon" width="18" height="18" />
+          <img src="src/assets/threads.svg" alt="threads icon" width="18" height="18" />
         </a>
         <a href="https://www.linkedin.com/in/jacobwpeterson/" target="_blank" rel="noreferrer">
-          <img src="./images/linkedin.svg" alt="LinkedIn icon" width="18" height="18" />
+          <img src="src/assets/linkedin.svg" alt="LinkedIn icon" width="18" height="18" />
         </a>
         <a href="https://edinburgh.academia.edu/JacobPeterson" target="_blank" rel="noreferrer">
-          <img src="./images/academia.svg" alt="academia.edu icon" width="16" height="16" />
+          <img src="src/assets/academia.svg" alt="academia.edu icon" width="16" height="16" />
         </a>
       </StyledFooter>
       <ContactModal onHide={() => setShowModal(false)} show={showModal} />
