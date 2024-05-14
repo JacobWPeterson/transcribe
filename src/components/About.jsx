@@ -31,13 +31,13 @@ const About = () => (
       </StyledLine>
       <Partners>
         <Partner>
-          <img src="./images/mirador.png" alt="mirador logo" />
+          <img src="src/assets/mirador.png" alt="mirador logo" />
           <PartnerText color="#3c444d" fontFamily="'Yanone Kaffeesatz', sans-serif" fontSize="48px" letterSpacing=".05em">
             mirador
           </PartnerText>
         </Partner>
         <Partner>
-          <img src="./images/library.svg" height="60" alt="library logo" />
+          <img src="src/assets/library.svg" height="60" alt="library logo" />
           <PartnerText color="#3e5276" fontSize="18px" fontStyle="italic" padding="20px 0 0 0">
             Holding Institutions
           </PartnerText>
@@ -48,7 +48,7 @@ const About = () => (
           </PartnerText>
         </Partner>
         <Partner>
-          <img src="./images/iiif.png" height="60" alt="iiif logo" />
+          <img src="src/assets/iiif.png" height="60" alt="iiif logo" />
           <PartnerText color="#006eb0" fontFamily="Playfair Display" fontSize="18px">
             International Image Interoperability Framework
           </PartnerText>
@@ -56,7 +56,7 @@ const About = () => (
       </Partners>
     </AboutPageMiddle>
     <AboutPageLower>
-      <img style={{ borderRadius: '50%' }} height="325" width="325" src="./images/me.jpg" alt="creator" />
+      <img style={{ borderRadius: '50%' }} height="325" width="325" src="src/assets/me.jpg" alt="creator" />
       <AboutPageLowerSection>
         <StyledH1 textAlign="center">About Me</StyledH1>
         <StyledP fontSize={18} width="50vw">I&apos;m a sponsored<sup>*</sup> trail ultrarunner living in Scotland. I earned a PhD in textual criticism from the University of Edinburgh and spent several years developing and overseeing projects to digitise ancient manuscripts in the US, Europe, and Asia with the Center for the Study of New Testament Manuscripts (CSNTM). I primarily publish on topics within papyrology, paratexts, and New Testament textual criticism.</StyledP>
