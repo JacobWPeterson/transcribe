@@ -50,7 +50,7 @@ export const Home = (): ReactElement => {
             <ListItem color="#fff"><span>helpful information when new concepts are encountered</span></ListItem>
             <ListItem color="#fff"><span>tips and clues to help resolve incorrect answers</span></ListItem>
             <ListItem color="#fff"><span>a glossary of relevant terms</span></ListItem>
-            <ListItem color="#fff"><span>a modern viewer featuring hi-res color images</span></ListItem>
+            <ListItem color="#fff"><span>a modern viewer featuring hi-res colour images</span></ListItem>
             <ListItem color="#fff">
               <span>codicological and bibliographic info about each manuscript</span>
             </ListItem>

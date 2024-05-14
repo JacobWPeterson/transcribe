@@ -21,7 +21,6 @@ export type Manifests = {
 const manifests: Manifests = {
   1: {
     manifestId: 'https://cudl.lib.cam.ac.uk/iiif/MS-ADD-06594',
-    // manifestId: '',
     canvasIndex: 160,
     lines: [
       {
