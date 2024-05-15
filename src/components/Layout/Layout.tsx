@@ -31,8 +31,8 @@ export const Layout = (): ReactElement => {
           <StyledNavbarToggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
             <StyledNav className="justify-content-end">
-              <NavLink id={styles.Link} href="/">Home</NavLink>
-              <NavLink id={styles.Link} href="/lessons">Lessons</NavLink>
+              <NavLink href="/">Home</NavLink>
+              <NavLink href="/lessons">Lessons</NavLink>
               <StyledNavDropdown title="Help" id="collapsible-nav-dropdown">
                 <StyledNavDropdownItem href="/guide">Guide</StyledNavDropdownItem>
                 <NavDropdown.Divider />
@@ -42,7 +42,7 @@ export const Layout = (): ReactElement => {
                 <NavDropdown.Divider />
                 <StyledNavDropdownItem href="/further-reading">Further reading</StyledNavDropdownItem>
               </StyledNavDropdown>
-              <NavLink id={styles.Link} href="/about">About</NavLink>
+              <NavLink href="/about">About</NavLink>
             </StyledNav>
           </Navbar.Collapse>
         </StyledContainer>
@@ -50,8 +50,7 @@ export const Layout = (): ReactElement => {
       <Outlet />
       <StyledFooter>
         <NavLink
-          id={styles.Link}
-          color="#3e5276"
+          className={styles.Link}
           role="link"
           tabIndex={0}
           onClick={() => setShowModal(true)}

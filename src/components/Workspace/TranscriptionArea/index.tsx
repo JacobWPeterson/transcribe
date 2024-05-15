@@ -4,7 +4,6 @@ import Form from 'react-bootstrap/Form';
 import {
   StyledButton,
   StyledFormSwitch,
-  StyledLink,
   TranscriptionContainer,
   TranscriptionHeader,
   TranscriptionNavButtons,
@@ -42,9 +41,9 @@ export const TranscriptionArea = ({
             onChange={() => setRequireSpaces(!requireSpaces)}
           />
         </Form>
-        <StyledLink href="/guide" marginBottom={10} target="_blank">
+        <a className="Link" href="/guide" target="_blank">
           Transcription guide
-        </StyledLink>
+        </a>
       </TranscriptionSubsection>
       {lines.map((line: Line, index) => (
         <SingleLine key={`${manifest}.${index}`} passedIndex={index} line={line} requireSpaces={requireSpaces} isTitle={line.isTitle} />

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 import {
-  Container, Form, Navbar, NavDropdown, Popover,
+  Container, Form, Navbar, NavDropdown,
 } from 'react-bootstrap';
 
 export const AboutPageLower = styled.div`
@@ -136,17 +136,6 @@ export const PartnerText = styled.p < { color?: string, fontSize?: number, fontF
   text-align: center;
 `;
 
-export const PopoverHeader = styled(Popover.Header)`
-  color: #3e5276;
-  padding: 0.5rem 1rem;
-  margin-bottom: 0;
-  font-size: 1rem;
-  background-color: #f0f0f0;
-  border-bottom: 1px solid rgba(0,0,0,.2);
-  border-top-left-radius: calc(0.3rem - 1px);
-  border-top-right-radius: calc(0.3rem - 1px);
-`;
-
 export const SectionHalf = styled.div < { background?: string } > `
   width: 80%;
   background: ${(props) => (props.background)};
@@ -186,24 +175,6 @@ export const StyledContainer = styled(Container)`
   }
 `;
 
-export const StyledCustomPillBadge = styled.div < { background?: string, padding?: string, margin?: string } > `
-  color: #3e5276;
-  background: ${(props) => (props.background ? props.background : '#3e5276')};
-  display: inline-block;
-  margin: ${(props) => (props.margin ? props.margin : '0 0 0 10px')};
-  padding: ${(props) => (props.padding ? props.padding : '0.35em 0.65em')};
-  font-size: .75em;
-  font-weight: 700;
-  line-height: 1;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: center;
-  border-radius: 50rem !important;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-`;
-
 export const StyledFooter = styled.footer`
   position: absolute;
   bottom: 0;
@@ -214,13 +185,6 @@ export const StyledFooter = styled.footer`
   justify-content: center;
   border-bottom: 5px solid #c9ac5f;
   gap: 12px;
-`;
-
-export const StyledForm = styled.form`
-  padding: 10px 0;
-  width: 100%;
-  display: flex;
-  align-items: baseline;
 `;
 
 export const StyledFormSwitch = styled(Form.Switch)`
@@ -243,47 +207,12 @@ export const StyledImage = styled.img < { borderColor?: string, maxWidth?: numbe
   border-radius: 5px;
 `;
 
-export const StyledInput = styled.input`
-  height: 30px;
-  font-size: 16px;
-  padding: 2px 5px;
-`;
-
-export const StyledInputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-width: 250px;
-  width: 23vw;
-  margin: 0 10px;
-`;
-
-export const StyledLabel = styled.label`
-  color: #3e5276;
-  width: 55px;
-`;
-
 export const StyledLine = styled.div < { color?: string, fontSize?: number, paddingLeft?: number, alignSelf?: string } > `
   display: flex;
   color: ${(props) => (props.color ? props.color : '#606060')};
   font-size: ${(props) => (props.fontSize ? `${props.fontSize}px` : 'inherit')};
   padding-left: ${(props) => (props.paddingLeft ? props.paddingLeft : 0)}px;
   align-self: ${(props) => (props.alignSelf ? props.alignSelf : 'auto')}
-`;
-
-export const StyledLink = styled.a < { marginBottom?: number } > `
-  color: #c9ac5f;
-  width: 250px;
-  margin-bottom: ${(props) => (props.marginBottom ? props.marginBottom : 0)}px;
-
-  &:hover, &:focus {
-    outline: none;
-    cursor: pointer;
-    color: #3e5276;
-  }
-  &:hover {
-    transition: 500ms ease;
-  }
 `;
 
 export const StyledNavbar = styled(Navbar) < { borderTop?: string } > `
@@ -364,22 +293,6 @@ export const StyledP = styled.p < { width?: string, margin?: string, fontSize?: 
   text-align: ${(props) => (props.textAlign ? props.textAlign : 'justify')};
   text-indent: ${(props) => (props.textIndent ? props.textIndent : '0')};
   letter-spacing: .03em;
-`;
-
-export const StyledSmall = styled.small`
-  color: #6c757d;
-  margin-top: 0.25rem;
-  font-size: .8em;
-`;
-
-export const StyledTable = styled.table`
-  border: none;
-  border-collapse: collapse;
-`;
-
-export const SymbolCell = styled.td`
-  width: 100px;
-  text-align: center;
 `;
 
 export const TranscriptionContainer = styled.div`
