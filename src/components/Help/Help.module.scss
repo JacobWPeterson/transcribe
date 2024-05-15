@@ -1,5 +1,21 @@
 .Badge {
     margin: 0;
+
+    &.Hint {
+        background-color: #3e5276 !important;
+    }
+
+    &.NC {
+        background-color: #c9ac5f !important;
+    }
+
+    &.Title {
+        background-color: #6c757d !important;
+    }
+
+    &.ReducedLeftMargin {
+        margin: 0 0 0 4px;
+    }
 }
 
 .GlossContainer {
@@ -10,6 +26,16 @@
         font-weight: 700;
         margin-bottom: 4px;
     }
+}
+
+.GuideText {
+    width: '100%';
+    margin: 6px auto;
+    color: #606060;
+    font-size: 16px;
+    text-align: justify;
+    text-indent: 24px;
+    letter-spacing: .03em;
 }
 
 .H1 {
@@ -43,7 +69,22 @@
     letter-spacing: .03rem;
 }
 
-.Link {
+.LegendText {
+    width: 100%;
+    margin: 0 auto;
+    color: #606060;
+    font-size: 14px;
+    text-align: justify;
+    letter-spacing: .03em;
+}
+
+.NameAndCreator {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.ResourceLink {
     color: #3e5276;
     text-decoration: none;
     padding: 0;
@@ -65,15 +106,23 @@
     }
 }
 
-.NameAndCreator {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-}
-
 .Span {
     color: #606060;
     font-size: 14px;
     text-align: left;
     letter-spacing: .03em;
+}
+
+.Table {
+    border: none;
+    border-collapse: collapse;
+
+    .Row {
+        height: 50px;
+
+        .Cell {
+            width: 100px;
+            text-align: center;
+        }
+    }
 }
