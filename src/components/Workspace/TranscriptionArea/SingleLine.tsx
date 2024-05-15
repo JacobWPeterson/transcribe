@@ -1,19 +1,9 @@
 import { type ReactElement, useEffect, useRef, useState, ChangeEvent } from 'react';
 import { Badge, OverlayTrigger, Popover } from 'react-bootstrap';
 import pluralize from 'pluralize';
+import classnames from 'classnames'
 import evaluateSubmission from './validators';
 import glosses from '../../../libraries/glosses';
-import {
-  StyledInputWrapper,
-  PopoverHeader,
-  StyledButton,
-  StyledForm,
-  StyledInput,
-  StyledLabel,
-  StyledLink,
-  StyledCustomPillBadge,
-  StyledSmall,
-} from '../../../styles';
 import { Line } from '../../../libraries/manifests';
 
 import styles from './SingleLine.module.scss';
@@ -80,16 +70,16 @@ export const SingleLine = ({ isTitle, line, passedIndex, requireSpaces = false }
       trigger='click'
       overlay={(
         <Popover id="popover-concepts">
-          <PopoverHeader as="h3">{`New Concept: ${concept}`}</PopoverHeader>
+          <Popover.Header className="PopoverHeader" as="h3">{`New Concept: ${concept}`}</Popover.Header>
           <Popover.Body>
             {glosses?.[concept]?.short}
             &nbsp;
-            <StyledLink href={`/glossary#${concept}`} target="_blank">Learn more</StyledLink>
+            <a className="Link" href={`/glossary#${concept}`} target="_blank">Learn more</a>
           </Popover.Body>
         </Popover>
       )}
     >
-      <StyledCustomPillBadge tabIndex={0} background="#c9ac5f">NC</StyledCustomPillBadge>
+      <Badge pill className={classnames(styles.Badge, styles.NC)} tabIndex={0}>NC</Badge>
     </OverlayTrigger>
   );
 
@@ -147,7 +137,7 @@ export const SingleLine = ({ isTitle, line, passedIndex, requireSpaces = false }
         </Popover>
       )}
     >
-      <StyledCustomPillBadge tabIndex={0} background="#3e5276">?</StyledCustomPillBadge>
+      <Badge pill className={classnames(styles.Badge, styles.Hint)} tabIndex={0}>?</Badge>
     </OverlayTrigger>
   );
 
@@ -167,24 +157,24 @@ export const SingleLine = ({ isTitle, line, passedIndex, requireSpaces = false }
         </Popover>
       )}
     >
-      <StyledCustomPillBadge tabIndex={0} background="#6c757d" margin="0 0 0 3px" padding="2px 5px">?</StyledCustomPillBadge>
+      <Badge pill className={classnames(styles.Badge, styles.Title, styles.ReducedLeftMargin)} tabIndex={0}>?</Badge>
     </OverlayTrigger>
   );
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
-      <StyledLabel htmlFor={isTitle ? 'title' : `Line ${passedIndex}`} style={{ display: 'flex', alignItems: 'center', marginTop: '3px' }}>
+    <form className={styles.Form} onSubmit={handleSubmit}>
+      <label className={styles.Label} htmlFor={isTitle ? 'title' : `Line ${passedIndex}`} style={{ display: 'flex', alignItems: 'center', marginTop: '3px' }}>
         {isTitle ? 'Title' : `Line ${passedIndex}`}
         {isTitle && titleHelp()}
-      </StyledLabel>
-      <StyledInputWrapper>
-        <StyledInput id={isTitle ? 'title' : `Line ${passedIndex}`} type="text" value={lineContent} onChange={handleChange} autoComplete="off" />
-        {line.caption && <StyledSmall>{line.caption}</StyledSmall>}
-      </StyledInputWrapper>
-      <StyledButton marginTop="2px" type="submit">Check</StyledButton>
+      </label>
+      <div className={styles.InputWrapper}>
+        <input className={styles.Input} id={isTitle ? 'title' : `Line ${passedIndex}`} type="text" value={lineContent} onChange={handleChange} autoComplete="off" />
+        {line.caption && <small className={styles.Small}>{line.caption}</small>}
+      </div>
+      <button className={styles.Button} type="submit">Check</button>
       {line.newConcept && newConcept(line.newConcept)}
       {submissionStatus && renderIncorrectAnswerMessaging()}
       {showHint && hint()}
-    </StyledForm>
+    </form>
   );
 };

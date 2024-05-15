@@ -1,3 +1,77 @@
 .Badge {
-    margin: 0 0 0 10px;
+    margin: 5px 0 0 10px;
+    align-self: start;
+
+    &.Hint {
+        background-color: #3e5276 !important;
+    }
+
+    &.NC {
+        background-color: #c9ac5f !important;
+    }
+
+    &.Title {
+        background-color: #6c757d !important;
+    }
+
+    &.ReducedLeftMargin {
+        margin: 0 0 0 4px;
+    }
+}
+
+.Form {
+    padding: 10px 0;
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+
+    .Button {
+        color: #fff;
+        background: #3e5276;
+        font-size: inherit;
+        text-align: center;
+        line-height: 1em;
+        padding: 2px 5px;
+        margin-top: 2px;
+        height: 25px;
+        border: none;
+        border-radius: 5px;
+
+        &:focus {
+            background: #3e527685;
+            border: none;
+            outline: none;
+        }
+
+        &:disabled {
+            background: #c9ac5f95;
+            color: #3e5276;
+        }
+    }
+
+    .Label {
+        color: #3e5276;
+        width: 55px;
+    }
+
+    .InputWrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-width: 250px;
+        width: 23vw;
+        margin: 0 10px;
+
+        .Input {
+            height: 30px;
+            font-size: 16px;
+            padding: 2px 5px;
+        }
+
+        .Small {
+            color: #6c757d;
+            margin-top: 0.25rem;
+            font-size: .8em;
+        }
+    }
 }

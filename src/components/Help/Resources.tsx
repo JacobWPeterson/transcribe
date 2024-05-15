@@ -12,7 +12,7 @@ interface ResourcesProps {
 }
 
 export const Resources = ({ resource, title }: ResourcesProps): ReactElement => (
-  <div className={styles.PageWrapper}>
+  <div className="PageWrapper">
     <div className={styles.HelpSection} id="resources">
       <h1 className={styles.H1}>{title}</h1>
       {
@@ -22,7 +22,7 @@ export const Resources = ({ resource, title }: ResourcesProps): ReactElement => 
             {resources?.map(({ name, creator, description, journal, journalDetails, url }, index) => (
               <Fragment key={index}>
                 <div className={styles.NameAndCreator}>
-                  <NavLink className={styles.Link} target="_blank" href={url}>{name}</NavLink>
+                  <NavLink className={styles.ResourceLink} target="_blank" href={url}>{name}</NavLink>
                   {creator && <span className={styles.Span}>{`by ${creator}`}</span>}
                 </div>
                 {(description || journal) && (
