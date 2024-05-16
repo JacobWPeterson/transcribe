@@ -1,0 +1,34 @@
+.Button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: inherit;
+    background: #3e5276;
+    height: 38px;
+    width: 90px;
+    border: none;
+    border-radius: 5px;
+
+    &.Cancel {
+        color: #3e5276;
+        background: #fff;
+    }
+
+    &:focus,
+    &:hover {
+        background: #3e527685;
+        border: none;
+        outline: none;
+
+        &.Cancel {
+            color: #3e5276;
+            background: #ddd;
+        }
+    }
+
+    &:disabled {
+        background: #3e527650;
+        cursor: not-allowed
+      }
+}
