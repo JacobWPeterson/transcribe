@@ -1,52 +1,8 @@
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 import {
-  Container, Form, Navbar, NavDropdown,
+  Container, Navbar, NavDropdown,
 } from 'react-bootstrap';
-
-export const AboutPageLower = styled.div`
-  width: 90vw;
-  display: flex;
-  background: #d3d3d3;
-  height: 400px;
-  align-items: center;
-  justify-content: space-evenly;
-  margin: 20px auto;
-`;
-
-export const AboutPageMiddle = styled.div`
-  width: 90vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  margin: auto;
-`;
-
-export const AboutPageUpper = styled.div`
-  width: 90vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  margin: 30px auto;
-`;
-
-export const AboutPageLowerSection = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const AppWrapper = styled.div`
-  font-family: 'Noto Sans', sans-serif;
-  position: relative;
-  min-height: 100vh;
-  padding-bottom: 50px;
-`;
-
-export const Copyright = styled.div`
-  color: #3e5276;
-`;
 
 export const E404Section = styled.div < { left?: number, z?: number } > `
   display: flex;
@@ -109,32 +65,7 @@ export const HomeUpperWrapper = styled.div`
   align-items: center;
 `;
 
-export const Partner = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 180px;
-  width: 200px;
-  align-items: center;
-`;
 
-export const Partners = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  min-width: 800px;
-  padding: 30px 0 0 0;
-`;
-
-export const PartnerText = styled.p < { color?: string, fontSize?: number, fontFamily?: string, fontStyle?: string, letterSpacing?: string, padding?: string } > `
-  color: ${(props) => (props.color ? props.color : '#606060')};
-  font-size: ${(props) => (props.fontSize ? `${props.fontSize}px` : '24px')};
-  font-family: ${(props) => (props.fontFamily ? props.fontFamily : 'inherit')};
-  font-style: ${(props) => (props.fontStyle ? props.fontStyle : 'normal')};
-  letter-spacing: ${(props) => (props.letterSpacing ? props.letterSpacing : 'normal')};
-  margin: 0;
-  padding: ${(props) => (props.padding ? props.padding : '20px 0')};
-  text-align: center;
-`;
 
 export const SectionHalf = styled.div < { background?: string } > `
   width: 80%;
@@ -185,18 +116,6 @@ export const StyledFooter = styled.footer`
   justify-content: center;
   border-bottom: 5px solid #c9ac5f;
   gap: 12px;
-`;
-
-export const StyledFormSwitch = styled(Form.Switch)`
-  input {
-    border-color: #3E5276;
-    color: #3E5276;
-
-    &:checked {
-      background-color: #3E5276;
-      border-color: #3E5276;
-    }
-  }
 `;
 
 export const StyledImage = styled.img < { borderColor?: string, maxWidth?: number } > `
@@ -293,34 +212,6 @@ export const StyledP = styled.p < { width?: string, margin?: string, fontSize?: 
   text-align: ${(props) => (props.textAlign ? props.textAlign : 'justify')};
   text-indent: ${(props) => (props.textIndent ? props.textIndent : '0')};
   letter-spacing: .03em;
-`;
-
-export const TranscriptionContainer = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  overflow-y: scroll;
-  padding: 12px 0 12px 24px;
-`;
-
-export const TranscriptionHeader = styled.h2`
-  color: #3e5276;
-  margin-bottom: 5px;
-`;
-
-export const TranscriptionSubsection = styled.div`
-  display: flex;
-  width: 100%;
-  padding: 8px 0;
-  gap: 24px;
-  color: #6c757d;
-`;
-
-export const TranscriptionNavButtons = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  padding-top: 12px;
 `;
 
 export const UnorderedList = styled.ul`
