@@ -1,15 +1,10 @@
 import { useState } from 'react';
 import { SingleLine } from './SingleLine';
-import Form from 'react-bootstrap/Form';
-import {
-  StyledButton,
-  StyledFormSwitch,
-  TranscriptionContainer,
-  TranscriptionHeader,
-  TranscriptionNavButtons,
-  TranscriptionSubsection,
-} from '../../../styles';
+import { Form } from 'react-bootstrap';
 import { Line, Manifest } from '../../../libraries/manifests';
+
+import styles from './index.module.scss';
+import classNames from 'classnames';
 
 interface TranscriptionAreaProps {
   changeManuscript: (type: 'next' | 'previous') => void,
@@ -29,13 +24,14 @@ export const TranscriptionArea = ({
 
 
   return (
-    <TranscriptionContainer>
-      <TranscriptionHeader>
+    <div className={styles.Container}>
+      <h2 className={styles.Header}>
         Transcription Workspace
-      </TranscriptionHeader>
-      <TranscriptionSubsection>
+      </h2>
+      <div className={styles.Section}>
         <Form>
-          <StyledFormSwitch
+          <Form.Switch
+            className={styles.FormSwitch}
             id="mode-switch"
             label="Require spaces"
             onChange={() => setRequireSpaces(!requireSpaces)}
@@ -44,14 +40,14 @@ export const TranscriptionArea = ({
         <a className="Link" href="/guide" target="_blank">
           Transcription guide
         </a>
-      </TranscriptionSubsection>
+      </div>
       {lines.map((line: Line, index) => (
         <SingleLine key={`${manifest}.${index}`} passedIndex={index} line={line} requireSpaces={requireSpaces} isTitle={line.isTitle} />
       ))}
-      <TranscriptionNavButtons>
-        {manuscriptId > 1 ? <StyledButton background="#d3d3d3" color="#3e5276" height={38} padding="6px 12px" onClick={() => handleClick('previous')}>Previous</StyledButton> : <div />}
-        {manuscriptId < manifestLength ? <StyledButton background="#c9ac5f" height={38} padding="6px 26px" onClick={() => handleClick('next')}>Next</StyledButton> : <div />}
-      </TranscriptionNavButtons>
-    </TranscriptionContainer>
+      <div className={styles.ButtonsContainer}>
+        {manuscriptId > 1 ? <button className={classNames(styles.Button, styles.Back)} color="#3e5276" onClick={() => handleClick('previous')}>Previous</button> : <div/>}
+        {manuscriptId < manifestLength ? <button className={styles.Button} onClick={() => handleClick('next')}>Next</button> : <div/>}
+      </div>
+    </div>
   );
 };

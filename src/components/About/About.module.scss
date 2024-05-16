@@ -1,3 +1,45 @@
+.Container {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: auto;
+
+    &.Lower {
+        flex-direction: row;
+        background: #d3d3d3;
+        height: 350px;
+        margin: 10px auto;
+
+        .Section {
+            display: flex;
+            flex-direction: column;
+            width: 50vw;
+        }
+    }
+
+    &.Upper {
+        margin: 30px auto;
+
+    }
+
+    .Text {
+        font-size: 18px;
+        color: #333;
+        text-align: justify;
+
+        &.Italic {
+            font-style: italic;
+        }
+
+        &.Smaller {
+            font-size: 16px;
+        }
+    }
+}
+
+
 .H1 {
     font-weight: 600;
     color: #c9ac5f;
@@ -14,4 +56,52 @@
     color: #6c757d;
     margin-top: 0.25rem;
     font-size: .8em;
+}
+
+
+.Partners {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    min-width: 800px;
+    padding: 30px 0 0 0;
+
+    .Partner {
+        display: flex;
+        flex-direction: column;
+        height: 180px;
+        width: 200px;
+        align-items: center;
+
+        .PartnerText {
+            color: #3e5276;
+            font-size: 18px;
+            text-align: center;
+            margin: 0;
+            padding: 20px 0;
+
+            &.HoldingInstitutions {
+                padding-bottom: 0;
+                font-style: italic;
+
+            }
+
+            &.HoldingInstitute {
+                font-size: 12px;
+                padding: 2px 0;
+            }
+
+            &.MiradorFont {
+                color: #3c444d;
+                font-size: 48px;
+                font-family: 'Yanone Kaffeesatz';
+                letter-spacing: .05em;
+            }
+
+            &.IIIFFont {
+                color: #006eb0;
+                font-family: 'Playfair Display';
+            }
+        }
+    }
 }
