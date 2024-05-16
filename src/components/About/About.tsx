@@ -4,7 +4,6 @@ import type { ReactElement } from 'react';
 import classNames from 'classnames';
 import styles from './About.module.scss'
 
-
 export const About = (): ReactElement => (
   <div className="PageWrapper">
     <div className={classNames(styles.Container, styles.Upper)}>

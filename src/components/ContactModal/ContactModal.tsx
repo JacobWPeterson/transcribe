@@ -1,6 +1,8 @@
 import { type ReactElement, useState } from 'react';
 import { Form, Modal } from 'react-bootstrap';
-import { StyledButton } from '../../styles';
+import classNames from 'classnames';
+
+import styles from './ContactModal.module.scss';
 
 interface ContactModalProps {
   show: boolean,
@@ -108,8 +110,8 @@ export const ContactModal = ({ show, onHide }: ContactModalProps): ReactElement 
       </Modal.Body>
       <Modal.Footer>
         {alert && <span style={{ color: 'red', 'paddingRight': '10px' }}>{alert}</span>}
-        <StyledButton background="#d3d3d3" color="#3e5276" height={38} padding="6px 12px" onClick={onHide}>{emailSent ? 'Close' : 'Cancel'}</StyledButton>
-        <StyledButton disabled={emailSent} height={38} padding="6px 12px" onClick={send}>{emailSent ? 'Email Sent' : 'Send'}</StyledButton>
+        <button className={classNames(styles.Button, styles.Cancel)} onClick={onHide}>{emailSent ? 'Close' : 'Cancel'}</button>
+        <button className={styles.Button} disabled={emailSent} onClick={send}>{emailSent ? 'Email Sent' : 'Send'}</button>
       </Modal.Footer>
     </Modal>
   );
