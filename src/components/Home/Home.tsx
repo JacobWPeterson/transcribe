@@ -1,18 +1,6 @@
 
 import { ReactElement } from 'react';
-import {
-  HomeTextContainer,
-  HomeFeatureWrapper,
-  SectionHalf,
-  HomeLowerWrapper,
-  HomeUpperWrapper,
-  StyledButton,
-  StyledImage,
-  StyledLine,
-  StyledP,
-  UnorderedList,
-  ListItem,
-} from '../../styles';
+import classNames from 'classnames';
 
 import styles from './Home.module.scss';
 
@@ -23,46 +11,46 @@ export const Home = (): ReactElement => {
 
   return (
     <div className="PageWrapper">
-      <HomeUpperWrapper>
-        <StyledImage borderColor="#c9ac5f" maxWidth={500} src="src/assets/Aristophanes-Critical-Edition.png" alt="Greek printed edition text" />
-        <HomeTextContainer>
-          <StyledLine alignSelf="flex-start" color="#3e5276" fontSize={40}>
+      <div className={styles.UpperSection}>
+        <img className={classNames(styles.Image, styles.LeftImage)} src="src/assets/Aristophanes-Critical-Edition.png" alt="Greek printed edition text" />
+        <div className={styles.CenterTextContainer}>
+          <div className={styles.Line1}>
             Guided lessons
-          </StyledLine>
-          <StyledLine alignSelf="flex-start" paddingLeft={36}>
+          </div>
+          <div className={styles.Line2}>
             for learning to read
-          </StyledLine>
-          <StyledLine alignSelf="flex-end" color="#c9ac5f" fontSize={40}>
+          </div>
+          <div className={styles.Line3}>
             Greek manuscripts
-          </StyledLine>
-        </HomeTextContainer>
-        <StyledImage borderColor="#3e5276" maxWidth={450} src="src/assets/Aristophanes-Barocci-127.jpg" alt="Greek manuscript text" />
-      </HomeUpperWrapper>
-      <HomeFeatureWrapper>
-        <StyledP fontStyle="italic" textAlign="center" width="70%">
+          </div>
+        </div>
+        <img className={styles.Image} src="src/assets/Aristophanes-Barocci-127.jpg" alt="Greek manuscript text" />
+      </div>
+      <div className={styles.FeaturesSection}>
+        <p className={styles.FeaturesText}>
           Xeirographa currently offers several different features for learners to ease the transition from reading printed Greek texts to manuscripts of any period.
-        </StyledP>
-        <SectionHalf background="#3e5276" color="#fff">
+        </p>
+        <div className={styles.FeaturesBlock} >
           <h2 className={styles.H2}>Features</h2>
-          <UnorderedList>
-            <ListItem color="#fff"><span>manuscripts get progressively more difficult to read</span></ListItem>
-            <ListItem color="#fff"><span>answers checked line-by-line</span></ListItem>
-            <ListItem color="#fff"><span>helpful information when new concepts are encountered</span></ListItem>
-            <ListItem color="#fff"><span>tips and clues to help resolve incorrect answers</span></ListItem>
-            <ListItem color="#fff"><span>a glossary of relevant terms</span></ListItem>
-            <ListItem color="#fff"><span>a modern viewer featuring hi-res colour images</span></ListItem>
-            <ListItem color="#fff">
+          <ul className={styles.UnorderedList}>
+            <li className={styles.ListItem}><span>manuscripts get progressively more difficult to read</span></li>
+            <li className={styles.ListItem}><span>answers checked line-by-line</span></li>
+            <li className={styles.ListItem}><span>helpful information when new concepts are encountered</span></li>
+            <li className={styles.ListItem}><span>tips and clues to help resolve incorrect answers</span></li>
+            <li className={styles.ListItem}><span>a glossary of relevant terms</span></li>
+            <li className={styles.ListItem}><span>a modern viewer featuring hi-res colour images</span></li>
+            <li className={styles.ListItem}>
               <span>codicological and bibliographic info about each manuscript</span>
-            </ListItem>
-            <ListItem color="#fff"><span>suggestions for further study</span></ListItem>
-            <ListItem color="#fff"><span>links to other relevant online and print resources</span></ListItem>
-          </UnorderedList>
-        </SectionHalf>
-      </HomeFeatureWrapper>
-      <HomeLowerWrapper>
+            </li>
+            <li className={styles.ListItem}><span>suggestions for further study</span></li>
+            <li className={styles.ListItem}><span>links to other relevant online and print resources</span></li>
+          </ul>
+        </div>
+      </div>
+      <div className={styles.LowerSection}>
         Go from reading printed texts to manuscripts of any period in a few lessons
-        <StyledButton onClick={handleGetStarted} height={50} fontSize={24} padding="5px 12px" type="button">Get started</StyledButton>
-      </HomeLowerWrapper>
+        <button className={styles.Button} onClick={handleGetStarted} type="button">Get started</button>
+      </div>
     </div>
   );
 };

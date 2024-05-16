@@ -1,20 +1,14 @@
 import { ReactElement, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import {
-  Navbar, NavDropdown,
+  Container,
+  Nav,
+  Navbar,
+  NavDropdown,
   NavLink,
 } from 'react-bootstrap';
+import classNames from 'classnames';
 import { ContactModal } from '../ContactModal/ContactModal';
-import {
-  StyledContainer,
-  StyledFooter,
-  StyledNavbar,
-  StyledNavbarBrand,
-  StyledNavbarToggle,
-  StyledNavDropdown,
-  StyledNavDropdownItem,
-  StyledNav,
-} from '../../styles';
 
 import styles from './Layout.module.scss';
 
@@ -23,30 +17,30 @@ export const Layout = (): ReactElement => {
 
   return (
     <div className={styles.AppWrapper}>
-      <StyledNavbar borderTop="5px solid #c9ac5f" collapseOnSelect expand="lg">
-        <StyledContainer className="container-fluid">
-          <StyledNavbarBrand href="/">Xeirographa</StyledNavbarBrand>
-          <StyledNavbarToggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
-            <StyledNav className="justify-content-end">
+      <Navbar className={styles.Navbar} collapseOnSelect expand="lg">
+        <Container className={classNames(styles.Container, 'container-fluid')}>
+          <Navbar.Brand className={styles.Brand} href="/">Xeirographa</Navbar.Brand>
+          <Navbar.Toggle className={styles.Toggle} aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav" className={styles.CollapsedNav}>
+            <Nav className={classNames("justify-content-end", styles.Nav)}>
               <NavLink href="/">Home</NavLink>
               <NavLink href="/lessons">Lessons</NavLink>
-              <StyledNavDropdown title="Help" id="collapsible-nav-dropdown">
-                <StyledNavDropdownItem href="/guide">Guide</StyledNavDropdownItem>
+              <NavDropdown title="Help" id="collapsible-nav-dropdown" className={styles.NavDropdown}>
+                <NavDropdown.Item className={styles.DropdownItem} href="/guide">Guide</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <StyledNavDropdownItem href="/glossary">Glossary</StyledNavDropdownItem>
+                <NavDropdown.Item className={styles.DropdownItem} href="/glossary">Glossary</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <StyledNavDropdownItem href="/online-resources">Online resources</StyledNavDropdownItem>
+                <NavDropdown.Item className={styles.DropdownItem} href="/online-resources">Online resources</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <StyledNavDropdownItem href="/further-reading">Further reading</StyledNavDropdownItem>
-              </StyledNavDropdown>
+                <NavDropdown.Item className={styles.DropdownItem} href="/further-reading">Further reading</NavDropdown.Item>
+              </NavDropdown>
               <NavLink href="/about">About</NavLink>
-            </StyledNav>
+            </Nav>
           </Navbar.Collapse>
-        </StyledContainer>
-      </StyledNavbar>
+        </Container>
+      </Navbar>
       <Outlet />
-      <StyledFooter>
+      <footer className={styles.Footer}>
         <NavLink
           className={styles.Link}
           role="link"
@@ -67,7 +61,7 @@ export const Layout = (): ReactElement => {
         <a href="https://edinburgh.academia.edu/JacobPeterson" target="_blank" rel="noreferrer">
           <img src="src/assets/academia.svg" alt="academia.edu icon" width="16" height="16" />
         </a>
-      </StyledFooter>
+      </footer>
       <ContactModal onHide={() => setShowModal(false)} show={showModal} />
     </div>
   );

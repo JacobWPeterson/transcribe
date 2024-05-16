@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { SingleLine } from './SingleLine';
 import { Form } from 'react-bootstrap';
+import classNames from 'classnames';
+import { SingleLine } from './SingleLine';
 import { Line, Manifest } from '../../../libraries/manifests';
 
 import styles from './index.module.scss';
-import classNames from 'classnames';
 
 interface TranscriptionAreaProps {
   changeManuscript: (type: 'next' | 'previous') => void,
@@ -45,8 +45,8 @@ export const TranscriptionArea = ({
         <SingleLine key={`${manifest}.${index}`} passedIndex={index} line={line} requireSpaces={requireSpaces} isTitle={line.isTitle} />
       ))}
       <div className={styles.ButtonsContainer}>
-        {manuscriptId > 1 ? <button className={classNames(styles.Button, styles.Back)} color="#3e5276" onClick={() => handleClick('previous')}>Previous</button> : <div/>}
-        {manuscriptId < manifestLength ? <button className={styles.Button} onClick={() => handleClick('next')}>Next</button> : <div/>}
+        {manuscriptId > 1 ? <button className={classNames(styles.Button, styles.Back)} color="#3e5276" onClick={() => handleClick('previous')}>Previous</button> : <div />}
+        {manuscriptId < manifestLength ? <button className={styles.Button} onClick={() => handleClick('next')}>Next</button> : <div />}
       </div>
     </div>
   );
