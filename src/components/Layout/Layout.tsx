@@ -6,8 +6,6 @@ import {
 } from 'react-bootstrap';
 import { ContactModal } from '../ContactModal/ContactModal';
 import {
-  AppWrapper,
-  Copyright,
   StyledContainer,
   StyledFooter,
   StyledNavbar,
@@ -24,7 +22,7 @@ export const Layout = (): ReactElement => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <AppWrapper>
+    <div className={styles.AppWrapper}>
       <StyledNavbar borderTop="5px solid #c9ac5f" collapseOnSelect expand="lg">
         <StyledContainer className="container-fluid">
           <StyledNavbarBrand href="/">Xeirographa</StyledNavbarBrand>
@@ -59,7 +57,7 @@ export const Layout = (): ReactElement => {
           Contact
         </NavLink>
         <span style={{ color: '#c9ac5f' }}>|</span>
-        <Copyright>© 2024 Jacob W. Peterson</Copyright>
+        <div className={styles.CopyrightText}>© 2024 Jacob W. Peterson</div>
         <a href="https://www.threads.net/@jacobwpeterson" target="_blank" rel="noreferrer">
           <img src="src/assets/threads.svg" alt="threads icon" width="18" height="18" />
         </a>
@@ -71,6 +69,6 @@ export const Layout = (): ReactElement => {
         </a>
       </StyledFooter>
       <ContactModal onHide={() => setShowModal(false)} show={showModal} />
-    </AppWrapper>
+    </div>
   );
 };
