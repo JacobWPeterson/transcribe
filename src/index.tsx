@@ -1,5 +1,8 @@
-import { createRoot } from 'react-dom/client';
+/* eslint-disable import/no-unassigned-import */
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.scss';
+
+import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 
 import { Layout } from './components/Layout/Layout';
@@ -13,7 +16,6 @@ import { E404 } from './components/E404/E404';
 import onlineResources from './libraries/onlineResources';
 import furtherReading from './libraries/furtherReading';
 
-import './index.scss';
 
 const container = document.getElementById('app');
 const root = createRoot(container);

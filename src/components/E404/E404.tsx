@@ -1,10 +1,10 @@
 
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 import styles from './E404.module.scss';
 
 export const E404 = (): ReactElement => {
-  const handleGoHome = () => {
+  const handleGoHome = (): void => {
     window.location.href = '/';
   };
 
