@@ -1,8 +1,10 @@
 import { type ReactElement, useEffect, useState } from 'react';
 import { Alert } from 'react-bootstrap';
+
+import manifests from '../../libraries/manifests';
+
 import { TranscriptionArea } from './TranscriptionArea/index';
 import { Mirador } from './Mirador/index';
-import manifests from '../../libraries/manifests';
 import styles from './Workspace.module.scss'
 
 export const Workspace = (): ReactElement => {
@@ -21,7 +23,7 @@ export const Workspace = (): ReactElement => {
     }
   }, [pageNumber, canvasIndex, manuscript]);
 
-  const handleManifestChange = (type: 'next' | 'previous') => {
+  const handleManifestChange = (type: 'next' | 'previous'): void => {
     switch (type) {
       case 'next':
         setManuscript(manuscript + 1);

@@ -1,11 +1,13 @@
-import { type ReactElement, useEffect, useRef, useState, ChangeEvent } from 'react';
+import type { ChangeEvent, FormEvent, ReactElement } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Badge, OverlayTrigger, Popover } from 'react-bootstrap';
 import pluralize from 'pluralize';
 import classnames from 'classnames'
-import evaluateSubmission from './validators';
-import glosses from '../../../libraries/glosses';
-import { Line } from '../../../libraries/manifests';
 
+import glosses from '../../../libraries/glosses';
+import type { Line } from '../../../libraries/manifests';
+
+import evaluateSubmission from './validators';
 import styles from './SingleLine.module.scss';
 
 interface SingleLineProps {
@@ -56,12 +58,12 @@ export const SingleLine = ({ isTitle, line, passedIndex, requireSpaces = false }
     setLineContent(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
     setSubmissionStatus(evaluateSubmission(lineContent, line.text, requireSpaces));
   }
 
-  const newConcept = (concept: string) => (
+  const newConcept = (concept: string): ReactElement => (
     <OverlayTrigger
       key={`${concept}-tooltip`}
       placement="top-end"
@@ -74,7 +76,7 @@ export const SingleLine = ({ isTitle, line, passedIndex, requireSpaces = false }
           <Popover.Body>
             {glosses?.[concept]?.short}
             &nbsp;
-            <a className="Link" href={`/glossary#${concept}`} target="_blank">Learn more</a>
+            <a className="Link" href={`/glossary#${concept}`} target="_blank" rel="noreferrer">Learn more</a>
           </Popover.Body>
         </Popover>
       )}
@@ -83,7 +85,7 @@ export const SingleLine = ({ isTitle, line, passedIndex, requireSpaces = false }
     </OverlayTrigger>
   );
 
-  const renderIncorrectAnswerMessaging = () => (
+  const renderIncorrectAnswerMessaging = (): ReactElement => (
     !submissionStatus[0] ? (
       <OverlayTrigger
         key="error-tooltip"
@@ -110,7 +112,7 @@ export const SingleLine = ({ isTitle, line, passedIndex, requireSpaces = false }
     )
   );
 
-  const getHint = (guess: string, answer: string) => {
+  const getHint = (guess: string, answer: string): string => {
     const reformattedAnswer = requireSpaces ? answer : answer.replace(/\s/g, '')
     const reformattedGuess = requireSpaces ? guess.replace(/ς|ϲ/gi, 'σ').toLowerCase() : guess.replace(/\s/g, '').replace(/ς|ϲ/gi, 'σ').toLowerCase();
     const mismatches = [];
@@ -122,7 +124,7 @@ export const SingleLine = ({ isTitle, line, passedIndex, requireSpaces = false }
     return `Incorrect ${pluralize('letter', mismatches.length)}: ${[...mismatches].join(', ')}.`;
   };
 
-  const hint = () => (
+  const hint = (): ReactElement => (
     <OverlayTrigger
       key={`hint-for-line-${passedIndex}`}
       placement="top-end"
@@ -141,7 +143,7 @@ export const SingleLine = ({ isTitle, line, passedIndex, requireSpaces = false }
     </OverlayTrigger>
   );
 
-  const titleHelp = () => (
+  const titleHelp = (): ReactElement => (
     <OverlayTrigger
       key={`title-help`}
       placement="top"
@@ -162,7 +164,7 @@ export const SingleLine = ({ isTitle, line, passedIndex, requireSpaces = false }
   );
 
   return (
-    <form className={styles.Form} onSubmit={handleSubmit}>
+    <form className={styles.Form} onSubmit={(e): void => handleSubmit(e)}>
       <label className={styles.Label} htmlFor={isTitle ? 'title' : `Line ${passedIndex}`} style={{ display: 'flex', alignItems: 'center', marginTop: '3px' }}>
         {isTitle ? 'Title' : `Line ${passedIndex}`}
         {isTitle && titleHelp()}

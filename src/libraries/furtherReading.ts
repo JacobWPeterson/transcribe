@@ -1,4 +1,4 @@
-import { ResourceCategories } from "./onlineResources";
+import type { ResourceCategories } from "./onlineResources";
 
 const furtherReading: ResourceCategories[] = [
     {

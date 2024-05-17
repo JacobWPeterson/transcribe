@@ -7,10 +7,11 @@
     "start": "vite",
     "start:dev": "npm-run-all --parallel -r start types:watch",
     "build": "vite build",
+    "preview": "vite preview",
     "test": "jest --coverage",
     "test-u": "npm run test -- -u",
     "eslint": "eslint . --ext .ts,.tsx --cache --cache-strategy content",
-    "eslint-fix": "eslint --fix . --ext .ts,.tsx --cache --cache-strategy content",
+    "eslint-fix": "eslint . --fix --ext .ts,.tsx --cache --cache-strategy content",
     "types:watch": "tsc --noEmit --watch"
   },
   "repository": {
@@ -47,7 +48,7 @@
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
-    "eslint-plugin-vitest": "^0.5.4",
+    "eslint-plugin-vitest": "^0.4.1",
     "jest": "^27.4.5",
     "jest-css-modules-transform": "^4.4.2",
     "jest-svg-transformer": "^1.0.0",
@@ -60,7 +61,8 @@
     "typescript-eslint": "^7.9.0",
     "vite": "^5.2.11",
     "vite-plugin-svgr": "4.2.0",
-    "vitest": "^1.6.0"
+    "vitest": "^1.6.0",
+    "@vitest/ui": "1.6.0"
   },
   "jest": {
     "transform": {
