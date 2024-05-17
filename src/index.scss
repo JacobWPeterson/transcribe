@@ -1,60 +1,60 @@
 .Link {
-    color: #3e5276;
-    margin-bottom: 0;
+  color: #3e5276;
+  margin-bottom: 0;
 
-    &:hover,
-    &:focus {
-        color: #c9ac5f;
-        outline: none;
-        cursor: pointer;
-    }
+  &:hover,
+  &:focus {
+    color: #c9ac5f;
+    outline: none;
+    cursor: pointer;
+  }
 
-    &:hover {
-        transition: 500ms ease;
-    }
+  &:hover {
+    transition: 500ms ease;
+  }
 }
 
 .PageWrapper {
-    height: 100%;
-    width: 98vw;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
+  height: 100%;
+  width: 98vw;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .PopoverHeader {
-    color: #3e5276;
-    padding: 0.5rem 1rem;
-    margin-bottom: 0;
-    font-size: 1rem;
-    background-color: #f0f0f0;
-    border-bottom: 1px solid rgba(0, 0, 0, .2);
-    border-top-left-radius: calc(0.3rem - 1px);
-    border-top-right-radius: calc(0.3rem - 1px);
+  color: #3e5276;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0;
+  font-size: 1rem;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
 }
 
 .navbar-light .navbar-nav .nav-link {
-    color: #fff;
-    text-decoration: none;
-    padding: 0;
-    font-size: 16px;
+  color: #fff;
+  text-decoration: none;
+  padding: 0;
+  font-size: 16px;
 
-    &.Dark {
-        color: #3e5276;
-    }
+  &.Dark {
+    color: #3e5276;
+  }
 
-    &:hover,
-    &:focus {
-        outline: none;
-        cursor: pointer;
-        color: #c9ac5f;
-    }
+  &:hover,
+  &:focus {
+    outline: none;
+    cursor: pointer;
+    color: #c9ac5f;
+  }
 
-    &:focus {
-        text-decoration: underline;
-    }
+  &:focus {
+    text-decoration: underline;
+  }
 
-    &:hover {
-        transition: 500ms ease;
-    }
+  &:hover {
+    transition: 500ms ease;
+  }
 }
