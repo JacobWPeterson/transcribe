@@ -69,9 +69,11 @@
                 cursor: pointer;
                 color: #c9ac5f;
               }
+
               &:focus {
                 text-decoration: underline;
               }
+
               &:hover {
                 transition: 500ms ease;
               }
