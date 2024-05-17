@@ -1,4 +1,5 @@
-import { ReactElement, useState } from 'react';
+import type { ReactElement} from 'react';
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import {
   Container,
@@ -8,6 +9,7 @@ import {
   NavLink,
 } from 'react-bootstrap';
 import classNames from 'classnames';
+
 import { ContactModal } from '../ContactModal/ContactModal';
 
 import styles from './Layout.module.scss';

@@ -50,7 +50,7 @@ export const Guide = (): ReactElement => (
                   <Popover.Body>
                     Here you&apos;ll find some useful information
                     &nbsp;
-                    <a className="Link" href={`/glossary`} target="_blank">And maybe a link to the glossary</a>
+                    <a className="Link" href={`/glossary`} target="_blank" rel="noreferrer">And maybe a link to the glossary</a>
                   </Popover.Body>
                 </Popover>
               )}
@@ -145,7 +145,7 @@ export const Guide = (): ReactElement => (
       </p>
       <h3 className={styles.H3}>Transcription workspace</h3>
       <p className={styles.GuideText}>
-        The overall concept is pretty straightforward. Each line of the manuscript, excepting titles (see the help icon for those), corresponds to one line of the transcription viewer. <i>Using a Greek unicode font</i>, type your answer into the relevant line, click the &quot;Check&quot; button, and you should then see one of the symbols listed above. How to add languages to your computer: <a className="Link" href="https://support.apple.com/en-gb/guide/mac-help/mchlp1406/mac" target="_blank">Mac</a> | <a className="Link" href="https://support.microsoft.com/en-gb/windows/manage-the-input-and-display-language-settings-in-windows-12a10cb4-8626-9b77-0ccb-5013e0c7c7a2#:~:text=Select%20the%20Start%20%3E%20Settings%20%3E%20Time,keyboard%20you%20want%20to%20add." target="_blank">Windows</a>
+        The overall concept is pretty straightforward. Each line of the manuscript, excepting titles (see the help icon for those), corresponds to one line of the transcription viewer. <i>Using a Greek unicode font</i>, type your answer into the relevant line, click the &quot;Check&quot; button, and you should then see one of the symbols listed above. How to add languages to your computer: <a className="Link" href="https://support.apple.com/en-gb/guide/mac-help/mchlp1406/mac" target="_blank" rel="noreferrer">Mac</a> | <a className="Link" href="https://support.microsoft.com/en-gb/windows/manage-the-input-and-display-language-settings-in-windows-12a10cb4-8626-9b77-0ccb-5013e0c7c7a2#:~:text=Select%20the%20Start%20%3E%20Settings%20%3E%20Time,keyboard%20you%20want%20to%20add." target="_blank" rel="noreferrer">Windows</a>
       </p>
       <p className={styles.GuideText}>
         Most Greek manuscripts do not have spaces, or at least do not use them in the same way as modern writers, so there are two ways of completing the lessons. The normal evaluation mode does not care whether or not spaces are included, so you can just type the letters as you see them on the line. Clicking the &quot;Require spaces&quot; toggle at the top of the editor, however, switches it so that you have to correctly insert spaces into the text in order to get the correct answer.

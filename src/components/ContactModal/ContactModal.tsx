@@ -16,13 +16,13 @@ export const ContactModal = ({ show, onHide }: ContactModalProps): ReactElement 
   const [emailSent, setEmailSent] = useState(false);
   const [alert, setAlert] = useState(null);
 
-  const isValidEmail = () => {
+  const isValidEmail = (): boolean => {
     // get a better regex
     const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(String(email).toLowerCase());
   };
 
-  const send = () => {
+  const send = (): void => {
     if (name.length > 2 && isValidEmail() && message.length > 10) {
       // TODO - send mail
       // See bookmark 'React Contact Form' https://www.webtips.dev/react-contact-form-without-backend

@@ -1,11 +1,11 @@
 
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import classNames from 'classnames';
 
 import styles from './Home.module.scss';
 
 export const Home = (): ReactElement => {
-  const handleGetStarted = () => {
+  const handleGetStarted = (): void => {
     window.location.href = 'lessons';
   };
 
