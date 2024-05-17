@@ -1,0 +1,10 @@
+{
+  "plugins": ["stylelint-order"],
+  "extends": ["stylelint-config-standard", "stylelint-config-standard-scss"],
+  "rules": {
+    "length-zero-no-unit": true,
+    "property-no-vendor-prefix": null,
+    "selector-class-pattern": null,
+    "selector-type-no-unknown": true
+  }
+}

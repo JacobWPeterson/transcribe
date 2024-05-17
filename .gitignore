@@ -6,3 +6,4 @@ vendors-node_modules*
 package-lock.json
 
 .eslintcache
+.stylelintcache
