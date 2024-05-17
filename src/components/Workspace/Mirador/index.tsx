@@ -1,5 +1,6 @@
 import { type ReactElement, useEffect } from 'react';
 import mirador from 'mirador';
+
 // import { miradorImageToolsPlugin } from 'mirador-image-tools'; // currently not available for Mirador v4 alpha; track progress and reinstall https://github.com/ProjectMirador/mirador-image-tools
 import config from './config';
 

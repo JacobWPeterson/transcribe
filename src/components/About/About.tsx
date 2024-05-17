@@ -2,6 +2,7 @@
 
 import type { ReactElement } from 'react';
 import classNames from 'classnames';
+
 import styles from './About.module.scss'
 
 export const About = (): ReactElement => (
@@ -10,7 +11,7 @@ export const About = (): ReactElement => (
       <h1 className={styles.H1}>Why Xeirographa</h1>
       <div className={styles.Text}>Xeirographa—from the Greek χειρόγραφα, meaning &quot;manuscripts&quot;—was created to bridge the skill gap between being able to read a print or critical edition and struggling to read original source material, whether for research purposes or personal interest. One of the major barriers to reading from manuscripts is that for most classical works the majority of surviving manuscripts are relatively late and these are often the most difficult manuscripts to read. The script in them is replete with cursive letters and ligatures that can bewilder newcomers. Accordingly, Xeirographa eases the learner into manuscripts by starting with relatively easy-to-read majuscule scripts. Then new and more complex concepts are slowly introduced over a series of lessons that accumulate into an ability to work with more difficult minuscule texts.</div>
       <br />
-      <div className={classNames(styles.Text, styles.Italic)} >Please use the contact form to send questions or suggestions for improvement. Also consider <a className="Link" href="https://www.venmo.com/jacobwpeterson" target="_blank">buying me a coffee</a> (or two).</div>
+      <div className={classNames(styles.Text, styles.Italic)} >Please use the contact form to send questions or suggestions for improvement. Also consider <a className="Link" href="https://www.venmo.com/jacobwpeterson" target="_blank" rel="noreferrer">buying me a coffee</a> (or two).</div>
     </div>
     <div className={styles.Container}>
       <h2 className={styles.H2}>Special Thanks</h2>

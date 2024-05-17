@@ -1,8 +1,9 @@
 
 import type { ReactElement } from 'react';
-import { GlossaryEntry } from './GlossaryEntry';
+
 import glosses from '../../libraries/glosses';
 
+import { GlossaryEntry } from './GlossaryEntry';
 import styles from './Help.module.scss';
 
 export const Glossary = (): ReactElement => (
