@@ -1,6 +1,8 @@
 {
   "name": "transcribe",
   "version": "1.0.0",
+  "private": true,
+  "type": "module",
   "description": "A website to learn to read manuscripts",
   "main": "index.tsx",
   "scripts": {
