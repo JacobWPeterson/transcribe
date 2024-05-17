@@ -1,24 +1,28 @@
-import { type ReactElement, useState } from 'react';
-import { Form, Modal } from 'react-bootstrap';
-import classNames from 'classnames';
+import { type ReactElement, useState } from "react";
+import { Form, Modal } from "react-bootstrap";
+import classNames from "classnames";
 
-import styles from './ContactModal.module.scss';
+import styles from "./ContactModal.module.scss";
 
 interface ContactModalProps {
-  show: boolean,
-  onHide: () => void
+  show: boolean;
+  onHide: () => void;
 }
 
-export const ContactModal = ({ show, onHide }: ContactModalProps): ReactElement => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+export const ContactModal = ({
+  show,
+  onHide,
+}: ContactModalProps): ReactElement => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [emailSent, setEmailSent] = useState(false);
   const [alert, setAlert] = useState(null);
 
   const isValidEmail = (): boolean => {
     // get a better regex
-    const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const regex =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(String(email).toLowerCase());
   };
 
@@ -27,20 +31,24 @@ export const ContactModal = ({ show, onHide }: ContactModalProps): ReactElement 
       // TODO - send mail
       // See bookmark 'React Contact Form' https://www.webtips.dev/react-contact-form-without-backend
       setAlert(null);
-      setName('');
-      setEmail('');
-      setMessage('');
+      setName("");
+      setEmail("");
+      setMessage("");
       setEmailSent(true);
     } else {
       if (name.length < 2) {
-        setAlert('Please enter your name');
+        setAlert("Please enter your name");
         return;
       }
       if (!isValidEmail()) {
-        setAlert('Enter a valid email');
+        setAlert("Enter a valid email");
         return;
       }
-      setAlert(message.length === 0 ? 'Please add your feedback.' : 'Please add more detail to your feedback.');
+      setAlert(
+        message.length === 0
+          ? "Please add your feedback."
+          : "Please add more detail to your feedback.",
+      );
     }
   };
 
@@ -53,7 +61,7 @@ export const ContactModal = ({ show, onHide }: ContactModalProps): ReactElement 
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      style={{ color: '#3e5276' }}
+      style={{ color: "#3e5276" }}
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
@@ -63,9 +71,9 @@ export const ContactModal = ({ show, onHide }: ContactModalProps): ReactElement 
       <Modal.Body>
         <p>Please reach out with any questions or suggestions.</p>
         <p>
-          Also use this form to report any errors or bugs you have found.
-          For errors, please indicate the manuscript and line number.
-          For bugs, please provide detailed replication steps.
+          Also use this form to report any errors or bugs you have found. For
+          errors, please indicate the manuscript and line number. For bugs,
+          please provide detailed replication steps.
         </p>
         <Form>
           <Form.Group className="mb-3" controlId="formName">
@@ -109,9 +117,18 @@ export const ContactModal = ({ show, onHide }: ContactModalProps): ReactElement 
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        {alert && <span style={{ color: 'red', 'paddingRight': '10px' }}>{alert}</span>}
-        <button className={classNames(styles.Button, styles.Cancel)} onClick={onHide}>{emailSent ? 'Close' : 'Cancel'}</button>
-        <button className={styles.Button} disabled={emailSent} onClick={send}>{emailSent ? 'Email Sent' : 'Send'}</button>
+        {alert && (
+          <span style={{ color: "red", paddingRight: "10px" }}>{alert}</span>
+        )}
+        <button
+          className={classNames(styles.Button, styles.Cancel)}
+          onClick={onHide}
+        >
+          {emailSent ? "Close" : "Cancel"}
+        </button>
+        <button className={styles.Button} disabled={emailSent} onClick={send}>
+          {emailSent ? "Email Sent" : "Send"}
+        </button>
       </Modal.Footer>
     </Modal>
   );
