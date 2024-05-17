@@ -1,67 +1,67 @@
 .Container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  overflow-y: scroll;
+  padding: 12px 0 12px 24px;
+
+  .Header {
+    color: #3e5276;
+    margin-bottom: 5px;
+  }
+
+  .Section {
     display: flex;
     width: 100%;
-    flex-direction: column;
-    overflow-y: scroll;
-    padding: 12px 0 12px 24px;
+    padding: 8px 0;
+    gap: 24px;
+    color: #6c757d;
 
-    .Header {
+    .FormSwitch {
+      input {
+        border-color: #3e5276;
         color: #3e5276;
-        margin-bottom: 5px;
-    }
 
-    .Section {
-        display: flex;
-        width: 100%;
-        padding: 8px 0;
-        gap: 24px;
-        color: #6c757d;
-
-        .FormSwitch {
-            input {
-                border-color: #3E5276;
-                color: #3E5276;
-
-                &:checked {
-                    background-color: #3E5276;
-                    border-color: #3E5276;
-                }
-            }
+        &:checked {
+          background-color: #3e5276;
+          border-color: #3e5276;
         }
+      }
     }
+  }
 
-    .ButtonsContainer {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        padding-top: 12px;
+  .ButtonsContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 12px;
 
-        .Button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            background: #c9ac5f;
-            height: 38px;
-            width: 90px;
-            border: none;
-            border-radius: 5px;
+    .Button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: #c9ac5f;
+      height: 38px;
+      width: 90px;
+      border: none;
+      border-radius: 5px;
 
-            &.Back {
-                color: #3e5276;
-                background: #d3d3d3;
-            }
+      &.Back {
+        color: #3e5276;
+        background: #d3d3d3;
+      }
 
-            &:focus,
-            &:hover {
-                background: #c9ac5f85;
-                border: none;
-                outline: none;
+      &:focus,
+      &:hover {
+        background: #c9ac5f85;
+        border: none;
+        outline: none;
 
-                &.Back {
-                    background: #d3d3d385;
-                }
-            }
+        &.Back {
+          background: #d3d3d385;
         }
+      }
     }
+  }
 }

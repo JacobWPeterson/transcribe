@@ -1,122 +1,122 @@
 .AppWrapper {
-    font-family: 'Noto Sans', sans-serif;
-    position: relative;
-    min-height: 100vh;
-    padding-bottom: 50px;
+  font-family: "Noto Sans", sans-serif;
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 50px;
 
-    .Navbar {
-        border-top: 5px solid #c9ac5f;
-        padding-top: 0;
+  .Navbar {
+    border-top: 5px solid #c9ac5f;
+    padding-top: 0;
 
-        .Container {
-            max-width: 100%;
-            background: #3e5276;
-            padding: 5px 50px;
+    .Container {
+      max-width: 100%;
+      background: #3e5276;
+      padding: 5px 50px;
 
-            .Brand {
-                color: #c9ac5f;
-                font-size: 24px;
-                font-style: italic;
-                letter-spacing: .2rem;
-            }
+      .Brand {
+        color: #c9ac5f;
+        font-size: 24px;
+        font-style: italic;
+        letter-spacing: 0.2rem;
+      }
 
-            .Toggle {
-                border-color: #c9ac5f;
-            }
+      .Toggle {
+        border-color: #c9ac5f;
+      }
 
-            .CollapsedNav {
-                display: flex;
-                justify-content: end;
-
-                .Nav {
-                    align-items: center;
-                    gap: 18px;
-
-                    .NavDropdown {
-                        >a {
-                            padding: 0;
-                            color: #fff;
-                            text-decoration: none;
-
-                            &:hover,
-                            &:focus {
-                                outline: none;
-                                cursor: pointer;
-                                color: #c9ac5f;
-                            }
-
-                            &:focus {
-                                text-decoration: underline;
-                            }
-
-                            &:hover {
-                                transition: 500ms ease;
-                            }
-                        }
-
-                        >div {
-                            left: unset;
-                            right: 0;
-                        }
-
-                        .DropdownItem {
-                            color: #3e5276;
-                            text-decoration: none;
-
-                            &:hover, &:focus {
-                              outline: none;
-                              cursor: pointer;
-                              color: #c9ac5f
-                            }
-                            &:focus {
-                              text-decoration: underline;
-                            }
-                            &:hover {
-                              transition: 500ms ease;
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-    }
-
-    .Footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 50px;
+      .CollapsedNav {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        border-bottom: 5px solid #c9ac5f;
-        gap: 12px;
+        justify-content: end;
+
+        .Nav {
+          align-items: center;
+          gap: 18px;
+
+          .NavDropdown {
+            > a {
+              padding: 0;
+              color: #fff;
+              text-decoration: none;
+
+              &:hover,
+              &:focus {
+                outline: none;
+                cursor: pointer;
+                color: #c9ac5f;
+              }
+
+              &:focus {
+                text-decoration: underline;
+              }
+
+              &:hover {
+                transition: 500ms ease;
+              }
+            }
+
+            > div {
+              left: unset;
+              right: 0;
+            }
+
+            .DropdownItem {
+              color: #3e5276;
+              text-decoration: none;
+
+              &:hover,
+              &:focus {
+                outline: none;
+                cursor: pointer;
+                color: #c9ac5f;
+              }
+              &:focus {
+                text-decoration: underline;
+              }
+              &:hover {
+                transition: 500ms ease;
+              }
+            }
+          }
+        }
+      }
     }
+  }
+
+  .Footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 5px solid #c9ac5f;
+    gap: 12px;
+  }
 }
 
 .CopyrightText {
-    color: #3e5276;
+  color: #3e5276;
 }
 
 .Link {
-    color: #3e5276;
-    text-decoration: none;
-    padding: 0;
-    font-size: 16px;
+  color: #3e5276;
+  text-decoration: none;
+  padding: 0;
+  font-size: 16px;
 
-    &:hover,
-    &:focus {
-        outline: none;
-        cursor: pointer;
-        color: #c9ac5f;
-    }
+  &:hover,
+  &:focus {
+    outline: none;
+    cursor: pointer;
+    color: #c9ac5f;
+  }
 
-    &:focus {
-        text-decoration: underline;
-    }
+  &:focus {
+    text-decoration: underline;
+  }
 
-    &:hover {
-        transition: 500ms ease;
-    }
+  &:hover {
+    transition: 500ms ease;
+  }
 }
