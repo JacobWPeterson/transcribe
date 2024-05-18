@@ -33,15 +33,15 @@ const glosses: Glosses = {
       "Where two or more letters are combined together to form a new glyph.",
     long: "Where two or more letters are combined together to form a new glyph, such as ȣ for ου. They become increasingly common in later minuscule manuscripts.",
   },
-  "Majuscule needs new def": {
+  Majuscule: {
     short:
-      "A writing style characterised by unconnected, capital letters of a consistent height.",
-    long: "The script deriving from the common letter forms of antiquity, used in most Greek books until the 9th century, when it was largely replaced by minuscule. It was used after that in headings (lemmata) within minuscule manuscripts and in liturgical manuscripts. The letters were unconnected, and all of the same hight. No word division was used.",
+      "A writing style characterised by unconnected block letters of a consistent height.",
+    long: 'The style of writing used in most Greek literary manuscripts (e.g., the Bible, histories, biographies, etc.) until the ninth century, when it was largely replaced by minuscule. It continued to be used for ornamental capitals, headings, and in liturgical manuscripts from the tenth to twelfth centuries with some examples from the fourteeth century. The letters are unconnected and of the same height (this characteristic is called "bilinearity"). It is not a technically correct definition, but you might associate majuscule script with the use of capital letter forms.',
   },
-  "Miniscule needs new def": {
+  Miniscule: {
     short:
-      "A writing style characterised by rounded, connected letters and, often, ligatures.",
-    long: 'The form of letters used in Greek changed from about 800 CE. The letter forms are quite distinct from the older majuscule forms. Sometimes this change is traced to the Stoudion monastery, but in fact the letter-forms derive from previous cursive usage, although the scriptorium of the Stoudion monastery may have propagated the script. It was much faster to write than the older majuscule script and the vast majority of Byzantine manuscripts are in minuscule. Minuscule manuscripts do not separate words, but do add breathings and accents, increasing legibility. The use of ligatures and abbreviations, however, counters ease of legibility. At first only the pure minuscule forms were used, but within a century, majuscule letter forms began to be used alongside the pure minuscule (modern type fonts reflect both sources). To begin with, minuscule was written on the ruled lines of parchment, but later the fashion was to have the letters "hanging" from the line. Another later development was the use of a variety of different sizes for various letters. Although manuscripts dating is not perfect, distinct fashions in minuscule script do enable some dating of otherwise undated manuscripts.',
+      "A more fluid writing style characterised by rounded, connected letters and, often, ligatures.",
+    long: "The style of writing that replaced majuscule as the predominant form of writing beginning in the ninth century. It likely developed from existing scripts that were used in documentary texts (e.g., receipts, letters, and tax records) and enabled more compact and quicker writing. It is more fluid in its nature and is characterised by rounded, often connected letters in a cursive-like style, and the use of ligatures. Whereas majuscule is bilinear, minuscule is monolinear with the script either being set so that the bottom of each letter sits on an imaginary line or the tops of the letters hang from the line.",
   },
   Monogram: {
     short:
