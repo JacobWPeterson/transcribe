@@ -37,26 +37,19 @@ export const Layout = (): ReactElement => {
                 <NavDropdown.Item className={styles.DropdownItem} href="/guide">
                   Guide
                 </NavDropdown.Item>
-                <NavDropdown.Divider />
+                <NavDropdown.Divider className={styles.Divider} />
                 <NavDropdown.Item
                   className={styles.DropdownItem}
                   href="/glossary"
                 >
                   Glossary
                 </NavDropdown.Item>
-                <NavDropdown.Divider />
+                <NavDropdown.Divider className={styles.Divider} />
                 <NavDropdown.Item
                   className={styles.DropdownItem}
                   href="/online-resources"
                 >
                   Online resources
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item
-                  className={styles.DropdownItem}
-                  href="/further-reading"
-                >
-                  Further reading
                 </NavDropdown.Item>
               </NavDropdown>
               <NavLink href="/about">About</NavLink>
