@@ -63,7 +63,7 @@ export const Home = (): ReactElement => {
               <span>suggestions for further study</span>
             </li>
             <li className={styles.ListItem}>
-              <span>links to other relevant online and print resources</span>
+              <span>links to other relevant online resources</span>
             </li>
           </ul>
         </div>

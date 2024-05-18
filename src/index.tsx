@@ -19,7 +19,6 @@ import { Resources } from "./components/Help/Resources";
 import { About } from "./components/About/About";
 import { E404 } from "./components/E404/E404";
 import onlineResources from "./libraries/onlineResources";
-import furtherReading from "./libraries/furtherReading";
 
 const container = document.getElementById("app");
 const root = createRoot(container);
@@ -38,17 +37,11 @@ const router = createBrowserRouter(
             <Resources resource={onlineResources} title="Online resources" />
           }
         />
-        <Route
-          path="further-reading"
-          element={
-            <Resources resource={furtherReading} title="Further reading" />
-          }
-        />
         <Route path="about" element={<About />} />
         <Route path="*" element={<E404 />} />
       </Route>
-    </Route>,
-  ),
+    </Route>
+  )
 );
 
 root.render(<RouterProvider router={router} />);
