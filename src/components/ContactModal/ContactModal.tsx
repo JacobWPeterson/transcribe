@@ -1,6 +1,8 @@
-import { type ReactElement, useState } from "react";
-import { Form, Modal } from "react-bootstrap";
+import { useState, type ReactElement } from "react";
+import { Modal } from "react-bootstrap";
 import classNames from "classnames";
+import emailjs from "@emailjs/browser";
+import { useForm } from "react-hook-form";
 
 import styles from "./ContactModal.module.scss";
 
@@ -9,126 +11,201 @@ interface ContactModalProps {
   onHide: () => void;
 }
 
+type ContactFormData = {
+  name: string;
+  email: string;
+  message: string;
+};
+
 export const ContactModal = ({
   show,
   onHide,
 }: ContactModalProps): ReactElement => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [emailSent, setEmailSent] = useState(false);
-  const [alert, setAlert] = useState(null);
+  const [emailSent, setEmailSent] = useState<boolean>(false);
+  const [sendFailed, setSendFailed] = useState<boolean>(false);
+  const {
+    formState: { errors, isSubmitSuccessful, isSubmitting },
+    handleSubmit,
+    register,
+    reset,
+    watch,
+  } = useForm<ContactFormData>({ mode: "onBlur" });
 
-  const isValidEmail = (): boolean => {
-    // get a better regex
-    const regex =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return regex.test(String(email).toLowerCase());
+  const nameInput = watch("name");
+  const emailInput = watch("email");
+  const messageInput = watch("message");
+
+  // TO-DO improve this regex
+  const emailRegex = /[^@s]+@[^@s]+.[^@s]+/g;
+
+  const handleCancel = () => {
+    reset();
+    setEmailSent(false);
+    onHide();
   };
-
-  const send = (): void => {
-    if (name.length > 2 && isValidEmail() && message.length > 10) {
-      // TODO - send mail
-      // See bookmark 'React Contact Form' https://www.webtips.dev/react-contact-form-without-backend
-      setAlert(null);
-      setName("");
-      setEmail("");
-      setMessage("");
-      setEmailSent(true);
-    } else {
-      if (name.length < 2) {
-        setAlert("Please enter your name");
-        return;
-      }
-      if (!isValidEmail()) {
-        setAlert("Enter a valid email");
-        return;
-      }
-      setAlert(
-        message.length === 0
-          ? "Please add your feedback."
-          : "Please add more detail to your feedback.",
+  const sendEmail = () => {
+    emailjs
+      .send(
+        "service_v5oeqac",
+        "template_r9mhd7m",
+        {
+          from_name: nameInput,
+          message: messageInput,
+          reply_to: emailInput,
+        },
+        {
+          publicKey: "bLp81eIkp1XLYMVPi",
+        }
+      )
+      .then(
+        () => {
+          setEmailSent(true);
+          if (sendFailed) {
+            setSendFailed(false);
+          }
+        },
+        () => {
+          setSendFailed(true);
+        }
       );
-    }
   };
 
   return (
     <Modal
       show={show}
       backdrop="static"
-      keyboard={false}
       onHide={onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      style={{ color: "#3e5276" }}
+      className={classNames(styles.Modal, {
+        [styles.Sent]: emailSent,
+      })}
     >
-      <Modal.Header closeButton>
+      <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter">
           Contact Form
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Please reach out with any questions or suggestions.</p>
-        <p>
-          Also use this form to report any errors or bugs you have found. For
-          errors, please indicate the manuscript and line number. For bugs,
-          please provide detailed replication steps.
-        </p>
-        <Form>
-          <Form.Group className="mb-3" controlId="formName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              onChange={(e) => setName(e.target.value)}
-              placeholder="e.g. Paul Maas"
-              value={name}
-            />
-            <Form.Control.Feedback type="invalid">
-              Please enter your name.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              required
-              type="email"
-              placeholder="name@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Form.Text className="text-muted">
-              We&apos;ll never share your email with anyone else.
-            </Form.Text>
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid email.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formComments">
-            <Form.Label>Comments</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={5}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            />
-          </Form.Group>
-        </Form>
+        {emailSent ? (
+          <div className={styles.EmailSent}>
+            <h3>Email successfully sent</h3>
+            <div className={styles.EmailSentSubTitle}>
+              Thanks for reaching out
+            </div>
+          </div>
+        ) : (
+          <>
+            <p>Please reach out with any questions or suggestions.</p>
+            <p>
+              Also use this form to report any errors or bugs you have found.
+              For errors, please indicate the manuscript and line number. For
+              bugs, please provide detailed replication steps.
+            </p>
+            <form onSubmit={handleSubmit(sendEmail)} className={styles.Form}>
+              <div className={styles.NameAndEmailContainer}>
+                <div className={styles.FormSection}>
+                  <label>Name</label>
+                  <input
+                    className={styles.TextInput}
+                    autoFocus
+                    type="text"
+                    placeholder="e.g., Paul Maas"
+                    {...register("name", { required: true })}
+                    aria-invalid={errors.name ? "true" : "false"}
+                  />
+                  {errors.name?.type === "required" && (
+                    <p className={styles.ErrorHelp} role="alert">
+                      Name is required
+                    </p>
+                  )}
+                </div>
+                <div className={styles.FormSection}>
+                  <label>Email</label>
+                  <input
+                    className={styles.TextInput}
+                    type="text"
+                    placeholder="Enter your email address"
+                    {...register("email", {
+                      required: true,
+                      pattern: emailRegex,
+                    })}
+                    aria-invalid={errors.email ? "true" : "false"}
+                  />
+                  {errors.email?.type === "required" && (
+                    <p className={styles.ErrorHelp} role="alert">
+                      Email is required
+                    </p>
+                  )}
+                  {errors.email?.type === "pattern" && (
+                    <p className={styles.ErrorHelp} role="alert">
+                      Please enter a valid email
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className={styles.FormSection}>
+                <label>Message</label>
+                <textarea
+                  className={styles.TextArea}
+                  {...register("message", {
+                    required: true,
+                    minLength: 5,
+                  })}
+                  maxLength={2000}
+                  aria-invalid={errors.message ? "true" : "false"}
+                  placeholder="Enter your comments here"
+                />
+                <div
+                  className={classNames(styles.TextAreaErrors, {
+                    [styles.HasErrors]: !!errors.message,
+                  })}
+                >
+                  {errors.message?.type === "required" && (
+                    <p className={styles.ErrorHelp} role="alert">
+                      Message is required
+                    </p>
+                  )}
+                  {errors.message?.type === "minLength" && (
+                    <p className={styles.ErrorHelp} role="alert">
+                      Please include a longer message
+                    </p>
+                  )}
+                  <p className={styles.Help} role="alert">
+                    {`(${messageInput?.length || 0}/2000)`}
+                  </p>
+                </div>
+              </div>
+            </form>
+          </>
+        )}
       </Modal.Body>
       <Modal.Footer>
-        {alert && (
-          <span style={{ color: "red", paddingRight: "10px" }}>{alert}</span>
-        )}
         <button
           className={classNames(styles.Button, styles.Cancel)}
-          onClick={onHide}
+          onClick={handleCancel}
         >
           {emailSent ? "Close" : "Cancel"}
         </button>
-        <button className={styles.Button} disabled={emailSent} onClick={send}>
-          {emailSent ? "Email Sent" : "Send"}
-        </button>
+        {!emailSent && (
+          <button
+            className={styles.Button}
+            disabled={
+              isSubmitting ||
+              isSubmitSuccessful ||
+              Object.keys(errors).length > 0
+            }
+            onClick={sendEmail}
+          >
+            {isSubmitting ? "Sending" : "Send"}
+          </button>
+        )}
+        {sendFailed && (
+          <p className={styles.ErrorHelp} role="alert">
+            Email failed to send. Please retry
+          </p>
+        )}
       </Modal.Footer>
     </Modal>
   );

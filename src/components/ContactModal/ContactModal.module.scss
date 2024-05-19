@@ -1,34 +1,130 @@
-.Button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: inherit;
-  background: #3e5276;
-  height: 38px;
-  width: 90px;
-  border: none;
-  border-radius: 5px;
+.Modal {
+  color: #3e5276;
 
-  &.Cancel {
-    color: #3e5276;
-    background: #fff;
+  > div {
+    max-height: 800px;
+    overflow: hidden;
+    width: 600px;
   }
 
-  &:focus,
-  &:hover {
-    background: #3e527685;
+  &.Sent {
+    > div {
+      width: 500px;
+    }
+  }
+  .Button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: inherit;
+    background: #3e5276;
+    height: 38px;
+    width: 90px;
     border: none;
-    outline: none;
+    border-radius: 5px;
 
     &.Cancel {
       color: #3e5276;
-      background: #ddd;
+      background: #fff;
+    }
+
+    &:focus,
+    &:hover {
+      background: #3e527685;
+      border: none;
+      outline: none;
+
+      &.Cancel {
+        color: #3e5276;
+        background: #ddd;
+      }
+    }
+
+    &:disabled {
+      background: #3e527650;
+      cursor: not-allowed;
     }
   }
 
-  &:disabled {
-    background: #3e527650;
-    cursor: not-allowed;
+  .EmailSent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .EmailSentSubTitle {
+      font-size: 14px;
+    }
+  }
+
+  .Form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    .NameAndEmailContainer {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 24px;
+    }
+
+    .FormSection {
+      display: flex;
+      height: 70px;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1 0 0;
+
+      .TextInput {
+        padding: 2px 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+
+        &::placeholder {
+          font-size: 14px;
+        }
+      }
+
+      .TextArea {
+        padding: 4px 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        max-height: 250px;
+        overflow: auto;
+
+        &::placeholder {
+          font-size: 14px;
+        }
+      }
+
+      .TextAreaErrors {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+
+        &.HasErrors {
+          justify-content: space-between;
+        }
+      }
+
+      .ErrorHelp {
+        color: #dc3545;
+        font-size: 14px;
+        margin-bottom: 0;
+        margin: -2px 0 0 8px;
+      }
+
+      .Help {
+        color: #333;
+        font-size: 14px;
+        margin-bottom: 0;
+        margin: -2px 0 0 8px;
+
+        align-self: flex-end;
+      }
+    }
   }
 }
