@@ -24,15 +24,15 @@ export const Layout = (): ReactElement => {
           />
           <Navbar.Collapse
             id="responsive-navbar-nav"
-            className={styles.CollapsedNav}
+            className="justify-content-end"
           >
-            <Nav className={classNames("justify-content-end", styles.Nav)}>
+            <Nav className={classNames(styles.Nav)}>
               <NavLink href="/">Home</NavLink>
               <NavLink href="/lessons">Lessons</NavLink>
               <NavDropdown
                 title="Help"
                 id="collapsible-nav-dropdown"
-                className={styles.NavDropdown}
+                className={styles.NavDropdown} // TO-DO: Improve the appearance of this when the nav bar is collapsed
               >
                 <NavDropdown.Item className={styles.DropdownItem} href="/guide">
                   Guide
