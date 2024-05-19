@@ -1,7 +1,7 @@
 import { useState, type ReactElement } from "react";
 import { Modal } from "react-bootstrap";
 import classNames from "classnames";
-import emailjs from "@emailjs/browser";
+import { send } from "@emailjs/browser";
 import { useForm } from "react-hook-form";
 
 import styles from "./ContactModal.module.scss";
@@ -22,52 +22,56 @@ export const ContactModal = ({
   onHide,
 }: ContactModalProps): ReactElement => {
   const [emailSent, setEmailSent] = useState<boolean>(false);
+  const [isSending, setIsSending] = useState<boolean>(false);
   const [sendFailed, setSendFailed] = useState<boolean>(false);
   const {
-    formState: { errors, isSubmitSuccessful, isSubmitting },
+    formState: { errors },
     handleSubmit,
     register,
     reset,
     watch,
-  } = useForm<ContactFormData>({ mode: "onBlur" });
+  } = useForm<ContactFormData>({ mode: "onTouched" });
 
   const nameInput = watch("name");
   const emailInput = watch("email");
   const messageInput = watch("message");
 
-  // TO-DO improve this regex
-  const emailRegex = /[^@s]+@[^@s]+.[^@s]+/g;
+  // Mid-strength solution comes from https://www.regular-expressions.info/email.html
+  const emailRegex =
+    /^[A-Z0-9._%+-]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
 
-  const handleCancel = () => {
+  const handleCancel = (): void => {
     reset();
-    setEmailSent(false);
     onHide();
+    setEmailSent(false);
   };
-  const sendEmail = () => {
-    emailjs
-      .send(
-        "service_v5oeqac",
-        "template_r9mhd7m",
-        {
-          from_name: nameInput,
-          message: messageInput,
-          reply_to: emailInput,
-        },
-        {
-          publicKey: "bLp81eIkp1XLYMVPi",
+
+  const sendEmail = (): void => {
+    setIsSending(true);
+    send(
+      "service_v5oeqac",
+      "template_r9mhd7m",
+      {
+        from_name: nameInput,
+        message: messageInput,
+        reply_to: emailInput,
+      },
+      {
+        publicKey: "bLp81eIkp1XLYMVPi",
+      }
+    )
+      .then(() => {
+        setEmailSent(true);
+        if (sendFailed) {
+          setSendFailed(false);
         }
-      )
-      .then(
-        () => {
-          setEmailSent(true);
-          if (sendFailed) {
-            setSendFailed(false);
-          }
-        },
-        () => {
-          setSendFailed(true);
-        }
-      );
+      })
+      .catch(() => {
+        setSendFailed(true);
+      })
+      .finally(() => {
+        setIsSending(false);
+      });
   };
 
   return (
@@ -105,11 +109,10 @@ export const ContactModal = ({
             </p>
             <form onSubmit={handleSubmit(sendEmail)} className={styles.Form}>
               <div className={styles.NameAndEmailContainer}>
-                <div className={styles.FormSection}>
-                  <label>Name</label>
+                <label className={styles.FormSection}>
+                  Name
                   <input
                     className={styles.TextInput}
-                    autoFocus
                     type="text"
                     placeholder="e.g., Paul Maas"
                     {...register("name", { required: true })}
@@ -120,9 +123,9 @@ export const ContactModal = ({
                       Name is required
                     </p>
                   )}
-                </div>
-                <div className={styles.FormSection}>
-                  <label>Email</label>
+                </label>
+                <label className={styles.FormSection}>
+                  Email
                   <input
                     className={styles.TextInput}
                     type="text"
@@ -143,10 +146,10 @@ export const ContactModal = ({
                       Please enter a valid email
                     </p>
                   )}
-                </div>
+                </label>
               </div>
-              <div className={styles.FormSection}>
-                <label>Message</label>
+              <label className={styles.FormSection}>
+                Message
                 <textarea
                   className={styles.TextArea}
                   {...register("message", {
@@ -176,7 +179,7 @@ export const ContactModal = ({
                     {`(${messageInput?.length || 0}/2000)`}
                   </p>
                 </div>
-              </div>
+              </label>
             </form>
           </>
         )}
@@ -191,14 +194,10 @@ export const ContactModal = ({
         {!emailSent && (
           <button
             className={styles.Button}
-            disabled={
-              isSubmitting ||
-              isSubmitSuccessful ||
-              Object.keys(errors).length > 0
-            }
+            disabled={isSending || Object.keys(errors).length > 0}
             onClick={sendEmail}
           >
-            {isSubmitting ? "Sending" : "Send"}
+            {isSending ? "Sending" : "Send"}
           </button>
         )}
         {sendFailed && (
