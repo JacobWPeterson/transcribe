@@ -32,7 +32,7 @@ export const Mirador = ({
         setPageNumber(
           Number(
             canvasIndex
-              .slice(canvasIndex.lastIndexOf("/") + 1)
+              .slice(canvasIndex.lastIndexOf("/"))
               .replace(/[^\d.-]/g, ""),
           ),
         );

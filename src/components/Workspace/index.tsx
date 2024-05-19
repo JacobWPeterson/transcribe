@@ -15,10 +15,10 @@ export const Workspace = (): ReactElement => {
   const manifestLength = Object.keys(manifests).length;
 
   useEffect(() => {
-    if (pageNumber && pageNumber !== canvasIndex + 1) {
+    if (pageNumber && pageNumber !== canvasIndex) {
       setShowWrongPageAlert(true);
     }
-    if (showWrongPageAlert && pageNumber === canvasIndex + 1) {
+    if (showWrongPageAlert && pageNumber === canvasIndex) {
       setShowWrongPageAlert(false);
     }
   }, [pageNumber, canvasIndex, manuscript]);
@@ -27,11 +27,11 @@ export const Workspace = (): ReactElement => {
     switch (type) {
       case "next":
         setManuscript(manuscript + 1);
-        setPageNumber(manifests[manuscript + 1].canvasIndex + 1);
+        setPageNumber(manifests[manuscript + 1].canvasIndex);
         return;
       case "previous":
         setManuscript(manuscript - 1);
-        setPageNumber(manifests[manuscript - 1].canvasIndex + 1);
+        setPageNumber(manifests[manuscript - 1].canvasIndex);
         return;
       default:
         throw new Error();
@@ -47,7 +47,7 @@ export const Workspace = (): ReactElement => {
           onClose={() => setShowWrongPageAlert(false)}
         >
           Feel free to explore, but you have left the target image (
-          {canvasIndex + 1}
+          {canvasIndex}
           ).
         </Alert>
       )}
@@ -55,7 +55,7 @@ export const Workspace = (): ReactElement => {
         <Mirador
           setPageNumber={setPageNumber}
           manifest={manifests[manuscript].manifestId}
-          index={canvasIndex}
+          index={canvasIndex - 1}
         />
       </div>
       <div className={styles.TranscriptionPanel}>
