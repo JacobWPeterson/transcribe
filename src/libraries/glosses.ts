@@ -10,8 +10,8 @@ export type Glosses = {
 const glosses: Glosses = {
   Abbreviation: {
     short:
-      "Abbreviations were used for common or repeated words and some names.",
-    long: 'Abbreviations were used for common or repeated words and some names. Abbreviation could be done by writing only the first letter or first few letters of a word, or by omitting word endings. One example is "και compendium" (ϗ) where a kappa with a trailing flourish stands for και. When the shortening is done by omitting the middle letters it is called a contraction (see below).',
+      "Abbreviations were used for word endings and common or repeated words and some names.",
+    long: 'Abbreviations were used for word endings common or repeated words and some names. Abbreviation could be done by writing only the first letter or first few letters of a word, or by omitting word endings. One example is "και compendium" (ϗ) where a kappa with a trailing flourish stands for και. When the shortening is done by omitting the middle letters it is called a contraction (see below).',
   },
   Compendium: {
     short: "(pl. compendia) Another word for abbreviation.",
@@ -27,6 +27,10 @@ const glosses: Glosses = {
   Ekthesis: {
     short:
       "A large, decorative letter at the beginning of a line that is often in the margin.",
+  },
+  "Final nu": {
+    short:
+      "When a nu occurs at the end of the line, it is often represented as a supralinear horizontal line.",
   },
   Ligature: {
     short:
@@ -52,6 +56,16 @@ const glosses: Glosses = {
     short:
       "Names of sacred persons reduced by contraction and marked by a line over the letters",
     long: 'Latin for "sacred names", where names of sacred persons were reduced by contraction and marked by a line over the letters. In biblical manuscripts these typically take two or three letter forms and are most often used for κυριος (κ\u{0305}ς\u{0305}), ιησους (ι\u{0305}ς\u{0305}), χριστος (χ\u{0305}ς\u{0305}), υιος (υ\u{0305}ς\u{0305}), θεος (θ\u{0305}ς\u{0305}), and πνευμα (μ\u{0305}ν\u{0305}α\u{0305}).',
+  },
+  Numbers: {
+    short:
+      "The Greek numbering system used the alphabet where each letter represented a numeric value. Numbers were often written with an overline to distinguish them from a letter.",
+    long: "The Greek numbering system used the alphabet where each letter represented a numeric value. Numbers were often written with an overline to distinguish them from a letter. For instance, α-θ were 1–9 (with Greek letter stigma (Ϛ) as 6), then ι began the 10s, ρ began the 100s, and so forth. So ι\u{0305}η\u{0305} was 18.",
+  },
+  Stigma: {
+    short:
+      "A Greek ligature (ϛ) for στ not to be confused with final sigma (ς)",
+    long: 'A Greek ligature (ϛ) for στ not to be confused with final sigma (ς). In the Middle Ages, the ligature was conflated with the long-disused digamma (Ϝ, written cursively as ϛ) and therefore came to be used as 6 in the Greek numeral system (see "Numbers" above).',
   },
   Uncial: {
     short: "An alternative term for majuscule script.",

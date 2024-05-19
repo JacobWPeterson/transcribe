@@ -24,63 +24,58 @@
         border-color: #c9ac5f;
       }
 
-      .CollapsedNav {
-        display: flex;
-        justify-content: end;
+      .Nav {
+        align-items: end;
+        gap: 18px;
 
-        .Nav {
-          align-items: center;
-          gap: 18px;
+        .NavDropdown {
+          > a {
+            padding: 0;
+            color: #fff;
+            text-decoration: none;
 
-          .NavDropdown {
-            > a {
-              padding: 0;
-              color: #fff;
-              text-decoration: none;
-
-              &:hover,
-              &:focus {
-                outline: none;
-                cursor: pointer;
-                color: #c9ac5f;
-              }
-
-              &:focus {
-                text-decoration: underline;
-              }
-
-              &:hover {
-                transition: 500ms ease;
-              }
+            &:hover,
+            &:focus {
+              outline: none;
+              cursor: pointer;
+              color: #c9ac5f;
             }
 
-            > div {
-              left: unset;
-              right: 0;
+            &:focus {
+              text-decoration: underline;
             }
 
-            .Divider {
-              border-color: #ddd;
+            &:hover {
+              transition: 500ms ease;
+            }
+          }
+
+          > div {
+            left: unset;
+            right: 0;
+          }
+
+          .Divider {
+            border-color: #ddd;
+          }
+
+          .DropdownItem {
+            color: #3e5276;
+            text-decoration: none;
+
+            &:hover,
+            &:focus {
+              outline: none;
+              cursor: pointer;
+              color: #c9ac5f;
             }
 
-            .DropdownItem {
-              color: #3e5276;
-              text-decoration: none;
+            &:focus {
+              text-decoration: underline;
+            }
 
-              &:hover,
-              &:focus {
-                outline: none;
-                cursor: pointer;
-                color: #c9ac5f;
-              }
-
-              &:focus {
-                text-decoration: underline;
-              }
-
-              &:hover {
-                transition: 500ms ease;
-              }
+            &:hover {
+              transition: 500ms ease;
             }
           }
         }
