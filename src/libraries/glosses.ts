@@ -48,7 +48,7 @@ const glosses: Glosses = {
       "A pictographic symbol in which a number of letters are arranged together without consideration for order.",
     long: 'A pictographic symbol in which a number of letters are arranged together without consideration for order. Examples include the chi-rho symbol (☧) where a rho is imposed over a chi to stand for "Christ" and the staurogram (⳨), a christogram comprised of tau and rho.',
   },
-  "Nomina Sacra": {
+  "Nomina sacra": {
     short:
       "Names of sacred persons reduced by contraction and marked by a line over the letters",
     long: 'Latin for "sacred names", where names of sacred persons were reduced by contraction and marked by a line over the letters. In biblical manuscripts these typically take two or three letter forms and are most often used for κυριος (κ\u{0305}ς\u{0305}), ιησους (ι\u{0305}ς\u{0305}), χριστος (χ\u{0305}ς\u{0305}), υιος (υ\u{0305}ς\u{0305}), θεος (θ\u{0305}ς\u{0305}), and πνευμα (μ\u{0305}ν\u{0305}α\u{0305}).',
