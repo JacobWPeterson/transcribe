@@ -21,10 +21,12 @@ export const TranscriptionArea = ({
   manuscriptId,
 }: TranscriptionAreaProps): ReactElement => {
   const [requireSpaces, setRequireSpaces] = useState(false);
-  const { lines } = manifest;
+  const { lines, instruction } = manifest;
   const handleClick = (type: "next" | "previous"): void => {
     changeManuscript(type);
   };
+
+  let titleAdjustments = 0;
 
   return (
     <div className={styles.Container}>
@@ -42,15 +44,25 @@ export const TranscriptionArea = ({
           Transcription guide
         </a>
       </div>
-      {lines.map((line: Line, index) => (
-        <SingleLine
-          key={`line.${index}`}
-          passedIndex={index}
-          line={line}
-          requireSpaces={requireSpaces}
-          isTitle={line.isTitle}
-        />
-      ))}
+      {instruction ? (
+        <small
+          className={styles.Small}
+        >{`General instructions: ${instruction}`}</small>
+      ) : null}
+      {lines.map((line: Line, index) => {
+        if (line.isTitle) {
+          titleAdjustments++;
+        }
+        return (
+          <SingleLine
+            key={`line.${index + 1 - titleAdjustments}`}
+            passedIndex={index + 1 - titleAdjustments}
+            line={line}
+            requireSpaces={requireSpaces}
+            isTitle={line.isTitle}
+          />
+        );
+      })}
       <div className={styles.ButtonsContainer}>
         {manuscriptId > 1 ? (
           <button

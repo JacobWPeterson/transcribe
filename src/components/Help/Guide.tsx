@@ -198,10 +198,11 @@ export const Guide = (): ReactElement => (
       <p className={styles.GuideText}>
         The overall concept is pretty straightforward. Each line of the
         manuscript, excepting titles (see the help icon for those), corresponds
-        to one line of the transcription viewer.{" "}
-        <i>Using a Greek unicode font</i>, type your answer into the relevant
-        line, click the &quot;Check&quot; button, and you should then see one of
-        the symbols listed above. How to add languages to your computer:{" "}
+        to one line of the transcription viewer. Using a Greek unicode font,
+        type your answer into the relevant line{" "}
+        <b>omitting any accents or punctuation</b>, then click the
+        &quot;Check&quot; button, and you should then see one of the symbols
+        listed above. How to add languages to your computer:{" "}
         <a
           className="Link"
           href="https://support.apple.com/en-gb/guide/mac-help/mchlp1406/mac"
