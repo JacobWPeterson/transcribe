@@ -49,20 +49,22 @@ export const TranscriptionArea = ({
           className={styles.Small}
         >{`General instructions: ${instruction}`}</small>
       ) : null}
-      {lines.map((line: Line, index) => {
-        if (line.isTitle) {
-          titleAdjustments++;
-        }
-        return (
-          <SingleLine
-            key={`line.${index + 1 - titleAdjustments}`}
-            passedIndex={index + 1 - titleAdjustments}
-            line={line}
-            requireSpaces={requireSpaces}
-            isTitle={line.isTitle}
-          />
-        );
-      })}
+      <div className={styles.LinesContainer}>
+        {lines.map((line: Line, index) => {
+          if (line.isTitle) {
+            titleAdjustments++;
+          }
+          return (
+            <SingleLine
+              key={`line.${index + 1 - titleAdjustments}`}
+              passedIndex={index + 1 - titleAdjustments}
+              line={line}
+              requireSpaces={requireSpaces}
+              isTitle={line.isTitle}
+            />
+          );
+        })}
+      </div>
       <div className={styles.ButtonsContainer}>
         {manuscriptId > 1 ? (
           <button
