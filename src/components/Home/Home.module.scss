@@ -1,3 +1,5 @@
+@use "src/styles/theme";
+
 .UpperSection {
   display: flex;
   margin: 30px 0;
@@ -8,12 +10,12 @@
     width: 100%;
     max-width: 450px;
     height: auto;
-    border: 5px solid #3e5276;
+    border: 5px solid theme.$primary03;
     border-radius: 5px;
 
     &.LeftImage {
       max-width: 500px;
-      border: 5px solid #c9ac5f;
+      border: 5px solid theme.$secondary03;
     }
   }
 
@@ -29,14 +31,14 @@
     .Line1 {
       display: flex;
       align-self: flex-start;
-      color: #3e5276;
+      color: theme.$primary03;
       font-size: 40px;
     }
 
     .Line2 {
       display: flex;
       align-self: flex-start;
-      color: #6c757d;
+      color: theme.$grey07;
       font-size: 32px;
       padding-left: 36px;
     }
@@ -44,7 +46,7 @@
     .Line3 {
       display: flex;
       align-self: flex-end;
-      color: #c9ac5f;
+      color: theme.$secondary03;
       font-size: 40px;
     }
   }
@@ -53,7 +55,7 @@
 .FeaturesSection {
   display: flex;
   flex-direction: column;
-  color: #3e5276;
+  color: theme.$primary03;
   margin: 12px 0 24px;
   align-items: center;
   justify-content: space-evenly;
@@ -62,7 +64,7 @@
   .FeaturesText {
     width: 70%;
     margin: 0 auto;
-    color: #606060;
+    color: theme.$grey10;
     font-size: 24px;
     font-style: italic;
     text-align: center;
@@ -71,14 +73,14 @@
 
   .FeaturesBlock {
     width: 80%;
-    color: #fff;
-    background: #3e5276;
+    color: theme.$grey00;
+    background: theme.$primary03;
     padding: 25px;
     border-radius: 20px;
 
     .H2 {
       font-weight: 600;
-      color: #c9ac5f;
+      color: theme.$secondary03;
       text-align: center;
     }
 
@@ -89,13 +91,13 @@
       -moz-columns: 2;
 
       .ListItem {
-        color: #c9ac5f;
+        color: theme.$secondary03;
         margin-left: 20px;
         padding: 10px 0 10px 10px;
         font-size: 20px;
 
         > span {
-          color: #fff;
+          color: theme.$grey00;
         }
       }
     }
@@ -104,12 +106,12 @@
 
 .LowerSection {
   height: 140px;
-  color: #fff;
+  color: theme.$grey00;
   font-size: 28px;
   display: flex;
   flex-direction: column;
   margin: 12px 0;
-  background-color: #c9ac5f;
+  background-color: theme.$secondary03;
   justify-content: space-evenly;
   align-items: center;
 
@@ -117,9 +119,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: theme.$grey00;
     font-size: 20px;
-    background: #3e5276;
+    background: theme.$primary03;
     height: 38px;
     width: 150px;
     border: none;
@@ -127,7 +129,7 @@
 
     &:focus,
     &:hover {
-      background: #3e527685;
+      background: theme.$primary02;
       border: none;
       outline: none;
     }

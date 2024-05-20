@@ -68,7 +68,7 @@ export const Layout = (): ReactElement => {
         >
           Contact
         </NavLink>
-        <span style={{ color: "#c9ac5f" }}>|</span>
+        <span className={styles.VerticalDivider}>|</span>
         <div className={styles.CopyrightText}>© 2024 Jacob W. Peterson</div>
         <a
           href="https://www.threads.net/@jacobwpeterson"

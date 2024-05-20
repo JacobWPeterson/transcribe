@@ -1,3 +1,5 @@
+@use "src/styles/theme";
+
 .Container {
   width: 80vw;
   display: flex;
@@ -8,7 +10,7 @@
 
   &.Lower {
     flex-direction: row;
-    background: #d3d3d3;
+    background: theme.$grey02;
     height: 350px;
     margin: 10px auto;
 
@@ -25,7 +27,7 @@
 
   .Text {
     font-size: 18px;
-    color: #333;
+    color: theme.$grey10;
     text-align: justify;
 
     &.Italic {
@@ -40,18 +42,18 @@
 
 .H1 {
   font-weight: 600;
-  color: #c9ac5f;
+  color: theme.$secondary03;
   text-align: center;
 }
 
 .H2 {
   font-weight: 600;
-  color: #3e5276;
+  color: theme.$primary03;
   text-align: center;
 }
 
 .Small {
-  color: #6c757d;
+  color: theme.$grey07;
   margin-top: 6px;
   font-size: 0.8em;
 }
@@ -71,7 +73,7 @@
     align-items: center;
 
     .PartnerText {
-      color: #3e5276;
+      color: theme.$primary03;
       font-size: 18px;
       text-align: center;
       margin: 0;
@@ -88,7 +90,7 @@
       }
 
       &.MiradorFont {
-        color: #3c444d;
+        color: theme.$grey10;
         font-size: 48px;
         font-family: "Yanone Kaffeesatz", sans-serif;
         letter-spacing: 0.05em;

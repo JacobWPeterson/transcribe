@@ -1,10 +1,12 @@
+@use "src/styles/theme";
+
 .Link {
-  color: #3e5276;
+  color: theme.$primary03;
   margin-bottom: 0;
 
   &:hover,
   &:focus {
-    color: #c9ac5f;
+    color: theme.$secondary03;
     outline: none;
     cursor: pointer;
   }
@@ -23,31 +25,29 @@
 }
 
 .PopoverHeader {
-  color: #3e5276;
+  color: theme.$grey00;
   padding: 0.5rem 1rem;
   margin-bottom: 0;
   font-size: 1rem;
-  background-color: #f0f0f0;
+  background-color: theme.$tertiary03;
   border-bottom: 1px solid rgb(0 0 0 / 20%);
-  border-top-left-radius: calc(0.3rem - 1px);
-  border-top-right-radius: calc(0.3rem - 1px);
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: #fff;
+  color: theme.$grey00;
   text-decoration: none;
   padding: 0;
   font-size: 16px;
 
   &.Dark {
-    color: #3e5276;
+    color: theme.$primary03;
   }
 
   &:hover,
   &:focus {
     outline: none;
     cursor: pointer;
-    color: #c9ac5f;
+    color: theme.$secondary03;
   }
 
   &:focus {

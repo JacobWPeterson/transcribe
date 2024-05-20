@@ -1,16 +1,18 @@
+@use "src/styles/theme";
+
 .Badge {
   margin: 0;
 
   &.Hint {
-    background-color: #3e5276 !important;
+    background-color: theme.$primary03 !important;
   }
 
   &.NC {
-    background-color: #c9ac5f !important;
+    background-color: theme.$secondary03 !important;
   }
 
   &.Title {
-    background-color: #6c757d !important;
+    background-color: theme.$grey06 !important;
   }
 
   &.ReducedLeftMargin {
@@ -22,7 +24,7 @@
   margin: "0 0 0 30px";
 
   .Word {
-    color: #3e5276;
+    color: theme.$primary03;
     font-weight: 700;
     margin-bottom: 4px;
   }
@@ -31,7 +33,7 @@
 .GuideText {
   width: "100%";
   margin: 6px auto;
-  color: #606060;
+  color: theme.$grey07;
   font-size: 16px;
   text-align: justify;
   text-indent: 24px;
@@ -40,19 +42,19 @@
 
 .H1 {
   font-weight: 600;
-  color: #c9ac5f;
+  color: theme.$secondary03;
   text-align: center;
 }
 
 .H2 {
   font-weight: 600;
-  color: #333;
+  color: theme.$grey10;
   text-align: left;
 }
 
 .H3 {
   font-weight: 500;
-  color: #333;
+  color: theme.$grey10;
   text-align: left;
   font-style: italic;
 }
@@ -63,7 +65,7 @@
 }
 
 .HelpText {
-  color: #606060;
+  color: theme.$grey07;
   text-align: justify;
   margin: 0 0 12px 24px;
   letter-spacing: 0.03rem;
@@ -72,7 +74,7 @@
 .LegendText {
   width: 100%;
   margin: 0 auto;
-  color: #606060;
+  color: theme.$grey07;
   font-size: 14px;
   text-align: justify;
   letter-spacing: 0.03em;
@@ -85,7 +87,7 @@
 }
 
 .ResourceLink {
-  color: #3e5276;
+  color: theme.$primary03;
   text-decoration: none;
   padding: 0;
   font-size: 18px;
@@ -94,7 +96,7 @@
   &:focus {
     outline: none;
     cursor: pointer;
-    color: #c9ac5f;
+    color: theme.$secondary03;
   }
 
   &:focus {
@@ -107,7 +109,7 @@
 }
 
 .Span {
-  color: #606060;
+  color: theme.$grey07;
   font-size: 14px;
   text-align: left;
   letter-spacing: 0.03em;
