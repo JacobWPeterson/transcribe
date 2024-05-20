@@ -1,3 +1,5 @@
+@use "src/styles/theme";
+
 .Container {
   display: flex;
   width: 100%;
@@ -5,7 +7,7 @@
   padding: 12px 0 4px 24px;
 
   .Header {
-    color: #3e5276;
+    color: theme.$primary03;
     margin-bottom: 5px;
   }
 
@@ -14,23 +16,23 @@
     width: 100%;
     padding: 8px 0;
     gap: 24px;
-    color: #6c757d;
+    color: theme.$grey07;
 
     .FormSwitch {
       input {
-        border-color: #3e5276;
-        color: #3e5276;
+        border-color: theme.$primary03;
+        color: theme.$primary03;
 
         &:checked {
-          background-color: #3e5276;
-          border-color: #3e5276;
+          background-color: theme.$primary03;
+          border-color: theme.$primary03;
         }
       }
     }
   }
 
   .Small {
-    color: #6c757d;
+    color: theme.$grey07;
     margin: 6px 0;
     font-size: 0.8em;
   }
@@ -50,26 +52,26 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      background: #c9ac5f;
+      color: theme.$grey00;
+      background: theme.$secondary03;
       height: 38px;
       width: 90px;
       border: none;
       border-radius: 5px;
 
       &.Back {
-        color: #3e5276;
-        background: #d3d3d3;
+        color: theme.$primary03;
+        background: theme.$grey02;
       }
 
       &:focus,
       &:hover {
-        background: #c9ac5f85;
+        background: theme.$secondary02;
         border: none;
         outline: none;
 
         &.Back {
-          background: #d3d3d385;
+          background: theme.$grey04;
         }
       }
     }
