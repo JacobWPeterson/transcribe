@@ -1,3 +1,5 @@
+@use "src/styles/theme";
+
 .WorkspacePageWrapper {
   height: 85vh;
   width: 98vw;
@@ -10,7 +12,7 @@
     top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #c9ac5f;
+    background: theme.$secondary03;
     padding: 12px 16px;
   }
 

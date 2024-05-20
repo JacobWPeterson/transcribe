@@ -1,5 +1,8 @@
+@use "src/styles/theme";
+@use "src/styles/variables";
+
 .Modal {
-  color: #3e5276;
+  color: theme.$primary03;
 
   > div {
     max-height: 800px;
@@ -17,33 +20,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: theme.$grey00;
     font-size: inherit;
-    background: #3e5276;
+    background: theme.$primary03;
     height: 38px;
     width: 90px;
     border: none;
     border-radius: 5px;
 
     &.Cancel {
-      color: #3e5276;
-      background: #fff;
+      color: theme.$primary03;
+      background: theme.$grey00;
     }
 
     &:focus,
     &:hover {
-      background: #3e527685;
+      background: theme.$primary02;
       border: none;
       outline: none;
 
       &.Cancel {
-        color: #3e5276;
-        background: #ddd;
+        color: theme.$primary03;
+        background: theme.$grey02;
       }
     }
 
     &:disabled {
-      background: #3e527650;
+      background: theme.$primary01;
       cursor: not-allowed;
     }
   }
@@ -80,7 +83,7 @@
 
       .TextInput {
         padding: 2px 8px;
-        border: 1px solid #ddd;
+        border: variables.$defaultBorderStyle;
         border-radius: 6px;
 
         &::placeholder {
@@ -90,7 +93,7 @@
 
       .TextArea {
         padding: 4px 8px;
-        border: 1px solid #ddd;
+        border: variables.$defaultBorderStyle;
         border-radius: 6px;
         max-height: 250px;
         overflow: auto;
@@ -112,13 +115,13 @@
       }
 
       .ErrorHelp {
-        color: #dc3545;
+        color: theme.$error;
         font-size: 14px;
         margin: -2px 0 0 8px;
       }
 
       .Help {
-        color: #333;
+        color: theme.$grey10;
         font-size: 14px;
         margin: -2px 0 0 8px;
         align-self: flex-end;

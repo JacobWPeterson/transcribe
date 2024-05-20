@@ -1,17 +1,19 @@
+@use "src/styles/theme";
+
 .Badge {
   margin: 5px 0 0 10px;
   align-self: start;
 
   &.Hint {
-    background-color: #3e5276 !important;
+    background-color: theme.$primary03 !important;
   }
 
   &.NC {
-    background-color: #c9ac5f !important;
+    background-color: theme.$secondary03 !important;
   }
 
   &.Title {
-    background-color: #6c757d !important;
+    background-color: theme.$grey06 !important;
   }
 
   &.ReducedLeftMargin {
@@ -26,8 +28,8 @@
   align-items: baseline;
 
   .Button {
-    color: #fff;
-    background: #3e5276;
+    color: theme.$grey00;
+    background: theme.$primary03;
     font-size: inherit;
     text-align: center;
     line-height: 1em;
@@ -38,19 +40,19 @@
     border-radius: 5px;
 
     &:focus {
-      background: #3e527685;
+      background: theme.$primary02;
       border: none;
       outline: none;
     }
 
     &:disabled {
-      background: #c9ac5f95;
-      color: #3e5276;
+      background: theme.$secondary03;
+      color: theme.$primary03;
     }
   }
 
   .Label {
-    color: #3e5276;
+    color: theme.$primary03;
     width: 55px;
   }
 
@@ -69,7 +71,7 @@
     }
 
     .Small {
-      color: #6c757d;
+      color: theme.$grey07;
       margin-top: 4px;
       font-size: 0.8em;
     }
