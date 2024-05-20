@@ -69,7 +69,6 @@ export const TranscriptionArea = ({
         {manuscriptId > 1 ? (
           <button
             className={classNames(styles.Button, styles.Back)}
-            color="#3e5276"
             onClick={() => handleClick("previous")}
           >
             Previous

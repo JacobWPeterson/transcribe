@@ -39,9 +39,9 @@ const config: any = {
       },
       shades: {
         // Shades that can be used to offset color areas of the Workspace / Window
-        dark: "#eeeeee",
-        main: "#ffffff",
-        light: "#f5f5f5",
+        dark: "#d6d6d6",
+        main: "fbfafb",
+        light: "#ebebeb",
       },
     },
   },
