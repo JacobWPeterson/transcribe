@@ -45,13 +45,17 @@ export const About = (): ReactElement => (
       </div>
       <div className={styles.Partners}>
         <div className={styles.Partner}>
-          <img src="src/assets/mirador.png" alt="mirador logo" />
+          <img src="src/assets/icons/mirador.png" alt="mirador logo" />
           <div className={classNames(styles.PartnerText, styles.MiradorFont)}>
             mirador
           </div>
         </div>
         <div className={styles.Partner}>
-          <img src="src/assets/library.svg" height="60" alt="library logo" />
+          <img
+            src="src/assets/icons/library.svg"
+            height="60"
+            alt="library logo"
+          />
           <div
             className={classNames(
               styles.PartnerText,
@@ -69,7 +73,7 @@ export const About = (): ReactElement => (
           </div>
         </div>
         <div className={styles.Partner}>
-          <img src="src/assets/iiif.png" height="60" alt="iiif logo" />
+          <img src="src/assets/icons/iiif.png" height="60" alt="iiif logo" />
           <div className={classNames(styles.PartnerText, styles.IIIFFont)}>
             International Image Interoperability Framework
           </div>
@@ -81,7 +85,7 @@ export const About = (): ReactElement => (
         style={{ borderRadius: "50%" }}
         height="280"
         width="280"
-        src="src/assets/me.jpg"
+        src="src/assets/images/me.jpg"
         alt="creator"
       />
       <div className={styles.Section}>

@@ -1,7 +1,7 @@
 import { type ReactElement, useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 
-import manifests from "../../libraries/manifests";
+import manifests from "../../assets/files/manifests";
 
 import { TranscriptionArea } from "./TranscriptionArea/index";
 import { Mirador } from "./Mirador/index";
