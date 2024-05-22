@@ -4,8 +4,8 @@ import { Badge, OverlayTrigger, Popover } from "react-bootstrap";
 import pluralize from "pluralize";
 import classnames from "classnames";
 
-import glosses from "../../../libraries/glosses";
-import type { Line } from "../../../libraries/manifests";
+import glosses from "../../../assets/files/glosses";
+import type { Line } from "../../../assets/files//manifests";
 
 import evaluateSubmission from "./validators";
 import styles from "./SingleLine.module.scss";

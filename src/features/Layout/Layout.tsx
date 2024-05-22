@@ -76,7 +76,7 @@ export const Layout = (): ReactElement => {
           rel="noreferrer"
         >
           <img
-            src="src/assets/threads.svg"
+            src="src/assets/icons/threads.svg"
             alt="threads icon"
             width="18"
             height="18"
@@ -88,7 +88,7 @@ export const Layout = (): ReactElement => {
           rel="noreferrer"
         >
           <img
-            src="src/assets/linkedin.svg"
+            src="src/assets/icons/linkedin.svg"
             alt="LinkedIn icon"
             width="18"
             height="18"
@@ -100,7 +100,7 @@ export const Layout = (): ReactElement => {
           rel="noreferrer"
         >
           <img
-            src="src/assets/academia.svg"
+            src="src/assets/icons/academia.svg"
             alt="academia.edu icon"
             width="16"
             height="16"
