@@ -13,7 +13,7 @@ export const Home = (): ReactElement => {
       <div className={styles.UpperSection}>
         <img
           className={classNames(styles.Image, styles.LeftImage)}
-          src="src/assets/Aristophanes-Critical-Edition.png"
+          src="src/assets/images/Aristophanes-Critical-Edition.png"
           alt="Greek printed edition text"
         />
         <div className={styles.CenterTextContainer}>
@@ -23,7 +23,7 @@ export const Home = (): ReactElement => {
         </div>
         <img
           className={styles.Image}
-          src="src/assets/Aristophanes-Barocci-127.jpg"
+          src="src/assets/images/Aristophanes-Barocci-127.jpg"
           alt="Greek manuscript text"
         />
       </div>

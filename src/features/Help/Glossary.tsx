@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 
-import glosses from "../../libraries/glosses";
+import glosses from "../../assets/files/glosses";
 
 import { GlossaryEntry } from "./GlossaryEntry";
 import styles from "./Help.module.scss";

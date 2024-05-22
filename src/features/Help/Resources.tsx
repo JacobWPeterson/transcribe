@@ -1,7 +1,7 @@
 import { Fragment, type ReactElement } from "react";
 import { NavLink } from "react-bootstrap";
 
-import type { ResourceCategories } from "../../libraries/onlineResources";
+import type { ResourceCategories } from "../../assets/files/onlineResources";
 
 import styles from "./Help.module.scss";
 
