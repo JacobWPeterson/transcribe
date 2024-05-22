@@ -72,6 +72,10 @@
     width: 200px;
     align-items: center;
 
+    &.Clickable {
+      cursor: pointer;
+    }
+
     .PartnerText {
       color: theme.$primary03;
       font-size: 18px;

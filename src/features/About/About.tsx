@@ -44,7 +44,17 @@ export const About = (): ReactElement => (
         following projects and organizations.
       </div>
       <div className={styles.Partners}>
-        <div className={styles.Partner}>
+        <div
+          role="link"
+          className={classNames(styles.Partner, styles.Clickable)}
+          tabIndex={0}
+          onClick={() => window.open("https://projectmirador.org/", "_blank")}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              window.open("https://projectmirador.org/", "_blank");
+            }
+          }}
+        >
           <img src="src/assets/icons/mirador.png" alt="mirador logo" />
           <div className={classNames(styles.PartnerText, styles.MiradorFont)}>
             mirador
@@ -72,7 +82,17 @@ export const About = (): ReactElement => (
             Cambridge University Library
           </div>
         </div>
-        <div className={styles.Partner}>
+        <div
+          role="link"
+          className={classNames(styles.Partner, styles.Clickable)}
+          tabIndex={0}
+          onClick={() => window.open("https://iiif.io/", "_blank")}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              window.open("https://iiif.io/", "_blank");
+            }
+          }}
+        >
           <img src="src/assets/icons/iiif.png" height="60" alt="iiif logo" />
           <div className={classNames(styles.PartnerText, styles.IIIFFont)}>
             International Image Interoperability Framework
