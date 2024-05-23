@@ -151,6 +151,31 @@ const manifests: Manifests = {
     ],
   },
   3: {
+    manifestId: 'https://viewer.cbl.ie/viewer/api/v1/records/BP_X_f_77/manifest/',
+    canvasIndex: 1,
+    instruction: "A papyrus manuscript by a trained scribe in a slightly irregular majuscule script. This lesson ends when the papyrus becomes damaged. Ignore the page number (πνγ) at the top of the leaf.",
+    lines: [
+      {
+        text: "και ιδου οφθαλμοι ωσει οφθαλ",
+      },
+      {
+        text: "μοι ανθρωπινοι εν τω κε",
+      },
+      {
+        text: "ρατι τουτω και στομα λαλουν",
+      },
+      {
+        text: "μεγαλα και εποιει πολε",
+      },
+      {
+        text: "μον προσ τουσ αγιουσ εθε",
+      },
+      {
+        text: "ωρουν εωσ οτου θρονοι",
+      },
+    ]
+  },
+  4: {
     manifestId:
       "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00058840/manifest",
     canvasIndex: 53,
@@ -220,7 +245,7 @@ const manifests: Manifests = {
       },
     ],
   },
-  4: {
+  5: {
     // helpful edition https://books.google.com/books?id=2c5hAAAAcAAJ&pg=PP118&lpg=PP118&dq=ephrem+syrus+%CE%BA%CE%B1%CF%84%CE%B1%CE%BD%CE%B9%CE%BA%CF%84%CE%B9%CE%BA%CE%BF%CF%82+%CE%BB%CE%BF%CE%B3%CE%BF%CF%82+%CE%B1&source=bl&ots=LeXDEgtDAt&sig=ACfU3U1qoHsw12pFlyLR5Tae8UnNklc6kg&hl=en&sa=X&ved=2ahUKEwif16uHiNH0AhX-Ap0JHUBGA_QQ6AF6BAgYEAM#v=onepage&q=ephrem%20syrus%20%CE%BA%CE%B1%CF%84%CE%B1%CE%BD%CE%B9%CE%BA%CF%84%CE%B9%CE%BA%CE%BF%CF%82%20%CE%BB%CE%BF%CE%B3%CE%BF%CF%82%20%CE%B1&f=false
     manifestId:
       "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00050975/manifest",
@@ -276,6 +301,11 @@ const manifests: Manifests = {
       },
     ],
   },
+  6: {
+    manifestId: 'https://viewer.cbl.ie/viewer/api/v1/records/MP_2_86/manifest/',
+    canvasIndex: 2,
+    lines: []
+  }
 };
 
 export default manifests;
