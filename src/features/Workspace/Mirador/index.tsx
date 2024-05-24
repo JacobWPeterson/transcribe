@@ -8,13 +8,18 @@ interface MiradorProps {
   manifest: string;
   index: number;
   setPageNumber: (number: number) => void;
+  specialIndexHandling?: string;
 }
 
 export const Mirador = ({
   manifest,
   index,
   setPageNumber,
+  specialIndexHandling,
 }: MiradorProps): ReactElement => {
+  // Can deal with fetching with this prop so that the navigation popup doesn't show on mss change
+  // manifests["https://viewer.cbl.ie/viewer/api/v1/records/MP_2_86/manifest"].isFetching
+
   useEffect(() => {
     config.windows[0] = {
       manifestId: manifest,
@@ -32,13 +37,17 @@ export const Mirador = ({
         setPageNumber(
           Number(
             canvasIndex
-              .slice(canvasIndex.lastIndexOf("/"))
+              .slice(
+                canvasIndex.lastIndexOf(
+                  specialIndexHandling ? specialIndexHandling : "/",
+                ),
+              )
               .replace(/[^\d.-]/g, ""),
           ),
         );
       }
     });
-  }, [manifest, index, setPageNumber]);
+  }, [manifest, index, setPageNumber, specialIndexHandling]);
 
   return <div id={config.id} />;
 };
