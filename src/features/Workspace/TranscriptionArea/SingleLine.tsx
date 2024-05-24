@@ -92,15 +92,19 @@ export const SingleLine = ({
           >{`New Concept: ${concept}`}</Popover.Header>
           <Popover.Body>
             {glosses?.[concept]?.short}
-            &nbsp;
-            <a
-              className="Link"
-              href={`/glossary#${concept}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Learn more
-            </a>
+            {glosses?.[concept]?.long && (
+              <>
+                &nbsp;
+                <a
+                  className="Link"
+                  href={`/glossary#${concept}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Learn more
+                </a>
+              </>
+            )}
           </Popover.Body>
         </Popover>
       }
