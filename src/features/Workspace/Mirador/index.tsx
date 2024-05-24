@@ -7,6 +7,7 @@ import config from "./config";
 interface MiradorProps {
   manifest: string;
   index: number;
+  setIsFetchingManuscript: (bool: boolean) => void;
   setPageNumber: (number: number) => void;
   specialIndexHandling?: string;
 }
@@ -14,12 +15,10 @@ interface MiradorProps {
 export const Mirador = ({
   manifest,
   index,
+  setIsFetchingManuscript,
   setPageNumber,
   specialIndexHandling,
 }: MiradorProps): ReactElement => {
-  // Can deal with fetching with this prop so that the navigation popup doesn't show on mss change
-  // manifests["https://viewer.cbl.ie/viewer/api/v1/records/MP_2_86/manifest"].isFetching
-
   useEffect(() => {
     config.windows[0] = {
       manifestId: manifest,
@@ -33,6 +32,12 @@ export const Mirador = ({
     miradorInstance.store.subscribe(() => {
       const state = miradorInstance.store.getState();
       const canvasIndex = state.windows[state.workspace.windowIds].canvasId;
+
+      setIsFetchingManuscript(
+        Boolean(
+          state.windows[state.workspace.windowIds]?.visibleCanvases?.length,
+        ),
+      );
       if (canvasIndex) {
         setPageNumber(
           Number(
@@ -47,7 +52,13 @@ export const Mirador = ({
         );
       }
     });
-  }, [manifest, index, setPageNumber, specialIndexHandling]);
+  }, [
+    manifest,
+    index,
+    setIsFetchingManuscript,
+    setPageNumber,
+    specialIndexHandling,
+  ]);
 
   return <div id={config.id} />;
 };

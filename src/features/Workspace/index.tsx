@@ -8,9 +8,11 @@ import { Mirador } from "./Mirador/index";
 import styles from "./Workspace.module.scss";
 
 export const Workspace = (): ReactElement => {
-  const [manuscript, setManuscript] = useState(1);
-  const [pageNumber, setPageNumber] = useState(null);
-  const [showWrongPageAlert, setShowWrongPageAlert] = useState(false);
+  const [isFetchingManuscript, setIsFetchingManuscript] =
+    useState<boolean>(false);
+  const [manuscript, setManuscript] = useState<number>(1);
+  const [pageNumber, setPageNumber] = useState<number | null>(null);
+  const [showWrongPageAlert, setShowWrongPageAlert] = useState<boolean>(false);
   const { canvasIndex } = manifests[manuscript];
   const manifestLength = Object.keys(manifests).length;
 
@@ -40,7 +42,7 @@ export const Workspace = (): ReactElement => {
 
   return (
     <div className={styles.WorkspacePageWrapper}>
-      {showWrongPageAlert && (
+      {showWrongPageAlert && !isFetchingManuscript && (
         <Alert
           className={styles.Alert}
           variant="warning"
@@ -55,6 +57,7 @@ export const Workspace = (): ReactElement => {
         <Mirador
           index={canvasIndex - 1}
           manifest={manifests[manuscript].manifestId}
+          setIsFetchingManuscript={setIsFetchingManuscript}
           setPageNumber={setPageNumber}
           specialIndexHandling={manifests[manuscript]?.specialIndexHandling}
         />
