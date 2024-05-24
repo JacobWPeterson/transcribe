@@ -53,9 +53,10 @@ export const Workspace = (): ReactElement => {
       )}
       <div className={styles.MiradorWrapper}>
         <Mirador
-          setPageNumber={setPageNumber}
-          manifest={manifests[manuscript].manifestId}
           index={canvasIndex - 1}
+          manifest={manifests[manuscript].manifestId}
+          setPageNumber={setPageNumber}
+          specialIndexHandling={manifests[manuscript]?.specialIndexHandling}
         />
       </div>
       <div className={styles.TranscriptionPanel}>
