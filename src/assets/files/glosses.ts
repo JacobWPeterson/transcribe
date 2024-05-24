@@ -24,6 +24,9 @@ const glosses: Glosses = {
     short:
       "A style of writing that allows the scribe to only infrequently lift the pen from the page.",
   },
+  Diaeresis: {
+    short: "A diacritic appearing over ι and υ indicating two vowels are pronounced separately.",
+  },
   Ekthesis: {
     short:
       "A large, decorative letter at the beginning of a line that is often in the margin.",
@@ -61,6 +64,10 @@ const glosses: Glosses = {
     short:
       "The Greek numbering system used the alphabet where each letter represented a numeric value. Numbers were often written with an overline to distinguish them from a letter.",
     long: "The Greek numbering system used the alphabet where each letter represented a numeric value. Numbers were often written with an overline to distinguish them from a letter. For instance, α-θ were 1–9 (with Greek letter stigma (Ϛ) as 6), then ι began the 10s, ρ began the 100s, and so forth. So ι\u{0305}η\u{0305} was 18.",
+  },
+  Reconstruction: {
+    short: "When part of a manuscript, often on papyrus, has been damaged and the missing text is supplied by the editor.",
+    long: "When part of a manuscript, often on papyrus, has been damaged and the missing text is supplied by the editor based on a combination of the expected text and available spacing. Reconstructions are enclosed in brackets in formal transcriptions."
   },
   Stigma: {
     short:
