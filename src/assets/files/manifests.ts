@@ -11,6 +11,7 @@ export type Line = {
 export type Manifest = {
   manifestId: string;
   canvasIndex: number;
+  specialIndexHandling?: string;
   instruction?: string;
   lines: Line[];
 };
@@ -151,8 +152,9 @@ const manifests: Manifests = {
     ],
   },
   3: {
-    manifestId: 'https://viewer.cbl.ie/viewer/api/v1/records/BP_X_f_77/manifest/',
+    manifestId: 'https://viewer.cbl.ie/viewer/api/v1/records/BP_X_f_77/manifest',
     canvasIndex: 1,
+    specialIndexHandling: 'pages/',
     instruction: "A papyrus manuscript by a trained scribe in a slightly irregular majuscule script. This lesson ends when the papyrus becomes damaged. Ignore the page number (πνγ) at the top of the leaf.",
     lines: [
       {
@@ -338,8 +340,9 @@ const manifests: Manifests = {
     ],
   },
   6: {
-      manifestId: 'https://viewer.cbl.ie/viewer/api/v1/records/MP_2_86/manifest/',
+      manifestId: 'https://viewer.cbl.ie/viewer/api/v2/records/MP_2_86/manifest',
       canvasIndex: 2,
+      specialIndexHandling: 'pages/',
       lines: [
         {
           text: "κουσατε μου και ζησεται ε",
