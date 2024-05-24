@@ -338,10 +338,55 @@ const manifests: Manifests = {
     ],
   },
   6: {
-    manifestId: 'https://viewer.cbl.ie/viewer/api/v1/records/MP_2_86/manifest/',
-    canvasIndex: 2,
-    lines: []
-  }
+      manifestId: 'https://viewer.cbl.ie/viewer/api/v1/records/MP_2_86/manifest/',
+      canvasIndex: 2,
+      lines: [
+        {
+          text: "κουσατε μου και ζησεται ε",
+        },
+        {
+          text: "ν αγαθοισ η ψυχη υμων και",
+        },
+        {
+          text: "διαθησομαι υμιν διαθη",
+          newConcept: 'Diaeresis'
+        },
+        {
+          text: "κην αιωνιον τα οσια δαυιδ",
+          caption: "There's a correction on this line after the tau. It looks as if the scribe skipped a letter, starting writing the next word for two letters, then made the correction. Transcribe these two letters as α ο."
+        },
+        {
+          text: "τα πιστα ιδου μαρτυριαν εν ε",
+        },
+        {
+          text: "θνεσιν αυτον δεδωκα αρχον",
+          caption: "Another correction here by a later scribe; don't include it in your transcription."
+        },
+        {
+          text: "τα και προστασσοντα εθνεσιν",
+        },
+        {
+          text: "εθνη α ουκ ηδεισαν σε επικα",
+        },
+        {
+          text: "λεσονται σε λαοι οι ουκ επισ",
+        },
+        {
+          text: "ταντα σε επι σε καταφευξον",
+        },
+        {
+          text: "ται εινεκεν του θυ σου του",
+        },
+        {
+          text: "αγιου ισραηλ οτι εδοξασεν",
+          caption: "The hole on this line completely affected one letter and part of another. Notice the overline indicating this began a nomen sacrum. The following four letters should allow you to work out the missing letters.",
+          newConcept: "Reconstruction",
+        },
+        {
+          text: "σε ζητησατε τον θν και εν",
+        }
+      ]
+  },
 };
 
 export default manifests;
