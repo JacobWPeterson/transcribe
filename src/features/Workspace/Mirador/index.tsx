@@ -7,7 +7,6 @@ import config from "./config";
 interface MiradorProps {
   manifest: string;
   index: number;
-  setIsFetchingManuscript: (bool: boolean) => void;
   setPageNumber: (number: number) => void;
   specialIndexHandling?: string;
 }
@@ -15,7 +14,6 @@ interface MiradorProps {
 export const Mirador = ({
   manifest,
   index,
-  setIsFetchingManuscript,
   setPageNumber,
   specialIndexHandling,
 }: MiradorProps): ReactElement => {
@@ -32,12 +30,6 @@ export const Mirador = ({
     miradorInstance.store.subscribe(() => {
       const state = miradorInstance.store.getState();
       const canvasIndex = state.windows[state.workspace.windowIds].canvasId;
-
-      setIsFetchingManuscript(
-        Boolean(
-          state.windows[state.workspace.windowIds]?.visibleCanvases?.length,
-        ),
-      );
       if (canvasIndex) {
         setPageNumber(
           Number(
@@ -52,13 +44,7 @@ export const Mirador = ({
         );
       }
     });
-  }, [
-    manifest,
-    index,
-    setIsFetchingManuscript,
-    setPageNumber,
-    specialIndexHandling,
-  ]);
+  }, [manifest, index, setPageNumber, specialIndexHandling]);
 
   return <div id={config.id} />;
 };

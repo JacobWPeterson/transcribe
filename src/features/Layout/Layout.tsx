@@ -28,7 +28,7 @@ export const Layout = (): ReactElement => {
           >
             <Nav className={classNames(styles.Nav)}>
               <NavLink href="/">Home</NavLink>
-              <NavLink href="/lessons">Lessons</NavLink>
+              <NavLink href="/lessons/1">Lessons</NavLink>
               <NavDropdown
                 title="Help"
                 id="collapsible-nav-dropdown"
