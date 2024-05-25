@@ -5,7 +5,7 @@ import styles from "./Home.module.scss";
 
 export const Home = (): ReactElement => {
   const handleGetStarted = (): void => {
-    window.location.href = "lessons";
+    window.location.href = "lessons/1";
   };
 
   return (
