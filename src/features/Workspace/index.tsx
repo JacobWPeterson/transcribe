@@ -1,19 +1,23 @@
 import { type ReactElement, useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 
 import manifests from "../../assets/files/manifests";
+import { E404 } from "../E404/E404";
 
 import { TranscriptionArea } from "./TranscriptionArea/index";
 import { Mirador } from "./Mirador/index";
 import styles from "./Workspace.module.scss";
 
 export const Workspace = (): ReactElement => {
-  const [isFetchingManuscript, setIsFetchingManuscript] =
-    useState<boolean>(false);
-  const [manuscript, setManuscript] = useState<number>(1);
-  const [pageNumber, setPageNumber] = useState<number | null>(null);
+  const { id = 1 } = useParams();
+  const navigate = useNavigate();
+  const [pageNumber, setPageNumber] = useState<number>(
+    manifests[id]?.canvasIndex,
+  );
   const [showWrongPageAlert, setShowWrongPageAlert] = useState<boolean>(false);
-  const { canvasIndex } = manifests[manuscript];
+
+  const canvasIndex = manifests[id]?.canvasIndex;
   const manifestLength = Object.keys(manifests).length;
 
   useEffect(() => {
@@ -23,18 +27,18 @@ export const Workspace = (): ReactElement => {
     if (showWrongPageAlert && pageNumber === canvasIndex) {
       setShowWrongPageAlert(false);
     }
-  }, [pageNumber, canvasIndex, manuscript]);
+  }, [pageNumber]);
+
+  if (!manifests[id]) {
+    return <E404 />;
+  }
 
   const handleManifestChange = (type: "next" | "previous"): void => {
     switch (type) {
       case "next":
-        setManuscript(manuscript + 1);
-        setPageNumber(manifests[manuscript + 1].canvasIndex);
-        return;
+        return navigate(`/lessons/${Number(id) + 1}`);
       case "previous":
-        setManuscript(manuscript - 1);
-        setPageNumber(manifests[manuscript - 1].canvasIndex);
-        return;
+        return navigate(`/lessons/${Number(id) - 1}`);
       default:
         throw new Error();
     }
@@ -42,7 +46,7 @@ export const Workspace = (): ReactElement => {
 
   return (
     <div className={styles.WorkspacePageWrapper}>
-      {showWrongPageAlert && !isFetchingManuscript && (
+      {showWrongPageAlert && (
         <Alert
           className={styles.Alert}
           variant="warning"
@@ -56,18 +60,17 @@ export const Workspace = (): ReactElement => {
       <div className={styles.MiradorWrapper}>
         <Mirador
           index={canvasIndex - 1}
-          manifest={manifests[manuscript].manifestId}
-          setIsFetchingManuscript={setIsFetchingManuscript}
+          manifest={manifests[id].manifestId}
           setPageNumber={setPageNumber}
-          specialIndexHandling={manifests[manuscript]?.specialIndexHandling}
+          specialIndexHandling={manifests[id]?.specialIndexHandling}
         />
       </div>
       <div className={styles.TranscriptionPanel}>
         <TranscriptionArea
           changeManuscript={handleManifestChange}
-          manifest={manifests[manuscript]}
+          manifest={manifests[id]}
           manifestLength={manifestLength}
-          manuscriptId={manuscript}
+          manuscriptId={Number(id)}
         />
       </div>
     </div>
