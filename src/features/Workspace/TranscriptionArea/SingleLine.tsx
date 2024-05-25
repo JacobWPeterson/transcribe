@@ -28,6 +28,8 @@ export const SingleLine = ({
     (boolean | string)[] | null
   >(null);
   const [showHint, setShowHint] = useState<boolean>(false);
+  const [showIncorrectErrorMessaging, setShowIncorrectErrorMessaging] =
+    useState<boolean>(false);
   const guesses = useRef(0);
 
   useEffect(() => {
@@ -63,11 +65,23 @@ export const SingleLine = ({
     if (!showHint && guesses.current >= 3) {
       setShowHint(true);
     }
-  }, [submissionStatus, lineContent, line.text, requireSpaces]);
+  }, [submissionStatus, line.text, requireSpaces]);
+
+  useEffect(() => {
+    if (submissionStatus?.length) {
+      setShowIncorrectErrorMessaging(true);
+    }
+  }, [submissionStatus]);
+
+  const clearMessages = (): void => {
+    setShowHint(false);
+    setShowIncorrectErrorMessaging(false);
+  };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event.persist();
     setLineContent(event.target.value);
+    clearMessages();
   };
 
   const handleSubmit = (event: FormEvent): void => {
@@ -116,7 +130,7 @@ export const SingleLine = ({
   );
 
   const renderIncorrectAnswerMessaging = (): ReactElement =>
-    !submissionStatus[0] ? (
+    submissionStatus[0] === false ? (
       <OverlayTrigger
         key="error-tooltip"
         placement="top-end"
@@ -236,7 +250,7 @@ export const SingleLine = ({
         Check
       </button>
       {line.newConcept && newConcept(line.newConcept)}
-      {submissionStatus && renderIncorrectAnswerMessaging()}
+      {showIncorrectErrorMessaging && renderIncorrectAnswerMessaging()}
       {showHint && hint()}
     </form>
   );
