@@ -1,14 +1,13 @@
-import type { ReactElement } from "react";
+import type { PropsWithChildren, ReactElement } from "react";
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
 import { Container, Nav, Navbar, NavDropdown, NavLink } from "react-bootstrap";
 import classNames from "classnames";
 
-import { ContactModal } from "../ContactModal/ContactModal";
+import { ContactModal } from "../../features/ContactModal/ContactModal";
 
-import styles from "./Layout.module.scss";
+import styles from "./AppWrapper.module.scss";
 
-export const Layout = (): ReactElement => {
+export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -57,7 +56,7 @@ export const Layout = (): ReactElement => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Outlet />
+      {children}
       <footer className={styles.Footer}>
         <NavLink
           className={styles.Link}
@@ -76,7 +75,7 @@ export const Layout = (): ReactElement => {
           rel="noreferrer"
         >
           <img
-            src="src/assets/icons/threads.svg"
+            src="/src/assets/icons/threads.svg"
             alt="threads icon"
             width="18"
             height="18"
@@ -88,7 +87,7 @@ export const Layout = (): ReactElement => {
           rel="noreferrer"
         >
           <img
-            src="src/assets/icons/linkedin.svg"
+            src="/src/assets/icons/linkedin.svg"
             alt="LinkedIn icon"
             width="18"
             height="18"
@@ -100,7 +99,7 @@ export const Layout = (): ReactElement => {
           rel="noreferrer"
         >
           <img
-            src="src/assets/icons/academia.svg"
+            src="/src/assets/icons/academia.svg"
             alt="academia.edu icon"
             width="16"
             height="16"

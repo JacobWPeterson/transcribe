@@ -22,7 +22,11 @@ export const E404 = (): ReactElement => {
         </button>
       </div>
       <div className={styles.RightSection}>
-        <img src="src/assets/E404.svg" alt="Error 404 Drawing" width="1200" />
+        <img
+          src="/src/assets/images/E404.svg"
+          alt="Error 404 Drawing"
+          width="1200"
+        />
       </div>
     </div>
   );
