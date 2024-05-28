@@ -58,7 +58,7 @@ export const ContactModal = ({
       },
       {
         publicKey: "bLp81eIkp1XLYMVPi",
-      },
+      }
     )
       .then(() => {
         setEmailSent(true);
@@ -73,6 +73,8 @@ export const ContactModal = ({
         setIsSending(false);
       });
   };
+
+  const isFormIncomplete = !nameInput || !emailInput || !messageInput;
 
   return (
     <Modal
@@ -194,7 +196,9 @@ export const ContactModal = ({
         {!emailSent && (
           <button
             className={styles.Button}
-            disabled={isSending || Object.keys(errors).length > 0}
+            disabled={
+              isFormIncomplete || isSending || Object.keys(errors).length > 0
+            }
             onClick={sendEmail}
           >
             {isSending ? "Sending" : "Send"}
