@@ -67,19 +67,15 @@ export const About = (): ReactElement => (
             alt="library logo"
           />
           <div
-            className={classNames(
-              styles.PartnerText,
-              styles.HoldingInstitutions,
-            )}
-          >
-            Holding Institutions
-          </div>
-          <div
             className={classNames(styles.PartnerText, styles.HoldingInstitute)}
           >
+            Bayerische Staatsbibliothek
+            <br />
             Biblioteca Apostolica Vaticana
             <br />
             Cambridge University Library
+            <br />
+            Chester Beatty Library
           </div>
         </div>
         <div
