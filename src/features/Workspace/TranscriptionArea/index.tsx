@@ -30,8 +30,8 @@ export const TranscriptionArea = ({
 
   return (
     <div className={styles.Container}>
-      <h2 className={styles.Header}>Transcription Workspace</h2>
-      <div className={styles.Section}>
+      <div className={styles.HeaderContainer}>
+        <h2 className={styles.Header}>{`Lesson ${manuscriptId}`}</h2>
         <Form>
           <Form.Switch
             className={styles.FormSwitch}
@@ -41,7 +41,7 @@ export const TranscriptionArea = ({
           />
         </Form>
         <a className="Link" href="/guide" target="_blank">
-          Transcription guide
+          Guide
         </a>
       </div>
       {instruction ? (
