@@ -6,17 +6,18 @@
   flex-direction: column;
   padding: 12px 0 4px 24px;
 
-  .Header {
-    color: theme.$primary03;
-    margin-bottom: 5px;
-  }
-
-  .Section {
+  .HeaderContainer {
     display: flex;
+    align-items: baseline;
     width: 100%;
     padding: 8px 0;
     gap: 24px;
     color: theme.$grey07;
+
+    .Header {
+      color: theme.$primary03;
+      margin-bottom: 5px;
+    }
 
     .FormSwitch {
       input {
