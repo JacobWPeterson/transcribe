@@ -45,9 +45,10 @@ export const TranscriptionArea = ({
         </a>
       </div>
       {instruction ? (
-        <small
-          className={styles.Small}
-        >{`General instructions: ${instruction}`}</small>
+        <small className={styles.Small}>
+          <b>General instructions</b>
+          {`: ${instruction}`}
+        </small>
       ) : null}
       <div className={styles.LinesContainer}>
         {lines.map((line: Line, index) => {
