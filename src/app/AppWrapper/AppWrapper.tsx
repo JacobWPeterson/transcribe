@@ -25,7 +25,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
             id="responsive-navbar-nav"
             className="justify-content-end"
           >
-            <Nav className={classNames(styles.Nav)}>
+            <Nav className={styles.Nav}>
               <NavLink href="/">Home</NavLink>
               <NavLink href="/lessons/1">Lessons</NavLink>
               <NavDropdown
