@@ -29,6 +29,13 @@ const onlineResources: ResourceCategories[] = [
     heading: "Reading aids",
     resources: [
       {
+        name: "CRBMI Minuscule Ligature/Abbreviation Tool",
+        creator: "Center for Research of Biblical Manuscripts",
+        description:
+          "A searchable database for finding ligatures and abbreviations. Simply type the possible letters into the filter and the tool will display images for all sequential combinations of letters in the input string.",
+        url: "https://airtable.com/appgrNuo12M56MZkN/shrjBIO9cbWMIZGF0/tbl3GfXLCvhcXcIbN",
+      },
+      {
         name: "The Ligatures of Early Printed Greek",
         creator: "William H. Ingram",
         journal: "Greek, Roman, and Byzantine Studies",
