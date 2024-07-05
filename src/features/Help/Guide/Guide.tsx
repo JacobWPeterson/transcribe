@@ -2,7 +2,7 @@ import type { ReactElement } from "react";
 import { Badge, OverlayTrigger, Popover } from "react-bootstrap";
 import classnames from "classnames";
 
-import styles from "./Help.module.scss";
+import styles from "../Help.module.scss";
 
 export const Guide = (): ReactElement => (
   <div className="PageWrapper">

@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 
-import styles from "./Help.module.scss";
+import styles from "../../Help.module.scss";
 
 interface GlossaryEntryProps {
   word: string;
