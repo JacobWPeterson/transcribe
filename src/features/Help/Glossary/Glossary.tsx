@@ -1,9 +1,9 @@
 import type { ReactElement } from "react";
 
-import glosses from "../../assets/files/glosses";
+import glosses from "../../../assets/files/glosses";
+import styles from "../Help.module.scss";
 
-import { GlossaryEntry } from "./GlossaryEntry";
-import styles from "./Help.module.scss";
+import { GlossaryEntry } from "./GlossaryEntry/GlossaryEntry";
 
 export const Glossary = (): ReactElement => (
   <div className="PageWrapper">

@@ -8,9 +8,9 @@ import type { ReactElement } from "react";
 
 import { Home } from "../features/Home/Home";
 import { Workspace } from "../features/Workspace/index";
-import { Glossary } from "../features/Help/Glossary";
-import { Guide } from "../features/Help/Guide";
-import { Resources } from "../features/Help/Resources";
+import { Glossary } from "../features/Help/Glossary/Glossary";
+import { Guide } from "../features/Help/Guide/Guide";
+import { Resources } from "../features/Help/Resources/Resources";
 import { About } from "../features/About/About";
 import { E404 } from "../features/E404/E404";
 import onlineResources from "../assets/files/onlineResources";
@@ -31,8 +31,8 @@ const router = createBrowserRouter(
       />
       <Route path="about" element={<About />} />
       <Route path="*" element={<E404 />} />
-    </Route>,
-  ),
+    </Route>
+  )
 );
 
 export const Routes = (): ReactElement => <RouterProvider router={router} />;
