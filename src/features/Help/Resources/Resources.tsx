@@ -5,24 +5,24 @@ import type { ResourceCategories } from "../../../assets/files/onlineResources";
 import styles from "../Help.module.scss";
 
 interface ResourcesProps {
-  resource: ResourceCategories[];
+  resources: ResourceCategories[];
   title: string;
 }
 
 export const Resources = ({
-  resource,
+  resources,
   title,
 }: ResourcesProps): ReactElement => (
   <div className="PageWrapper">
     <div className={styles.HelpSection} id="resources">
       <h1 className={styles.H1}>{title}</h1>
-      {resource.map(({ heading, resources }) => (
+      {resources.map(({ heading, resources }) => (
         <>
           <h2 className={styles.H2}>{heading}</h2>
           {resources?.map(
             (
               { name, creator, description, journal, journalDetails, url },
-              index
+              index,
             ) => (
               <Fragment key={index}>
                 <div className={styles.NameAndCreator}>
@@ -50,7 +50,7 @@ export const Resources = ({
                   </div>
                 )}
               </Fragment>
-            )
+            ),
           )}
         </>
       ))}
