@@ -26,13 +26,13 @@ const router = createBrowserRouter(
       <Route
         path="online-resources"
         element={
-          <Resources resource={onlineResources} title="Online resources" />
+          <Resources resources={onlineResources} title="Online resources" />
         }
       />
       <Route path="about" element={<About />} />
       <Route path="*" element={<E404 />} />
-    </Route>
-  )
+    </Route>,
+  ),
 );
 
 export const Routes = (): ReactElement => <RouterProvider router={router} />;
