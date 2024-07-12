@@ -89,7 +89,10 @@ export const ContactModal = ({
       })}
     >
       <Modal.Header>
-        <Modal.Title className={styles.Title} id="contained-modal-title-vcenter">
+        <Modal.Title
+          className={styles.Title}
+          id="contained-modal-title-vcenter"
+        >
           Contact Form
         </Modal.Title>
       </Modal.Header>
