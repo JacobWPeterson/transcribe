@@ -68,14 +68,24 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
           Contact
         </NavLink>
         <span className={styles.VerticalDivider}>|</span>
-        <div className={styles.CopyrightText}>© 2024 Jacob W. Peterson</div>
+        <div className={styles.CopyrightText}>
+          © 2024{" "}
+          <a
+            className="PersonalSiteLink"
+            href="https://www.jacobwpeterson.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Jacob W. Peterson
+          </a>
+        </div>
         <a
           href="https://www.threads.net/@jacobwpeterson"
           target="_blank"
           rel="noreferrer"
         >
           <img
-            src="/src/assets/icons/threads.svg"
+            src="/icons/threads.svg"
             alt="threads icon"
             width="18"
             height="18"
@@ -87,7 +97,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
           rel="noreferrer"
         >
           <img
-            src="/src/assets/icons/linkedin.svg"
+            src="/icons/linkedin.svg"
             alt="LinkedIn icon"
             width="18"
             height="18"
@@ -99,7 +109,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
           rel="noreferrer"
         >
           <img
-            src="/src/assets/icons/academia.svg"
+            src="/icons/academia.svg"
             alt="academia.edu icon"
             width="16"
             height="16"

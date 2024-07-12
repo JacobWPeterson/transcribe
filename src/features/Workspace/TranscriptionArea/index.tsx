@@ -2,7 +2,7 @@ import { type ReactElement, useState } from "react";
 import { Form } from "react-bootstrap";
 import classNames from "classnames";
 
-import type { Line, Manifest } from "../../../assets/files/manifests";
+import type { Line, Manifest } from "../../../files/manifests";
 
 import { SingleLine } from "./SingleLine";
 import styles from "./index.module.scss";
