@@ -38,6 +38,10 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       open: true,
     },
+    build: {
+      outDir: "dist",
+    },
+    publicDir: "src/static",
     css: {
       modules: {
         generateScopedName: isProduction

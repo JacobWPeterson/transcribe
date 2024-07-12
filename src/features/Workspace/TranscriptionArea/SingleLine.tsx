@@ -4,8 +4,8 @@ import { Badge, OverlayTrigger, Popover } from "react-bootstrap";
 import pluralize from "pluralize";
 import classnames from "classnames";
 
-import glosses from "../../../assets/files/glosses";
-import type { Line } from "../../../assets/files//manifests";
+import glosses from "../../../files/glosses";
+import type { Line } from "../../../files//manifests";
 
 import evaluateSubmission from "./validators";
 import styles from "./SingleLine.module.scss";
@@ -87,7 +87,7 @@ export const SingleLine = ({
   const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
     setSubmissionStatus(
-      evaluateSubmission(lineContent, line.text, requireSpaces),
+      evaluateSubmission(lineContent, line.text, requireSpaces)
     );
   };
 
@@ -216,7 +216,7 @@ export const SingleLine = ({
         className={classnames(
           styles.Badge,
           styles.Title,
-          styles.ReducedLeftMargin,
+          styles.ReducedLeftMargin
         )}
         tabIndex={0}
       >

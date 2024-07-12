@@ -2,7 +2,7 @@ import { type ReactElement, useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 
-import manifests from "../../assets/files/manifests";
+import manifests from "../../files/manifests";
 import { E404 } from "../E404/E404";
 
 import { TranscriptionArea } from "./TranscriptionArea/index";
@@ -13,7 +13,7 @@ export const Workspace = (): ReactElement => {
   const { id = 1 } = useParams();
   const navigate = useNavigate();
   const [pageNumber, setPageNumber] = useState<number>(
-    manifests[id]?.canvasIndex,
+    manifests[id]?.canvasIndex
   );
   const [showWrongPageAlert, setShowWrongPageAlert] = useState<boolean>(false);
 
