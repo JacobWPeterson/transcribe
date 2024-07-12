@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/JacobWPeterson/transcribe#readme",
   "dependencies": {
-    "@emailjs/browser": "^4.3.3",
+    "@emailjs/browser": "^4.4.1",
     "bootstrap": "^5.3.3",
     "mirador": "^4.0.0-alpha.2",
     "pluralize": "^8.0.0",
