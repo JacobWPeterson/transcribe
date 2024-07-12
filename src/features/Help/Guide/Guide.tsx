@@ -154,7 +154,7 @@ export const Guide = (): ReactElement => (
         </tr>
         <tr className={styles.Row}>
           <td className={styles.Cell}>
-            <Badge className={styles.Badge} pill bg="success">
+            <Badge className={classnames(styles.Badge, styles.Success)} pill>
               Correct!
             </Badge>
           </td>
