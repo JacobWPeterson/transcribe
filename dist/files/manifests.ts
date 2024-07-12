@@ -152,10 +152,12 @@ const manifests: Manifests = {
     ],
   },
   3: {
-    manifestId: 'https://viewer.cbl.ie/viewer/api/v1/records/BP_X_f_77/manifest',
+    manifestId:
+      "https://viewer.cbl.ie/viewer/api/v1/records/BP_X_f_77/manifest",
     canvasIndex: 1,
-    specialIndexHandling: 'pages/',
-    instruction: "A papyrus manuscript by a trained scribe in a slightly irregular majuscule script. This lesson ends when the papyrus becomes damaged. Ignore the page number (πνγ) at the top of the leaf.",
+    specialIndexHandling: "pages/",
+    instruction:
+      "A papyrus manuscript by a trained scribe in a slightly irregular majuscule script. This lesson ends when the papyrus becomes damaged. Ignore the page number (πνγ) at the top of the leaf.",
     lines: [
       {
         text: "και ιδου οφθαλμοι ωσει οφθαλ",
@@ -211,7 +213,7 @@ const manifests: Manifests = {
       {
         text: "αυτον και μυριαι μυρια",
       },
-    ]
+    ],
   },
   4: {
     manifestId:
@@ -340,55 +342,58 @@ const manifests: Manifests = {
     ],
   },
   6: {
-      manifestId: 'https://viewer.cbl.ie/viewer/api/v2/records/MP_2_86/manifest',
-      canvasIndex: 2,
-      specialIndexHandling: 'pages/',
-      lines: [
-        {
-          text: "κουσατε μου και ζησεται ε",
-        },
-        {
-          text: "ν αγαθοισ η ψυχη υμων και",
-        },
-        {
-          text: "διαθησομαι υμιν διαθη",
-          newConcept: 'Diaeresis'
-        },
-        {
-          text: "κην αιωνιον τα οσια δαυιδ",
-          caption: "There's a correction on this line after the tau. It looks as if the scribe skipped a letter, starting writing the next word for two letters, then made the correction. Transcribe these two letters as α ο."
-        },
-        {
-          text: "τα πιστα ιδου μαρτυριαν εν ε",
-        },
-        {
-          text: "θνεσιν αυτον δεδωκα αρχον",
-          caption: "Another correction here by a later scribe; don't include it in your transcription."
-        },
-        {
-          text: "τα και προστασσοντα εθνεσιν",
-        },
-        {
-          text: "εθνη α ουκ ηδεισαν σε επικα",
-        },
-        {
-          text: "λεσονται σε λαοι οι ουκ επισ",
-        },
-        {
-          text: "ταντα σε επι σε καταφευξον",
-        },
-        {
-          text: "ται εινεκεν του θυ σου του",
-        },
-        {
-          text: "αγιου ισραηλ οτι εδοξασεν",
-          caption: "The hole on this line completely affected one letter and part of another. Notice the overline indicating this began a nomen sacrum. The following four letters should allow you to work out the missing letters.",
-          newConcept: "Reconstruction",
-        },
-        {
-          text: "σε ζητησατε τον θν και εν",
-        }
-      ]
+    manifestId: "https://viewer.cbl.ie/viewer/api/v2/records/MP_2_86/manifest",
+    canvasIndex: 2,
+    specialIndexHandling: "pages/",
+    lines: [
+      {
+        text: "κουσατε μου και ζησεται ε",
+      },
+      {
+        text: "ν αγαθοισ η ψυχη υμων και",
+      },
+      {
+        text: "διαθησομαι υμιν διαθη",
+        newConcept: "Diaeresis",
+      },
+      {
+        text: "κην αιωνιον τα οσια δαυιδ",
+        caption:
+          "There's a correction on this line after the tau. It looks as if the scribe skipped a letter, starting writing the next word for two letters, then made the correction. Transcribe these two letters as α ο.",
+      },
+      {
+        text: "τα πιστα ιδου μαρτυριαν εν ε",
+      },
+      {
+        text: "θνεσιν αυτον δεδωκα αρχον",
+        caption:
+          "Another correction here by a later scribe; don't include it in your transcription.",
+      },
+      {
+        text: "τα και προστασσοντα εθνεσιν",
+      },
+      {
+        text: "εθνη α ουκ ηδεισαν σε επικα",
+      },
+      {
+        text: "λεσονται σε λαοι οι ουκ επισ",
+      },
+      {
+        text: "ταντα σε επι σε καταφευξον",
+      },
+      {
+        text: "ται εινεκεν του θυ σου του",
+      },
+      {
+        text: "αγιου ισραηλ οτι εδοξασεν",
+        caption:
+          "The hole on this line completely affected one letter and part of another. Notice the overline indicating this began a nomen sacrum. The following four letters should allow you to work out the missing letters.",
+        newConcept: "Reconstruction",
+      },
+      {
+        text: "σε ζητησατε τον θν και εν",
+      },
+    ],
   },
 };
 
