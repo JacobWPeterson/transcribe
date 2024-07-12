@@ -35,10 +35,11 @@
 
 .PageWrapper {
   height: 100%;
-  width: 98vw;
+  width: 100vw;
   margin: auto;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .PopoverHeader {

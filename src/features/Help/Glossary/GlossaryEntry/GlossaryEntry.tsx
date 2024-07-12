@@ -11,7 +11,7 @@ export const GlossaryEntry = ({
   word,
   gloss,
 }: GlossaryEntryProps): ReactElement => (
-  <div className={styles.GlossContainer}>
+  <div>
     <h4 className={styles.Word} id={word}>
       {word}
     </h4>
