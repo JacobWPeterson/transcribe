@@ -10,12 +10,12 @@
     width: 100%;
     max-width: 450px;
     height: auto;
-    border: 5px solid theme.$primary03;
+    border: 1px solid theme.$primary03;
     border-radius: 5px;
 
     &.LeftImage {
       max-width: 500px;
-      border: 5px solid theme.$secondary03;
+      border: 1px solid theme.$primary03;
     }
   }
 
@@ -46,7 +46,7 @@
     .Line3 {
       display: flex;
       align-self: flex-end;
-      color: theme.$secondary03;
+      color: theme.$grey10;
       font-size: 40px;
     }
   }
@@ -73,14 +73,13 @@
 
   .FeaturesBlock {
     width: 80%;
-    color: theme.$grey00;
-    background: theme.$primary03;
     padding: 25px;
     border-radius: 20px;
+    background-color: theme.$grey02;
 
     .H2 {
       font-weight: 600;
-      color: theme.$secondary03;
+      color: theme.$primary03;
       text-align: center;
     }
 
@@ -91,13 +90,13 @@
       -moz-columns: 2;
 
       .ListItem {
-        color: theme.$secondary03;
+        color: theme.$primary03;
         margin-left: 20px;
         padding: 10px 0 10px 10px;
         font-size: 20px;
 
         > span {
-          color: theme.$grey00;
+          color: theme.$grey10;
         }
       }
     }
@@ -111,7 +110,7 @@
   display: flex;
   flex-direction: column;
   margin: 12px 0;
-  background-color: theme.$secondary03;
+  background-color: theme.$grey10;
   justify-content: space-evenly;
   align-items: center;
 
@@ -129,7 +128,7 @@
 
     &:focus,
     &:hover {
-      background: theme.$primary02;
+      background: theme.$primary04;
       border: none;
       outline: none;
     }
