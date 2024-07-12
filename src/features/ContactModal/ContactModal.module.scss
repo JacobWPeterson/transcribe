@@ -2,12 +2,16 @@
 @use "src/styles/variables";
 
 .Modal {
-  color: theme.$primary03;
+  color: theme.$grey10;
 
   > div {
     max-height: 800px;
     overflow: hidden;
     width: 600px;
+  }
+
+  .Title {
+    color: theme.$primary03;
   }
 
   &.Sent {
@@ -35,12 +39,12 @@
 
     &:focus,
     &:hover {
-      background: theme.$primary02;
+      background: theme.$primary04;
       border: none;
       outline: none;
 
       &.Cancel {
-        color: theme.$primary03;
+        color: theme.$primary04;
         background: theme.$grey02;
       }
     }
@@ -80,6 +84,7 @@
       flex-direction: column;
       gap: 4px;
       flex: 1 0 0;
+      color: theme.$primary03;
 
       .TextInput {
         padding: 2px 8px;

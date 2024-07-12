@@ -35,7 +35,7 @@ const config: any = {
         main: "#c9ac5f",
       },
       secondary: {
-        main: "#3e5276",
+        main: "#65743a",
       },
       shades: {
         // Shades that can be used to offset color areas of the Workspace / Window
