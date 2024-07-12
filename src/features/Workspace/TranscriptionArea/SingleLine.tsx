@@ -87,7 +87,7 @@ export const SingleLine = ({
   const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
     setSubmissionStatus(
-      evaluateSubmission(lineContent, line.text, requireSpaces),
+      evaluateSubmission(lineContent, line.text, requireSpaces)
     );
   };
 
@@ -148,7 +148,7 @@ export const SingleLine = ({
         </Badge>
       </OverlayTrigger>
     ) : (
-      <Badge className={styles.Badge} pill bg="success">
+      <Badge className={classnames(styles.Badge, styles.Success)} pill>
         Correct!
       </Badge>
     );
@@ -216,7 +216,7 @@ export const SingleLine = ({
         className={classnames(
           styles.Badge,
           styles.Title,
-          styles.ReducedLeftMargin,
+          styles.ReducedLeftMargin
         )}
         tabIndex={0}
       >
