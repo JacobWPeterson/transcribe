@@ -8,16 +8,41 @@
   justify-content: space-evenly;
   margin: auto;
 
+  @media (width < 1024px) {
+    width: 90vw;
+  }
+
   &.Lower {
     flex-direction: row;
     background: theme.$grey02;
-    height: 350px;
     margin: 10px auto;
+    padding: 24px;
+    gap: 12px;
+    border-radius: 12px;
+
+    @media (width < 1024px) {
+      flex-direction: column;
+    }
+
+    @media (width < 600px) {
+      margin: 0 auto;
+    }
+
+    .Image {
+      height: 280px;
+      width: 280px;
+      border-radius: 50%;
+
+      @media (width < 1024px) {
+        height: 200px;
+        width: 200px;
+      }
+    }
 
     .Section {
       display: flex;
       flex-direction: column;
-      width: 50vw;
+      flex-grow: 1;
     }
   }
 
@@ -30,12 +55,20 @@
     color: theme.$grey10;
     text-align: justify;
 
+    @media (width < 1024px) {
+      font-size: 14px;
+    }
+
     &.Italic {
       font-style: italic;
     }
 
     &.Smaller {
       font-size: 16px;
+
+      @media (width < 1024px) {
+        font-size: 12px;
+      }
     }
   }
 }
@@ -62,17 +95,26 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  min-width: 800px;
-  padding: 30px 0 0;
+  padding: 24px 0;
+  gap: 48px;
+
+  @media (width < 1024px) {
+    padding: 12px 0 0;
+    gap: 24px;
+  }
+
+  @media (width < 600px) {
+    flex-direction: column;
+    gap: 4px;
+  }
 
   .Partner {
     display: flex;
     flex-direction: column;
-    height: 180px;
-    width: 200px;
+    height: 160px;
     align-items: center;
 
-    &.Clickable {
+    .IIIF &.Clickable {
       cursor: pointer;
     }
 
@@ -82,6 +124,10 @@
       text-align: center;
       margin: 0;
       padding: 20px 0;
+
+      @media (width < 1024px) {
+        font-size: 14px;
+      }
 
       &.HoldingInstitute {
         font-size: 12px;
@@ -97,6 +143,7 @@
       &.IIIFFont {
         color: #006eb0;
         font-family: "Playfair Display", sans-serif;
+        width: 170px;
       }
     }
   }

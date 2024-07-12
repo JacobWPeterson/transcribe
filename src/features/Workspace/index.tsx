@@ -46,6 +46,22 @@ export const Workspace = (): ReactElement => {
 
   return (
     <div className={styles.WorkspacePageWrapper}>
+      <div className={styles.InvalidDevice}>
+        <img
+          src="/images/cog.svg"
+          alt="Rotate device to landscape"
+          className={styles.Image}
+        />
+        <h2>Sorry, lessons are only supported on larger screens.</h2>
+      </div>
+      <div className={styles.Rotate}>
+        <img
+          src="/images/rotate.svg"
+          alt="Rotate device to landscape"
+          className={styles.Image}
+        />
+        <h2>Rotate your device to landscape</h2>
+      </div>
       {showWrongPageAlert && (
         <Alert
           className={styles.Alert}

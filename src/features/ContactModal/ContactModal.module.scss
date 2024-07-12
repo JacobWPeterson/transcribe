@@ -8,6 +8,10 @@
     max-height: 800px;
     overflow: hidden;
     width: 600px;
+
+    @media (width <= 1024px) {
+      width: 90%;
+    }
   }
 
   .Title {
@@ -76,6 +80,11 @@
       align-items: center;
       width: 100%;
       gap: 24px;
+
+      @media (width <= 800px) {
+        flex-direction: column;
+        gap: 12px;
+      }
     }
 
     .FormSection {
@@ -85,6 +94,10 @@
       gap: 4px;
       flex: 1 0 0;
       color: theme.$primary03;
+
+      @media (width <= 800px) {
+        width: 100%;
+      }
 
       .TextInput {
         padding: 2px 8px;
