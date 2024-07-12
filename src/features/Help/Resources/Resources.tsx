@@ -22,7 +22,7 @@ export const Resources = ({
           {resources?.map(
             (
               { name, creator, description, journal, journalDetails, url },
-              index
+              index,
             ) => (
               <Fragment key={index}>
                 <div className={styles.NameAndCreator}>
@@ -50,7 +50,7 @@ export const Resources = ({
                   </div>
                 )}
               </Fragment>
-            )
+            ),
           )}
         </>
       ))}
