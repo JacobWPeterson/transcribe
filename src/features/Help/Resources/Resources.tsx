@@ -1,8 +1,8 @@
 import { Fragment, type ReactElement } from "react";
 import { NavLink } from "react-bootstrap";
 
-import type { ResourceCategories } from "../../../assets/files/onlineResources";
 import styles from "../Help.module.scss";
+import type { ResourceCategories } from "../../../files/onlineResources";
 
 interface ResourcesProps {
   resources: ResourceCategories[];
@@ -22,7 +22,7 @@ export const Resources = ({
           {resources?.map(
             (
               { name, creator, description, journal, journalDetails, url },
-              index,
+              index
             ) => (
               <Fragment key={index}>
                 <div className={styles.NameAndCreator}>
@@ -50,7 +50,7 @@ export const Resources = ({
                   </div>
                 )}
               </Fragment>
-            ),
+            )
           )}
         </>
       ))}
