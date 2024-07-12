@@ -6,25 +6,27 @@
   position: relative;
   min-height: 100vh;
   padding-bottom: 50px;
+  background-color: theme.$grey00;
 
   .Navbar {
-    border-top: 5px solid theme.$secondary03;
+    border-top: 5px solid theme.$primary03;
     padding-top: 0;
+    z-index: 2;
 
     .Container {
       max-width: 100%;
-      background: theme.$primary03;
+      background: theme.$grey00;
       padding: 5px 50px;
 
       .Brand {
-        color: theme.$secondary03;
+        color: theme.$primary03;
         font-size: 24px;
         font-style: italic;
         letter-spacing: 0.2rem;
       }
 
       .Toggle {
-        border-color: theme.$secondary03;
+        border-color: theme.$primary03;
       }
 
       .Nav {
@@ -34,14 +36,14 @@
         .NavDropdown {
           > a {
             padding: 0;
-            color: theme.$grey00;
+            color: theme.$grey10;
             text-decoration: none;
 
             &:hover,
             &:focus {
               outline: none;
               cursor: pointer;
-              color: theme.$secondary03;
+              color: theme.$primary03;
             }
 
             &:focus {
@@ -70,7 +72,7 @@
             &:focus {
               outline: none;
               cursor: pointer;
-              color: theme.$secondary03;
+              color: theme.$primary03;
             }
 
             &:focus {
@@ -94,13 +96,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 5px solid theme.$secondary03;
+    border-bottom: 5px solid theme.$primary03;
     gap: 12px;
   }
 }
 
 .VerticalDivider {
-  color: theme.$secondary03;
+  color: theme.$primary03;
 }
 
 .CopyrightText {
@@ -117,7 +119,7 @@
   &:focus {
     outline: none;
     cursor: pointer;
-    color: theme.$secondary03;
+    color: theme.$primary05;
   }
 
   &:focus {
