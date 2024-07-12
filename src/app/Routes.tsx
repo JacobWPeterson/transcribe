@@ -13,7 +13,7 @@ import { Guide } from "../features/Help/Guide/Guide";
 import { Resources } from "../features/Help/Resources/Resources";
 import { About } from "../features/About/About";
 import { E404 } from "../features/E404/E404";
-import onlineResources from "../assets/files/onlineResources";
+import onlineResources from "../files/onlineResources";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,8 +31,8 @@ const router = createBrowserRouter(
       />
       <Route path="about" element={<About />} />
       <Route path="*" element={<E404 />} />
-    </Route>,
-  ),
+    </Route>
+  )
 );
 
 export const Routes = (): ReactElement => <RouterProvider router={router} />;

@@ -55,17 +55,13 @@ export const About = (): ReactElement => (
             }
           }}
         >
-          <img src="src/assets/icons/mirador.png" alt="mirador logo" />
+          <img src="/icons/mirador.png" alt="mirador logo" />
           <div className={classNames(styles.PartnerText, styles.MiradorFont)}>
             mirador
           </div>
         </div>
         <div className={styles.Partner}>
-          <img
-            src="src/assets/icons/library.svg"
-            height="60"
-            alt="library logo"
-          />
+          <img src="/icons/library.svg" height="60" alt="library logo" />
           <div
             className={classNames(styles.PartnerText, styles.HoldingInstitute)}
           >
@@ -89,7 +85,7 @@ export const About = (): ReactElement => (
             }
           }}
         >
-          <img src="src/assets/icons/iiif.png" height="60" alt="iiif logo" />
+          <img src="/icons/iiif.png" height="60" alt="iiif logo" />
           <div className={classNames(styles.PartnerText, styles.IIIFFont)}>
             International Image Interoperability Framework
           </div>
@@ -101,7 +97,7 @@ export const About = (): ReactElement => (
         style={{ borderRadius: "50%" }}
         height="280"
         width="280"
-        src="src/assets/images/me.jpg"
+        src="/images/me.jpg"
         alt="creator"
       />
       <div className={styles.Section}>
@@ -113,7 +109,16 @@ export const About = (): ReactElement => (
           ancient manuscripts in the US, Europe, and Asia with the Center for
           the Study of New Testament Manuscripts (CSNTM). I primarily publish on
           topics within papyrology, paratexts, and New Testament textual
-          criticism.
+          criticism. Visit my{" "}
+          <a
+            className="Link"
+            href="https://www.jacobwpeterson.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            personal website
+          </a>{" "}
+          to learn more.
         </div>
         <small className={styles.Small}>
           <sup>*</sup>by my career in software engineering
