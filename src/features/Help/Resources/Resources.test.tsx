@@ -36,30 +36,30 @@ describe("Resources", () => {
     render(<Resources resources={mockResources} title="Test Resources" />);
 
     expect(
-      screen.getByRole("heading", { level: 1, name: "Test Resources" })
+      screen.getByRole("heading", { level: 1, name: "Test Resources" }),
     ).toBeInTheDocument();
 
     // Websites (i.e., not a journal)
     expect(
-      screen.getByRole("heading", { level: 2, name: "Heading 1" })
+      screen.getByRole("heading", { level: 2, name: "Heading 1" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: mockResources[0].resources[0].name })
+      screen.getByRole("link", { name: mockResources[0].resources[0].name }),
     ).toHaveAttribute("href", mockResources[0].resources[0].url);
     expect(
-      screen.getByText(`by ${mockResources[0].resources[0].creator}`)
+      screen.getByText(`by ${mockResources[0].resources[0].creator}`),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(mockResources[0].resources[0].description)
+      screen.getByText(mockResources[0].resources[0].description),
     ).toBeInTheDocument();
 
     // Journals/Books should have relevant citation details
     expect(
-      screen.getByRole("heading", { level: 2, name: "Heading 2" })
+      screen.getByRole("heading", { level: 2, name: "Heading 2" }),
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Name 2" })).toHaveAttribute(
       "href",
-      mockResources[1].resources[0].url
+      mockResources[1].resources[0].url,
     );
     expect(screen.getByText("by Creator 2")).toBeInTheDocument();
     expect(screen.getByText(/Journal 2/)).toBeInTheDocument();

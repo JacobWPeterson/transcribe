@@ -13,7 +13,7 @@ export const Workspace = (): ReactElement => {
   const { id = 1 } = useParams();
   const navigate = useNavigate();
   const [pageNumber, setPageNumber] = useState<number>(
-    manifests[id]?.canvasIndex
+    manifests[id]?.canvasIndex,
   );
   const [showWrongPageAlert, setShowWrongPageAlert] = useState<boolean>(false);
 
