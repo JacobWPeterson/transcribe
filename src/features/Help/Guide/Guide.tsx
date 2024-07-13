@@ -17,7 +17,7 @@ export const Guide = (): ReactElement => (
               placement="top"
               rootClose
               transition
-              trigger={["hover", "focus"]}
+              trigger={["hover", "focus", "click"]}
               overlay={
                 <Popover id="popover-hint">
                   <Popover.Body>
@@ -100,7 +100,7 @@ export const Guide = (): ReactElement => (
               placement="top"
               rootClose
               transition
-              trigger={["hover", "focus"]}
+              trigger={["hover", "focus", "click"]}
               overlay={
                 <Popover id="popover-error">
                   <Popover.Body>Answer is incorrect</Popover.Body>
@@ -127,7 +127,7 @@ export const Guide = (): ReactElement => (
               placement="top"
               rootClose
               transition
-              trigger={["hover", "focus"]}
+              trigger={["hover", "focus", "click"]}
               overlay={
                 <Popover id="popover-hint">
                   <Popover.Body>Incorrect letter: σ(10)</Popover.Body>
