@@ -17,6 +17,10 @@ interface SingleLineProps {
   requireSpaces?: boolean;
 }
 
+const includesNonGreekChars = (text: string): boolean => {
+  return !!text.match(/[^Α-Ωα-ω\s]/g)?.length;
+};
+
 export const SingleLine = ({
   isTitle,
   line,
@@ -24,6 +28,7 @@ export const SingleLine = ({
   requireSpaces = false,
 }: SingleLineProps): ReactElement => {
   const [lineContent, setLineContent] = useState<string>("");
+  const [hasError, setHasError] = useState<boolean>(false);
   const [submissionStatus, setSubmissionStatus] = useState<
     (boolean | string)[] | null
   >(null);
@@ -72,6 +77,14 @@ export const SingleLine = ({
       setShowIncorrectErrorMessaging(true);
     }
   }, [submissionStatus]);
+
+  useEffect(() => {
+    if (lineContent.length === 0) {
+      setHasError(false);
+      return;
+    }
+    setHasError(includesNonGreekChars(lineContent));
+  }, [lineContent]);
 
   const clearMessages = (): void => {
     setShowHint(false);
@@ -136,7 +149,7 @@ export const SingleLine = ({
         placement="top-end"
         rootClose
         transition
-        trigger={["hover", "focus"]}
+        trigger={["hover", "focus", "click"]}
         overlay={
           <Popover id="popover-error">
             <Popover.Body>{submissionStatus[1]}</Popover.Body>
@@ -175,7 +188,7 @@ export const SingleLine = ({
       placement="top-end"
       rootClose
       transition
-      trigger={["hover", "focus"]}
+      trigger={["hover", "focus", "click"]}
       overlay={
         <Popover id="popover-hint">
           <Popover.Body>{getHint(lineContent, line.text)}</Popover.Body>
@@ -198,7 +211,7 @@ export const SingleLine = ({
       placement="top"
       rootClose
       transition
-      trigger={["hover", "focus"]}
+      trigger={["hover", "focus", "click"]}
       overlay={
         <Popover id="popover-hint">
           <Popover.Body>
@@ -244,7 +257,14 @@ export const SingleLine = ({
           onChange={handleChange}
           autoComplete="off"
         />
-        {line.caption && <small className={styles.Small}>{line.caption}</small>}
+        {hasError && (
+          <small className={classnames(styles.Small, styles.Error)}>
+            Non-Greek characters have been detected
+          </small>
+        )}
+        {line.caption && !hasError && (
+          <small className={styles.Small}>{line.caption}</small>
+        )}
       </div>
       <button className={styles.Button} type="submit">
         Check
