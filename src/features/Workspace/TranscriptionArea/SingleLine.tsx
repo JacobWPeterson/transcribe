@@ -100,7 +100,7 @@ export const SingleLine = ({
   const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
     setSubmissionStatus(
-      evaluateSubmission(lineContent, line.text, requireSpaces),
+      evaluateSubmission(lineContent, line.text, requireSpaces)
     );
   };
 
@@ -229,7 +229,7 @@ export const SingleLine = ({
         className={classnames(
           styles.Badge,
           styles.Title,
-          styles.ReducedLeftMargin,
+          styles.ReducedLeftMargin
         )}
         tabIndex={0}
       >
