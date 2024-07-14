@@ -86,6 +86,15 @@ export const SingleLine = ({
     setHasError(includesNonGreekChars(lineContent));
   }, [lineContent]);
 
+  useEffect(() => {
+    if (!lineContent) {
+      return;
+    }
+    setSubmissionStatus(
+      evaluateSubmission(lineContent, line.text, requireSpaces)
+    );
+  }, [requireSpaces]);
+
   const clearMessages = (): void => {
     setShowHint(false);
     setShowIncorrectErrorMessaging(false);
