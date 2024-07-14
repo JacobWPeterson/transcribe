@@ -31,10 +31,10 @@ export const Guide = (): ReactElement => (
             >
               <Badge
                 pill
-                className={classnames(styles.Badge, styles.Title)}
+                className={classnames(styles.Badge, styles.Help)}
                 tabIndex={0}
               >
-                ?
+                T
               </Badge>
             </OverlayTrigger>
           </td>
@@ -136,7 +136,7 @@ export const Guide = (): ReactElement => (
             >
               <Badge
                 pill
-                className={classnames(styles.Badge, styles.Hint)}
+                className={classnames(styles.Badge, styles.Help)}
                 tabIndex={0}
               >
                 ?
@@ -155,7 +155,7 @@ export const Guide = (): ReactElement => (
         <tr className={styles.Row}>
           <td className={styles.Cell}>
             <Badge className={classnames(styles.Badge, styles.Success)} pill>
-              Correct!
+              ✓
             </Badge>
           </td>
           <td>
