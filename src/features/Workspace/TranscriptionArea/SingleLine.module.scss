@@ -4,10 +4,6 @@
   margin: 5px 0 0 10px;
   align-self: start;
 
-  &.Hint {
-    background-color: theme.$primary03 !important;
-  }
-
   &.NC {
     background-color: theme.$secondary03 !important;
   }
@@ -16,7 +12,7 @@
     background-color: theme.$primary03 !important;
   }
 
-  &.Title {
+  &.Help {
     background-color: theme.$grey06 !important;
   }
 
@@ -43,8 +39,8 @@
     border: none;
     border-radius: 5px;
 
-    &:focus {
-      background: theme.$primary02;
+    &:active {
+      background: theme.$primary04;
       border: none;
       outline: none;
     }
