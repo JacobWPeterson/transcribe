@@ -3,10 +3,6 @@
 .Badge {
   margin: 0;
 
-  &.Hint {
-    background-color: theme.$primary03 !important;
-  }
-
   &.NC {
     background-color: theme.$secondary03 !important;
   }
@@ -15,7 +11,7 @@
     background-color: theme.$primary03 !important;
   }
 
-  &.Title {
+  &.Help {
     background-color: theme.$grey06 !important;
   }
 
