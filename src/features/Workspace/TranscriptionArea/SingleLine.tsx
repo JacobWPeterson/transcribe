@@ -86,6 +86,15 @@ export const SingleLine = ({
     setHasError(includesNonGreekChars(lineContent));
   }, [lineContent]);
 
+  useEffect(() => {
+    if (!lineContent) {
+      return;
+    }
+    setSubmissionStatus(
+      evaluateSubmission(lineContent, line.text, requireSpaces)
+    );
+  }, [requireSpaces]);
+
   const clearMessages = (): void => {
     setShowHint(false);
     setShowIncorrectErrorMessaging(false);
@@ -143,7 +152,7 @@ export const SingleLine = ({
   );
 
   const renderIncorrectAnswerMessaging = (): ReactElement =>
-    submissionStatus[0] === false ? (
+    submissionStatus?.[0] === false ? (
       <OverlayTrigger
         key="error-tooltip"
         placement="top-end"
@@ -162,7 +171,7 @@ export const SingleLine = ({
       </OverlayTrigger>
     ) : (
       <Badge className={classnames(styles.Badge, styles.Success)} pill>
-        Correct!
+        ✓
       </Badge>
     );
 
@@ -197,7 +206,7 @@ export const SingleLine = ({
     >
       <Badge
         pill
-        className={classnames(styles.Badge, styles.Hint)}
+        className={classnames(styles.Badge, styles.Help)}
         tabIndex={0}
       >
         ?
@@ -228,12 +237,12 @@ export const SingleLine = ({
         pill
         className={classnames(
           styles.Badge,
-          styles.Title,
-          styles.ReducedLeftMargin,
+          styles.Help,
+          styles.ReducedLeftMargin
         )}
         tabIndex={0}
       >
-        ?
+        T
       </Badge>
     </OverlayTrigger>
   );
