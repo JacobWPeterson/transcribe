@@ -1,14 +1,8 @@
 import type { PropsWithChildren, ReactElement } from "react";
 import classNames from "classnames";
 
+import { BadgeTypes } from "./badge.enum";
 import styles from "./Badge.module.scss";
-
-export enum BadgeTypes {
-  SUCCESS = "Success",
-  ERROR = "Error",
-  HELP = "Help",
-  NC = "NC",
-}
 
 interface BadgeProps {
   type?: BadgeTypes;
