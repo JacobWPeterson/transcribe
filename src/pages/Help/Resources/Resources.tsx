@@ -1,5 +1,4 @@
 import { Fragment, type ReactElement } from "react";
-import { NavLink } from "react-bootstrap";
 
 import styles from "../Help.module.scss";
 import type { ResourceCategories } from "../../../files/onlineResources";
@@ -26,13 +25,14 @@ export const Resources = ({
             ) => (
               <Fragment key={index}>
                 <div className={styles.NameAndCreator}>
-                  <NavLink
+                  <a
                     className={styles.ResourceLink}
                     target="_blank"
                     href={url}
+                    rel="noreferrer"
                   >
                     {name}
-                  </NavLink>
+                  </a>
                   {creator && (
                     <span className={styles.Span}>{`by ${creator}`}</span>
                   )}

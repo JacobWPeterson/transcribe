@@ -1,0 +1,68 @@
+@use "src/styles/theme";
+
+.Form {
+  padding: 10px 0;
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+
+  .PostInputItemsContainer {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+
+    .Button {
+      color: theme.$grey00;
+      background: theme.$primary03;
+      font-size: inherit;
+      text-align: center;
+      line-height: 1em;
+      padding: 2px 5px;
+      height: 25px;
+      border: none;
+      border-radius: 5px;
+
+      &:active {
+        background: theme.$primary04;
+        border: none;
+        outline: none;
+      }
+
+      &:disabled {
+        background: theme.$secondary03;
+        color: theme.$primary03;
+      }
+    }
+  }
+
+  .Label {
+    color: theme.$primary03;
+    width: 55px;
+    gap: 4px;
+  }
+
+  .InputWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 250px;
+    width: 23vw;
+    margin: 0 10px;
+
+    .Input {
+      height: 30px;
+      font-size: 16px;
+      padding: 2px 5px;
+    }
+
+    .Small {
+      color: theme.$grey07;
+      margin-top: 4px;
+      font-size: 0.8em;
+
+      &.Error {
+        color: theme.$error;
+      }
+    }
+  }
+}

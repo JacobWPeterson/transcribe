@@ -6,13 +6,13 @@ import {
 } from "react-router-dom";
 import type { ReactElement } from "react";
 
-import { Home } from "../features/Home/Home";
-import { Workspace } from "../features/Workspace/index";
-import { Glossary } from "../features/Help/Glossary/Glossary";
-import { Guide } from "../features/Help/Guide/Guide";
-import { Resources } from "../features/Help/Resources/Resources";
-import { About } from "../features/About/About";
-import { E404 } from "../features/E404/E404";
+import { Home } from "../pages/Home/Home";
+import { Workspace } from "../pages/Workspace/index";
+import { Glossary } from "../pages/Help/Glossary/Glossary";
+import { Guide } from "../pages/Help/Guide/Guide";
+import { Resources } from "../pages/Help/Resources/Resources";
+import { About } from "../pages/About/About";
+import { E404 } from "../pages/E404/E404";
 import onlineResources from "../files/onlineResources";
 
 const router = createBrowserRouter(

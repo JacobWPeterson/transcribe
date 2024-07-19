@@ -1,11 +1,14 @@
 import type { ChangeEvent, FormEvent, ReactElement } from "react";
 import { useEffect, useRef, useState } from "react";
-import { Badge, OverlayTrigger, Popover } from "react-bootstrap";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
 import pluralize from "pluralize";
 import classnames from "classnames";
 
 import glosses from "../../../files/glosses";
 import type { Line } from "../../../files//manifests";
+import { Badge } from "../../../components/Badge/Badge";
+import { BadgeTypes } from "../../../components/Badge/badge.enum";
 
 import evaluateSubmission from "./validators";
 import styles from "./SingleLine.module.scss";
@@ -91,7 +94,7 @@ export const SingleLine = ({
       return;
     }
     setSubmissionStatus(
-      evaluateSubmission(lineContent, line.text, requireSpaces)
+      evaluateSubmission(lineContent, line.text, requireSpaces),
     );
   }, [requireSpaces]);
 
@@ -145,9 +148,9 @@ export const SingleLine = ({
         </Popover>
       }
     >
-      <Badge pill className={classnames(styles.Badge, styles.NC)} tabIndex={0}>
-        NC
-      </Badge>
+      <span>
+        <Badge type={BadgeTypes.NC}>NC</Badge>
+      </span>
     </OverlayTrigger>
   );
 
@@ -165,14 +168,12 @@ export const SingleLine = ({
           </Popover>
         }
       >
-        <Badge className={styles.Badge} tabIndex={0} pill bg="danger">
-          X
-        </Badge>
+        <span>
+          <Badge type={BadgeTypes.ERROR}>X</Badge>
+        </span>
       </OverlayTrigger>
     ) : (
-      <Badge className={classnames(styles.Badge, styles.Success)} pill>
-        ✓
-      </Badge>
+      <Badge type={BadgeTypes.SUCCESS}>✓</Badge>
     );
 
   const getHint = (guess: string, answer: string): string => {
@@ -204,13 +205,9 @@ export const SingleLine = ({
         </Popover>
       }
     >
-      <Badge
-        pill
-        className={classnames(styles.Badge, styles.Help)}
-        tabIndex={0}
-      >
-        ?
-      </Badge>
+      <span>
+        <Badge>?</Badge>
+      </span>
     </OverlayTrigger>
   );
 
@@ -233,17 +230,9 @@ export const SingleLine = ({
         </Popover>
       }
     >
-      <Badge
-        pill
-        className={classnames(
-          styles.Badge,
-          styles.Help,
-          styles.ReducedLeftMargin
-        )}
-        tabIndex={0}
-      >
-        T
-      </Badge>
+      <span>
+        <Badge small>T</Badge>
+      </span>
     </OverlayTrigger>
   );
 
@@ -275,12 +264,14 @@ export const SingleLine = ({
           <small className={styles.Small}>{line.caption}</small>
         )}
       </div>
-      <button className={styles.Button} type="submit">
-        Check
-      </button>
-      {line.newConcept && newConcept(line.newConcept)}
-      {showIncorrectErrorMessaging && renderIncorrectAnswerMessaging()}
-      {showHint && hint()}
+      <div className={styles.PostInputItemsContainer}>
+        <button className={styles.Button} type="submit">
+          Check
+        </button>
+        {line.newConcept && newConcept(line.newConcept)}
+        {showIncorrectErrorMessaging && renderIncorrectAnswerMessaging()}
+        {showHint && hint()}
+      </div>
     </form>
   );
 };
