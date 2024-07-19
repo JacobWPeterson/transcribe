@@ -7,7 +7,8 @@ import classnames from "classnames";
 
 import glosses from "../../../files/glosses";
 import type { Line } from "../../../files//manifests";
-import { Badge, BadgeTypes } from "../../../components/Badge/Badge";
+import { Badge } from "../../../components/Badge/Badge";
+import { BadgeTypes } from "../../../components/Badge/badge.enum";
 
 import evaluateSubmission from "./validators";
 import styles from "./SingleLine.module.scss";
