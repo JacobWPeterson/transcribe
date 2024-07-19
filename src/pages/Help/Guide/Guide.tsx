@@ -3,7 +3,8 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 
 import styles from "../Help.module.scss";
-import { Badge, BadgeTypes } from "../../../components/Badge/Badge";
+import { Badge } from "../../../components/Badge/Badge";
+import { BadgeTypes } from "../../../components/Badge/badge.enum";
 
 export const Guide = (): ReactElement => (
   <div className="PageWrapper">
