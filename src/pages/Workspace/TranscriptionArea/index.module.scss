@@ -21,13 +21,16 @@
 
     .FormSwitch {
       input {
-        border-color: theme.$primary03;
-        color: theme.$primary03;
+        margin-right: 4px;
 
         &:checked {
           background-color: theme.$primary03;
           border-color: theme.$primary03;
         }
+      }
+
+      label {
+        color: theme.$primary03;
       }
     }
   }

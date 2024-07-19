@@ -1,5 +1,4 @@
 import { type ReactElement, useState } from "react";
-import { Form } from "react-bootstrap";
 import classNames from "classnames";
 
 import type { Line, Manifest } from "../../../files/manifests";
@@ -32,14 +31,16 @@ export const TranscriptionArea = ({
     <div className={styles.Container}>
       <div className={styles.HeaderContainer}>
         <h2 className={styles.Header}>{`Lesson ${manuscriptId}`}</h2>
-        <Form>
-          <Form.Switch
+        <div className={styles.FormSwitch}>
+          <input
+            type="checkbox"
+            id="require_spaces"
+            name="require_spaces"
             className={styles.FormSwitch}
-            id="mode-switch"
-            label="Require spaces"
             onChange={() => setRequireSpaces(!requireSpaces)}
           />
-        </Form>
+          <label htmlFor="require_spaces">Require spaces</label>
+        </div>
         <a className="Link" href="/guide" target="_blank">
           Guide
         </a>

@@ -1,9 +1,8 @@
 import type { PropsWithChildren, ReactElement } from "react";
 import { useState } from "react";
-import { Container, Nav, Navbar, NavDropdown, NavLink } from "react-bootstrap";
-import classNames from "classnames";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
-import { ContactModal } from "../../features/ContactModal/ContactModal";
+import { ContactModal } from "../../components/ContactModal/ContactModal";
 
 import styles from "./AppWrapper.module.scss";
 
@@ -12,53 +11,43 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
 
   return (
     <div className={styles.AppWrapper}>
-      <Navbar className={styles.Navbar} collapseOnSelect expand="lg">
-        <Container className={classNames(styles.Container, "container-fluid")}>
-          <Navbar.Brand className={styles.Brand} href="/">
-            Xeirographa
-          </Navbar.Brand>
-          <Navbar.Toggle
-            className={styles.Toggle}
-            aria-controls="responsive-navbar-nav"
-          />
-          <Navbar.Collapse
-            id="responsive-navbar-nav"
-            className="justify-content-end"
+      <div className={styles.Navbar}>
+        <a className={styles.Brand} href="/">
+          Xeirographa
+        </a>
+        <div className={styles.NavButtons}>
+          <a
+            className={styles.NavLink}
+            href="/lessons/1"
+            data-replace="Lessons"
           >
-            <Nav className={styles.Nav}>
-              <NavLink href="/">Home</NavLink>
-              <NavLink href="/lessons/1">Lessons</NavLink>
-              <NavDropdown
-                title="Help"
-                id="collapsible-nav-dropdown"
-                className={styles.NavDropdown} // TO-DO: Improve the appearance of this when the nav bar is collapsed
-              >
-                <NavDropdown.Item className={styles.DropdownItem} href="/guide">
-                  Guide
-                </NavDropdown.Item>
-                <NavDropdown.Divider className={styles.Divider} />
-                <NavDropdown.Item
-                  className={styles.DropdownItem}
-                  href="/glossary"
-                >
-                  Glossary
-                </NavDropdown.Item>
-                <NavDropdown.Divider className={styles.Divider} />
-                <NavDropdown.Item
-                  className={styles.DropdownItem}
-                  href="/online-resources"
-                >
-                  Online resources
-                </NavDropdown.Item>
-              </NavDropdown>
-              <NavLink href="/about">About</NavLink>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+            <span>Lessons</span>
+          </a>
+          <NavDropdown
+            title="Help"
+            id="collapsible-nav-dropdown"
+            className={styles.NavDropdown}
+          >
+            <div className={styles.DropdownItem}>
+              <a href="/guide">Guide</a>
+            </div>
+            <div className={styles.Divider} />
+            <div className={styles.DropdownItem}>
+              <a href="/glossary">Glossary</a>
+            </div>
+            <div className={styles.Divider} />
+            <div className={styles.DropdownItem}>
+              <a href="/online-resources">Online resources</a>
+            </div>
+          </NavDropdown>
+          <a className={styles.NavLink} href="/about" data-replace="About">
+            <span>About</span>
+          </a>
+        </div>
+      </div>
       {children}
       <footer className={styles.Footer}>
-        <NavLink
+        <div
           className={styles.Link}
           role="link"
           tabIndex={0}
@@ -66,7 +55,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
           onKeyDown={() => setShowModal(true)}
         >
           Contact
-        </NavLink>
+        </div>
         <span className={styles.VerticalDivider}>|</span>
         <div className={styles.CopyrightText}>
           © 2024{" "}

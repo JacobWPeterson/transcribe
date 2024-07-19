@@ -1,17 +1,18 @@
 import type { ReactElement } from "react";
-import { Badge, OverlayTrigger, Popover } from "react-bootstrap";
-import classnames from "classnames";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
 
 import styles from "../Help.module.scss";
+import { Badge, BadgeTypes } from "../../../components/Badge/Badge";
 
 export const Guide = (): ReactElement => (
   <div className="PageWrapper">
     <div className={styles.HelpSection} id="guide">
       <h1 className={styles.H1}>Guide</h1>
       <h2 className={styles.H2}>Symbols</h2>
-      <table className={styles.Table}>
+      <table>
         <tr className={styles.Row}>
-          <td className={styles.Cell}>
+          <td className={styles.SymbolCell}>
             <OverlayTrigger
               key="title-help"
               placement="top"
@@ -29,13 +30,9 @@ export const Guide = (): ReactElement => (
                 </Popover>
               }
             >
-              <Badge
-                pill
-                className={classnames(styles.Badge, styles.Help)}
-                tabIndex={0}
-              >
-                T
-              </Badge>
+              <span>
+                <Badge small>T</Badge>
+              </span>
             </OverlayTrigger>
           </td>
           <td>
@@ -49,7 +46,7 @@ export const Guide = (): ReactElement => (
           </td>
         </tr>
         <tr className={styles.Row}>
-          <td className={styles.Cell}>
+          <td className={styles.SymbolCell}>
             <OverlayTrigger
               key="NC-example"
               placement="top"
@@ -75,16 +72,12 @@ export const Guide = (): ReactElement => (
                 </Popover>
               }
             >
-              <Badge
-                pill
-                className={classnames(styles.Badge, styles.NC)}
-                tabIndex={0}
-              >
-                NC
-              </Badge>
+              <div>
+                <Badge type={BadgeTypes.NC}>NC</Badge>
+              </div>
             </OverlayTrigger>
           </td>
-          <td>
+          <td className={styles.TextCell}>
             <p className={styles.LegendText}>
               This icon indicates there is a new concept being introduced on
               that particular line of the manuscript. <b>Clicking</b> the NC
@@ -94,7 +87,7 @@ export const Guide = (): ReactElement => (
           </td>
         </tr>
         <tr className={styles.Row}>
-          <td className={styles.Cell}>
+          <td className={styles.SymbolCell}>
             <OverlayTrigger
               key="error-tooltip"
               placement="top"
@@ -107,12 +100,12 @@ export const Guide = (): ReactElement => (
                 </Popover>
               }
             >
-              <Badge className={styles.Badge} tabIndex={0} pill bg="danger">
-                X
-              </Badge>
+              <span>
+                <Badge type={BadgeTypes.ERROR}>X</Badge>
+              </span>
             </OverlayTrigger>
           </td>
-          <td>
+          <td className={styles.TextCell}>
             <p className={styles.LegendText}>
               This icon appears after submitting an incorrect answer.{" "}
               <b>Hovering</b> over the icon will reveal more details, such as if
@@ -121,7 +114,7 @@ export const Guide = (): ReactElement => (
           </td>
         </tr>
         <tr className={styles.Row}>
-          <td className={styles.Cell}>
+          <td className={styles.SymbolCell}>
             <OverlayTrigger
               key="hint-icon"
               placement="top"
@@ -134,16 +127,12 @@ export const Guide = (): ReactElement => (
                 </Popover>
               }
             >
-              <Badge
-                pill
-                className={classnames(styles.Badge, styles.Help)}
-                tabIndex={0}
-              >
-                ?
-              </Badge>
+              <span>
+                <Badge>?</Badge>
+              </span>
             </OverlayTrigger>
           </td>
-          <td>
+          <td className={styles.TextCell}>
             <p className={styles.LegendText}>
               After three incorrect attempts of the correct length, this icon
               appears. <b>Hovering</b> over the icon reveals which letter(s) is
@@ -153,12 +142,10 @@ export const Guide = (): ReactElement => (
           </td>
         </tr>
         <tr className={styles.Row}>
-          <td className={styles.Cell}>
-            <Badge className={classnames(styles.Badge, styles.Success)} pill>
-              ✓
-            </Badge>
+          <td className={styles.SymbolCell}>
+            <Badge type={BadgeTypes.SUCCESS}>✓</Badge>
           </td>
-          <td>
+          <td className={styles.TextCell}>
             <p className={styles.LegendText}>
               Congrats, you&apos;ve answered correctly.
             </p>

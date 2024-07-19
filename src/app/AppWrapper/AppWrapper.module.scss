@@ -7,85 +7,129 @@
   min-height: 100vh;
   padding-bottom: 50px;
   background-color: theme.$grey00;
+  border-top: 5px solid theme.$primary03;
 
   .Navbar {
-    border-top: 5px solid theme.$primary03;
-    padding-top: 0;
-    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
 
-    .Container {
-      max-width: 100%;
-      background: theme.$grey00;
-      padding: 5px 50px;
+    @media (width <= 1024px) {
+      padding: 10px 30px;
+    }
+    @media (width <= 800px) {
+      padding: 10px 20px;
+    }
 
-      @media (width < 1024px) {
-        padding: 5px 16px;
+    .Brand {
+      color: theme.$primary03;
+      font-size: 24px;
+      font-style: italic;
+      letter-spacing: 0.2rem;
+      text-decoration: none;
+
+      @media (width <= 600px) {
+        font-size: 20px;
+      }
+    }
+
+    .NavButtons {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 30px;
+
+      @media (width <= 600px) {
+        gap: 15px;
       }
 
-      .Brand {
+      .NavLink {
+        text-decoration: none;
         color: theme.$primary03;
-        font-size: 24px;
-        font-style: italic;
-        letter-spacing: 0.2rem;
+        font-weight: 400;
+        vertical-align: top;
+        padding: 0;
+        font-size: 16px;
+        overflow: hidden;
+        position: relative;
+        display: inline-block;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          width: 100%;
+          left: 0;
+        }
+
+        &::before {
+          background-color: theme.$primary04;
+          height: 2px;
+          bottom: 0;
+          transform-origin: 100% 50%;
+          transform: scaleX(0);
+          transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        &::after {
+          content: attr(data-replace);
+          height: 100%;
+          top: 0;
+          transform-origin: 100% 50%;
+          transform: translate3d(200%, 0, 0);
+          transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+          color: theme.$primary04;
+        }
+
+        &:hover::before,
+        &:focus-within::before {
+          transform-origin: 0% 50%;
+          transform: scaleX(1);
+        }
+
+        &:hover::after,
+        &:focus-within::after {
+          transform: translate3d(0, 0, 0);
+        }
+
+        span {
+          display: inline-block;
+          transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        &:hover > span,
+        &:focus-within > span {
+          transform: translate3d(-200%, 0, 0);
+        }
+      }
+    }
+
+    .NavDropdown {
+      height: fit-content;
+      .Divider {
+        border-bottom: variables.$defaultBorderStyle;
       }
 
-      .Toggle {
-        border-color: theme.$primary03;
-      }
+      .DropdownItem {
+        padding: 8px;
 
-      .Nav {
-        align-items: end;
-        gap: 18px;
-
-        .NavDropdown {
-          > a {
-            padding: 0;
-            color: theme.$grey10;
-            text-decoration: none;
-
-            &:hover,
-            &:focus {
-              outline: none;
-              cursor: pointer;
-              color: theme.$primary03;
-            }
-
-            &:focus {
-              text-decoration: underline;
-            }
-
-            &:hover {
-              transition: 500ms ease;
-            }
+        > a {
+          color: theme.$primary03;
+          text-decoration: none;
+          &:hover,
+          &:focus {
+            outline: none;
+            cursor: pointer;
+            color: theme.$primary04;
           }
 
-          > div {
-            left: unset;
-            right: 0;
+          &:focus {
+            text-decoration: underline;
           }
 
-          .Divider {
-            border-color: variables.$defaultBorderColor;
-          }
-
-          .DropdownItem {
-            color: theme.$primary03;
-            text-decoration: none;
-
-            &:hover,
-            &:focus {
-              outline: none;
-              cursor: pointer;
-              color: theme.$primary03;
-            }
-
-            &:focus {
-              text-decoration: underline;
-            }
-
-            &:hover {
-              transition: 500ms ease;
-            }
+          &:hover {
+            transition: 500ms ease;
           }
         }
       }
