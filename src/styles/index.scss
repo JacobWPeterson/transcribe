@@ -51,28 +51,6 @@
   border-bottom: 1px solid rgb(0 0 0 / 20%);
 }
 
-.navbar-light .navbar-nav .nav-link {
-  color: theme.$grey10;
-  text-decoration: none;
+.dropdown-menu {
   padding: 0;
-  font-size: 16px;
-
-  &.Dark {
-    color: theme.$primary03;
-  }
-
-  &:hover,
-  &:focus {
-    outline: none;
-    cursor: pointer;
-    color: theme.$primary03;
-  }
-
-  &:focus {
-    text-decoration: underline;
-  }
-
-  &:hover {
-    transition: 500ms ease;
-  }
 }

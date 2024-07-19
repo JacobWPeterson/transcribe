@@ -1,25 +1,5 @@
 @use "src/styles/theme";
 
-.Badge {
-  margin: 0;
-
-  &.NC {
-    background-color: theme.$secondary03 !important;
-  }
-
-  &.Success {
-    background-color: theme.$primary03 !important;
-  }
-
-  &.Help {
-    background-color: theme.$grey06 !important;
-  }
-
-  &.ReducedLeftMargin {
-    margin: 0 0 0 4px;
-  }
-}
-
 .Word {
   color: theme.$primary03;
   font-weight: 700;
@@ -149,25 +129,19 @@
   letter-spacing: 0.03em;
 }
 
-.Table {
-  border: none;
-  border-collapse: collapse;
+.Row {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
 
-  @media (width < 800px) {
-    border-collapse: separate;
-    border-spacing: 12px;
-  }
+  .SymbolCell {
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
 
-  .Row {
-    height: 50px;
-
-    .Cell {
-      width: 100px;
-      text-align: center;
-
-      @media (width < 800px) {
-        width: 50px;
-      }
+    @media (width < 800px) {
+      min-width: 50px;
     }
   }
 }

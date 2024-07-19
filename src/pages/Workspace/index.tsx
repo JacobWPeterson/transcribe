@@ -1,9 +1,9 @@
 import { type ReactElement, useEffect, useState } from "react";
-import { Alert } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 
 import manifests from "../../files/manifests";
 import { E404 } from "../E404/E404";
+import { Alert } from "../../components/Alert/Alert";
 
 import { TranscriptionArea } from "./TranscriptionArea/index";
 import { Mirador } from "./Mirador/index";
@@ -63,11 +63,7 @@ export const Workspace = (): ReactElement => {
         <h2>Rotate your device to landscape</h2>
       </div>
       {showWrongPageAlert && (
-        <Alert
-          className={styles.Alert}
-          variant="warning"
-          onClose={() => setShowWrongPageAlert(false)}
-        >
+        <Alert>
           Feel free to explore, but you have left the target image (
           {canvasIndex}
           ).
