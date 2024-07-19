@@ -18,6 +18,7 @@
     @media (width <= 1024px) {
       padding: 10px 30px;
     }
+
     @media (width <= 800px) {
       padding: 10px 20px;
     }
@@ -107,6 +108,25 @@
 
     .NavDropdown {
       height: fit-content;
+      color: theme.$primary03;
+
+      > a {
+        &:hover,
+        &:focus {
+          outline: none;
+          cursor: pointer;
+          color: theme.$primary04;
+        }
+
+        &:focus {
+          text-decoration: underline;
+        }
+
+        &:hover {
+          transition: 500ms ease;
+        }
+      }
+
       .Divider {
         border-bottom: variables.$defaultBorderStyle;
       }
@@ -117,6 +137,7 @@
         > a {
           color: theme.$primary03;
           text-decoration: none;
+
           &:hover,
           &:focus {
             outline: none;
