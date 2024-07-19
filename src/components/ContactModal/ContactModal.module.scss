@@ -173,6 +173,12 @@
         right: -30%;
       }
 
+      &:disabled {
+        border-color: theme.$grey04;
+        color: theme.$grey04;
+        cursor: not-allowed;
+      }
+
       &:hover:not([disabled])::after,
       &:focus-within:not([disabled])::after {
         transform: scale(1);
@@ -184,12 +190,6 @@
         border-color: theme.$grey10;
         transform: translateY(0);
         transition: border-color 1s;
-      }
-
-      &:disabled {
-        border-color: theme.$grey04;
-        color: theme.$grey04;
-        cursor: not-allowed;
       }
     }
 
@@ -213,9 +213,6 @@
         position: absolute;
         width: 100%;
         left: 0;
-      }
-
-      &::before {
         background-color: theme.$primary04;
         height: 2px;
         bottom: 0;

@@ -59,7 +59,7 @@ export const ContactModal = ({
       },
       {
         publicKey: "bLp81eIkp1XLYMVPi",
-      }
+      },
     )
       .then(() => {
         setEmailSent(true);
