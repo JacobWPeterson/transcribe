@@ -93,7 +93,7 @@ export const SingleLine = ({
       return;
     }
     setSubmissionStatus(
-      evaluateSubmission(lineContent, line.text, requireSpaces)
+      evaluateSubmission(lineContent, line.text, requireSpaces),
     );
   }, [requireSpaces]);
 
@@ -111,7 +111,7 @@ export const SingleLine = ({
   const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
     setSubmissionStatus(
-      evaluateSubmission(lineContent, line.text, requireSpaces)
+      evaluateSubmission(lineContent, line.text, requireSpaces),
     );
   };
 
