@@ -1,0 +1,32 @@
+@use "src/styles/theme";
+
+.Container {
+  height: 28px;
+  width: 28px;
+  border-radius: 14px;
+  color: theme.$grey00;
+  background-color: theme.$grey06;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  font-size: 14px;
+
+  &.Small {
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+  }
+
+  &.NC {
+    background-color: theme.$secondary03;
+  }
+
+  &.Success {
+    background-color: theme.$primary03;
+  }
+
+  &.Error {
+    background-color: theme.$error;
+  }
+}
