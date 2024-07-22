@@ -12,6 +12,7 @@ export const Guide = (): ReactElement => (
       <h1 className={styles.H1}>Guide</h1>
       <h2 className={styles.H2}>Symbols</h2>
       <table>
+        <tbody>
         <tr className={styles.Row}>
           <td className={styles.SymbolCell}>
             <OverlayTrigger
@@ -152,6 +153,7 @@ export const Guide = (): ReactElement => (
             </p>
           </td>
         </tr>
+        </tbody>
       </table>
       <h2 className={styles.H2}>How-to</h2>
       <p className={styles.GuideText}>
