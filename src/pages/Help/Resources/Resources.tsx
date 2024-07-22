@@ -15,8 +15,8 @@ export const Resources = ({
   <div className="PageWrapper">
     <div className={styles.HelpSection} id="resources">
       <h1 className={styles.H1}>{title}</h1>
-      {resources.map(({ heading, resources }) => (
-        <>
+      {resources.map(({ heading, resources }, headingIndex) => (
+        <Fragment key={`heading-${headingIndex}`}>
           <h2 className={styles.H2}>{heading}</h2>
           {resources?.map(
             (
@@ -52,7 +52,7 @@ export const Resources = ({
               </Fragment>
             ),
           )}
-        </>
+        </Fragment>
       ))}
     </div>
   </div>
