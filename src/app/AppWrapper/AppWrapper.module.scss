@@ -33,6 +33,13 @@
       @media (width <= 600px) {
         font-size: 20px;
       }
+
+      .Beta {
+        color: theme.$error;
+        font-size: 18px;
+        font-style: normal;
+        letter-spacing: 0;
+      }
     }
 
     .NavButtons {
