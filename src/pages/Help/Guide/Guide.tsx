@@ -13,146 +13,146 @@ export const Guide = (): ReactElement => (
       <h2 className={styles.H2}>Symbols</h2>
       <table>
         <tbody>
-        <tr className={styles.Row}>
-          <td className={styles.SymbolCell}>
-            <OverlayTrigger
-              key="title-help"
-              placement="top"
-              rootClose
-              transition
-              trigger={["hover", "focus", "click"]}
-              overlay={
-                <Popover id="popover-hint">
-                  <Popover.Body>
-                    Titles can be plain or feature elaborate patterns. Titles
-                    often feature ligatures and abbreviations and can be much
-                    more difficult to read, so don&apos;t worry about them as
-                    much early on. Type them as a single line.
-                  </Popover.Body>
-                </Popover>
-              }
-            >
-              <span>
-                <Badge small>T</Badge>
-              </span>
-            </OverlayTrigger>
-          </td>
-          <td>
-            <p className={styles.LegendText}>
-              This icon appears next to titles in the transcription workspace.
-              Titles can be plain or feature elaborate patterns. Titles often
-              feature ligatures and abbreviations and can be much more difficult
-              to read, so don&apos;t worry about them as much early on. Type
-              them as a single line.
-            </p>
-          </td>
-        </tr>
-        <tr className={styles.Row}>
-          <td className={styles.SymbolCell}>
-            <OverlayTrigger
-              key="NC-example"
-              placement="top"
-              rootClose
-              transition
-              trigger="click"
-              overlay={
-                <Popover id="popover-concepts">
-                  <Popover.Header className="PopoverHeader" as="h3">
-                    New Concept
-                  </Popover.Header>
-                  <Popover.Body>
-                    Here you&apos;ll find some useful information &nbsp;
-                    <a
-                      className="Link"
-                      href={`/glossary`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      And maybe a link to the glossary
-                    </a>
-                  </Popover.Body>
-                </Popover>
-              }
-            >
-              <div>
-                <Badge type={BadgeTypes.NC}>NC</Badge>
-              </div>
-            </OverlayTrigger>
-          </td>
-          <td className={styles.TextCell}>
-            <p className={styles.LegendText}>
-              This icon indicates there is a new concept being introduced on
-              that particular line of the manuscript. <b>Clicking</b> the NC
-              icon will show a popup with a brief introduction to the concept
-              and a link to the glossary to learn more.
-            </p>
-          </td>
-        </tr>
-        <tr className={styles.Row}>
-          <td className={styles.SymbolCell}>
-            <OverlayTrigger
-              key="error-tooltip"
-              placement="top"
-              rootClose
-              transition
-              trigger={["hover", "focus", "click"]}
-              overlay={
-                <Popover id="popover-error">
-                  <Popover.Body>Answer is incorrect</Popover.Body>
-                </Popover>
-              }
-            >
-              <span>
-                <Badge type={BadgeTypes.ERROR}>X</Badge>
-              </span>
-            </OverlayTrigger>
-          </td>
-          <td className={styles.TextCell}>
-            <p className={styles.LegendText}>
-              This icon appears after submitting an incorrect answer.{" "}
-              <b>Hovering</b> over the icon will reveal more details, such as if
-              the answer is too short or too long.
-            </p>
-          </td>
-        </tr>
-        <tr className={styles.Row}>
-          <td className={styles.SymbolCell}>
-            <OverlayTrigger
-              key="hint-icon"
-              placement="top"
-              rootClose
-              transition
-              trigger={["hover", "focus", "click"]}
-              overlay={
-                <Popover id="popover-hint">
-                  <Popover.Body>Incorrect letter: σ(10)</Popover.Body>
-                </Popover>
-              }
-            >
-              <span>
-                <Badge>?</Badge>
-              </span>
-            </OverlayTrigger>
-          </td>
-          <td className={styles.TextCell}>
-            <p className={styles.LegendText}>
-              After three incorrect attempts of the correct length, this icon
-              appears. <b>Hovering</b> over the icon reveals which letter(s) is
-              incorrect, giving the letter you have entered and its position on
-              the line.
-            </p>
-          </td>
-        </tr>
-        <tr className={styles.Row}>
-          <td className={styles.SymbolCell}>
-            <Badge type={BadgeTypes.SUCCESS}>✓</Badge>
-          </td>
-          <td className={styles.TextCell}>
-            <p className={styles.LegendText}>
-              Congrats, you&apos;ve answered correctly.
-            </p>
-          </td>
-        </tr>
+          <tr className={styles.Row}>
+            <td className={styles.SymbolCell}>
+              <OverlayTrigger
+                key="title-help"
+                placement="top"
+                rootClose
+                transition
+                trigger={["hover", "focus", "click"]}
+                overlay={
+                  <Popover id="popover-hint">
+                    <Popover.Body>
+                      Titles can be plain or feature elaborate patterns. Titles
+                      often feature ligatures and abbreviations and can be much
+                      more difficult to read, so don&apos;t worry about them as
+                      much early on. Type them as a single line.
+                    </Popover.Body>
+                  </Popover>
+                }
+              >
+                <span>
+                  <Badge small>T</Badge>
+                </span>
+              </OverlayTrigger>
+            </td>
+            <td>
+              <p className={styles.LegendText}>
+                This icon appears next to titles in the transcription workspace.
+                Titles can be plain or feature elaborate patterns. Titles often
+                feature ligatures and abbreviations and can be much more
+                difficult to read, so don&apos;t worry about them as much early
+                on. Type them as a single line.
+              </p>
+            </td>
+          </tr>
+          <tr className={styles.Row}>
+            <td className={styles.SymbolCell}>
+              <OverlayTrigger
+                key="NC-example"
+                placement="top"
+                rootClose
+                transition
+                trigger="click"
+                overlay={
+                  <Popover id="popover-concepts">
+                    <Popover.Header className="PopoverHeader" as="h3">
+                      New Concept
+                    </Popover.Header>
+                    <Popover.Body>
+                      Here you&apos;ll find some useful information &nbsp;
+                      <a
+                        className="Link"
+                        href={`/glossary`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        And maybe a link to the glossary
+                      </a>
+                    </Popover.Body>
+                  </Popover>
+                }
+              >
+                <div>
+                  <Badge type={BadgeTypes.NC}>NC</Badge>
+                </div>
+              </OverlayTrigger>
+            </td>
+            <td className={styles.TextCell}>
+              <p className={styles.LegendText}>
+                This icon indicates there is a new concept being introduced on
+                that particular line of the manuscript. <b>Clicking</b> the NC
+                icon will show a popup with a brief introduction to the concept
+                and a link to the glossary to learn more.
+              </p>
+            </td>
+          </tr>
+          <tr className={styles.Row}>
+            <td className={styles.SymbolCell}>
+              <OverlayTrigger
+                key="error-tooltip"
+                placement="top"
+                rootClose
+                transition
+                trigger={["hover", "focus", "click"]}
+                overlay={
+                  <Popover id="popover-error">
+                    <Popover.Body>Answer is incorrect</Popover.Body>
+                  </Popover>
+                }
+              >
+                <span>
+                  <Badge type={BadgeTypes.ERROR}>X</Badge>
+                </span>
+              </OverlayTrigger>
+            </td>
+            <td className={styles.TextCell}>
+              <p className={styles.LegendText}>
+                This icon appears after submitting an incorrect answer.{" "}
+                <b>Hovering</b> over the icon will reveal more details, such as
+                if the answer is too short or too long.
+              </p>
+            </td>
+          </tr>
+          <tr className={styles.Row}>
+            <td className={styles.SymbolCell}>
+              <OverlayTrigger
+                key="hint-icon"
+                placement="top"
+                rootClose
+                transition
+                trigger={["hover", "focus", "click"]}
+                overlay={
+                  <Popover id="popover-hint">
+                    <Popover.Body>Incorrect letter: σ(10)</Popover.Body>
+                  </Popover>
+                }
+              >
+                <span>
+                  <Badge>?</Badge>
+                </span>
+              </OverlayTrigger>
+            </td>
+            <td className={styles.TextCell}>
+              <p className={styles.LegendText}>
+                After three incorrect attempts of the correct length, this icon
+                appears. <b>Hovering</b> over the icon reveals which letter(s)
+                is incorrect, giving the letter you have entered and its
+                position on the line.
+              </p>
+            </td>
+          </tr>
+          <tr className={styles.Row}>
+            <td className={styles.SymbolCell}>
+              <Badge type={BadgeTypes.SUCCESS}>✓</Badge>
+            </td>
+            <td className={styles.TextCell}>
+              <p className={styles.LegendText}>
+                Congrats, you&apos;ve answered correctly.
+              </p>
+            </td>
+          </tr>
         </tbody>
       </table>
       <h2 className={styles.H2}>How-to</h2>
