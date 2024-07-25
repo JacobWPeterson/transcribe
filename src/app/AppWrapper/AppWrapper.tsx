@@ -13,7 +13,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
     <div className={styles.AppWrapper}>
       <div className={styles.Navbar}>
         <a className={styles.Brand} href="/">
-          Xeirographa
+          Xeirographa <span className={styles.Beta}>beta</span>
         </a>
         <div className={styles.NavButtons}>
           <a
