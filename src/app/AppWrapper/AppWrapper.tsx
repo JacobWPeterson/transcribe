@@ -56,7 +56,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
         >
           Contact
         </div>
-        <span className={styles.VerticalDivider}>|</span>
+        <div className={styles.VerticalDivider} />
         <div className={styles.CopyrightText}>
           © 2024{" "}
           <a
@@ -68,42 +68,6 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
             Jacob W. Peterson
           </a>
         </div>
-        <a
-          href="https://www.threads.net/@jacobwpeterson"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            src="/icons/threads.svg"
-            alt="threads icon"
-            width="18"
-            height="18"
-          />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/jacobwpeterson/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            src="/icons/linkedin.svg"
-            alt="LinkedIn icon"
-            width="18"
-            height="18"
-          />
-        </a>
-        <a
-          href="https://edinburgh.academia.edu/JacobPeterson"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            src="/icons/academia.svg"
-            alt="academia.edu icon"
-            width="16"
-            height="16"
-          />
-        </a>
       </footer>
       <ContactModal onHide={() => setShowModal(false)} show={showModal} />
     </div>

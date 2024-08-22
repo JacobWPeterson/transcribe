@@ -5,7 +5,7 @@
   font-family: "Noto Sans", sans-serif;
   position: relative;
   min-height: 100vh;
-  padding-bottom: 50px;
+  padding-bottom: 40px;
   background-color: theme.$grey00;
   border-top: 5px solid theme.$primary03;
 
@@ -39,6 +39,10 @@
         font-size: 18px;
         font-style: normal;
         letter-spacing: 0;
+
+        @media (width <= 600px) {
+          display: none;
+        }
       }
     }
 
@@ -168,7 +172,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 50px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -178,7 +182,9 @@
 }
 
 .VerticalDivider {
-  color: theme.$primary03;
+  height: 20px;
+  width: 1px;
+  background: theme.$primary03;
 }
 
 .CopyrightText {
