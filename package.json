@@ -51,7 +51,7 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react-swc": "^3.7.2",
-    "@vitest/ui": "3.0.4",
+    "@vitest/ui": "3.0.5",
     "classnames": "2.5.1",
     "eslint": "^8.57.1",
     "eslint-plugin-compat": "^6.0.2",
@@ -78,6 +78,6 @@
     "typescript-eslint": "^8.22.0",
     "vite": "^6.0.11",
     "vite-plugin-svgr": "4.3.0",
-    "vitest": "^3.0.4"
+    "vitest": "^3.0.5"
   }
 }
