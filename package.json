@@ -34,14 +34,14 @@
   "homepage": "https://github.com/JacobWPeterson/transcribe#readme",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "bootstrap": "^5.3.3",
+    "bootstrap": "^5.3.5",
     "mirador": "^4.0.0-alpha.16",
     "pluralize": "^8.0.0",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.55.0",
-    "react-router-dom": "^7.4.1"
+    "react-router-dom": "^7.5.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
