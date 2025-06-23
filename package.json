@@ -35,7 +35,7 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "bootstrap": "^5.3.7",
-    "mirador": "^4.0.0-alpha.16",
+    "mirador": "^4.0.0-alpha.17",
     "pluralize": "^8.0.0",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",
