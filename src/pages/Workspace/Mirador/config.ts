@@ -21,26 +21,19 @@ const config: any = {
     sideBarPanel: "info", // Configure which sidebar is selected by default. Options: info, attribution, canvas, annotations, search
   },
   windows: [],
-  workspace: {
-    type: "mosaic",
-    showZoomControls: true,
-  },
+  workspace: { type: "mosaic", showZoomControls: true },
   workspaceControlPanel: {
     enabled: false, // Remove extra workspace settings
   },
   views: [{ key: "single", behaviors: ["individuals"] }],
   theme: {
     palette: {
-      primary: {
-        main: "#c9ac5f",
-      },
-      secondary: {
-        main: "#65743a",
-      },
+      primary: { main: "#c9ac5f" },
+      secondary: { main: "#65743a" },
       shades: {
         // Shades that can be used to offset color areas of the Workspace / Window
         dark: "#d6d6d6",
-        main: "fbfafb",
+        main: "#fbfafb",
         light: "#ebebeb",
       },
     },
