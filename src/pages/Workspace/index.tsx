@@ -33,7 +33,9 @@ export const Workspace = (): ReactElement => {
     return <E404 />;
   }
 
-  const handleManifestChange = (type: "next" | "previous"): void => {
+  const handleManifestChange = (
+    type: "next" | "previous",
+  ): Promise<void> | void => {
     switch (type) {
       case "next":
         return navigate(`/lessons/${Number(id) + 1}`);

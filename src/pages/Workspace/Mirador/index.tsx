@@ -1,7 +1,7 @@
 import { type ReactElement, useEffect } from "react";
-import mirador from "mirador";
+import { viewer } from "mirador";
+import { miradorImageToolsPlugin } from "mirador-image-tools";
 
-// import { miradorImageToolsPlugin } from 'mirador-image-tools'; // currently not available for Mirador v4 alpha; track progress and reinstall https://github.com/ProjectMirador/mirador-image-tools
 import config from "./config";
 
 interface MiradorProps {
@@ -24,8 +24,7 @@ export const Mirador = ({
       view: "single",
     };
 
-    // const miradorInstance = mirador.viewer(config, miradorImageToolsPlugin); // See above comment about the plugin
-    const miradorInstance = mirador.viewer(config);
+    const miradorInstance = viewer(config, miradorImageToolsPlugin);
 
     miradorInstance.store.subscribe(() => {
       const state = miradorInstance.store.getState();
@@ -36,11 +35,11 @@ export const Mirador = ({
             canvasIndex
               .slice(
                 canvasIndex.lastIndexOf(
-                  specialIndexHandling ? specialIndexHandling : "/",
-                ),
+                  specialIndexHandling ? specialIndexHandling : "/"
+                )
               )
-              .replace(/[^\d.-]/g, ""),
-          ),
+              .replace(/[^\d.-]/g, "")
+          )
         );
       }
     });
