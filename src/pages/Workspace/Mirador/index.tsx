@@ -35,11 +35,11 @@ export const Mirador = ({
             canvasIndex
               .slice(
                 canvasIndex.lastIndexOf(
-                  specialIndexHandling ? specialIndexHandling : "/",
-                ),
+                  specialIndexHandling ? specialIndexHandling : "/"
+                )
               )
-              .replace(/[^\d.-]/g, ""),
-          ),
+              .replace(/[^\d.-]/g, "")
+          )
         );
       }
     });
