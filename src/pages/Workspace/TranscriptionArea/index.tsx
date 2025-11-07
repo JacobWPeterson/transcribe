@@ -58,7 +58,7 @@ export const TranscriptionArea = ({
           }
           return (
             <SingleLine
-              key={`line.${index + 1 - titleAdjustments}`}
+              key={`${manuscriptId}-line.${index + 1 - titleAdjustments}`}
               passedIndex={index + 1 - titleAdjustments}
               line={line}
               requireSpaces={requireSpaces}

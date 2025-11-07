@@ -31,20 +31,14 @@ export const SingleLine = ({
   requireSpaces = false,
 }: SingleLineProps): ReactElement => {
   const [lineContent, setLineContent] = useState<string>("");
-  const [hasError, setHasError] = useState<boolean>(false);
   const [submissionStatus, setSubmissionStatus] = useState<
     (boolean | string)[] | null
   >(null);
   const [showHint, setShowHint] = useState<boolean>(false);
-  const [showIncorrectErrorMessaging, setShowIncorrectErrorMessaging] =
+  const [showAnswerEvaluation, setShowAnswerEvaluation] =
     useState<boolean>(false);
   const guesses = useRef(0);
-
-  useEffect(() => {
-    setLineContent("");
-    setShowHint(false);
-    setSubmissionStatus(null);
-  }, [line]);
+  const setHasNonGreekChars = includesNonGreekChars(lineContent);
 
   useEffect(() => {
     if (lineContent.length > 0 && submissionStatus?.[0]) {
@@ -76,31 +70,17 @@ export const SingleLine = ({
   }, [submissionStatus, line.text, requireSpaces]);
 
   useEffect(() => {
-    if (submissionStatus?.length) {
-      setShowIncorrectErrorMessaging(true);
-    }
-  }, [submissionStatus]);
-
-  useEffect(() => {
-    if (lineContent.length === 0) {
-      setHasError(false);
-      return;
-    }
-    setHasError(includesNonGreekChars(lineContent));
-  }, [lineContent]);
-
-  useEffect(() => {
     if (!lineContent) {
       return;
     }
     setSubmissionStatus(
-      evaluateSubmission(lineContent, line.text, requireSpaces),
+      evaluateSubmission(lineContent, line.text, requireSpaces)
     );
   }, [requireSpaces]);
 
   const clearMessages = (): void => {
     setShowHint(false);
-    setShowIncorrectErrorMessaging(false);
+    setShowAnswerEvaluation(false);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -112,8 +92,9 @@ export const SingleLine = ({
   const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
     setSubmissionStatus(
-      evaluateSubmission(lineContent, line.text, requireSpaces),
+      evaluateSubmission(lineContent, line.text, requireSpaces)
     );
+    setShowAnswerEvaluation(true);
   };
 
   const newConcept = (concept: string): ReactElement => (
@@ -154,7 +135,7 @@ export const SingleLine = ({
     </OverlayTrigger>
   );
 
-  const renderIncorrectAnswerMessaging = (): ReactElement =>
+  const renderAnswerEvaluation = (): ReactElement =>
     submissionStatus?.[0] === false ? (
       <OverlayTrigger
         key="error-tooltip"
@@ -255,12 +236,12 @@ export const SingleLine = ({
           onChange={handleChange}
           autoComplete="off"
         />
-        {hasError && (
+        {setHasNonGreekChars && (
           <small className={classnames(styles.Small, styles.Error)}>
             Non-Greek characters have been detected
           </small>
         )}
-        {line.caption && !hasError && (
+        {line.caption && !setHasNonGreekChars && (
           <small className={styles.Small}>{line.caption}</small>
         )}
       </div>
@@ -269,7 +250,7 @@ export const SingleLine = ({
           Check
         </button>
         {line.newConcept && newConcept(line.newConcept)}
-        {showIncorrectErrorMessaging && renderIncorrectAnswerMessaging()}
+        {showAnswerEvaluation && renderAnswerEvaluation()}
         {showHint && hint()}
       </div>
     </form>
