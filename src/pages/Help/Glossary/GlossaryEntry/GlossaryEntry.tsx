@@ -12,9 +12,9 @@ export const GlossaryEntry = ({
   gloss,
 }: GlossaryEntryProps): ReactElement => (
   <div>
-    <h4 className={styles.Word} id={word}>
+    <h2 className={styles.Word} id={word}>
       {word}
-    </h4>
+    </h2>
     <p className={styles.HelpText}>{gloss}</p>
   </div>
 );
