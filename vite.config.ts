@@ -3,6 +3,7 @@
 
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import path from "path";
 import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
@@ -19,11 +20,7 @@ export default defineConfig(({ mode }) => {
             plugins: [
               {
                 name: "preset-default",
-                params: {
-                  overrides: {
-                    removeViewBox: false,
-                  },
-                },
+                params: { overrides: { removeViewBox: false } },
               },
             ],
           },
@@ -33,14 +30,9 @@ export default defineConfig(({ mode }) => {
       }),
       react(),
     ],
-    server: {
-      hmr: true,
-      port: 3000,
-      open: true,
-    },
-    build: {
-      outDir: "dist",
-    },
+    resolve: { alias: { "@styles": path.resolve(__dirname, "src/styles") } },
+    server: { hmr: true, port: 3000, open: true },
+    build: { outDir: "dist" },
     publicDir: "src/static",
     css: {
       modules: {

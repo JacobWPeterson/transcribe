@@ -13,7 +13,7 @@ export const Home = (): ReactElement => {
       <div className={styles.UpperSection}>
         <img
           className={classNames(styles.Image, styles.LeftImage)}
-          src="/images/Aristophanes-Critical-Edition.png"
+          src="/images/Aristophanes-Critical-Edition.webp"
           alt="Greek printed edition text"
         />
         <div className={styles.CenterTextContainer}>
@@ -23,7 +23,7 @@ export const Home = (): ReactElement => {
         </div>
         <img
           className={styles.Image}
-          src="/images/Aristophanes-Barocci-127.jpg"
+          src="/images/Aristophanes-Barocci-127-cropped.webp"
           alt="Greek manuscript text"
         />
       </div>
@@ -37,30 +37,27 @@ export const Home = (): ReactElement => {
           <h2 className={styles.H2}>Features</h2>
           <ul className={styles.UnorderedList}>
             <li className={styles.ListItem}>
-              <span>manuscripts get progressively more difficult to read</span>
+              <span>progressively more difficult manuscripts</span>
             </li>
             <li className={styles.ListItem}>
               <span>answers checked line-by-line</span>
             </li>
             <li className={styles.ListItem}>
-              <span>helpful information when new concepts are encountered</span>
+              <span>help when new concepts are encountered</span>
             </li>
             <li className={styles.ListItem}>
               <span>tips and clues to help resolve incorrect answers</span>
             </li>
             <li className={styles.ListItem}>
-              <span>a glossary of relevant terms</span>
+              <span>glossary of relevant terms</span>
             </li>
             <li className={styles.ListItem}>
-              <span>a modern viewer featuring hi-res colour images</span>
+              <span>modern viewer with hi-res colour images</span>
             </li>
             <li className={styles.ListItem}>
               <span>
-                codicological and bibliographic info about each manuscript
+                codicological & bibliographic info for each manuscript
               </span>
-            </li>
-            <li className={styles.ListItem}>
-              <span>suggestions for further study</span>
             </li>
             <li className={styles.ListItem}>
               <span>links to other relevant online resources</span>
