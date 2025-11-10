@@ -91,6 +91,13 @@ const onlineResources: ResourceCategories[] = [
           "The Codex Sinaiticus Project is an international collaboration to reunite the entire manuscript in digital form and make it accessible to a global audience for the first time.",
         url: "https://codexsinaiticus.org/en/manuscript.aspx",
       },
+      {
+        name: "Papyrus 46",
+        creator: "Jacob W. Peterson",
+        description:
+          "A site bringing together the latest high-resolution images of P46 from the Chester Beatty Library and the University of Michigan, as well as Kenyon's editio princeps, and placing them alongside Peterson and Kenyon's transcriptions.",
+        url: "https://papyrus46.com",
+      },
     ],
   },
 ];
