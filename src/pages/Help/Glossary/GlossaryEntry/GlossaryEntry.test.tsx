@@ -7,7 +7,7 @@ describe("GlossaryEntry", () => {
     render(<GlossaryEntry word={"Term"} gloss={"Here is a gloss."} />);
 
     expect(
-      screen.getByRole("heading", { level: 4, name: "Term" }),
+      screen.getByRole("heading", { level: 2, name: "Term" })
     ).toBeInTheDocument();
     expect(screen.getByText("Here is a gloss.")).toBeInTheDocument();
   });
