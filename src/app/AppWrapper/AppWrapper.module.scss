@@ -185,6 +185,10 @@
     justify-content: center;
     border-bottom: 5px solid theme.$primary03;
     gap: 12px;
+
+    @media (width < 600px) {
+      height: variables.$mobileFooterHeight;
+    }
   }
 }
 
