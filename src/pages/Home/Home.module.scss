@@ -140,6 +140,10 @@
     @media (width < 1280px) {
       font-size: 18px;
     }
+
+    @media (width < 600px) {
+      width: 90%;
+    }
   }
 
   .FeaturesBlock {
@@ -150,6 +154,10 @@
 
     @media (width < 1280px) {
       padding: 12px;
+    }
+
+    @media (width < 600px) {
+      width: 90%;
     }
 
     .H2 {
@@ -173,6 +181,10 @@
         columns: 1;
         -webkit-columns: 1;
         -moz-columns: 1;
+      }
+
+      @media (width < 600px) {
+        padding-left: 16px;
       }
 
       .ListItem {
