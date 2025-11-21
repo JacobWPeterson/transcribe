@@ -2,7 +2,7 @@
 @use "@styles/variables";
 
 .WorkspacePageWrapper {
-  width: 98vw;
+  width: 98dvw;
   height: calc(100% - variables.$headerHeight - variables.$footerHeight - 16px);
   display: flex;
   margin: 8px 0;
