@@ -35,7 +35,7 @@
 }
 
 .PageWrapper {
-  width: 100vw;
+  width: 100dvw;
   height: calc(100% - variables.$headerHeight - variables.$footerHeight - 16px);
   display: flex;
   flex-direction: column;
