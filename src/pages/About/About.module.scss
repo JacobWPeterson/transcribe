@@ -25,6 +25,7 @@
     }
 
     @media (width < 600px) {
+      padding: 16px;
       margin: 0 auto;
     }
 
@@ -36,6 +37,11 @@
       @media (width < 1024px) {
         height: 200px;
         width: 200px;
+      }
+
+      @media (width < 600px) {
+        height: 180px;
+        width: 180px;
       }
     }
 
@@ -111,7 +117,6 @@
   .Partner {
     display: flex;
     flex-direction: column;
-    height: 160px;
     align-items: center;
 
     .IIIF &.Clickable {
@@ -123,10 +128,11 @@
       font-size: 18px;
       text-align: center;
       margin: 0;
-      padding: 20px 0;
+      padding: 10px 0 20px;
 
       @media (width < 1024px) {
         font-size: 14px;
+        padding: 8px 0 12px;
       }
 
       &.HoldingInstitute {
@@ -136,6 +142,7 @@
       &.MiradorFont {
         color: theme.$grey10;
         font-size: 48px;
+        line-height: 48px;
         font-family: "Yanone Kaffeesatz", sans-serif;
         letter-spacing: 0.05em;
       }
