@@ -100,7 +100,7 @@ export const SingleLine = ({
   const newConcept = (concept: string): ReactElement => (
     <OverlayTrigger
       key={`${concept}-tooltip`}
-      placement="top-end"
+      placement="auto"
       rootClose
       transition
       trigger="click"
@@ -139,7 +139,7 @@ export const SingleLine = ({
     submissionStatus?.[0] === false ? (
       <OverlayTrigger
         key="error-tooltip"
-        placement="top-end"
+        placement="auto"
         rootClose
         transition
         trigger={["hover", "focus", "click"]}
@@ -176,7 +176,7 @@ export const SingleLine = ({
   const hint = (): ReactElement => (
     <OverlayTrigger
       key={`hint-for-line-${passedIndex}`}
-      placement="top-end"
+      placement="auto"
       rootClose
       transition
       trigger={["hover", "focus", "click"]}
@@ -195,7 +195,7 @@ export const SingleLine = ({
   const titleHelp = (): ReactElement => (
     <OverlayTrigger
       key={`title-help`}
-      placement="top"
+      placement="auto"
       rootClose
       transition
       trigger={["hover", "focus", "click"]}

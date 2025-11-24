@@ -17,7 +17,7 @@ export const Guide = (): ReactElement => (
             <td className={styles.SymbolCell}>
               <OverlayTrigger
                 key="title-help"
-                placement="top"
+                placement="auto"
                 rootClose
                 transition
                 trigger={["hover", "focus", "click"]}
@@ -51,7 +51,7 @@ export const Guide = (): ReactElement => (
             <td className={styles.SymbolCell}>
               <OverlayTrigger
                 key="NC-example"
-                placement="top"
+                placement="auto"
                 rootClose
                 transition
                 trigger="click"
@@ -92,7 +92,7 @@ export const Guide = (): ReactElement => (
             <td className={styles.SymbolCell}>
               <OverlayTrigger
                 key="error-tooltip"
-                placement="top"
+                placement="auto"
                 rootClose
                 transition
                 trigger={["hover", "focus", "click"]}
@@ -119,7 +119,7 @@ export const Guide = (): ReactElement => (
             <td className={styles.SymbolCell}>
               <OverlayTrigger
                 key="hint-icon"
-                placement="top"
+                placement="auto"
                 rootClose
                 transition
                 trigger={["hover", "focus", "click"]}
