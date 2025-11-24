@@ -2,18 +2,11 @@
 @use "@styles/variables";
 
 .WorkspacePageWrapper {
-  width: 98dvw;
-  height: calc(100% - variables.$headerHeight - variables.$footerHeight - 16px);
+  width: 100dvw;
+  height: calc(100% - variables.$headerHeight - variables.$footerHeight - 8px);
   display: flex;
-  margin: 8px 0;
   box-sizing: border-box;
   overflow-y: hidden;
-
-  @media (width < 600px) {
-    height: calc(
-      100% - variables.$headerHeight - variables.$mobileFooterHeight - 16px
-    );
-  }
 
   .InvalidDevice {
     display: none;
