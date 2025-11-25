@@ -21,7 +21,7 @@ interface SingleLineProps {
 }
 
 const includesNonGreekChars = (text: string): boolean => {
-  return !!text.match(/[^Α-Ωα-ω\s]/g)?.length;
+  return !!text.match(/[^Α-Ωα-ωϛ\s]/g)?.length;
 };
 
 export const SingleLine = ({
@@ -38,7 +38,7 @@ export const SingleLine = ({
   const [showAnswerEvaluation, setShowAnswerEvaluation] =
     useState<boolean>(false);
   const guesses = useRef(0);
-  const setHasNonGreekChars = includesNonGreekChars(lineContent);
+  const hasNonGreekChars = includesNonGreekChars(lineContent);
 
   useEffect(() => {
     if (lineContent.length > 0 && submissionStatus?.[0]) {
@@ -100,7 +100,7 @@ export const SingleLine = ({
   const newConcept = (concept: string): ReactElement => (
     <OverlayTrigger
       key={`${concept}-tooltip`}
-      placement="auto"
+      placement="top"
       rootClose
       transition
       trigger="click"
@@ -139,7 +139,7 @@ export const SingleLine = ({
     submissionStatus?.[0] === false ? (
       <OverlayTrigger
         key="error-tooltip"
-        placement="auto"
+        placement="top"
         rootClose
         transition
         trigger={["hover", "focus", "click"]}
@@ -176,7 +176,7 @@ export const SingleLine = ({
   const hint = (): ReactElement => (
     <OverlayTrigger
       key={`hint-for-line-${passedIndex}`}
-      placement="auto"
+      placement="top"
       rootClose
       transition
       trigger={["hover", "focus", "click"]}
@@ -218,41 +218,52 @@ export const SingleLine = ({
   );
 
   return (
-    <form className={styles.Form} onSubmit={(e): void => handleSubmit(e)}>
-      <label
-        className={styles.Label}
-        htmlFor={isTitle ? "title" : `Line ${passedIndex}`}
-        style={{ display: "flex", alignItems: "center", marginTop: "3px" }}
-      >
-        {isTitle ? "Title" : `Line ${passedIndex}`}
-        {isTitle && titleHelp()}
-      </label>
-      <div className={styles.InputWrapper}>
-        <input
-          className={styles.Input}
-          id={isTitle ? "title" : `Line ${passedIndex}`}
-          type="text"
-          value={lineContent}
-          onChange={handleChange}
-          autoComplete="off"
-        />
-        {setHasNonGreekChars && (
-          <small className={classnames(styles.Small, styles.Error)}>
-            Non-Greek characters have been detected
-          </small>
-        )}
-        {line.caption && !setHasNonGreekChars && (
-          <small className={styles.Small}>{line.caption}</small>
-        )}
+    <form
+      className={classnames(styles.Form, {
+        [styles.HasHelpText]: hasNonGreekChars || line.caption,
+      })}
+      onSubmit={(e): void => handleSubmit(e)}
+    >
+      <div className={styles.Upper}>
+        <label
+          className={styles.Label}
+          htmlFor={isTitle ? "title" : `Line ${passedIndex}`}
+          style={{ display: "flex", alignItems: "center", marginTop: "3px" }}
+        >
+          {isTitle ? "Title" : `Line ${passedIndex}`}
+          {isTitle && titleHelp()}
+        </label>
+        <div className={styles.InputWrapper}>
+          <input
+            className={styles.Input}
+            id={isTitle ? "title" : `Line ${passedIndex}`}
+            type="text"
+            value={lineContent}
+            onChange={handleChange}
+            autoComplete="off"
+          />
+        </div>
+        <div className={styles.PostInputItemsContainer}>
+          <button className={styles.Button} type="submit">
+            Check
+          </button>
+          {line.newConcept && newConcept(line.newConcept)}
+          {showAnswerEvaluation && renderAnswerEvaluation()}
+          {showHint && hint()}
+        </div>
       </div>
-      <div className={styles.PostInputItemsContainer}>
-        <button className={styles.Button} type="submit">
-          Check
-        </button>
-        {line.newConcept && newConcept(line.newConcept)}
-        {showAnswerEvaluation && renderAnswerEvaluation()}
-        {showHint && hint()}
-      </div>
+      {(hasNonGreekChars || line.caption) && (
+        <div className={styles.Lower}>
+          {hasNonGreekChars && (
+            <small className={classnames(styles.Small, styles.Error)}>
+              Non-Greek characters have been detected
+            </small>
+          )}
+          {line.caption && !hasNonGreekChars && (
+            <small className={styles.Small}>{line.caption}</small>
+          )}
+        </div>
+      )}
     </form>
   );
 };

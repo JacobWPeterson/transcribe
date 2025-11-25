@@ -2,60 +2,75 @@
 
 .Form {
   padding: 10px 0;
-  width: 100%;
   display: flex;
-  align-items: baseline;
+  flex-direction: column;
 
-  .PostInputItemsContainer {
+  &.HasHelpText {
+    padding-bottom: 0;
+  }
+
+  .Upper {
+    width: 100%;
     display: flex;
-    gap: 4px;
-    align-items: center;
+    align-items: baseline;
 
-    .Button {
-      color: theme.$grey00;
-      background: theme.$primary03;
-      font-size: inherit;
-      text-align: center;
-      line-height: 1em;
-      padding: 2px 5px;
-      height: 25px;
-      border: none;
-      border-radius: 5px;
+    .PostInputItemsContainer {
+      display: flex;
+      gap: 4px;
+      align-items: center;
 
-      &:active {
-        background: theme.$primary04;
+      .Button {
+        color: theme.$grey00;
+        background: theme.$primary03;
+        font-size: inherit;
+        text-align: center;
+        line-height: 1em;
+        padding: 2px 5px;
+        height: 25px;
         border: none;
-        outline: none;
-      }
+        border-radius: 5px;
 
-      &:disabled {
-        background: theme.$secondary03;
-        color: theme.$primary03;
+        &:active {
+          background: theme.$primary04;
+          border: none;
+          outline: none;
+        }
+
+        &:disabled {
+          background: theme.$secondary03;
+          color: theme.$primary03;
+        }
+      }
+    }
+
+    .Label {
+      color: theme.$primary03;
+      width: 55px;
+      gap: 4px;
+    }
+
+    .InputWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-width: 250px;
+      width: 25dvw;
+      margin: 0 10px;
+
+      .Input {
+        height: 30px;
+        font-size: 16px;
+        padding: 2px 5px;
       }
     }
   }
 
-  .Label {
-    color: theme.$primary03;
-    width: 55px;
-    gap: 4px;
-  }
-
-  .InputWrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    min-width: 250px;
-    width: 23dvw;
-    margin: 0 10px;
-
-    .Input {
-      height: 30px;
-      font-size: 16px;
-      padding: 2px 5px;
-    }
+  .Lower {
+    margin-left: 65px;
+    width: calc(25dvw + 60px);
 
     .Small {
+      display: block;
       color: theme.$grey07;
       margin-top: 4px;
       font-size: 0.8em;
