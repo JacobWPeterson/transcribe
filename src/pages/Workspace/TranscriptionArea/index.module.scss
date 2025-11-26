@@ -4,19 +4,18 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  padding: 12px 0 4px 24px;
+  padding: 12px 8px 4px 16px;
 
   .HeaderContainer {
     display: flex;
     align-items: baseline;
     width: 100%;
-    padding: 8px 0;
     gap: 24px;
     color: theme.$grey07;
 
     .Header {
       color: theme.$primary03;
-      margin-bottom: 5px;
+      margin-bottom: 0;
     }
 
     .FormSwitch {
@@ -36,8 +35,8 @@
   }
 
   .Small {
-    color: theme.$grey07;
-    margin: 6px 0;
+    color: theme.$grey08;
+    margin: 4px 0 0;
     font-size: 0.8em;
   }
 
@@ -50,7 +49,7 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding-top: 12px;
+    padding: 12px 8px 0 0;
 
     .Button {
       display: flex;
@@ -58,7 +57,7 @@
       justify-content: center;
       color: theme.$grey00;
       background: theme.$secondary03;
-      height: 38px;
+      height: 34px;
       width: 90px;
       border: none;
       border-radius: 5px;
