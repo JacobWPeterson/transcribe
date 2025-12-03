@@ -72,6 +72,8 @@ export const About = (): ReactElement => (
             Cambridge University Library
             <br />
             Chester Beatty Library
+            <br />
+            Stiftsbibliothek St. Gallen
           </div>
         </div>
         <div
