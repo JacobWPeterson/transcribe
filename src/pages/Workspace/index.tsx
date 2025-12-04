@@ -12,9 +12,7 @@ import styles from "./Workspace.module.scss";
 export const Workspace = (): ReactElement => {
   const { id = 1 } = useParams();
   const navigate = useNavigate();
-  const [pageNumber, setPageNumber] = useState<number>(
-    manifests[id]?.canvasIndex
-  );
+  const [pageNumber, setPageNumber] = useState<number>();
   const [showWrongPageAlert, setShowWrongPageAlert] = useState<boolean>(false);
 
   const canvasIndex = manifests[id]?.canvasIndex;
@@ -24,11 +22,12 @@ export const Workspace = (): ReactElement => {
   useEffect(() => {
     if (pageNumber && pageNumber !== canvasIndex + indexAdjustment) {
       setShowWrongPageAlert(true);
+      return;
     }
-    if (showWrongPageAlert && pageNumber === canvasIndex + indexAdjustment) {
-      setShowWrongPageAlert(false);
-    }
-  }, [canvasIndex, indexAdjustment, pageNumber, showWrongPageAlert]);
+    setShowWrongPageAlert(false);
+  }, [pageNumber]);
+
+  useEffect(() => setShowWrongPageAlert(false), [id]);
 
   if (!manifests[id]) {
     return <E404 />;
