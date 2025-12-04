@@ -12,29 +12,29 @@ import styles from "./Workspace.module.scss";
 export const Workspace = (): ReactElement => {
   const { id = 1 } = useParams();
   const navigate = useNavigate();
-  const [pageNumber, setPageNumber] = useState<number>(
-    manifests[id]?.canvasIndex,
-  );
+  const [pageNumber, setPageNumber] = useState<number>();
   const [showWrongPageAlert, setShowWrongPageAlert] = useState<boolean>(false);
 
   const canvasIndex = manifests[id]?.canvasIndex;
+  const indexAdjustment = manifests[id]?.canvasIndexToPageNumberAdj || 0;
   const manifestLength = Object.keys(manifests).length;
 
   useEffect(() => {
-    if (pageNumber && pageNumber !== canvasIndex) {
+    if (pageNumber && pageNumber !== canvasIndex + indexAdjustment) {
       setShowWrongPageAlert(true);
+      return;
     }
-    if (showWrongPageAlert && pageNumber === canvasIndex) {
-      setShowWrongPageAlert(false);
-    }
+    setShowWrongPageAlert(false);
   }, [pageNumber]);
+
+  useEffect(() => setShowWrongPageAlert(false), [id]);
 
   if (!manifests[id]) {
     return <E404 />;
   }
 
   const handleManifestChange = (
-    type: "next" | "previous",
+    type: "next" | "previous"
   ): Promise<void> | void => {
     switch (type) {
       case "next":
@@ -76,7 +76,8 @@ export const Workspace = (): ReactElement => {
           index={canvasIndex - 1}
           manifest={manifests[id].manifestId}
           setPageNumber={setPageNumber}
-          specialIndexHandling={manifests[id]?.specialIndexHandling}
+          specialIndexHandlingStart={manifests[id]?.specialIndexHandlingStart}
+          specialIndexHandlingEnd={manifests[id]?.specialIndexHandlingEnd}
         />
       </div>
       <div className={styles.TranscriptionPanel}>
