@@ -8,14 +8,16 @@ interface MiradorProps {
   manifest: string;
   index: number;
   setPageNumber: (number: number) => void;
-  specialIndexHandling?: string;
+  specialIndexHandlingStart?: string;
+  specialIndexHandlingEnd?: string;
 }
 
 export const Mirador = ({
   manifest,
   index,
   setPageNumber,
-  specialIndexHandling,
+  specialIndexHandlingStart,
+  specialIndexHandlingEnd,
 }: MiradorProps): ReactElement => {
   useEffect(() => {
     config.windows[0] = {
@@ -29,21 +31,31 @@ export const Mirador = ({
     miradorInstance.store.subscribe(() => {
       const state = miradorInstance.store.getState();
       const canvasIndex = state.windows[state.workspace.windowIds].canvasId;
+
       if (canvasIndex) {
         setPageNumber(
           Number(
             canvasIndex
-              .slice(
+              ?.slice(
                 canvasIndex.lastIndexOf(
-                  specialIndexHandling ? specialIndexHandling : "/"
-                )
+                  specialIndexHandlingStart ? specialIndexHandlingStart : "/"
+                ),
+                specialIndexHandlingEnd
+                  ? canvasIndex?.lastIndexOf(specialIndexHandlingEnd)
+                  : undefined
               )
               .replace(/[^\d.-]/g, "")
           )
         );
       }
     });
-  }, [manifest, index, setPageNumber, specialIndexHandling]);
+  }, [
+    manifest,
+    index,
+    setPageNumber,
+    specialIndexHandlingStart,
+    specialIndexHandlingEnd,
+  ]);
 
   return <div id={config.id} />;
 };

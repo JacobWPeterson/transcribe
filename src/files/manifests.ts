@@ -1,6 +1,8 @@
 //  Other potential MSS:
 // Aristophanes minuscules https://www.digitale-sammlungen.de/en/view/bsb00069327?page=,1
 
+// Difficult 16th c minuscule: https://digi.vatlib.it/view/MSS_Barb.gr.22
+
 export type Line = {
   text: string;
   caption?: string;
@@ -11,7 +13,9 @@ export type Line = {
 export type Manifest = {
   manifestId: string;
   canvasIndex: number;
-  specialIndexHandling?: string;
+  canvasIndexToPageNumberAdj?: number;
+  specialIndexHandlingStart?: string;
+  specialIndexHandlingEnd?: string;
   instruction?: string;
   lines: Line[];
 };
@@ -116,7 +120,7 @@ const manifests: Manifests = {
     manifestId:
       "https://viewer.cbl.ie/viewer/api/v1/records/BP_X_f_77/manifest",
     canvasIndex: 1,
-    specialIndexHandling: "pages/",
+    specialIndexHandlingStart: "pages/",
     instruction:
       "A papyrus manuscript by a trained scribe in a slightly irregular majuscule script. This lesson ends when the papyrus becomes damaged. Ignore the page number (πνγ) at the top of the leaf. No new concepts here, just new letter forms different the uniform block capitals of the prior manuscript.",
     lines: [
@@ -218,6 +222,86 @@ const manifests: Manifests = {
   },
   4: {
     manifestId:
+      "https://www.e-codices.unifr.ch/metadata/iiif/csg-0048/manifest.json",
+    canvasIndex: 78,
+    specialIndexHandlingStart: "_",
+    specialIndexHandlingEnd: ".json",
+    canvasIndexToPageNumberAdj: -2,
+    instruction:
+      "Welcome to an intralinear Greek-Latin diglot. Don't worry, you only need to transcribe the Greek. You should feel comfortable transitioning to the semi-majuscule letter forms, so this will mostly be an exercise in attention to detail and ignoring extraneous material. Skip the initial κατα.",
+    lines: [
+      {
+        text: "και το δανιον αφηκεν αυτο εξελθων δε ο δουλοσ εκεινοσ",
+      },
+      {
+        text: "ευρεν ινα των συνδουλων αυτου οσ ωφειλεν αυτω εκατον",
+      },
+      {
+        text: "δηναρια και κρατησασ αυτον επνιγεν λεγων αποδοσ μοι",
+      },
+      {
+        text: "ει τι οφειλεισ πεσων ουν ο συνδουλοσ αυτου εισ τουσ",
+      },
+      {
+        text: "πασασ αυτου παρεκαλει αυτον λεγων μακροθυμησον",
+      },
+      {
+        text: "επε μοι και αποδωσω σοι ο δε ουκ ηθελεν αλλ απελ",
+      },
+      {
+        text: "θων εβαλεν αυτον εισ φυλακην εωσ ου αποδω το οφειλο",
+      },
+      {
+        text: "μενον ιδοντεσ δε οι συνδουλοι αυτου τα γενομενα",
+      },
+      {
+        text: "ελυπηθησαν σφοδρα και ελθοντεσ διεσαφησαν τω κω",
+      },
+      {
+        text: "εαυτων παντα γενομενα τοτε προσκαλεσαμενοσ αυτον",
+      },
+      {
+        text: "ο κυριοσ αυτου λεγει αυτω δουλε πονηρε πασαν την",
+      },
+      {
+        text: "οφειλην εκεινη αφηκα σοι επει παρεκαλεσασ με ουκ εδει και σε",
+      },
+      {
+        text: "ελεησαι τον συνδουλον σου ωσ και ετω σε ηλεησα και",
+      },
+      {
+        text: "οργισθεισ ο κυριοσ αυτου παρεδωκεν αυτον τοισ βασανισταισ",
+      },
+      {
+        text: "εωσ ου αποδω παν το οφειλομενον αυτω ουτωσ και ο πηρ",
+        caption:
+          "Be careful with one of the vowels on this line. Consult other examples on the page.",
+      },
+      {
+        text: "μου ο επουρανιοσ ποιησει υμιν εαν μη αφητε εκατοσ",
+      },
+      {
+        text: "τω αδελφω αυτου απο των καρδιων υμων τα παραπτωμα",
+      },
+      {
+        text: "τα αυτων και εγενετο οτε ετελεσεν ο ισ τουσ λογουσ του",
+      },
+      {
+        text: "τουσ μετηρεν απο τησ γαλιλαιασ και ηλθεν εισ τα ορια",
+      },
+      {
+        text: "τησ ιουδαιασ περαν του ιορδανου και ηκολουθησαν αυ",
+      },
+      {
+        text: "τω οχλοι πολλοι και εθεραπευσεν αυτουσ εκει περι",
+      },
+      {
+        text: "των επερωτησαντων ει εξεστιν απολυσαι την",
+      },
+    ],
+  },
+  5: {
+    manifestId:
       "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00058840/manifest",
     canvasIndex: 51,
     instruction:
@@ -295,10 +379,10 @@ const manifests: Manifests = {
       },
     ],
   },
-  5: {
+  6: {
     manifestId: "https://viewer.cbl.ie/viewer/api/v2/records/MP_2_86/manifest",
     canvasIndex: 2,
-    specialIndexHandling: "pages/",
+    specialIndexHandlingStart: "pages/",
     instruction:
       "This manuscript features more irregular letter forms than you have seen so far. Be particularly careful with letters that might easily be confused for others.",
     lines: [
@@ -350,7 +434,7 @@ const manifests: Manifests = {
       },
     ],
   },
-  6: {
+  7: {
     // helpful edition https://books.google.com/books?id=2c5hAAAAcAAJ&pg=PP118&lpg=PP118&dq=ephrem+syrus+%CE%BA%CE%B1%CF%84%CE%B1%CE%BD%CE%B9%CE%BA%CF%84%CE%B9%CE%BA%CE%BF%CF%82+%CE%BB%CE%BF%CE%B3%CE%BF%CF%82+%CE%B1&source=bl&ots=LeXDEgtDAt&sig=ACfU3U1qoHsw12pFlyLR5Tae8UnNklc6kg&hl=en&sa=X&ved=2ahUKEwif16uHiNH0AhX-Ap0JHUBGA_QQ6AF6BAgYEAM#v=onepage&q=ephrem%20syrus%20%CE%BA%CE%B1%CF%84%CE%B1%CE%BD%CE%B9%CE%BA%CF%84%CE%B9%CE%BA%CE%BF%CF%82%20%CE%BB%CE%BF%CE%B3%CE%BF%CF%82%20%CE%B1&f=false
     manifestId:
       "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00050975/manifest",
