@@ -228,8 +228,77 @@ const manifests: Manifests = {
     specialIndexHandlingEnd: ".json",
     canvasIndexToPageNumberAdj: -2,
     instruction:
-      "Welcome to an intralinear Greek-Latin diglot. Don't worry, you only need to transcribe the Greek. You should feel comfortable with the letter forms, but this will be a great exercise in attention to detail and ignoring the extraneous material.",
-    lines: [],
+      "Welcome to an intralinear Greek-Latin diglot. Don't worry, you only need to transcribe the Greek. You should feel comfortable transitioning to the semi-majuscule letter forms, so this will mostly be an exercise in attention to detail and ignoring extraneous material. Skip the initial κατα.",
+    lines: [
+      {
+        text: "και το δανιον αφηκεν αυτο εξελθων δε ο δουλοσ εκεινοσ",
+      },
+      {
+        text: "ευρεν ινα των συνδουλων αυτου οσ ωφειλεν αυτω εκατον",
+      },
+      {
+        text: "δηναρια και κρατησασ αυτον επνιγεν λεγων αποδοσ μοι",
+      },
+      {
+        text: "ει τι οφειλεισ πεσων ουν ο συνδουλοσ αυτου εισ τουσ",
+      },
+      {
+        text: "πασασ αυτου παρεκαλει αυτον λεγων μακροθυμησον",
+      },
+      {
+        text: "επε μοι και αποδωσω σοι ο δε ουκ ηθελεν αλλ απελ",
+      },
+      {
+        text: "θων εβαλεν αυτον εισ φυλακην εωσ ου αποδω το οφειλο",
+      },
+      {
+        text: "μενον ιδοντεσ δε οι συνδουλοι αυτου τα γενομενα",
+      },
+      {
+        text: "ελυπηθησαν σφοδρα και ελθοντεσ διεσαφησαν τω κω",
+      },
+      {
+        text: "εαυτων παντα γενομενα τοτε προσκαλεσαμενοσ αυτον",
+      },
+      {
+        text: "ο κυριοσ αυτου λεγει αυτω δουλε πονηρε πασαν την",
+      },
+      {
+        text: "οφειλην εκεινη αφηκα σοι επει παρεκαλεσασ με ουκ εδει και σε",
+      },
+      {
+        text: "ελεησαι τον συνδουλον σου ωσ και ετω σε ηλεησα και",
+      },
+      {
+        text: "οργισθεισ ο κυριοσ αυτου παρεδωκεν αυτον τοισ βασανισταισ",
+      },
+      {
+        text: "εωσ ου αποδω παν το οφειλομενον αυτω ουτωσ και ο πηρ",
+        caption:
+          "Be careful with one of the vowels on this line. Consult other examples on the page.",
+      },
+      {
+        text: "μου ο επουρανιοσ ποιησει υμιν εαν μη αφητε εκατοσ",
+      },
+      {
+        text: "τω αδελφω αυτου απο των καρδιων υμων τα παραπτωμα",
+      },
+      {
+        text: "τα αυτων και εγενετο οτε ετελεσεν ο ισ τουσ λογουσ του",
+      },
+      {
+        text: "τουσ μετηρεν απο τησ γαλιλαιασ και ηλθεν εισ τα ορια",
+      },
+      {
+        text: "τησ ιουδαιασ περαν του ιορδανου και ηκολουθησαν αυ",
+      },
+      {
+        text: "τω οχλοι πολλοι και εθεραπευσεν αυτουσ εκει περι",
+      },
+      {
+        text: "των επερωτησαντων ει εξεστιν απολυσαι την",
+      },
+    ],
   },
   5: {
     manifestId:
