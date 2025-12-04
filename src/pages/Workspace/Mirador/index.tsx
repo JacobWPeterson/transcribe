@@ -31,7 +31,7 @@ export const Mirador = ({
     miradorInstance.store.subscribe(() => {
       const state = miradorInstance.store.getState();
       const canvasIndex = state.windows[state.workspace.windowIds].canvasId;
-      console.log(canvasIndex);
+
       if (canvasIndex) {
         setPageNumber(
           Number(
