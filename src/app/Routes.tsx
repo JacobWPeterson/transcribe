@@ -7,7 +7,7 @@ import {
 import type { ReactElement } from "react";
 
 import { Home } from "../pages/Home/Home";
-import { Workspace } from "../pages/Workspace/index";
+import { Workspace } from "../pages/Workspace/Workspace";
 import { Glossary } from "../pages/Help/Glossary/Glossary";
 import { Guide } from "../pages/Help/Guide/Guide";
 import { Resources } from "../pages/Help/Resources/Resources";
@@ -31,8 +31,8 @@ const router = createBrowserRouter(
       />
       <Route path="about" element={<About />} />
       <Route path="*" element={<E404 />} />
-    </Route>,
-  ),
+    </Route>
+  )
 );
 
 export const Routes = (): ReactElement => <RouterProvider router={router} />;
