@@ -5,12 +5,12 @@ import Popover from "react-bootstrap/Popover";
 import pluralize from "pluralize";
 import classnames from "classnames";
 
-import glosses from "../../../files/glosses";
-import type { Line } from "../../../files//manifests";
-import { Badge } from "../../../components/Badge/Badge";
-import { BadgeTypes } from "../../../components/Badge/badge.enum";
+import glosses from "../../../../files/glosses";
+import type { Line } from "../../../../files/manifests";
+import { Badge } from "../../../../components/Badge/Badge";
+import { BadgeTypes } from "../../../../components/Badge/badge.enum";
+import evaluateSubmission from "../validators";
 
-import evaluateSubmission from "./validators";
 import styles from "./SingleLine.module.scss";
 
 interface SingleLineProps {
