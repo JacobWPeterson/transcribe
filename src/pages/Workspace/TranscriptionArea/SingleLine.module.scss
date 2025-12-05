@@ -37,15 +37,14 @@
         }
 
         &:disabled {
-          background: theme.$secondary03;
-          color: theme.$primary03;
+          opacity: 30%;
         }
       }
     }
 
     .Label {
       color: theme.$primary03;
-      width: 55px;
+      width: 25px;
       gap: 4px;
     }
 
@@ -54,7 +53,7 @@
       flex-direction: column;
       justify-content: flex-start;
       min-width: 250px;
-      width: 25dvw;
+      width: 28dvw;
       margin: 0 10px;
 
       .Input {
@@ -66,7 +65,7 @@
   }
 
   .Lower {
-    margin-left: 65px;
+    margin-left: 35px;
     width: calc(25dvw + 60px);
 
     .Small {

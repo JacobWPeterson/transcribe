@@ -230,8 +230,7 @@ export const SingleLine = ({
           htmlFor={isTitle ? "title" : `Line ${passedIndex}`}
           style={{ display: "flex", alignItems: "center", marginTop: "3px" }}
         >
-          {isTitle ? "Title" : `Line ${passedIndex}`}
-          {isTitle && titleHelp()}
+          {isTitle ? titleHelp() : `L${passedIndex}`}
         </label>
         <div className={styles.InputWrapper}>
           <input
@@ -244,11 +243,15 @@ export const SingleLine = ({
           />
         </div>
         <div className={styles.PostInputItemsContainer}>
-          <button className={styles.Button} type="submit">
+          <button
+            className={styles.Button}
+            disabled={!lineContent.trim()}
+            type="submit"
+          >
             Check
           </button>
           {line.newConcept && newConcept(line.newConcept)}
-          {showAnswerEvaluation && renderAnswerEvaluation()}
+          {showAnswerEvaluation && !showHint && renderAnswerEvaluation()}
           {showHint && hint()}
         </div>
       </div>
