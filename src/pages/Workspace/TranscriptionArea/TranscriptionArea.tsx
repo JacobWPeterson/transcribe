@@ -3,8 +3,8 @@ import classNames from "classnames";
 
 import type { Line, Manifest } from "../../../files/manifests";
 
-import { SingleLine } from "./SingleLine";
-import styles from "./index.module.scss";
+import { SingleLine } from "./SingleLine/SingleLine";
+import styles from "./TranscriptionArea.module.scss";
 
 interface TranscriptionAreaProps {
   changeManuscript: (type: "next" | "previous") => void;
@@ -66,25 +66,28 @@ export const TranscriptionArea = ({
             />
           );
         })}
-      </div>
-      <div className={styles.ButtonsContainer}>
-        {manuscriptId > 1 ? (
-          <button
-            className={classNames(styles.Button, styles.Back)}
-            onClick={() => handleClick("previous")}
-          >
-            Previous
-          </button>
-        ) : (
-          <div />
-        )}
-        {manuscriptId < manifestLength ? (
-          <button className={styles.Button} onClick={() => handleClick("next")}>
-            Next
-          </button>
-        ) : (
-          <div />
-        )}
+        <div className={styles.ButtonsContainer}>
+          {manuscriptId > 1 ? (
+            <button
+              className={classNames(styles.Button, styles.Back)}
+              onClick={() => handleClick("previous")}
+            >
+              Previous
+            </button>
+          ) : (
+            <div />
+          )}
+          {manuscriptId < manifestLength ? (
+            <button
+              className={styles.Button}
+              onClick={() => handleClick("next")}
+            >
+              Next
+            </button>
+          ) : (
+            <div />
+          )}
+        </div>
       </div>
     </div>
   );

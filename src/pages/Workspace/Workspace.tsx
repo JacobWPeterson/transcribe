@@ -5,7 +5,7 @@ import manifests from "../../files/manifests";
 import { E404 } from "../E404/E404";
 import { Alert } from "../../components/Alert/Alert";
 
-import { TranscriptionArea } from "./TranscriptionArea/index";
+import { TranscriptionArea } from "./TranscriptionArea/TranscriptionArea";
 import { Mirador } from "./Mirador/index";
 import styles from "./Workspace.module.scss";
 
