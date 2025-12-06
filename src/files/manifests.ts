@@ -488,6 +488,109 @@ const manifests: Manifests = {
       },
     ],
   },
+  8: {
+    // Transcription (which has errors): https://spotlight.vatlib.it/greek-paleography/catalog/71fcddac-57f2-4a02-a97a-35469f00ba9b
+    // Commentary on the script: https://spotlight.vatlib.it/greek-paleography/feature/2-introduction-to-minuscule-bookhands)
+    manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.2200/manifest.json",
+    canvasIndex: 277,
+    instruction:
+      'The minuscule scripts you have worked through so far have been of the "Studite" variety. However, in the early development of minuscule script there were other contenders. The manuscript in this exercise features one of them: the "Hagiopolitan" script.',
+    lines: [
+      {
+        text: "λαττουσα και τουτοισ ακολουθει καθαπερ νο",
+      },
+      {
+        text: "μοισ τισιν αρραγεσι και αλισκεσθαι μη δυ",
+      },
+      {
+        text: "ναμενοισ πορρω φευγουσα την ευτυχε",
+      },
+      {
+        text: "οσ μανιαν και το βλασφημον νεστοριου",
+      },
+      {
+        text: "στομα μακραν εαυτησ απωθουμενη και",
+      },
+      {
+        text: "κατηγορουσα τησ τουτου θρασυτητοσ",
+      },
+      {
+        text: "ωσπερ οι σοφοι εκεινοι και τησ πιστεωσ συ",
+      },
+      {
+        text: "νηγοροι οτι δε ουτωσ εχει και τουτον οι πατερεσ",
+      },
+      {
+        text: "εκεινοι μετα τησ αληθειασ προειλαντο",
+      },
+      {
+        text: "τον αγωνα κοινον χαριζομενοι κερδοσ",
+      },
+      {
+        text: "εξ αυτησ τησ υποθεσεωσ εξεστι μαθειν και σα",
+      },
+      {
+        text: "φη την μαρτυριαν λαμβανειν παντα",
+      },
+      {
+        text: "γαρ τα αυτων συναγαγοντεσ και παραλληλα",
+      },
+      {
+        text: "θεντεσ εκεινοισ προστεθηκαμεν τοισ",
+      },
+      {
+        text: "βουλομενοισ ορθωσ εξεταζειν και την αλη",
+      },
+      {
+        text: "θειαν διαγινωσκειν τοισ λεγομενοισ",
+      },
+      {
+        text: "τοινυν προσεχοντεσ ραδιαν ληψεσθε",
+      },
+      {
+        text: "την αποδειξιν ωσ ουδε κατα μικρον εκ",
+      },
+      {
+        text: "βεβηκε τησ ορθησ των αγιων πατερων δο",
+      },
+      {
+        text: "ξησ η εν χαλκηδονι γενομενη αγια συνοδοσ",
+      },
+      {
+        text: "εκθεσισ περι πιστεωσ τησ αγιασ συνοδου",
+      },
+      {
+        text: "τησ εν χαλκηδονι συναθροισθεισησ",
+        caption:
+          "The full form of the abbreviation on this line appears on the last line of minuscule script above.",
+      },
+      {
+        text: "των χλ αγιων πατερων",
+      },
+      {
+        text: "επομενοι τοινυν τοισ αγιοισ πατρασιν ενα και",
+      },
+      {
+        text: "τον αυτον ομολογειν υιον τον κυριον ημων ιησουν χριστον συμ",
+      },
+      {
+        text: "φωνωσ απαντεσ εκδιδασκομεν",
+      },
+      {
+        text: "κυριλλου εκ τησ προσ σουκενσον επιστολησ",
+        caption: 'The abbreviation here is "κυριλλου"',
+      },
+      {
+        text: "εδιδαχθημεν παρα τε τησ θειασ γραφησ",
+      },
+      {
+        text: "και των αγιων πατερων ενα υιον και χριστον ομολογειν",
+      },
+      {
+        text: "τησ συνοδου",
+      },
+    ],
+  },
 };
 
 export default manifests;
