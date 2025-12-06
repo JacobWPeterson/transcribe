@@ -40,42 +40,47 @@
     font-size: 0.8em;
   }
 
-  .LinesContainer {
-    overflow-y: auto;
-    flex-grow: 1;
-    scrollbar-width: thin;
-  }
-
-  .ButtonsContainer {
+  .TranscriptionArea {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
-    padding: 4px 8px 0 0;
+    flex-direction: column;
+    overflow: auto;
+    height: 100%;
 
-    .Button {
+    .LinesContainer {
+      flex-grow: 1;
+    }
+
+    .ButtonsContainer {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      color: theme.$grey00;
-      background: theme.$secondary03;
-      height: 34px;
-      width: 90px;
-      border: none;
-      border-radius: 5px;
+      width: 100%;
+      justify-content: space-between;
+      padding: 4px 8px 0 0;
 
-      &.Back {
-        color: theme.$primary03;
-        background: theme.$grey02;
-      }
-
-      &:focus,
-      &:hover {
-        background: theme.$secondary05;
+      .Button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: theme.$grey00;
+        background: theme.$secondary03;
+        height: 34px;
+        width: 90px;
         border: none;
-        outline: none;
+        border-radius: 5px;
 
         &.Back {
-          background: theme.$grey04;
+          color: theme.$primary03;
+          background: theme.$grey02;
+        }
+
+        &:focus,
+        &:hover {
+          background: theme.$secondary05;
+          border: none;
+          outline: none;
+
+          &.Back {
+            background: theme.$grey04;
+          }
         }
       }
     }

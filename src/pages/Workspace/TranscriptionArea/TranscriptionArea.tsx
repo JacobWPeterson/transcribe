@@ -1,4 +1,4 @@
-import { type ReactElement, useState } from "react";
+import { type ReactElement, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 
 import type { Line, Manifest } from "../../../files/manifests";
@@ -20,10 +20,15 @@ export const TranscriptionArea = ({
   manuscriptId,
 }: TranscriptionAreaProps): ReactElement => {
   const [requireSpaces, setRequireSpaces] = useState(false);
+  const transcriptionAreaRef = useRef<HTMLDivElement>(null);
   const { lines, instruction } = manifest;
   const handleClick = (type: "next" | "previous"): void => {
     changeManuscript(type);
   };
+
+  useEffect(() => {
+    transcriptionAreaRef.current.scrollTop = 0;
+  }, [manuscriptId]);
 
   let titleAdjustments = 0;
 
@@ -51,21 +56,23 @@ export const TranscriptionArea = ({
           {`: ${instruction}`}
         </small>
       ) : null}
-      <div className={styles.LinesContainer}>
-        {lines.map((line: Line, index) => {
-          if (line.isTitle) {
-            titleAdjustments++;
-          }
-          return (
-            <SingleLine
-              key={`${manuscriptId}-line.${index + 1 - titleAdjustments}`}
-              passedIndex={index + 1 - titleAdjustments}
-              line={line}
-              requireSpaces={requireSpaces}
-              isTitle={line.isTitle}
-            />
-          );
-        })}
+      <div className={styles.TranscriptionArea} ref={transcriptionAreaRef}>
+        <div className={styles.LinesContainer}>
+          {lines.map((line: Line, index) => {
+            if (line.isTitle) {
+              titleAdjustments++;
+            }
+            return (
+              <SingleLine
+                key={`${manuscriptId}-line.${index + 1 - titleAdjustments}`}
+                passedIndex={index + 1 - titleAdjustments}
+                line={line}
+                requireSpaces={requireSpaces}
+                isTitle={line.isTitle}
+              />
+            );
+          })}
+        </div>
         <div className={styles.ButtonsContainer}>
           {manuscriptId > 1 ? (
             <button
