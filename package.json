@@ -38,11 +38,11 @@
     "mirador": "^4.0.0",
     "mirador-image-tools": "^1.0.0",
     "pluralize": "^8.0.0",
-    "react": "^19.2.0",
+    "react": "^19.2.1",
     "react-bootstrap": "^2.10.10",
-    "react-dom": "^19.2.0",
-    "react-hook-form": "^7.67.0",
-    "react-router-dom": "^7.9.6"
+    "react-dom": "^19.2.1",
+    "react-hook-form": "^7.68.0",
+    "react-router-dom": "^7.10.1"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.1",
