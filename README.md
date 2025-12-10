@@ -1,5 +1,7 @@
 # Xeirographa
 
+[![Node.js CI](https://github.com/JacobWPeterson/transcribe/actions/workflows/node.js.yml/badge.svg)](https://github.com/JacobWPeterson/transcribe/actions/workflows/node.js.yml)
+
 Guided lessons for learning to read Greek manuscripts
 
 Available for use at [xeirographa.com](www.xeirographa.com)
@@ -16,5 +18,3 @@ Available for use at [xeirographa.com](www.xeirographa.com)
 
 1. `npm install`
 2. `npm run start:dev`
-
-[![Node.js CI](https://github.com/JacobWPeterson/transcribe/actions/workflows/node.js.yml/badge.svg)](https://github.com/JacobWPeterson/transcribe/actions/workflows/node.js.yml)
