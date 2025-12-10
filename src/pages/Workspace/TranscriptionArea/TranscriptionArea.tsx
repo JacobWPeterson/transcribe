@@ -68,7 +68,6 @@ export const TranscriptionArea = ({
                 passedIndex={index + 1 - titleAdjustments}
                 line={line}
                 requireSpaces={requireSpaces}
-                isTitle={line.isTitle}
               />
             );
           })}
