@@ -1,0 +1,391 @@
+import { render, screen } from "@testing-library/react";
+import type { Line } from "src/files/manifests";
+import userEvent from "@testing-library/user-event";
+
+import { SingleLine } from "./SingleLine";
+
+const mockTitleLine: Line = {
+  isTitle: true,
+  caption: "",
+  newConcept: null,
+  text: "ιωβ",
+};
+
+const mockNewConceptLine: Line = {
+  isTitle: false,
+  caption: "Helpful caption",
+  newConcept: "Ekthesis",
+  text: "αδελφοσ",
+};
+
+describe("SingeLine", () => {
+  it("renders correctly for titles", async () => {
+    render(<SingleLine line={mockTitleLine} passedIndex={0} />);
+
+    const user = userEvent.setup();
+    expect(screen.getByRole("textbox", { name: "T" })).toBeInTheDocument();
+    const checkButton = screen.getByRole("button", { name: "Check" });
+    expect(checkButton).toBeInTheDocument();
+    expect(checkButton).toBeDisabled();
+
+    await user.hover(screen.getByRole("button", { name: "T" }));
+    expect(
+      screen.getByText(
+        "Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don't worry about them as much early on. Type them as a single line."
+      )
+    ).toBeInTheDocument();
+  });
+
+  it("renders correctly for new concept lines", async () => {
+    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+    const user = userEvent.setup();
+    expect(screen.queryByRole("button", { name: "T" })).not.toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "L1" })).toBeInTheDocument();
+
+    expect(screen.getByText("Helpful caption")).toBeInTheDocument();
+    const checkButton = screen.getByRole("button", { name: "Check" });
+    expect(checkButton).toBeInTheDocument();
+    expect(checkButton).toBeDisabled();
+    expect(screen.getByRole("button", { name: "NC" })).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "NC" }));
+    expect(
+      screen.getByRole("heading", { level: 3, name: "New Concept: Ekthesis" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "A large, decorative letter at the beginning of a line that is often in the margin."
+      )
+    ).toBeInTheDocument();
+  });
+
+  it("enables the check button when text is present", async () => {
+    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+    const user = userEvent.setup();
+    const lineInput = screen.getByRole("textbox", { name: "L1" });
+    expect(lineInput).toBeInTheDocument();
+    const checkButton = screen.getByRole("button", { name: "Check" });
+    expect(checkButton).toBeInTheDocument();
+    expect(checkButton).toBeDisabled();
+
+    await user.type(lineInput, "α");
+    expect(checkButton).toBeEnabled();
+  });
+
+  it("shows a help message when user types non-Greek characters", async () => {
+    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+    const user = userEvent.setup();
+    const lineInput = screen.getByRole("textbox", { name: "L1" });
+    expect(lineInput).toBeInTheDocument();
+    expect(screen.getByText("Helpful caption")).toBeInTheDocument();
+
+    await user.type(lineInput, "latin");
+
+    expect(screen.queryByText("Helpful caption")).not.toBeInTheDocument();
+    expect(
+      screen.getByText("Non-Greek characters have been detected")
+    ).toBeInTheDocument();
+
+    await user.clear(lineInput);
+    expect(
+      screen.queryByText("Non-Greek characters have been detected")
+    ).not.toBeInTheDocument();
+    expect(screen.getByText("Helpful caption")).toBeInTheDocument();
+  });
+
+  it("shows a help message when user types numbers", async () => {
+    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+    const user = userEvent.setup();
+    const lineInput = screen.getByRole("textbox", { name: "L1" });
+    expect(lineInput).toBeInTheDocument();
+    expect(screen.getByText("Helpful caption")).toBeInTheDocument();
+
+    await user.type(lineInput, "1000");
+
+    expect(screen.queryByText("Helpful caption")).not.toBeInTheDocument();
+    expect(
+      screen.getByText("Non-Greek characters have been detected")
+    ).toBeInTheDocument();
+  });
+
+  it("showσ a check when user has submitted a correct answer", async () => {
+    // Answer is αδελφοσ
+    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+    const user = userEvent.setup();
+    const lineInput = screen.getByRole("textbox", { name: "L1" });
+    expect(lineInput).toBeInTheDocument();
+    const checkButton = screen.getByRole("button", { name: "Check" });
+    expect(checkButton).toBeInTheDocument();
+    expect(checkButton).toBeDisabled();
+
+    await user.type(lineInput, "αδελφοσ");
+
+    expect(checkButton).toBeEnabled();
+    await user.click(checkButton);
+
+    expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+  });
+
+  it("allows final sigmas", async () => {
+    // Answer is αδελφοσ
+    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+    const user = userEvent.setup();
+    const lineInput = screen.getByRole("textbox", { name: "L1" });
+    expect(lineInput).toBeInTheDocument();
+    const checkButton = screen.getByRole("button", { name: "Check" });
+    expect(checkButton).toBeInTheDocument();
+    expect(checkButton).toBeDisabled();
+
+    await user.type(lineInput, "αδελφος");
+
+    expect(checkButton).toBeEnabled();
+    await user.click(checkButton);
+
+    expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+  });
+
+  it("is case insensitive", async () => {
+    // Answer is αδελφοσ
+    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+    const user = userEvent.setup();
+    const lineInput = screen.getByRole("textbox", { name: "L1" });
+    expect(lineInput).toBeInTheDocument();
+    const checkButton = screen.getByRole("button", { name: "Check" });
+    expect(checkButton).toBeInTheDocument();
+    expect(checkButton).toBeDisabled();
+
+    await user.type(lineInput, "αΔεΛφοΣ");
+
+    expect(checkButton).toBeEnabled();
+    await user.click(checkButton);
+
+    expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+  });
+
+  it("clears the incorrect answer symbol after user changes input", async () => {
+    // Answer is αδελφοσ
+    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+    const user = userEvent.setup();
+    const lineInput = screen.getByRole("textbox", { name: "L1" });
+    expect(lineInput).toBeInTheDocument();
+    const checkButton = screen.getByRole("button", { name: "Check" });
+    expect(checkButton).toBeInTheDocument();
+    expect(checkButton).toBeDisabled();
+
+    await user.type(lineInput, "αδελφω");
+
+    expect(checkButton).toBeEnabled();
+    await user.click(checkButton);
+    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+
+    await user.type(lineInput, "{backspace}");
+    expect(screen.queryByRole("button", { name: "X" })).not.toBeInTheDocument();
+  });
+
+  it("tells the user their incorrect answer is too short when appropriate", async () => {
+    // Answer is αδελφοσ
+    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+    const user = userEvent.setup();
+    const lineInput = screen.getByRole("textbox", { name: "L1" });
+    expect(lineInput).toBeInTheDocument();
+    const checkButton = screen.getByRole("button", { name: "Check" });
+    expect(checkButton).toBeInTheDocument();
+    expect(checkButton).toBeDisabled();
+
+    await user.type(lineInput, "αδελφω");
+
+    expect(checkButton).toBeEnabled();
+    await user.click(checkButton);
+
+    const incorrectButton = screen.getByRole("button", { name: "X" });
+    expect(incorrectButton).toBeInTheDocument();
+    await user.hover(incorrectButton);
+    expect(
+      screen.getByText("Your answer is 1 letter too short.")
+    ).toBeInTheDocument();
+  });
+
+  it("tells the user their incorrect answer is too long when appropriate", async () => {
+    // Answer is αδελφοσ
+    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+    const user = userEvent.setup();
+    const lineInput = screen.getByRole("textbox", { name: "L1" });
+    expect(lineInput).toBeInTheDocument();
+    const checkButton = screen.getByRole("button", { name: "Check" });
+    expect(checkButton).toBeInTheDocument();
+    expect(checkButton).toBeDisabled();
+
+    await user.type(lineInput, "αδελφωσοο");
+
+    expect(checkButton).toBeEnabled();
+    await user.click(checkButton);
+
+    const incorrectButton = screen.getByRole("button", { name: "X" });
+    expect(incorrectButton).toBeInTheDocument();
+    await user.hover(incorrectButton);
+    expect(
+      screen.getByText("Your answer is 2 letters too long.")
+    ).toBeInTheDocument();
+  });
+
+  it("indicates an answer is incorrect when it is wrong but the correct length", async () => {
+    // Answer is αδελφοσ
+    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+    const user = userEvent.setup();
+    const lineInput = screen.getByRole("textbox", { name: "L1" });
+    expect(lineInput).toBeInTheDocument();
+    const checkButton = screen.getByRole("button", { name: "Check" });
+    expect(checkButton).toBeInTheDocument();
+    expect(checkButton).toBeDisabled();
+
+    await user.type(lineInput, "αδελφωσ");
+
+    expect(checkButton).toBeEnabled();
+    await user.click(checkButton);
+
+    const incorrectButton = screen.getByRole("button", { name: "X" });
+    expect(incorrectButton).toBeInTheDocument();
+    await user.hover(incorrectButton);
+    expect(screen.getByText("Answer is incorrect.")).toBeInTheDocument();
+  });
+
+  it("shows a hint after three incorrect guesses of correct length", async () => {
+    // Answer is αδελφοσ
+    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+    const user = userEvent.setup();
+    const lineInput = screen.getByRole("textbox", { name: "L1" });
+    expect(lineInput).toBeInTheDocument();
+    const checkButton = screen.getByRole("button", { name: "Check" });
+    expect(checkButton).toBeInTheDocument();
+    expect(checkButton).toBeDisabled();
+
+    await user.type(lineInput, "αδελφοο");
+    expect(checkButton).toBeEnabled();
+    await user.click(checkButton);
+    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+
+    await user.type(lineInput, "{backspace}{backspace}ωσ");
+    await user.click(checkButton);
+    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+
+    await user.type(lineInput, "{backspace}{backspace}οω");
+    await user.click(checkButton);
+    expect(screen.queryByRole("button", { name: "X" })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "?" })).toBeInTheDocument();
+
+    await user.hover(screen.getByRole("button", { name: "?" }));
+    expect(screen.getByText("Incorrect letter: ω(7).")).toBeInTheDocument();
+
+    await user.type(lineInput, "{backspace}{backspace}ωζ");
+    await user.click(checkButton);
+    expect(screen.queryByRole("button", { name: "X" })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "?" })).toBeInTheDocument();
+
+    await user.hover(screen.getByRole("button", { name: "?" }));
+    expect(
+      screen.getByText("Incorrect letters: ω(6), ζ(7).")
+    ).toBeInTheDocument();
+  });
+
+  it("does not show a hint after three incorrect guesses of incorrect length", async () => {
+    // Answer is αδελφοσ
+    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+    const user = userEvent.setup();
+    const lineInput = screen.getByRole("textbox", { name: "L1" });
+    expect(lineInput).toBeInTheDocument();
+    const checkButton = screen.getByRole("button", { name: "Check" });
+    expect(checkButton).toBeInTheDocument();
+    expect(checkButton).toBeDisabled();
+
+    await user.type(lineInput, "αδελφ");
+    expect(checkButton).toBeEnabled();
+    await user.click(checkButton);
+    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+
+    await user.type(lineInput, "ω");
+    await user.click(checkButton);
+    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+
+    await user.type(lineInput, "{backspace}ο");
+    await user.click(checkButton);
+    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+  });
+
+  describe("a11y", () => {
+    it("has keyboard accessible answer checking", async () => {
+      // Answer is αδελφοσ
+      render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+      const user = userEvent.setup();
+      const lineInput = screen.getByRole("textbox", { name: "L1" });
+      expect(lineInput).toBeInTheDocument();
+      const checkButton = screen.getByRole("button", { name: "Check" });
+      expect(checkButton).toBeInTheDocument();
+      expect(checkButton).toBeDisabled();
+
+      await user.keyboard("{tab}");
+      await user.keyboard("αδελφοσ");
+
+      expect(checkButton).toBeEnabled();
+      await user.keyboard("{tab}");
+      await user.keyboard("{enter}");
+
+      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+    });
+
+    it("has keyboard accessible title messaging", async () => {
+      // Answer is αδελφοσ
+      render(<SingleLine line={mockTitleLine} passedIndex={1} />);
+
+      const user = userEvent.setup();
+
+      await user.keyboard("{tab}");
+
+      expect(
+        screen.getByText(
+          "Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don't worry about them as much early on. Type them as a single line."
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("has keyboard accessible incorrect answer messaging", async () => {
+      // Answer is αδελφοσ
+      render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+
+      const user = userEvent.setup();
+      const lineInput = screen.getByRole("textbox", { name: "L1" });
+      expect(lineInput).toBeInTheDocument();
+      const checkButton = screen.getByRole("button", { name: "Check" });
+      expect(checkButton).toBeInTheDocument();
+      expect(checkButton).toBeDisabled();
+
+      await user.keyboard("{tab}");
+      await user.keyboard("αδελφο");
+
+      expect(checkButton).toBeEnabled();
+      await user.keyboard("{tab}");
+      await user.keyboard("{enter}");
+
+      const incorrectButton = screen.getByRole("button", { name: "X" });
+      expect(incorrectButton).toBeInTheDocument();
+      await user.keyboard("{tab}");
+      await user.keyboard("{tab}");
+      expect(
+        screen.getByText("Your answer is 1 letter too short.")
+      ).toBeInTheDocument();
+    });
+  });
+});
