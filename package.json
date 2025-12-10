@@ -34,6 +34,7 @@
   "homepage": "https://github.com/JacobWPeterson/transcribe#readme",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@testing-library/user-event": "^14.6.1",
     "bootstrap": "^5.3.8",
     "mirador": "^4.0.0",
     "mirador-image-tools": "^1.0.0",
