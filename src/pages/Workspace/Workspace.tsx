@@ -17,7 +17,7 @@ export const Workspace = (): ReactElement => {
 
   const canvasIndex = manifests[id]?.canvasIndex;
   const indexAdjustment = manifests[id]?.canvasIndexToPageNumberAdj || 0;
-  const manifestLength = Object.keys(manifests).length;
+  const numberOfLessons = Object.keys(manifests).length;
 
   useEffect(() => {
     if (pageNumber && pageNumber !== canvasIndex + indexAdjustment) {
@@ -83,9 +83,9 @@ export const Workspace = (): ReactElement => {
       <div className={styles.TranscriptionPanel}>
         <TranscriptionArea
           changeManuscript={handleManifestChange}
+          lessonNumber={Number(id)}
           manifest={manifests[id]}
-          manifestLength={manifestLength}
-          manuscriptId={Number(id)}
+          numberOfLessons={numberOfLessons}
         />
       </div>
     </div>

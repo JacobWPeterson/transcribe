@@ -324,6 +324,168 @@ describe("SingeLine", () => {
     expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
   });
 
+  describe("Requiring spaces", () => {
+    it("does not consider missing spaces when requireSpaces is false", async () => {
+      render(
+        <SingleLine
+          line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
+          passedIndex={1}
+        />
+      );
+
+      const user = userEvent.setup();
+      const lineInput = screen.getByRole("textbox", { name: "L1" });
+      expect(lineInput).toBeInTheDocument();
+      const checkButton = screen.getByRole("button", { name: "Check" });
+
+      await user.type(lineInput, "αδελφοσμου");
+
+      expect(checkButton).toBeEnabled();
+      await user.click(checkButton);
+
+      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+    });
+
+    it("does not consider extra spaces when requireSpaces is false", async () => {
+      render(
+        <SingleLine
+          line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
+          passedIndex={1}
+        />
+      );
+
+      const user = userEvent.setup();
+      const lineInput = screen.getByRole("textbox", { name: "L1" });
+      expect(lineInput).toBeInTheDocument();
+      const checkButton = screen.getByRole("button", { name: "Check" });
+
+      await user.type(lineInput, "αδελφοσ     μου");
+
+      expect(checkButton).toBeEnabled();
+      await user.click(checkButton);
+
+      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+    });
+
+    it("does not consider incorrect spacing when requireSpaces is false", async () => {
+      render(
+        <SingleLine
+          line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
+          passedIndex={1}
+        />
+      );
+
+      const user = userEvent.setup();
+      const lineInput = screen.getByRole("textbox", { name: "L1" });
+      expect(lineInput).toBeInTheDocument();
+      const checkButton = screen.getByRole("button", { name: "Check" });
+
+      await user.type(lineInput, "αδελ φοσ μου");
+
+      expect(checkButton).toBeEnabled();
+      await user.click(checkButton);
+
+      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+    });
+
+    it("marks the asnwer as correct when answer is correctly spaced adn when requireSpaces is true", async () => {
+      render(
+        <SingleLine
+          line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
+          passedIndex={1}
+          requireSpaces
+        />
+      );
+
+      const user = userEvent.setup();
+      const lineInput = screen.getByRole("textbox", { name: "L1" });
+      expect(lineInput).toBeInTheDocument();
+      const checkButton = screen.getByRole("button", { name: "Check" });
+
+      await user.type(lineInput, "αδελφοσ μου");
+
+      expect(checkButton).toBeEnabled();
+      await user.click(checkButton);
+
+      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+    });
+
+    it("considers missing spaces when requireSpaces is true", async () => {
+      render(
+        <SingleLine
+          line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
+          passedIndex={1}
+          requireSpaces
+        />
+      );
+
+      const user = userEvent.setup();
+      const lineInput = screen.getByRole("textbox", { name: "L1" });
+      expect(lineInput).toBeInTheDocument();
+      const checkButton = screen.getByRole("button", { name: "Check" });
+
+      await user.type(lineInput, "αδελφοσμου");
+
+      expect(checkButton).toBeEnabled();
+      await user.click(checkButton);
+
+      expect(
+        screen.queryByRole("button", { name: "✓" })
+      ).not.toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    });
+
+    it("considers extra spaces when requireSpaces is true", async () => {
+      render(
+        <SingleLine
+          line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
+          passedIndex={1}
+          requireSpaces
+        />
+      );
+
+      const user = userEvent.setup();
+      const lineInput = screen.getByRole("textbox", { name: "L1" });
+      expect(lineInput).toBeInTheDocument();
+      const checkButton = screen.getByRole("button", { name: "Check" });
+
+      await user.type(lineInput, "αδελφοσ  μου");
+
+      expect(checkButton).toBeEnabled();
+      await user.click(checkButton);
+
+      expect(
+        screen.queryByRole("button", { name: "✓" })
+      ).not.toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    });
+
+    it("considers incorrect spacing when requireSpaces is true", async () => {
+      render(
+        <SingleLine
+          line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
+          passedIndex={1}
+          requireSpaces
+        />
+      );
+
+      const user = userEvent.setup();
+      const lineInput = screen.getByRole("textbox", { name: "L1" });
+      expect(lineInput).toBeInTheDocument();
+      const checkButton = screen.getByRole("button", { name: "Check" });
+
+      await user.type(lineInput, "αδελ φοσ μου");
+
+      expect(checkButton).toBeEnabled();
+      await user.click(checkButton);
+
+      expect(
+        screen.queryByRole("button", { name: "✓" })
+      ).not.toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    });
+  });
+
   describe("a11y", () => {
     it("has keyboard accessible answer checking", async () => {
       // Answer is αδελφοσ

@@ -8,16 +8,16 @@ import styles from "./TranscriptionArea.module.scss";
 
 interface TranscriptionAreaProps {
   changeManuscript: (type: "next" | "previous") => void;
+  lessonNumber: number;
   manifest: Manifest;
-  manifestLength: number;
-  manuscriptId: number;
+  numberOfLessons: number;
 }
 
 export const TranscriptionArea = ({
   changeManuscript,
+  lessonNumber,
   manifest,
-  manifestLength,
-  manuscriptId,
+  numberOfLessons,
 }: TranscriptionAreaProps): ReactElement => {
   const [requireSpaces, setRequireSpaces] = useState(false);
   const transcriptionAreaRef = useRef<HTMLDivElement>(null);
@@ -28,14 +28,14 @@ export const TranscriptionArea = ({
 
   useEffect(() => {
     transcriptionAreaRef.current.scrollTop = 0;
-  }, [manuscriptId]);
+  }, [lessonNumber]);
 
   let titleAdjustments = 0;
 
   return (
     <div className={styles.Container}>
       <div className={styles.HeaderContainer}>
-        <h2 className={styles.Header}>{`Lesson ${manuscriptId}`}</h2>
+        <h2 className={styles.Header}>{`Lesson ${lessonNumber}`}</h2>
         <div className={styles.FormSwitch}>
           <input
             type="checkbox"
@@ -64,7 +64,7 @@ export const TranscriptionArea = ({
             }
             return (
               <SingleLine
-                key={`${manuscriptId}-line.${index + 1 - titleAdjustments}`}
+                key={`${lessonNumber}-line.${index + 1 - titleAdjustments}`}
                 passedIndex={index + 1 - titleAdjustments}
                 line={line}
                 requireSpaces={requireSpaces}
@@ -73,7 +73,7 @@ export const TranscriptionArea = ({
           })}
         </div>
         <div className={styles.ButtonsContainer}>
-          {manuscriptId > 1 ? (
+          {lessonNumber > 1 ? (
             <button
               className={classNames(styles.Button, styles.Back)}
               onClick={() => handleClick("previous")}
@@ -83,7 +83,7 @@ export const TranscriptionArea = ({
           ) : (
             <div />
           )}
-          {manuscriptId < manifestLength ? (
+          {lessonNumber < numberOfLessons ? (
             <button
               className={styles.Button}
               onClick={() => handleClick("next")}
