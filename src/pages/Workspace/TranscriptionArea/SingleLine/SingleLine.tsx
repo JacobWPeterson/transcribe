@@ -14,7 +14,6 @@ import evaluateSubmission from "../validators";
 import styles from "./SingleLine.module.scss";
 
 interface SingleLineProps {
-  isTitle?: boolean;
   line: Line;
   passedIndex: number;
   requireSpaces?: boolean;
@@ -25,15 +24,13 @@ const includesNonGreekChars = (text: string): boolean => {
 };
 
 export const SingleLine = ({
-  isTitle,
   line,
   passedIndex,
   requireSpaces = false,
 }: SingleLineProps): ReactElement => {
   const [lineContent, setLineContent] = useState<string>("");
-  const [submissionStatus, setSubmissionStatus] = useState<
-    (boolean | string)[] | null
-  >(null);
+  const [submissionStatus, setSubmissionStatus] =
+    useState<(boolean | string)[]>(null);
   const [showHint, setShowHint] = useState<boolean>(false);
   const [showAnswerEvaluation, setShowAnswerEvaluation] =
     useState<boolean>(false);
@@ -227,15 +224,15 @@ export const SingleLine = ({
       <div className={styles.Upper}>
         <label
           className={styles.Label}
-          htmlFor={isTitle ? "title" : `Line ${passedIndex}`}
+          htmlFor={line.isTitle ? "title" : `Line ${passedIndex}`}
           style={{ display: "flex", alignItems: "center", marginTop: "3px" }}
         >
-          {isTitle ? titleHelp() : `L${passedIndex}`}
+          {line.isTitle ? titleHelp() : `L${passedIndex}`}
         </label>
         <div className={styles.InputWrapper}>
           <input
             className={styles.Input}
-            id={isTitle ? "title" : `Line ${passedIndex}`}
+            id={line.isTitle ? "title" : `Line ${passedIndex}`}
             type="text"
             value={lineContent}
             onChange={handleChange}
