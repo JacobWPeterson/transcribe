@@ -5,7 +5,6 @@
   width: 28px;
   border-radius: 14px;
   color: theme.$grey00;
-  background-color: theme.$grey06;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,9 +16,10 @@
     height: 20px;
     width: 20px;
     border-radius: 10px;
+    background-color: theme.$tertiary !important;
   }
 
-  &.NC {
+  &.Help {
     background-color: theme.$secondary03;
   }
 

@@ -10,7 +10,7 @@ export type Glosses = {
 const glosses: Glosses = {
   Abbreviation: {
     short:
-      "Abbreviations were used for word endings and common or repeated words and some names.",
+      "Abbreviations were used for word endings and common or repeated words and some names",
     long: 'Abbreviations were used for word endings common or repeated words and some names. Abbreviation could be done by writing only the first letter or first few letters of a word, or by omitting word endings. One example is "και compendium" (ϗ) where a kappa with a trailing flourish stands for και. When the shortening is done by omitting the middle letters it is called a contraction (see below).',
   },
   Compendium: {
@@ -38,22 +38,22 @@ const glosses: Glosses = {
   },
   Ligature: {
     short:
-      "Where two or more letters are combined together to form a new glyph.",
+      "Where two or more letters are combined together to form a new glyph",
     long: "Where two or more letters are combined together to form a new glyph, such as ȣ for ου. They become increasingly common in later minuscule manuscripts.",
   },
   Majuscule: {
     short:
-      "A writing style characterised by unconnected block letters of a consistent height.",
+      "A writing style characterised by unconnected block letters of a consistent height",
     long: 'The style of writing used in most Greek literary manuscripts (e.g., the Bible, histories, biographies, etc.) until the ninth century, when it was largely replaced by minuscule. It continued to be used for ornamental capitals, headings, and in liturgical manuscripts from the tenth to twelfth centuries with some examples from the fourteeth century. The letters are unconnected and of the same height (this characteristic is called "bilinearity"). It is not a technically correct definition, but you might associate majuscule script with the use of capital letter forms.',
   },
   Miniscule: {
     short:
-      "A more fluid writing style characterised by rounded, connected letters and, often, ligatures.",
+      "A more fluid writing style characterised by rounded, connected letters and, often, ligatures",
     long: "The style of writing that replaced majuscule as the predominant form of writing beginning in the ninth century. It likely developed from existing scripts that were used in documentary texts (e.g., receipts, letters, and tax records) and enabled more compact and quicker writing. It is more fluid in its nature and is characterised by rounded, often connected letters in a cursive-like style, and the use of ligatures. Whereas majuscule is bilinear, minuscule is monolinear with the script either being set so that the bottom of each letter sits on an imaginary line or the tops of the letters hang from the line.",
   },
   Monogram: {
     short:
-      "A pictographic symbol in which a number of letters are arranged together without consideration for order.",
+      "A pictographic symbol in which a number of letters are arranged together without consideration for order",
     long: 'A pictographic symbol in which a number of letters are arranged together without consideration for order. Examples include the chi-rho symbol (☧) where a rho is imposed over a chi to stand for "Christ" and the staurogram (⳨), a christogram comprised of tau and rho.',
   },
   "Nomina sacra": {
@@ -63,12 +63,12 @@ const glosses: Glosses = {
   },
   Numbers: {
     short:
-      "The Greek numbering system used the alphabet where each letter represented a numeric value. Numbers were often written with an overline to distinguish them from a letter.",
+      "The Greek numbering system used the alphabet where each letter represented a numeric value. Numbers were often written with an overline to distinguish them from a letter",
     long: "The Greek numbering system used the alphabet where each letter represented a numeric value. Numbers were often written with an overline to distinguish them from a letter. For instance, α-θ were 1–9 (with Greek letter stigma (Ϛ) as 6), then ι began the 10s, ρ began the 100s, and so forth. So ι\u{0305}η\u{0305} was 18.",
   },
   Reconstruction: {
     short:
-      "When part of a manuscript, often on papyrus, has been damaged and the missing text is supplied by the editor.",
+      "When part of a manuscript, often on papyrus, has been damaged and the missing text is supplied by the editor",
     long: "When part of a manuscript, often on papyrus, has been damaged and the missing text is supplied by the editor based on a combination of the expected text and available spacing. Reconstructions are enclosed in brackets in formal transcriptions.",
   },
   Stigma: {

@@ -50,47 +50,6 @@ export const Guide = (): ReactElement => (
           <tr className={styles.Row}>
             <td className={styles.SymbolCell}>
               <OverlayTrigger
-                key="NC-example"
-                placement="auto"
-                rootClose
-                transition
-                trigger="click"
-                overlay={
-                  <Popover id="popover-concepts">
-                    <Popover.Header className="PopoverHeader" as="h3">
-                      New Concept
-                    </Popover.Header>
-                    <Popover.Body>
-                      Here you&apos;ll find some useful information &nbsp;
-                      <a
-                        className="Link"
-                        href={`/glossary`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        And maybe a link to the glossary
-                      </a>
-                    </Popover.Body>
-                  </Popover>
-                }
-              >
-                <div>
-                  <Badge type={BadgeTypes.NC}>NC</Badge>
-                </div>
-              </OverlayTrigger>
-            </td>
-            <td className={styles.TextCell}>
-              <p className={styles.LegendText}>
-                This icon indicates there is a new concept being introduced on
-                that particular line of the manuscript. <b>Clicking</b> the NC
-                icon will show a popup with a brief introduction to the concept
-                and a link to the glossary to learn more.
-              </p>
-            </td>
-          </tr>
-          <tr className={styles.Row}>
-            <td className={styles.SymbolCell}>
-              <OverlayTrigger
                 key="error-tooltip"
                 placement="auto"
                 rootClose
@@ -165,9 +124,9 @@ export const Guide = (): ReactElement => (
         The image viewer loads with the image of the page for that lesson. Basic
         controls for zooming in (+) and out (-) on the image are located at the
         bottom. You can also click the image or use swipe actions to zoom in and
-        out. There you will also find left (◀) and right (▶) arrow buttons
-        that will take you to different pages of the manuscript, which can be
-        useful for getting a better idea of that particular scribe&apos;s letter
+        out. There you will also find left (◀) and right (▶) arrow buttons that
+        will take you to different pages of the manuscript, which can be useful
+        for getting a better idea of that particular scribe&apos;s letter
         formations. If you navigate away from the target image, a message will
         pop up to remind you which image the lesson covers so you can navigate
         back.
