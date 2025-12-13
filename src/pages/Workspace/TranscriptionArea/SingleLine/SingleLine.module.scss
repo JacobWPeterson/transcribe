@@ -14,6 +14,29 @@
     display: flex;
     align-items: baseline;
 
+    .Label {
+      color: theme.$primary03;
+      width: 25px;
+      gap: 4px;
+    }
+
+    .InputWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-width: 250px;
+      width: calc(
+        100% - 25px - 88px - 20px
+      ); // Label width - PostInputItemsContainer width - L-R margins
+      margin: 0 10px;
+
+      .Input {
+        height: 30px;
+        font-size: 16px;
+        padding: 2px 5px;
+      }
+    }
+
     .PostInputItemsContainer {
       display: flex;
       gap: 4px;
@@ -41,32 +64,10 @@
         }
       }
     }
-
-    .Label {
-      color: theme.$primary03;
-      width: 25px;
-      gap: 4px;
-    }
-
-    .InputWrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      min-width: 250px;
-      width: 28dvw;
-      margin: 0 10px;
-
-      .Input {
-        height: 30px;
-        font-size: 16px;
-        padding: 2px 5px;
-      }
-    }
   }
 
   .Lower {
-    margin-left: 35px;
-    width: 33dvw;
+    margin: 0 35px;
 
     .Small {
       display: block;
