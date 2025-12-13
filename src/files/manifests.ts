@@ -305,7 +305,7 @@ const manifests: Manifests = {
       "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00058840/manifest",
     canvasIndex: 51,
     instruction:
-      "This lesson features relatively easy to read minuscule text but introduces ligatures, abbreviations, and numbers, so be sure to consult the 'Online Resources' under the Help tab for resources to help intrepret these. This is a page of kephalaia (ancient chapter divisions) where each line contains a Greek number and then a short title for that section. Many lines begin with an abbreviation for περι (the stacked πε).",
+      "This lesson features a relatively easy to read decorative semi-uncial text but introduces ligatures, abbreviations, and numbers, so be sure to consult the 'Online Resources' under the Help tab for resources to help intrepret these. This is a page of kephalaia (ancient chapter divisions) where each line contains a Greek number and then a short title for that section. Many lines begin with an abbreviation for περι (the stacked πε).",
     lines: [
       {
         text: "α περι των μαγων",
@@ -435,6 +435,49 @@ const manifests: Manifests = {
     ],
   },
   7: {
+    manifestId: "https://digi.vatlib.it/iiif/MSS_Ott.gr.326/manifest.json",
+    instruction:
+      "An introduction to minuscule featuring dyed parchment and silver letters. The script is fairly clear, upright, and regular and the ligatures are all very common. Consult the resources for minuscules and ligatures on the Online Resources help page. Ignore the title in gold at the top of the leaf.",
+    canvasIndex: 42,
+    lines: [
+      {
+        text: "προ εξ ημερων του πασ",
+      },
+      {
+        text: "χα ηλθεν ο ισ εισ βη",
+        caption:
+          'Be very careful with the second to last letter. In some scripts, β, μ, ν, and υ are only differentiated by how the "tails" to the lower left and right side of the letters are formed and connect (or not!) to the surrounding letters.',
+      },
+      {
+        text: "θανιαν οπου ην λα",
+      },
+      {
+        text: "ζαροσ ο τεθνηκωσ",
+      },
+      {
+        text: "ον ηγειρεν εκ νεκρων",
+      },
+      {
+        text: "εποιησαν ουν αυτω",
+      },
+      {
+        text: "δειπνον εκει και η μαρ",
+      },
+      {
+        text: "θα διηκονει ο δε λαζα",
+      },
+      {
+        text: "ροσ εισ ην των ανακει",
+      },
+      {
+        text: "μενων συν αυτω η ουν",
+      },
+      {
+        text: "μαρια λαβουσα λιτ",
+      },
+    ],
+  },
+  8: {
     // helpful edition https://books.google.com/books?id=2c5hAAAAcAAJ&pg=PP118&lpg=PP118&dq=ephrem+syrus+%CE%BA%CE%B1%CF%84%CE%B1%CE%BD%CE%B9%CE%BA%CF%84%CE%B9%CE%BA%CE%BF%CF%82+%CE%BB%CE%BF%CE%B3%CE%BF%CF%82+%CE%B1&source=bl&ots=LeXDEgtDAt&sig=ACfU3U1qoHsw12pFlyLR5Tae8UnNklc6kg&hl=en&sa=X&ved=2ahUKEwif16uHiNH0AhX-Ap0JHUBGA_QQ6AF6BAgYEAM#v=onepage&q=ephrem%20syrus%20%CE%BA%CE%B1%CF%84%CE%B1%CE%BD%CE%B9%CE%BA%CF%84%CE%B9%CE%BA%CE%BF%CF%82%20%CE%BB%CE%BF%CE%B3%CE%BF%CF%82%20%CE%B1&f=false
     manifestId:
       "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00050975/manifest",
@@ -488,7 +531,7 @@ const manifests: Manifests = {
       },
     ],
   },
-  8: {
+  9: {
     // Transcription (which has errors): https://spotlight.vatlib.it/greek-paleography/catalog/71fcddac-57f2-4a02-a97a-35469f00ba9b
     // Commentary on the script: https://spotlight.vatlib.it/greek-paleography/feature/2-introduction-to-minuscule-bookhands)
     manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.2200/manifest.json",
