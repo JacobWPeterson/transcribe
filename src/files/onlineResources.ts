@@ -26,7 +26,7 @@ const onlineResources: ResourceCategories[] = [
     ],
   },
   {
-    heading: "Reading aids",
+    heading: "Ligatures and Abbreviations",
     resources: [
       {
         name: "CRBMI Minuscule Ligature/Abbreviation Tool",
@@ -60,10 +60,17 @@ const onlineResources: ResourceCategories[] = [
           "A helpful short article with scores of ligatures (Requires a free JSTOR account; is also available elsewhere online).",
         url: "https://www.jstor.org/stable/625810",
       },
+      {
+        name: "Greek ligatures",
+        creator: "Wikipedia",
+        description:
+          "Includes a quick table overview of Greek ligatures forms.",
+        url: "https://en.wikipedia.org/wiki/Greek_ligatures",
+      },
     ],
   },
   {
-    heading: "Palaeography",
+    heading: "Greek Scripts",
     resources: [
       {
         name: "Collaborative Database of Dateable Greek Bookhands (CDDGB)",
@@ -72,6 +79,20 @@ const onlineResources: ResourceCategories[] = [
           "A database of objectively datable manuscripts useful for tracing the development of Greek handwriting and comparatively dating other manuscripts.",
         url: "https://airtable.com/appAIIx0kRIuaKBxI/shrZEkjkKomzgWh5Y/tblS0ve69dAzdMrus/viwSd70ZTRJuzxvM1?blocks=hide",
       },
+      {
+        name: "An Introduction to Greek and Latin Palaeography",
+        creator: "Edward Maunde Thompson",
+        description:
+          "In addition to useful discussions around tools and materials, Thompson traces the development of Greek and Latin alphabets across a wide range of centuries. Of particular usefulness are the tables of letters on pages 144–7",
+        url: "https://archive.org/details/greeklatin00thomuoft",
+      },
+      {
+        name: "Greek minuscule",
+        creator: "Wikipedia",
+        description:
+          "Includes a quick table overview of Greek cursive and minuscule forms.",
+        url: "https://en.wikipedia.org/wiki/Greek_minuscule",
+      },
     ],
   },
   {
@@ -79,14 +100,14 @@ const onlineResources: ResourceCategories[] = [
     resources: [
       {
         name: "New Testament Virtual Manuscript Room (NT.VMR)",
-        creator: "the Institut für Neutestamentliche Textforschung (INTF)",
+        creator: "The Institut für Neutestamentliche Textforschung (INTF)",
         description:
           "A collaborative research environment where New Testament textual scholars come to use and share resources and to contribute to the ongoing efforts for cataloging, imaging, indexing, and transcribing all known New Testament manuscript resources worldwide.",
         url: "https://ntvmr.uni-muenster.de/manuscript-workspace",
       },
       {
         name: "Codex Sinaiticus",
-        creator: "the Codex Sinaiticus Project",
+        creator: "The Codex Sinaiticus Project",
         description:
           "The Codex Sinaiticus Project is an international collaboration to reunite the entire manuscript in digital form and make it accessible to a global audience for the first time.",
         url: "https://codexsinaiticus.org/en/manuscript.aspx",
