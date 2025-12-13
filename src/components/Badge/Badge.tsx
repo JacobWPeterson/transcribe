@@ -21,7 +21,7 @@ export const Badge = ({
       className={classNames(styles.Container, {
         [styles.Success]: type === BadgeTypes.SUCCESS,
         [styles.Error]: type === BadgeTypes.ERROR,
-        [styles.NC]: type === BadgeTypes.NC,
+        [styles.Help]: type === BadgeTypes.HELP,
         [styles.Small]: small,
       })}
     >

@@ -94,44 +94,6 @@ export const SingleLine = ({
     setShowAnswerEvaluation(true);
   };
 
-  const newConcept = (concept: string): ReactElement => (
-    <OverlayTrigger
-      key={`${concept}-tooltip`}
-      placement="top"
-      rootClose
-      transition
-      trigger="click"
-      overlay={
-        <Popover id="popover-concepts">
-          <Popover.Header
-            className="PopoverHeader"
-            as="h3"
-          >{`New Concept: ${concept}`}</Popover.Header>
-          <Popover.Body>
-            {glosses?.[concept]?.short}
-            {glosses?.[concept]?.long && (
-              <>
-                &nbsp;
-                <a
-                  className="Link"
-                  href={`/glossary#${concept}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Learn more
-                </a>
-              </>
-            )}
-          </Popover.Body>
-        </Popover>
-      }
-    >
-      <span>
-        <Badge type={BadgeTypes.NC}>NC</Badge>
-      </span>
-    </OverlayTrigger>
-  );
-
   const renderAnswerEvaluation = (): ReactElement =>
     submissionStatus?.[0] === false ? (
       <OverlayTrigger
@@ -217,7 +179,8 @@ export const SingleLine = ({
   return (
     <form
       className={classnames(styles.Form, {
-        [styles.HasHelpText]: hasNonGreekChars || line.caption,
+        [styles.HasHelpText]:
+          hasNonGreekChars || line.newConcept || line.caption,
       })}
       onSubmit={(e): void => handleSubmit(e)}
     >
@@ -247,20 +210,41 @@ export const SingleLine = ({
           >
             Check
           </button>
-          {line.newConcept && newConcept(line.newConcept)}
           {showAnswerEvaluation && !showHint && renderAnswerEvaluation()}
           {showHint && hint()}
         </div>
       </div>
-      {(hasNonGreekChars || line.caption) && (
+      {(hasNonGreekChars || line.newConcept || line.caption) && (
         <div className={styles.Lower}>
           {hasNonGreekChars && (
             <small className={classnames(styles.Small, styles.Error)}>
               Non-Greek characters have been detected
             </small>
           )}
-          {line.caption && !hasNonGreekChars && (
-            <small className={styles.Small}>{line.caption}</small>
+          {!hasNonGreekChars && (line.newConcept || line.caption) && (
+            <small className={styles.Small}>
+              {line.newConcept && (
+                <>
+                  <i>{`New concept: ${line.newConcept}. `}</i>
+                  {glosses?.[line.newConcept]?.short}
+                  &nbsp;
+                  {glosses?.[line.newConcept]?.long && (
+                    <>
+                      <a
+                        className="Link"
+                        href={`/glossary#${line.newConcept}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Learn more
+                      </a>
+                      {line?.caption && <>.&nbsp;</>}
+                    </>
+                  )}
+                </>
+              )}
+              {line?.caption}
+            </small>
           )}
         </div>
       )}

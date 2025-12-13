@@ -36,26 +36,20 @@ describe("SingeLine", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders correctly for new concept lines", async () => {
+  it("renders correctly for new concept lines", () => {
     render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
 
-    const user = userEvent.setup();
     expect(screen.queryByRole("button", { name: "T" })).not.toBeInTheDocument();
     expect(screen.getByRole("textbox", { name: "L1" })).toBeInTheDocument();
 
-    expect(screen.getByText("Helpful caption")).toBeInTheDocument();
+    expect(screen.getByText(/Helpful caption/)).toBeInTheDocument();
     const checkButton = screen.getByRole("button", { name: "Check" });
     expect(checkButton).toBeInTheDocument();
     expect(checkButton).toBeDisabled();
-    expect(screen.getByRole("button", { name: "NC" })).toBeInTheDocument();
-
-    await user.click(screen.getByRole("button", { name: "NC" }));
-    expect(
-      screen.getByRole("heading", { level: 3, name: "New Concept: Ekthesis" })
-    ).toBeInTheDocument();
+    expect(screen.getByText(/New concept: Ekthesis./)).toBeInTheDocument();
     expect(
       screen.getByText(
-        "A large, decorative letter at the beginning of a line that is often in the margin."
+        /A large, decorative letter at the beginning of a line that is often in the margin./
       )
     ).toBeInTheDocument();
   });
@@ -80,11 +74,11 @@ describe("SingeLine", () => {
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
     expect(lineInput).toBeInTheDocument();
-    expect(screen.getByText("Helpful caption")).toBeInTheDocument();
+    expect(screen.getByText(/Helpful caption/)).toBeInTheDocument();
 
     await user.type(lineInput, "latin");
 
-    expect(screen.queryByText("Helpful caption")).not.toBeInTheDocument();
+    expect(screen.queryByText(/Helpful caption/)).not.toBeInTheDocument();
     expect(
       screen.getByText("Non-Greek characters have been detected")
     ).toBeInTheDocument();
@@ -93,7 +87,7 @@ describe("SingeLine", () => {
     expect(
       screen.queryByText("Non-Greek characters have been detected")
     ).not.toBeInTheDocument();
-    expect(screen.getByText("Helpful caption")).toBeInTheDocument();
+    expect(screen.getByText(/Helpful caption/)).toBeInTheDocument();
   });
 
   it("shows a help message when user types numbers", async () => {
@@ -102,11 +96,11 @@ describe("SingeLine", () => {
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
     expect(lineInput).toBeInTheDocument();
-    expect(screen.getByText("Helpful caption")).toBeInTheDocument();
+    expect(screen.getByText(/Helpful caption/)).toBeInTheDocument();
 
     await user.type(lineInput, "1000");
 
-    expect(screen.queryByText("Helpful caption")).not.toBeInTheDocument();
+    expect(screen.queryByText(/Helpful caption/)).not.toBeInTheDocument();
     expect(
       screen.getByText("Non-Greek characters have been detected")
     ).toBeInTheDocument();
@@ -543,7 +537,6 @@ describe("SingeLine", () => {
 
       const incorrectButton = screen.getByRole("button", { name: "X" });
       expect(incorrectButton).toBeInTheDocument();
-      await user.keyboard("{tab}");
       await user.keyboard("{tab}");
       expect(
         screen.getByText("Your answer is 1 letter too short.")
