@@ -39,7 +39,7 @@ const manifests: Manifests = {
         text: "ανθρωποσ τισ ην εν χωρα τη αυσιτιδι ω ονομα ιωβ",
         newConcept: "Ekthesis",
         caption:
-          "The new concept (click the NC icon) was made possible by the erasure of the first letter on this line.",
+          "The ekthesis was made possible by the erasure of the first letter on this line.",
       },
       {
         text: "και ην ο ανθρωποσ εκεινοσ αληθινοσ αμεμπτοσ δικαιοσ θεοσεβησ",
@@ -305,7 +305,7 @@ const manifests: Manifests = {
       "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00058840/manifest",
     canvasIndex: 51,
     instruction:
-      "This lesson features a relatively easy to read decorative semi-uncial text but introduces ligatures, abbreviations, and numbers, so be sure to consult the 'Online Resources' under the Help tab for resources to help intrepret these. This is a page of kephalaia (ancient chapter divisions) where each line contains a Greek number and then a short title for that section. Many lines begin with an abbreviation for περι (the stacked πε).",
+      "This lesson features a relatively easy to read decorative semi-uncial text but introduces ligatures, abbreviations, and numbers, so be sure to consult the 'Online resources' under the Help tab for resources to help intrepret these. This is a page of kephalaia (ancient chapter divisions) where each line contains a Greek number and then a short title for that section. Many lines begin with an abbreviation for περι (the stacked πε).",
     lines: [
       {
         text: "α περι των μαγων",
@@ -437,7 +437,7 @@ const manifests: Manifests = {
   7: {
     manifestId: "https://digi.vatlib.it/iiif/MSS_Ott.gr.326/manifest.json",
     instruction:
-      "An introduction to minuscule featuring dyed parchment and silver letters. The script is fairly clear, upright, and regular and the ligatures are all very common. Consult the resources for minuscules and ligatures on the Online Resources help page. Ignore the title in gold at the top of the leaf.",
+      "An introduction to minuscule featuring dyed parchment and silver letters. The script is fairly clear, upright, and regular and the ligatures are all very common. Consult the resources for minuscules and ligatures on the Online resources help page. Ignore the title in gold at the top of the leaf.",
     canvasIndex: 42,
     lines: [
       {
