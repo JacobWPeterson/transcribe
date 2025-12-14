@@ -614,6 +614,104 @@ const manifests: Manifests = {
     ],
   },
   10: {
+    manifestId:
+      "https://viewer.cbl.ie/viewer/api/v1/records/W_143_5_1/manifest/",
+    canvasIndex: 2,
+    lines: [
+      {
+        text: "γεγονεν εν αυτω ζωη ην και η",
+        caption: "The flourish above the line contains two letters.",
+      },
+      {
+        text: "ζωη ην το φωσ των ανων και",
+      },
+      {
+        text: "το φωσ εν τη σκοτια φαινει και η",
+      },
+      {
+        text: "σκοτια αυτο ου κατελαβεν εγενετο",
+      },
+      {
+        text: "ανοσ απεσταλμενοσ παρα θυ ο",
+      },
+      {
+        text: "νομα αυτω ιωαννησ ουτοσ ηλθεν",
+      },
+      {
+        text: "εισ μαρτυριαν ινα μαρτυριση περι",
+      },
+      {
+        text: "του φωτοσ ινα παντεσ πιστευ",
+      },
+      {
+        text: "σωσι δι αυτου ουκ ην εκεινοσ το φωσ",
+      },
+      {
+        text: "αλλ ινα μαρτυριση περι του φωτοσ",
+      },
+      {
+        text: "ην το φωσ το αληθινον ο φωτι",
+      },
+      {
+        text: "ζει παντα ανον ερχομενον εισ τον κοσ",
+      },
+      {
+        text: "μον εν τω κοσμω ην και ο κοσμοσ",
+        caption:
+          "A new form of the και compendium appears here and several more times below.",
+      },
+      {
+        text: "δι αυτου εγενετο και ο κοσμοσ αυτον",
+      },
+      {
+        text: "ουκ εγνω εισ τα ιδια ηλθε και",
+      },
+      {
+        text: "οι ιδιοι αυτον ου παρελαβον ο",
+      },
+      {
+        text: "σοι δε ελαβον αυτον εδωκεν",
+      },
+      {
+        text: "αυτοισ εξουσιαν τεκνα θεου γενεσ",
+      },
+      {
+        text: "θαι τοισ πιστευουσιν εισ το ονομα αυτου",
+      },
+      {
+        text: "οι ουκ εξ αιματων ουδε εκ θε",
+      },
+      {
+        text: "ληματοσ σαρκοσ ουδε εκ θεληματοσ",
+        caption: "There are four letters being abbreviated after the last μ.",
+      },
+      {
+        text: "ανδροσ αλλ εκ θεου εγεννηθησαν",
+      },
+      {
+        text: "και ο λογοσ σαρξ εγενετο και εσκη",
+      },
+      {
+        text: "νωσεν εν ημιν και εθεασαμεθα την",
+      },
+      {
+        text: "δοξαν αυτου δοξαν ωσ μονογε",
+      },
+      {
+        text: "νουσ παρα πρσ πληρησ χαριτοσ",
+      },
+      {
+        text: "και αληθειασ ιωαννησ μαρτυρει",
+      },
+      {
+        text: "περι αυτου κεκεκραγε λεγων",
+      },
+      {
+        text: "ουτοσ ην ον ειπον ο οπισω μου",
+      },
+    ],
+  },
+  11: {
     // Transcription (which has errors): https://spotlight.vatlib.it/greek-paleography/catalog/71fcddac-57f2-4a02-a97a-35469f00ba9b
     // Commentary on the script: https://spotlight.vatlib.it/greek-paleography/feature/2-introduction-to-minuscule-bookhands)
     manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.2200/manifest.json",
