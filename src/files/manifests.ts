@@ -1,6 +1,8 @@
 //  Other potential MSS:
 // Aristophanes minuscules https://www.digitale-sammlungen.de/en/view/bsb00069327?page=,1
 
+// Boethius: https://cudl.lib.cam.ac.uk/view/MS-ADD-01880-00008/1
+
 // Difficult 16th c minuscule: https://digi.vatlib.it/view/MSS_Barb.gr.22
 
 export type Line = {
@@ -478,6 +480,86 @@ const manifests: Manifests = {
     ],
   },
   8: {
+    // Edition of Epiphanius: http://khazarzar.skeptik.net/books/panariog.htm
+    manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.503/manifest.json",
+    canvasIndex: 56,
+    instruction:
+      "A slightly more angular form of minuscule featuring evermore ligatures. Transcribe the left column.",
+    lines: [
+      {
+        text: "δικαιου μονον υψωθησεται",
+      },
+      {
+        text: "οπερ εστιν πιστισ αληθειασ",
+      },
+      {
+        text: "διο και τουτον συντριψαντεσ",
+      },
+      {
+        text: "τη τησ αληθειασ διδασκα",
+      },
+      {
+        text: "λια επι τασ μετεπειτα διελ",
+      },
+      {
+        text: "θωμεν θν βοηθον επικαλου",
+      },
+      {
+        text: "μενοι ω δοξα τιμη και",
+      },
+      {
+        text: "κρατοσ εισ τουσ αιωνασ",
+      },
+      {
+        text: "των αιωνων αμην",
+      },
+      {
+        text: "κατα βασιλειδου",
+      },
+      {
+        text: "κατα νικολαιτων",
+      },
+      {
+        text: "πεμπτη η και κε",
+        caption:
+          'It appears this line originally read "πεντοτε και κε." Try to work out what it has been corrected to. Hint: The first τ and what remains of the next letter now form one letter.',
+      },
+      {
+        text: "νικολαοσ γεγονεν εισ απο",
+      },
+      {
+        text: "των επτα διακονων των",
+      },
+      {
+        text: "εκλελεγμενων υπο των",
+      },
+      {
+        text: "αποστολων αμα στεφανω",
+      },
+      {
+        text: "τω αγιω και πρωτομαρτυρι",
+      },
+      {
+        text: "και προχορω και παρμενα",
+      },
+      {
+        text: "και τοισ αλλοισ",
+      },
+      {
+        text: "ουτοσ απο των αντιοχεων",
+      },
+      {
+        text: "ορμωμενοσ προσηλυτοσ",
+      },
+      {
+        text: "γινεται μετεπειτα δε κατα",
+      },
+      {
+        text: "δεξαμενοσ τον περι χυ",
+      },
+    ],
+  },
+  9: {
     // helpful edition https://books.google.com/books?id=2c5hAAAAcAAJ&pg=PP118&lpg=PP118&dq=ephrem+syrus+%CE%BA%CE%B1%CF%84%CE%B1%CE%BD%CE%B9%CE%BA%CF%84%CE%B9%CE%BA%CE%BF%CF%82+%CE%BB%CE%BF%CE%B3%CE%BF%CF%82+%CE%B1&source=bl&ots=LeXDEgtDAt&sig=ACfU3U1qoHsw12pFlyLR5Tae8UnNklc6kg&hl=en&sa=X&ved=2ahUKEwif16uHiNH0AhX-Ap0JHUBGA_QQ6AF6BAgYEAM#v=onepage&q=ephrem%20syrus%20%CE%BA%CE%B1%CF%84%CE%B1%CE%BD%CE%B9%CE%BA%CF%84%CE%B9%CE%BA%CE%BF%CF%82%20%CE%BB%CE%BF%CE%B3%CE%BF%CF%82%20%CE%B1&f=false
     manifestId:
       "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00050975/manifest",
@@ -531,7 +613,7 @@ const manifests: Manifests = {
       },
     ],
   },
-  9: {
+  10: {
     // Transcription (which has errors): https://spotlight.vatlib.it/greek-paleography/catalog/71fcddac-57f2-4a02-a97a-35469f00ba9b
     // Commentary on the script: https://spotlight.vatlib.it/greek-paleography/feature/2-introduction-to-minuscule-bookhands)
     manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.2200/manifest.json",
