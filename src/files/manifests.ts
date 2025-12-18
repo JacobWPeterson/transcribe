@@ -1,6 +1,4 @@
 //  Other potential MSS:
-// Aristophanes minuscules https://www.digitale-sammlungen.de/en/view/bsb00069327?page=,1
-
 // Boethius: https://cudl.lib.cam.ac.uk/view/MS-ADD-01880-00008/1
 
 // Difficult 16th c minuscule: https://digi.vatlib.it/view/MSS_Barb.gr.22
@@ -712,6 +710,61 @@ const manifests: Manifests = {
     ],
   },
   11: {
+    // Lines 153-179 of Aristophanes, The Clouds. Diglot: https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0019.tlg003.perseus-eng2:0-1200?right=perseus-grc2
+    manifestId:
+      "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00069327/manifest",
+    canvasIndex: 65,
+    instruction:
+      "Ignore the text in red. These indicate changes in character in the play; see if you can figure out the abbreviations.",
+    lines: [
+      {
+        text: "ω ζευ βασιλευ τησ λεπτοτητοσ των φρενων",
+      },
+      {
+        text: "τι δητ αν ετερον ει πυθοιο σωκρατουσ",
+        caption: "Theres is a correction by the original scribe on this line.",
+      },
+      {
+        text: "φροντισμα ποιον αντιβολω κατειπε μοι",
+      },
+      {
+        text: "ανηρετ αυτον χαιρεφων ο σφηττιοσ οποτερα",
+      },
+      {
+        text: "την γνωμην εχει τασ εμπιδασ κατα το στομ αδειν η",
+        caption:
+          "The 17th character in this line may be hard to identify; it appears twice in slightly more regular ligature appearance on line 1. You will see it again on the following lines.",
+      },
+      {
+        text: "κατα τουρροπυγιον τι δητ εκεινοσ ειπε περι τησ εμπιδοσ",
+      },
+      {
+        text: "",
+      },
+      {
+        text: "",
+      },
+      {
+        text: "",
+      },
+      {
+        text: "",
+      },
+      {
+        text: "",
+      },
+      {
+        text: "",
+      },
+      {
+        text: "",
+      },
+      {
+        text: "",
+      },
+    ],
+  },
+  12: {
     // Transcription (which has errors): https://spotlight.vatlib.it/greek-paleography/catalog/71fcddac-57f2-4a02-a97a-35469f00ba9b
     // Commentary on the script: https://spotlight.vatlib.it/greek-paleography/feature/2-introduction-to-minuscule-bookhands)
     manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.2200/manifest.json",
