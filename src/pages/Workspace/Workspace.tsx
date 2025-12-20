@@ -1,6 +1,7 @@
 import { type ReactElement, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import type { ManifestSets } from "../../files/manifests";
 import manifests from "../../files/manifests";
 import { E404 } from "../E404/E404";
 import { Alert } from "../../components/Alert/Alert";
@@ -9,15 +10,17 @@ import { TranscriptionArea } from "./TranscriptionArea/TranscriptionArea";
 import { Mirador } from "./Mirador/index";
 import styles from "./Workspace.module.scss";
 
-export const Workspace = (): ReactElement => {
+export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
   const { id = 1 } = useParams();
   const navigate = useNavigate();
+  const manifestSet = manifests[set];
+  const currentManifest = manifestSet[id];
   const [pageNumber, setPageNumber] = useState<number>();
   const [showWrongPageAlert, setShowWrongPageAlert] = useState<boolean>(false);
 
-  const canvasIndex = manifests[id]?.canvasIndex;
-  const indexAdjustment = manifests[id]?.canvasIndexToPageNumberAdj || 0;
-  const numberOfLessons = Object.keys(manifests).length;
+  const canvasIndex = currentManifest?.canvasIndex;
+  const indexAdjustment = currentManifest?.canvasIndexToPageNumberAdj || 0;
+  const numberOfLessons = Object.keys(manifestSet).length;
 
   useEffect(() => {
     if (pageNumber && pageNumber !== canvasIndex + indexAdjustment) {
@@ -29,7 +32,7 @@ export const Workspace = (): ReactElement => {
 
   useEffect(() => setShowWrongPageAlert(false), [id]);
 
-  if (!manifests[id]) {
+  if (!currentManifest) {
     return <E404 />;
   }
 
@@ -38,9 +41,9 @@ export const Workspace = (): ReactElement => {
   ): Promise<void> | void => {
     switch (type) {
       case "next":
-        return navigate(`/lessons/${Number(id) + 1}`);
+        return navigate(`/${set}/${Number(id) + 1}`);
       case "previous":
-        return navigate(`/lessons/${Number(id) - 1}`);
+        return navigate(`/${set}/${Number(id) - 1}`);
       default:
         throw new Error();
     }
@@ -74,17 +77,17 @@ export const Workspace = (): ReactElement => {
       <div className={styles.MiradorWrapper}>
         <Mirador
           index={canvasIndex - 1}
-          manifest={manifests[id].manifestId}
+          manifest={currentManifest.manifestId}
           setPageNumber={setPageNumber}
-          specialIndexHandlingStart={manifests[id]?.specialIndexHandlingStart}
-          specialIndexHandlingEnd={manifests[id]?.specialIndexHandlingEnd}
+          specialIndexHandlingStart={currentManifest?.specialIndexHandlingStart}
+          specialIndexHandlingEnd={currentManifest?.specialIndexHandlingEnd}
         />
       </div>
       <div className={styles.TranscriptionPanel}>
         <TranscriptionArea
           changeManuscript={handleManifestChange}
           lessonNumber={Number(id)}
-          manifest={manifests[id]}
+          manifest={currentManifest}
           numberOfLessons={numberOfLessons}
         />
       </div>
