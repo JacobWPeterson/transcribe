@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 
 import type { Manifest } from "../../files/manifests";
-import manifests from "../../files/manifests";
+import manifests, { ManifestSets } from "../../files/manifests";
 
 import { Workspace } from "./Workspace";
 
@@ -67,7 +67,10 @@ describe("Workspace", () => {
     render(
       <MemoryRouter initialEntries={["/lessons/1"]}>
         <Routes>
-          <Route path="/lessons/:id" element={<Workspace />} />
+          <Route
+            path="/lessons/:id"
+            element={<Workspace set={ManifestSets.CORE} />}
+          />
         </Routes>
       </MemoryRouter>
     );
@@ -89,7 +92,10 @@ describe("Workspace", () => {
     render(
       <MemoryRouter initialEntries={["/lessons/1"]}>
         <Routes>
-          <Route path="/lessons/:id" element={<Workspace />} />
+          <Route
+            path="/lessons/:id"
+            element={<Workspace set={ManifestSets.CORE} />}
+          />
         </Routes>
       </MemoryRouter>
     );
@@ -97,7 +103,7 @@ describe("Workspace", () => {
     // Alert should appear mentioning the target canvas index
     expect(
       screen.getByText(
-        `Feel free to explore, but you have left the target image (${manifests[1].canvasIndex}).`
+        `Feel free to explore, but you have left the target image (${manifests[ManifestSets.CORE][1].canvasIndex}).`
       )
     ).toBeInTheDocument();
   });
@@ -106,7 +112,10 @@ describe("Workspace", () => {
     render(
       <MemoryRouter initialEntries={["/lessons/9999"]}>
         <Routes>
-          <Route path="/lessons/:id" element={<Workspace />} />
+          <Route
+            path="/lessons/:id"
+            element={<Workspace set={ManifestSets.CORE} />}
+          />
         </Routes>
       </MemoryRouter>
     );

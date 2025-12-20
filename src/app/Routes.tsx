@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import type { ReactElement } from "react";
 
+import { ManifestSets } from "../files/manifests";
 import { Home } from "../pages/Home/Home";
 import { Workspace } from "../pages/Workspace/Workspace";
 import { Glossary } from "../pages/Help/Glossary/Glossary";
@@ -19,8 +20,16 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route index element={<Home />} />
-      <Route path="lessons" element={<Workspace />} />
-      <Route path="lessons/:id" element={<Workspace />} />
+      <Route path="lessons" element={<Workspace set={ManifestSets.CORE} />} />
+      <Route path="UoEDiv" element={<Workspace set={ManifestSets.UoEDiv} />} />
+      <Route
+        path="UoEDiv/:id"
+        element={<Workspace set={ManifestSets.UoEDiv} />}
+      />
+      <Route
+        path="lessons/:id"
+        element={<Workspace set={ManifestSets.CORE} />}
+      />
       <Route path="glossary" element={<Glossary />} />
       <Route path="guide" element={<Guide />} />
       <Route
