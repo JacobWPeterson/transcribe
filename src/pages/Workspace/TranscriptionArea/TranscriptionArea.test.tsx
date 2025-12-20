@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import manifests from "../../../files/manifests";
+import manifests, { ManifestSets } from "../../../files/manifests";
 
 import { TranscriptionArea } from "./TranscriptionArea";
 
@@ -17,7 +17,7 @@ describe("TranscriptionArea", () => {
         changeManuscript={mockChangeManuscript}
         numberOfLessons={3}
         lessonNumber={1}
-        manifest={manifests[1]}
+        manifest={manifests[ManifestSets.CORE][1]}
       />
     );
     const user = userEvent.setup();
@@ -43,7 +43,7 @@ describe("TranscriptionArea", () => {
 
     // Lines
     expect(screen.getAllByRole("textbox")).toHaveLength(
-      manifests[1].lines.length
+      manifests[ManifestSets.CORE][1].lines.length
     );
 
     // Buttons
@@ -61,7 +61,7 @@ describe("TranscriptionArea", () => {
         changeManuscript={mockChangeManuscript}
         numberOfLessons={3}
         lessonNumber={2}
-        manifest={manifests[2]}
+        manifest={manifests[ManifestSets.CORE][2]}
       />
     );
     const user = userEvent.setup();
@@ -87,7 +87,7 @@ describe("TranscriptionArea", () => {
 
     // Lines
     expect(screen.getAllByRole("textbox")).toHaveLength(
-      manifests[2].lines.length
+      manifests[ManifestSets.CORE][2].lines.length
     );
 
     // Buttons
@@ -107,7 +107,7 @@ describe("TranscriptionArea", () => {
         changeManuscript={mockChangeManuscript}
         numberOfLessons={3}
         lessonNumber={3}
-        manifest={manifests[3]}
+        manifest={manifests[ManifestSets.CORE][3]}
       />
     );
     const user = userEvent.setup();
@@ -133,7 +133,7 @@ describe("TranscriptionArea", () => {
 
     // Lines
     expect(screen.getAllByRole("textbox")).toHaveLength(
-      manifests[3].lines.length
+      manifests[ManifestSets.CORE][3].lines.length
     );
 
     // Buttons
@@ -153,7 +153,7 @@ describe("TranscriptionArea", () => {
         changeManuscript={mockChangeManuscript}
         numberOfLessons={3}
         lessonNumber={3}
-        manifest={manifests[3]}
+        manifest={manifests[ManifestSets.CORE][3]}
       />
     );
     const user = userEvent.setup();
@@ -188,7 +188,7 @@ describe("TranscriptionArea", () => {
         changeManuscript={mockChangeManuscript}
         numberOfLessons={3}
         lessonNumber={3}
-        manifest={manifests[3]}
+        manifest={manifests[ManifestSets.CORE][3]}
       />
     );
     const user = userEvent.setup();
