@@ -889,12 +889,18 @@ const manifests: ManifestSet = {
       lines: [
         {
           text: "λυμων και ιουδαιασ και",
+          caption:
+            'The line ends with a decorative kappa; this is a "και compendium." Write it out in full.',
+          newConcept: "Abbreviation",
         },
         {
           text: "περαν του ιορδανου",
         },
         {
           text: "ιδων δε τουσ οχλουσ",
+          caption:
+            "Chapter 5 begins on this line with the kephalaia number, ΚΓ, followed by the outdented iota. Do not include the ΚΓ in your transcription.",
+          newConcept: "Numbers",
         },
         {
           text: "ανεβη εισ το οροσ και",
@@ -904,6 +910,8 @@ const manifests: ManifestSet = {
         },
         {
           text: "προσηλθαν οι μαθηται",
+          caption:
+            "There is an intralinear letter on this line; it is by a later corrector and suggests a variant reading. Do not include it.",
         },
         {
           text: "αυτου και ανοιξασ το",
@@ -919,6 +927,7 @@ const manifests: ManifestSet = {
         },
         {
           text: "πνευματι οτι αυτων",
+          newConcept: "Final nu",
         },
         {
           text: "εστιν η βασιλεια των",
@@ -973,6 +982,8 @@ const manifests: ManifestSet = {
         },
         {
           text: "θν οψονται",
+          newConcept: "Nomina sacra",
+          caption: "Leave the nomen sacrum abbreviated in your transcription.",
         },
         {
           text: "μακαριοι οι ειρηνοποιοι",
@@ -1003,6 +1014,8 @@ const manifests: ManifestSet = {
         },
         {
           text: "ξωσιν και ειπωσιν παν",
+          caption:
+            "A later corrector partially erased the two final nus on this line; leave them in your transcription.",
         },
         {
           text: "πονηρον καθ υμων",
