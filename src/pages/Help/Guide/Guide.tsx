@@ -1,6 +1,7 @@
 import type { ReactElement } from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
+import { Check } from "react-feather";
 
 import styles from "../Help.module.scss";
 import { Badge } from "../../../components/Badge/Badge";
@@ -104,7 +105,9 @@ export const Guide = (): ReactElement => (
           </tr>
           <tr className={styles.Row}>
             <td className={styles.SymbolCell}>
-              <Badge type={BadgeTypes.SUCCESS}>✓</Badge>
+              <Badge type={BadgeTypes.SUCCESS}>
+                <Check strokeWidth={3} />
+              </Badge>
             </td>
             <td className={styles.TextCell}>
               <p className={styles.LegendText}>

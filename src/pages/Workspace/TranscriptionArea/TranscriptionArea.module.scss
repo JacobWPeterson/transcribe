@@ -60,16 +60,17 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        gap: 4px;
         color: theme.$grey00;
         background: theme.$secondary03;
-        height: 34px;
-        width: 90px;
+        padding: 4px 8px;
         border: none;
         border-radius: 5px;
 
-        &.Back {
+        &.Download {
           color: theme.$primary03;
-          background: theme.$grey02;
+          background: theme.$grey01;
+          font-size: 14px;
         }
 
         &:focus,
@@ -78,10 +79,14 @@
           border: none;
           outline: none;
 
-          &.Back {
-            background: theme.$grey04;
+          &.Download {
+            background: theme.$grey02;
           }
         }
+      }
+
+      .DummyButton {
+        width: 90px;
       }
     }
   }
