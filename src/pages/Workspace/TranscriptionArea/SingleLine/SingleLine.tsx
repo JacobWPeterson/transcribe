@@ -4,6 +4,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import pluralize from "pluralize";
 import classnames from "classnames";
+import { Check } from "react-feather";
 
 import glosses from "../../../../files/glosses";
 import type { Line } from "../../../../files/manifests";
@@ -113,7 +114,9 @@ export const SingleLine = ({
         </span>
       </OverlayTrigger>
     ) : (
-      <Badge type={BadgeTypes.SUCCESS}>✓</Badge>
+      <Badge type={BadgeTypes.SUCCESS}>
+        <Check strokeWidth={3} />
+      </Badge>
     );
 
   const getHint = (guess: string, answer: string): string => {
