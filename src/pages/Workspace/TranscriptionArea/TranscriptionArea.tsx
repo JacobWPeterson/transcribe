@@ -1,5 +1,7 @@
 import { type ReactElement, useEffect, useRef, useState } from "react";
+import { jsPDF } from "jspdf";
 import classNames from "classnames";
+import { ArrowLeft, ArrowRight, Download } from "react-feather";
 
 import type { Line, Manifest } from "../../../files/manifests";
 
@@ -29,6 +31,35 @@ export const TranscriptionArea = ({
   useEffect(() => {
     transcriptionAreaRef.current.scrollTop = 0;
   }, [lessonNumber]);
+
+  const handleDownloadPDF = (): void => {
+    const element = transcriptionAreaRef.current;
+    const heading = document.createElement("h1");
+    heading.style.setProperty("font-size", "28px");
+    const headingText = document.createTextNode(
+      `Lesson ${lessonNumber} report`
+    );
+    heading.appendChild(headingText);
+    element.prepend(heading);
+    const pdf = new jsPDF();
+    pdf
+      .html(element, {
+        margin: [10, 10, 10, 10],
+        html2canvas: {
+          scale: 0.25,
+          ignoreElements: ({ id }) =>
+            id === "prevButton" ||
+            id === "downloadButton" ||
+            id === "nextButton",
+        },
+      })
+      .then(() => {
+        pdf.output("pdfobjectnewwindow");
+      })
+      .finally(() => {
+        element.removeChild(heading);
+      });
+  };
 
   let titleAdjustments = 0;
 
@@ -75,23 +106,33 @@ export const TranscriptionArea = ({
         <div className={styles.ButtonsContainer}>
           {lessonNumber > 1 ? (
             <button
-              className={classNames(styles.Button, styles.Back)}
+              className={styles.Button}
               onClick={() => handleClick("previous")}
+              id="prevButton"
             >
-              Previous
+              <ArrowLeft size={18} />
             </button>
           ) : (
-            <div />
+            <div className={styles.DummyButton} />
           )}
+          <button
+            className={classNames(styles.Button, styles.Download)}
+            onClick={handleDownloadPDF}
+            id="downloadButton"
+          >
+            Report
+            <Download className={styles.DownloadIcon} size={14} />
+          </button>
           {lessonNumber < numberOfLessons ? (
             <button
               className={styles.Button}
               onClick={() => handleClick("next")}
+              id="nextButton"
             >
-              Next
+              <ArrowRight size={18} />
             </button>
           ) : (
-            <div />
+            <div className={styles.DummyButton} />
           )}
         </div>
       </div>
