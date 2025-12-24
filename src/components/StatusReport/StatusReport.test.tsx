@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 
 import { LessonStatus } from "../../pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum";
+
 import { StatusReport } from "./StatusReport";
 
 describe("StatusReport", () => {
@@ -14,8 +15,8 @@ describe("StatusReport", () => {
 
     render(<StatusReport lessonsStatus={lessonsStatus} />);
 
-    // Check progress text - now shows attempted lines (correct + incorrect)
-    expect(screen.getByText("3 / 4 lines attempted")).toBeInTheDocument();
+    // Check progress text
+    expect(screen.getByText("2 / 4 lines correct (50%)")).toBeInTheDocument();
 
     // Check status indicators
     expect(screen.getByText("Correct: 2")).toBeInTheDocument();
@@ -28,7 +29,7 @@ describe("StatusReport", () => {
 
     render(<StatusReport lessonsStatus={lessonsStatus} />);
 
-    expect(screen.getByText("0 / 0 lines attempted")).toBeInTheDocument();
+    expect(screen.getByText("0 / 0 lines correct (0%)")).toBeInTheDocument();
     expect(screen.getByText("Correct: 0")).toBeInTheDocument();
     expect(screen.getByText("Incorrect: 0")).toBeInTheDocument();
     expect(screen.getByText("Incomplete: 0")).toBeInTheDocument();
@@ -42,6 +43,6 @@ describe("StatusReport", () => {
 
     render(<StatusReport lessonsStatus={lessonsStatus} />);
 
-    expect(screen.getByText("2 / 2 lines attempted")).toBeInTheDocument();
+    expect(screen.getByText("2 / 2 lines correct (100%)")).toBeInTheDocument();
   });
 });
