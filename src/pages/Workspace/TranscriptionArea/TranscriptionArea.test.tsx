@@ -168,18 +168,20 @@ describe("TranscriptionArea", () => {
     expect(requireSpacesCheckbox).toBeInTheDocument();
     expect(requireSpacesCheckbox).not.toBeChecked();
 
-    const line1 = screen.getByRole("textbox", { name: "T" });
+    const line1 = screen.getByRole("textbox", { name: "title" });
     await user.type(line1, "ευαγγελιονκαταμαρκον");
 
     const checkButtons = screen.getAllByRole("button", { name: "Check" });
     await user.click(checkButtons[0]);
-    expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
 
     // Now require spaces
     await user.click(requireSpacesCheckbox);
     expect(requireSpacesCheckbox).toBeChecked();
-    expect(screen.queryByRole("button", { name: "✓" })).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("img", { name: "correct" })
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "incorrect" })).toBeInTheDocument();
   });
 
   it("correctly revalidates a line when user changes from requireSpaces true to false", async () => {
@@ -205,19 +207,25 @@ describe("TranscriptionArea", () => {
     // Now require spaces
     await user.click(requireSpacesCheckbox);
     expect(requireSpacesCheckbox).toBeChecked();
-    expect(screen.queryByRole("button", { name: "✓" })).not.toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "X" })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("img", { name: "correct" })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("img", { name: "incorrect" })
+    ).not.toBeInTheDocument();
 
-    const line1 = screen.getByRole("textbox", { name: "T" });
+    const line1 = screen.getByRole("textbox", { name: "title" });
     await user.type(line1, "ευαγγελιον κατα μαρκον");
 
     const checkButtons = screen.getAllByRole("button", { name: "Check" });
     await user.click(checkButtons[0]);
-    expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
 
     // Now unrequire spaces
     await user.click(requireSpacesCheckbox);
-    expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "X" })).not.toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("img", { name: "incorrect" })
+    ).not.toBeInTheDocument();
   });
 });
