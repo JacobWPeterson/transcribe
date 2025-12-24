@@ -106,7 +106,9 @@ export const SingleLine = ({
           </Popover>
         }
       >
-        <img src="/icons/x-octagon.png" alt="incorrect" />
+        <div role="button" tabIndex={0}>
+          <img src="/icons/x-octagon.png" alt="incorrect" />
+        </div>
       </OverlayTrigger>
     ) : (
       <img src="/icons/check-circle.png" alt="correct" />
@@ -141,7 +143,9 @@ export const SingleLine = ({
         </Popover>
       }
     >
-      <img src="/icons/help-circle.png" alt="help" />
+      <div role="button" tabIndex={0}>
+        <img src="/icons/help-circle.png" alt="help" />
+      </div>
     </OverlayTrigger>
   );
 
@@ -164,7 +168,9 @@ export const SingleLine = ({
         </Popover>
       }
     >
-      <img src="/icons/type.png" alt="title" />
+      <div role="button" tabIndex={0}>
+        <img src="/icons/type.png" alt="title" />
+      </div>
     </OverlayTrigger>
   );
 

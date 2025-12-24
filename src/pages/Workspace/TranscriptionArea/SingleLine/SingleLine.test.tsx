@@ -23,12 +23,12 @@ describe("SingeLine", () => {
     render(<SingleLine line={mockTitleLine} passedIndex={0} />);
 
     const user = userEvent.setup();
-    expect(screen.getByRole("textbox", { name: "T" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "title" })).toBeInTheDocument();
     const checkButton = screen.getByRole("button", { name: "Check" });
     expect(checkButton).toBeInTheDocument();
     expect(checkButton).toBeDisabled();
 
-    await user.hover(screen.getByRole("button", { name: "T" }));
+    await user.hover(screen.getByRole("img", { name: "title" }));
     expect(
       screen.getByText(
         "Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don't worry about them as much early on. Type them as a single line."
@@ -39,7 +39,9 @@ describe("SingeLine", () => {
   it("renders correctly for new concept lines", () => {
     render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
 
-    expect(screen.queryByRole("button", { name: "T" })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("img", { name: "title" })
+    ).not.toBeInTheDocument();
     expect(screen.getByRole("textbox", { name: "L1" })).toBeInTheDocument();
 
     expect(screen.getByText(/Helpful caption/)).toBeInTheDocument();
@@ -122,7 +124,7 @@ describe("SingeLine", () => {
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
 
-    expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
   });
 
   it("allows final sigmas", async () => {
@@ -141,7 +143,7 @@ describe("SingeLine", () => {
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
 
-    expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
   });
 
   it("is case insensitive", async () => {
@@ -160,7 +162,7 @@ describe("SingeLine", () => {
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
 
-    expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
   });
 
   it("clears the incorrect answer symbol after user changes input", async () => {
@@ -178,10 +180,12 @@ describe("SingeLine", () => {
 
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
-    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "incorrect" })).toBeInTheDocument();
 
     await user.type(lineInput, "{backspace}");
-    expect(screen.queryByRole("button", { name: "X" })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("img", { name: "incorrect" })
+    ).not.toBeInTheDocument();
   });
 
   it("tells the user their incorrect answer is too short when appropriate", async () => {
@@ -200,7 +204,7 @@ describe("SingeLine", () => {
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
 
-    const incorrectButton = screen.getByRole("button", { name: "X" });
+    const incorrectButton = screen.getByRole("img", { name: "incorrect" });
     expect(incorrectButton).toBeInTheDocument();
     await user.hover(incorrectButton);
     expect(
@@ -224,7 +228,7 @@ describe("SingeLine", () => {
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
 
-    const incorrectButton = screen.getByRole("button", { name: "X" });
+    const incorrectButton = screen.getByRole("img", { name: "incorrect" });
     expect(incorrectButton).toBeInTheDocument();
     await user.hover(incorrectButton);
     expect(
@@ -248,7 +252,7 @@ describe("SingeLine", () => {
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
 
-    const incorrectButton = screen.getByRole("button", { name: "X" });
+    const incorrectButton = screen.getByRole("img", { name: "incorrect" });
     expect(incorrectButton).toBeInTheDocument();
     await user.hover(incorrectButton);
     expect(screen.getByText("Answer is incorrect.")).toBeInTheDocument();
@@ -268,26 +272,30 @@ describe("SingeLine", () => {
     await user.type(lineInput, "αδελφοο");
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
-    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "incorrect" })).toBeInTheDocument();
 
     await user.type(lineInput, "{backspace}{backspace}ωσ");
     await user.click(checkButton);
-    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "incorrect" })).toBeInTheDocument();
 
     await user.type(lineInput, "{backspace}{backspace}οω");
     await user.click(checkButton);
-    expect(screen.queryByRole("button", { name: "X" })).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "?" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("img", { name: "incorrect" })
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "help" })).toBeInTheDocument();
 
-    await user.hover(screen.getByRole("button", { name: "?" }));
+    await user.hover(screen.getByRole("img", { name: "help" }));
     expect(screen.getByText("Incorrect letter: ω(7).")).toBeInTheDocument();
 
     await user.type(lineInput, "{backspace}{backspace}ωζ");
     await user.click(checkButton);
-    expect(screen.queryByRole("button", { name: "X" })).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "?" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("img", { name: "incorrect" })
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "help" })).toBeInTheDocument();
 
-    await user.hover(screen.getByRole("button", { name: "?" }));
+    await user.hover(screen.getByRole("img", { name: "help" }));
     expect(
       screen.getByText("Incorrect letters: ω(6), ζ(7).")
     ).toBeInTheDocument();
@@ -307,15 +315,15 @@ describe("SingeLine", () => {
     await user.type(lineInput, "αδελφ");
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
-    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "incorrect" })).toBeInTheDocument();
 
     await user.type(lineInput, "ω");
     await user.click(checkButton);
-    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "incorrect" })).toBeInTheDocument();
 
     await user.type(lineInput, "{backspace}ο");
     await user.click(checkButton);
-    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "incorrect" })).toBeInTheDocument();
   });
 
   describe("Requiring spaces", () => {
@@ -337,7 +345,7 @@ describe("SingeLine", () => {
       expect(checkButton).toBeEnabled();
       await user.click(checkButton);
 
-      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+      expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
     });
 
     it("does not consider extra spaces when requireSpaces is false", async () => {
@@ -358,7 +366,7 @@ describe("SingeLine", () => {
       expect(checkButton).toBeEnabled();
       await user.click(checkButton);
 
-      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+      expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
     });
 
     it("does not consider incorrect spacing when requireSpaces is false", async () => {
@@ -379,7 +387,7 @@ describe("SingeLine", () => {
       expect(checkButton).toBeEnabled();
       await user.click(checkButton);
 
-      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+      expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
     });
 
     it("marks the asnwer as correct when answer is correctly spaced adn when requireSpaces is true", async () => {
@@ -401,7 +409,7 @@ describe("SingeLine", () => {
       expect(checkButton).toBeEnabled();
       await user.click(checkButton);
 
-      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+      expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
     });
 
     it("considers missing spaces when requireSpaces is true", async () => {
@@ -424,9 +432,11 @@ describe("SingeLine", () => {
       await user.click(checkButton);
 
       expect(
-        screen.queryByRole("button", { name: "✓" })
+        screen.queryByRole("img", { name: "correct" })
       ).not.toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("img", { name: "incorrect" })
+      ).toBeInTheDocument();
     });
 
     it("considers extra spaces when requireSpaces is true", async () => {
@@ -449,9 +459,11 @@ describe("SingeLine", () => {
       await user.click(checkButton);
 
       expect(
-        screen.queryByRole("button", { name: "✓" })
+        screen.queryByRole("img", { name: "correct" })
       ).not.toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("img", { name: "incorrect" })
+      ).toBeInTheDocument();
     });
 
     it("considers incorrect spacing when requireSpaces is true", async () => {
@@ -474,9 +486,11 @@ describe("SingeLine", () => {
       await user.click(checkButton);
 
       expect(
-        screen.queryByRole("button", { name: "✓" })
+        screen.queryByRole("img", { name: "correct" })
       ).not.toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("img", { name: "incorrect" })
+      ).toBeInTheDocument();
     });
   });
 
@@ -499,7 +513,7 @@ describe("SingeLine", () => {
       await user.keyboard("{tab}");
       await user.keyboard("{enter}");
 
-      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+      expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
     });
 
     it("has keyboard accessible title messaging", async () => {
@@ -535,7 +549,7 @@ describe("SingeLine", () => {
       await user.keyboard("{tab}");
       await user.keyboard("{enter}");
 
-      const incorrectButton = screen.getByRole("button", { name: "X" });
+      const incorrectButton = screen.getByRole("img", { name: "incorrect" });
       expect(incorrectButton).toBeInTheDocument();
       await user.keyboard("{tab}");
       expect(
