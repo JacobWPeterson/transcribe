@@ -30,7 +30,9 @@ export const Guide = (): ReactElement => (
                   </Popover>
                 }
               >
-                <img src="/icons/type.png" alt="title" />
+                <div role="button" tabIndex={0}>
+                  <img src="/icons/type.png" alt="title" />
+                </div>
               </OverlayTrigger>
             </td>
             <td>
@@ -57,7 +59,9 @@ export const Guide = (): ReactElement => (
                   </Popover>
                 }
               >
-                <img src="/icons/x-octagon.png" alt="incorrect" />
+                <div role="button" tabIndex={0}>
+                  <img src="/icons/x-octagon.png" alt="incorrect" />
+                </div>
               </OverlayTrigger>
             </td>
             <td className={styles.TextCell}>
@@ -82,7 +86,9 @@ export const Guide = (): ReactElement => (
                   </Popover>
                 }
               >
-                <img src="/icons/help-circle.png" alt="help" />
+                <div role="button" tabIndex={0}>
+                  <img src="/icons/help-circle.png" alt="help" />
+                </div>
               </OverlayTrigger>
             </td>
             <td className={styles.TextCell}>

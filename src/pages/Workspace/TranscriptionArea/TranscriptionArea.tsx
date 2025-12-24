@@ -115,6 +115,7 @@ export const TranscriptionArea = ({
         <div className={styles.ButtonsContainer}>
           {lessonNumber > 1 ? (
             <button
+              aria-label="Previous"
               className={styles.Button}
               onClick={() => handleClick("previous")}
               id="prevButton"
@@ -134,6 +135,7 @@ export const TranscriptionArea = ({
           </button>
           {lessonNumber < numberOfLessons ? (
             <button
+              aria-label="Next"
               className={styles.Button}
               onClick={() => handleClick("next")}
               id="nextButton"
