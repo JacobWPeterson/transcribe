@@ -7,6 +7,7 @@ import type { Line, Manifest } from "../../../files/manifests";
 
 import { SingleLine } from "./SingleLine/SingleLine";
 import styles from "./TranscriptionArea.module.scss";
+import { brillBase64 } from "./constants";
 
 interface TranscriptionAreaProps {
   changeManuscript: (type: "next" | "previous") => void;
@@ -35,16 +36,23 @@ export const TranscriptionArea = ({
   const handleDownloadPDF = (): void => {
     const element = transcriptionAreaRef.current;
     const heading = document.createElement("h1");
+    element.style.setProperty("width", "790px");
     heading.style.setProperty("font-size", "28px");
     const headingText = document.createTextNode(
-      `Lesson ${lessonNumber} report`
+      `Lesson ${lessonNumber} Report`
     );
     heading.appendChild(headingText);
     element.prepend(heading);
-    const pdf = new jsPDF();
+
+    const pdf = new jsPDF({ format: "a4" });
+    pdf.addFileToVFS("Brill-Roman.ttf", brillBase64);
+    pdf.addFont("Brill-Roman.ttf", "Brill-Roman", "normal");
+    pdf.setFont("Brill-Roman");
+    pdf.setProperties({ title: `Lesson ${lessonNumber} Report` });
+
     pdf
       .html(element, {
-        margin: [10, 10, 10, 10],
+        margin: [10, 7, 10, 7],
         html2canvas: {
           scale: 0.25,
           ignoreElements: ({ id }) =>
@@ -58,6 +66,7 @@ export const TranscriptionArea = ({
       })
       .finally(() => {
         element.removeChild(heading);
+        element.style.removeProperty("width");
       });
   };
 
