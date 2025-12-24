@@ -4,12 +4,9 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import pluralize from "pluralize";
 import classnames from "classnames";
-import { Check } from "react-feather";
 
 import glosses from "../../../../files/glosses";
 import type { Line } from "../../../../files/manifests";
-import { Badge } from "../../../../components/Badge/Badge";
-import { BadgeTypes } from "../../../../components/Badge/badge.enum";
 import evaluateSubmission from "../validators";
 
 import styles from "./SingleLine.module.scss";
@@ -109,14 +106,10 @@ export const SingleLine = ({
           </Popover>
         }
       >
-        <span>
-          <Badge type={BadgeTypes.ERROR}>X</Badge>
-        </span>
+        <img src="/icons/x-octagon.png" alt="incorrect" />
       </OverlayTrigger>
     ) : (
-      <Badge type={BadgeTypes.SUCCESS}>
-        <Check strokeWidth={3} />
-      </Badge>
+      <img src="/icons/check-circle.png" alt="correct" />
     );
 
   const getHint = (guess: string, answer: string): string => {
@@ -148,9 +141,7 @@ export const SingleLine = ({
         </Popover>
       }
     >
-      <span>
-        <Badge>?</Badge>
-      </span>
+      <img src="/icons/help-circle.png" alt="help" />
     </OverlayTrigger>
   );
 
@@ -173,9 +164,7 @@ export const SingleLine = ({
         </Popover>
       }
     >
-      <span>
-        <Badge small>T</Badge>
-      </span>
+      <img src="/icons/type.png" alt="title" />
     </OverlayTrigger>
   );
 
