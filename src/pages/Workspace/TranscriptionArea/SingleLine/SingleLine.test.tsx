@@ -20,7 +20,13 @@ const mockNewConceptLine: Line = {
 
 describe("SingeLine", () => {
   it("renders correctly for titles", async () => {
-    render(<SingleLine line={mockTitleLine} passedIndex={0} />);
+    render(
+      <SingleLine
+        line={mockTitleLine}
+        passedIndex={0}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     expect(screen.getByRole("textbox", { name: "title" })).toBeInTheDocument();
@@ -37,7 +43,13 @@ describe("SingeLine", () => {
   });
 
   it("renders correctly for new concept lines", () => {
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     expect(
       screen.queryByRole("img", { name: "title" })
@@ -57,7 +69,13 @@ describe("SingeLine", () => {
   });
 
   it("enables the check button when text is present", async () => {
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -71,7 +89,13 @@ describe("SingeLine", () => {
   });
 
   it("shows a help message when user types non-Greek characters", async () => {
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -93,7 +117,13 @@ describe("SingeLine", () => {
   });
 
   it("shows a help message when user types numbers", async () => {
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -110,7 +140,13 @@ describe("SingeLine", () => {
 
   it("showσ a check when user has submitted a correct answer", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -129,7 +165,13 @@ describe("SingeLine", () => {
 
   it("allows final sigmas", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -148,7 +190,13 @@ describe("SingeLine", () => {
 
   it("is case insensitive", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -167,7 +215,13 @@ describe("SingeLine", () => {
 
   it("clears the incorrect answer symbol after user changes input", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -190,7 +244,13 @@ describe("SingeLine", () => {
 
   it("tells the user their incorrect answer is too short when appropriate", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -214,7 +274,13 @@ describe("SingeLine", () => {
 
   it("tells the user their incorrect answer is too long when appropriate", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -238,7 +304,13 @@ describe("SingeLine", () => {
 
   it("indicates an answer is incorrect when it is wrong but the correct length", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -260,7 +332,13 @@ describe("SingeLine", () => {
 
   it("shows a hint after three incorrect guesses of correct length", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -303,7 +381,13 @@ describe("SingeLine", () => {
 
   it("does not show a hint after three incorrect guesses of incorrect length", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -332,6 +416,7 @@ describe("SingeLine", () => {
         <SingleLine
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
+          updateLessonStatus={() => {}}
         />
       );
 
@@ -353,6 +438,7 @@ describe("SingeLine", () => {
         <SingleLine
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
+          updateLessonStatus={() => {}}
         />
       );
 
@@ -374,6 +460,7 @@ describe("SingeLine", () => {
         <SingleLine
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
+          updateLessonStatus={() => {}}
         />
       );
 
@@ -396,6 +483,7 @@ describe("SingeLine", () => {
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
           requireSpaces
+          updateLessonStatus={() => {}}
         />
       );
 
@@ -418,6 +506,7 @@ describe("SingeLine", () => {
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
           requireSpaces
+          updateLessonStatus={() => {}}
         />
       );
 
@@ -445,6 +534,7 @@ describe("SingeLine", () => {
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
           requireSpaces
+          updateLessonStatus={() => {}}
         />
       );
 
@@ -472,6 +562,7 @@ describe("SingeLine", () => {
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
           requireSpaces
+          updateLessonStatus={() => {}}
         />
       );
 
@@ -497,7 +588,13 @@ describe("SingeLine", () => {
   describe("a11y", () => {
     it("has keyboard accessible answer checking", async () => {
       // Answer is αδελφοσ
-      render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+      render(
+        <SingleLine
+          line={mockNewConceptLine}
+          passedIndex={1}
+          updateLessonStatus={() => {}}
+        />
+      );
 
       const user = userEvent.setup();
       const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -518,7 +615,13 @@ describe("SingeLine", () => {
 
     it("has keyboard accessible title messaging", async () => {
       // Answer is αδελφοσ
-      render(<SingleLine line={mockTitleLine} passedIndex={1} />);
+      render(
+        <SingleLine
+          line={mockTitleLine}
+          passedIndex={1}
+          updateLessonStatus={() => {}}
+        />
+      );
 
       const user = userEvent.setup();
 
@@ -533,7 +636,13 @@ describe("SingeLine", () => {
 
     it("has keyboard accessible incorrect answer messaging", async () => {
       // Answer is αδελφοσ
-      render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+      render(
+        <SingleLine
+          line={mockNewConceptLine}
+          passedIndex={1}
+          updateLessonStatus={() => {}}
+        />
+      );
 
       const user = userEvent.setup();
       const lineInput = screen.getByRole("textbox", { name: "L1" });

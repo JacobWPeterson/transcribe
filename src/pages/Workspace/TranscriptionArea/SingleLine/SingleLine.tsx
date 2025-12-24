@@ -10,11 +10,13 @@ import type { Line } from "../../../../files/manifests";
 import evaluateSubmission from "../validators";
 
 import styles from "./SingleLine.module.scss";
+import type { LessonStatus } from "./singleLine.enum";
 
 interface SingleLineProps {
   line: Line;
   passedIndex: number;
   requireSpaces?: boolean;
+  updateLessonStatus: (index: number, status: LessonStatus) => void;
 }
 
 const includesNonGreekChars = (text: string): boolean => {
@@ -25,6 +27,7 @@ export const SingleLine = ({
   line,
   passedIndex,
   requireSpaces = false,
+  updateLessonStatus,
 }: SingleLineProps): ReactElement => {
   const [lineContent, setLineContent] = useState<string>("");
   const [submissionStatus, setSubmissionStatus] =
@@ -68,9 +71,13 @@ export const SingleLine = ({
     if (!lineContent) {
       return;
     }
-    setSubmissionStatus(
-      evaluateSubmission(lineContent, line.text, requireSpaces)
+    const submissionStatus = evaluateSubmission(
+      lineContent,
+      line.text,
+      requireSpaces
     );
+    setSubmissionStatus(submissionStatus);
+    updateLessonStatus(passedIndex, Number(submissionStatus[0])); // This Number cast works because of the enum order in singleLine.enum.ts
   }, [requireSpaces]);
 
   const clearMessages = (): void => {
@@ -86,9 +93,14 @@ export const SingleLine = ({
 
   const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
-    setSubmissionStatus(
-      evaluateSubmission(lineContent, line.text, requireSpaces)
+    const submissionStatus = evaluateSubmission(
+      lineContent,
+      line.text,
+      requireSpaces
     );
+    setSubmissionStatus(submissionStatus);
+    updateLessonStatus(passedIndex, Number(submissionStatus[0])); // This Number cast works because of the enum order in singleLine.enum.ts
+
     setShowAnswerEvaluation(true);
   };
 

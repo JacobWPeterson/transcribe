@@ -1,0 +1,82 @@
+@use "@styles/theme";
+
+.StatusReport {
+  margin: 12px 0;
+  padding: 12px;
+  background: theme.$grey00;
+  border-radius: 6px;
+  border: 1px solid theme.$grey02;
+  max-width: 500px;
+  width: 100%;
+  align-self: center;
+}
+
+.ProgressContainer {
+  margin-bottom: 12px;
+}
+
+.ProgressBar {
+  width: 100%;
+  height: 8px;
+  background: theme.$grey02;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.ProgressFillCorrect {
+  height: 100%;
+  background: theme.$primary03;
+  transition: width 0.3s ease;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.ProgressFillIncorrect {
+  height: 100%;
+  background: theme.$error;
+  transition: width 0.3s ease;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.ProgressText {
+  font-size: 14px;
+  color: theme.$grey08;
+  text-align: center;
+}
+
+.StatusIndicators {
+  display: flex;
+  justify-content: space-around;
+  gap: 16px;
+}
+
+.StatusItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: theme.$grey08;
+}
+
+.StatusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+
+  &[data-status="correct"] {
+    background: theme.$primary03;
+  }
+
+  &[data-status="incorrect"] {
+    background: theme.$error;
+  }
+
+  &[data-status="incomplete"] {
+    background: theme.$grey04;
+  }
+}
