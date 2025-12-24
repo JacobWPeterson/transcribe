@@ -10,7 +10,7 @@ import type { Line } from "../../../../files/manifests";
 import evaluateSubmission from "../validators";
 
 import styles from "./SingleLine.module.scss";
-import type { LessonStatus } from "./singleLine.enum";
+import { LessonStatus } from "./singleLine.enum";
 
 interface SingleLineProps {
   line: Line;
@@ -88,6 +88,7 @@ export const SingleLine = ({
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event.persist();
     setLineContent(event.target.value);
+    updateLessonStatus(passedIndex, LessonStatus.INCOMPLETE);
     clearMessages();
   };
 
