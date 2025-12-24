@@ -4,10 +4,12 @@ import classNames from "classnames";
 import { ArrowLeft, ArrowRight, Download } from "react-feather";
 
 import type { Line, Manifest } from "../../../files/manifests";
+import { StatusReport } from "../../../components/StatusReport/StatusReport";
 
 import { SingleLine } from "./SingleLine/SingleLine";
 import styles from "./TranscriptionArea.module.scss";
 import { brillBase64 } from "./constants";
+import { LessonStatus } from "./SingleLine/singleLine.enum";
 
 interface TranscriptionAreaProps {
   changeManuscript: (type: "next" | "previous") => void;
@@ -24,25 +26,43 @@ export const TranscriptionArea = ({
 }: TranscriptionAreaProps): ReactElement => {
   const [requireSpaces, setRequireSpaces] = useState(false);
   const transcriptionAreaRef = useRef<HTMLDivElement>(null);
+  const inputContainerRef = useRef<HTMLDivElement>(null);
   const { lines, instruction } = manifest;
+  const [lessonsStatus, setLessonsStatus] =
+    useState<Record<number, LessonStatus>>(null);
+
+  useEffect(() => {
+    inputContainerRef.current.scrollTop = 0;
+  }, [lessonNumber]);
+
+  useEffect(() => {
+    const lessonsStatusObj = lines.reduce(
+      (obj, _, index) => ({ ...obj, [index]: LessonStatus.INCOMPLETE }),
+      {}
+    );
+    setLessonsStatus(lessonsStatusObj);
+  }, []);
+
   const handleClick = (type: "next" | "previous"): void => {
     changeManuscript(type);
   };
 
-  useEffect(() => {
-    transcriptionAreaRef.current.scrollTop = 0;
-  }, [lessonNumber]);
+  const handleUpdateLessonStatus = (
+    index: number,
+    status: LessonStatus
+  ): void => {
+    setLessonsStatus(
+      (
+        prevStatus: Record<number, LessonStatus>
+      ): Record<number, LessonStatus> => {
+        return { ...prevStatus, [index]: status };
+      }
+    );
+  };
 
   const handleDownloadPDF = (): void => {
     const element = transcriptionAreaRef.current;
-    const heading = document.createElement("h1");
     element.style.setProperty("width", "790px");
-    heading.style.setProperty("font-size", "28px");
-    const headingText = document.createTextNode(
-      `Lesson ${lessonNumber} Report`
-    );
-    heading.appendChild(headingText);
-    element.prepend(heading);
 
     const pdf = new jsPDF({ format: "a4" });
     pdf.addFileToVFS("Brill-Roman.ttf", brillBase64);
@@ -65,7 +85,6 @@ export const TranscriptionArea = ({
         pdf.output("pdfobjectnewwindow");
       })
       .finally(() => {
-        element.removeChild(heading);
         element.style.removeProperty("width");
       });
   };
@@ -73,7 +92,7 @@ export const TranscriptionArea = ({
   let titleAdjustments = 0;
 
   return (
-    <div className={styles.Container}>
+    <div className={styles.Container} ref={transcriptionAreaRef}>
       <div className={styles.HeaderContainer}>
         <h2 className={styles.Header}>{`Lesson ${lessonNumber}`}</h2>
         <div className={styles.FormSwitch}>
@@ -96,7 +115,8 @@ export const TranscriptionArea = ({
           {`: ${instruction}`}
         </small>
       ) : null}
-      <div className={styles.TranscriptionArea} ref={transcriptionAreaRef}>
+      {<StatusReport lessonsStatus={lessonsStatus} />}
+      <div className={styles.TranscriptionArea} ref={inputContainerRef}>
         <div className={styles.LinesContainer}>
           {lines.map((line: Line, index) => {
             if (line.isTitle) {
@@ -108,6 +128,7 @@ export const TranscriptionArea = ({
                 passedIndex={index + 1 - titleAdjustments}
                 line={line}
                 requireSpaces={requireSpaces}
+                updateLessonStatus={handleUpdateLessonStatus}
               />
             );
           })}
