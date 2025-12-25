@@ -3,6 +3,7 @@ import type { Line } from "src/files/manifests";
 import userEvent from "@testing-library/user-event";
 
 import { SingleLine } from "./SingleLine";
+import { LessonStatus } from "./singleLine.enum";
 
 const mockTitleLine: Line = {
   isTitle: true,
@@ -664,6 +665,76 @@ describe("SingeLine", () => {
       expect(
         screen.getByText("Your answer is 1 letter too short.")
       ).toBeInTheDocument();
+    });
+
+    it("re-evaluates submitted answer when requireSpaces changes", () => {
+      const mockUpdateLessonStatus = vi.fn();
+      const { rerender } = render(
+        <SingleLine
+          line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
+          passedIndex={1}
+          requireSpaces={false}
+          savedAnswer="αδελφοσμου"
+          savedStatus={LessonStatus.CORRECT}
+          updateLessonStatus={mockUpdateLessonStatus}
+        />
+      );
+
+      // Initially should show correct status
+      expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
+      expect(mockUpdateLessonStatus).not.toHaveBeenCalled();
+
+      // Change requireSpaces to true - should re-evaluate and mark as incorrect
+      rerender(
+        <SingleLine
+          line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
+          passedIndex={1}
+          requireSpaces={true}
+          savedAnswer="αδελφοσμου"
+          savedStatus={LessonStatus.CORRECT}
+          updateLessonStatus={mockUpdateLessonStatus}
+        />
+      );
+
+      // Should have re-evaluated and called updateLessonStatus with INCORRECT
+      expect(mockUpdateLessonStatus).toHaveBeenCalledWith(
+        1,
+        LessonStatus.INCORRECT
+      );
+    });
+
+    it("re-evaluates saved answer when requireSpaces changes, even for incomplete lines", () => {
+      const mockUpdateLessonStatus = vi.fn();
+      const { rerender } = render(
+        <SingleLine
+          line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
+          passedIndex={1}
+          requireSpaces={false}
+          savedAnswer="αδελφοσμου"
+          savedStatus={LessonStatus.INCOMPLETE}
+          updateLessonStatus={mockUpdateLessonStatus}
+        />
+      );
+
+      expect(mockUpdateLessonStatus).not.toHaveBeenCalled();
+
+      // Change requireSpaces to true - should re-evaluate the savedAnswer and mark as incorrect
+      rerender(
+        <SingleLine
+          line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
+          passedIndex={1}
+          requireSpaces={true}
+          savedAnswer="αδελφοσμου"
+          savedStatus={LessonStatus.INCOMPLETE}
+          updateLessonStatus={mockUpdateLessonStatus}
+        />
+      );
+
+      // Should have re-evaluated the savedAnswer and called updateLessonStatus with INCORRECT
+      expect(mockUpdateLessonStatus).toHaveBeenCalledWith(
+        1,
+        LessonStatus.INCORRECT
+      );
     });
   });
 });
