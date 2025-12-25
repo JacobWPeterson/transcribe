@@ -5,6 +5,10 @@ import { ArrowLeft, ArrowRight, Download } from "react-feather";
 
 import type { Line, Manifest } from "../../../files/manifests";
 import { StatusReport } from "../../../components/StatusReport/StatusReport";
+import {
+  loadLessonProgress,
+  saveLessonProgress,
+} from "../../../utils/localStorage";
 
 import { SingleLine } from "./SingleLine/SingleLine";
 import styles from "./TranscriptionArea.module.scss";
@@ -31,14 +35,40 @@ export const TranscriptionArea = ({
   const [lessonsStatus, setLessonsStatus] =
     useState<Record<number, LessonStatus>>(null);
 
+  const [savedAnswers, setSavedAnswers] = useState<Record<number, string>>({});
+
   useEffect(() => {
-    const lessonsStatusObj = lines.reduce(
-      (obj, _, index) => ({ ...obj, [index]: LessonStatus.INCOMPLETE }),
-      {}
-    );
-    setLessonsStatus(lessonsStatusObj);
+    // Load saved progress for this lesson
+    const savedProgress = loadLessonProgress(lessonNumber);
+    if (savedProgress && Object.entries(savedProgress.answers).length) {
+      setLessonsStatus(savedProgress.status);
+      setSavedAnswers(savedProgress.answers);
+      setRequireSpaces(savedProgress.requireSpaces);
+    } else {
+      // Initialize with default values if no saved progress
+      const lessonsStatusObj = lines.reduce(
+        (obj, _, index) => ({ ...obj, [index]: LessonStatus.INCOMPLETE }),
+        {}
+      );
+      setLessonsStatus(lessonsStatusObj);
+      setSavedAnswers({});
+      setRequireSpaces(false);
+    }
     inputContainerRef.current.scrollTop = 0;
-  }, [lessonNumber]);
+  }, [lessonNumber, lines]);
+
+  // Save progress whenever it changes
+  useEffect(() => {
+    if (lessonsStatus) {
+      const progress = {
+        answers: savedAnswers,
+        status: lessonsStatus,
+        requireSpaces,
+        lastUpdated: Date.now(),
+      };
+      saveLessonProgress(lessonNumber, progress);
+    }
+  }, [lessonNumber, lessonsStatus, savedAnswers, requireSpaces]);
 
   const handleClick = (type: "next" | "previous"): void => {
     changeManuscript(type);
@@ -55,6 +85,10 @@ export const TranscriptionArea = ({
         return { ...prevStatus, [index]: status };
       }
     );
+  };
+
+  const handleSaveAnswer = (index: number, answer: string): void => {
+    setSavedAnswers((prev) => ({ ...prev, [index]: answer }));
   };
 
   const handleDownloadPDF = (): void => {
@@ -98,6 +132,7 @@ export const TranscriptionArea = ({
             id="require_spaces"
             name="require_spaces"
             className={styles.FormSwitch}
+            checked={requireSpaces}
             onChange={() => setRequireSpaces(!requireSpaces)}
           />
           <label htmlFor="require_spaces">Require spaces</label>
@@ -126,6 +161,9 @@ export const TranscriptionArea = ({
                 line={line}
                 requireSpaces={requireSpaces}
                 updateLessonStatus={handleUpdateLessonStatus}
+                savedAnswer={savedAnswers[index]}
+                savedStatus={lessonsStatus?.[index]}
+                onSaveAnswer={handleSaveAnswer}
               />
             );
           })}
