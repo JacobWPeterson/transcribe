@@ -17,6 +17,9 @@ interface SingleLineProps {
   passedIndex: number;
   requireSpaces?: boolean;
   updateLessonStatus: (index: number, status: LessonStatus) => void;
+  savedAnswer?: string;
+  savedStatus?: LessonStatus;
+  onSaveAnswer?: (index: number, answer: string) => void;
 }
 
 const includesNonGreekChars = (text: string): boolean => {
@@ -28,8 +31,11 @@ export const SingleLine = ({
   passedIndex,
   requireSpaces = false,
   updateLessonStatus,
+  savedAnswer,
+  savedStatus,
+  onSaveAnswer,
 }: SingleLineProps): ReactElement => {
-  const [lineContent, setLineContent] = useState<string>("");
+  const [lineContent, setLineContent] = useState<string>(savedAnswer || "");
   const [submissionStatus, setSubmissionStatus] =
     useState<(boolean | string)[]>(null);
   const [showHint, setShowHint] = useState<boolean>(false);
@@ -37,6 +43,25 @@ export const SingleLine = ({
     useState<boolean>(false);
   const guesses = useRef(0);
   const hasNonGreekChars = includesNonGreekChars(lineContent);
+
+  useEffect(() => {
+    setLineContent(savedAnswer || "");
+  }, [savedAnswer]);
+
+  // Set submission status from saved status when available, or reset when no saved data
+  useEffect(() => {
+    if (savedAnswer) {
+      // Convert LessonStatus enum to submission status format
+      const isCorrect = savedStatus === LessonStatus.CORRECT;
+      const message = isCorrect ? "correct" : "Answer is incorrect.";
+      setSubmissionStatus([isCorrect, message]);
+      setShowAnswerEvaluation(true);
+    } else {
+      // Reset status when no saved data is available for this line
+      setSubmissionStatus(null);
+      setShowAnswerEvaluation(false);
+    }
+  }, [savedAnswer]);
 
   useEffect(() => {
     if (lineContent.length > 0 && submissionStatus?.[0]) {
@@ -67,18 +92,21 @@ export const SingleLine = ({
     }
   }, [submissionStatus, line.text, requireSpaces]);
 
+  const prevRequireSpacesRef = useRef(requireSpaces);
+
   useEffect(() => {
-    if (!lineContent) {
-      return;
+    // Only re-evaluate when requireSpaces changes
+    if (prevRequireSpacesRef.current !== requireSpaces && savedAnswer) {
+      const submissionStatus = evaluateSubmission(
+        savedAnswer,
+        line.text,
+        requireSpaces
+      );
+      setSubmissionStatus(submissionStatus);
+      updateLessonStatus(passedIndex, Number(submissionStatus[0]));
     }
-    const submissionStatus = evaluateSubmission(
-      lineContent,
-      line.text,
-      requireSpaces
-    );
-    setSubmissionStatus(submissionStatus);
-    updateLessonStatus(passedIndex, Number(submissionStatus[0])); // This Number cast works because of the enum order in singleLine.enum.ts
-  }, [requireSpaces]);
+    prevRequireSpacesRef.current = requireSpaces;
+  }, [requireSpaces, savedAnswer, line.text, passedIndex]);
 
   const clearMessages = (): void => {
     setShowHint(false);
@@ -101,6 +129,8 @@ export const SingleLine = ({
     );
     setSubmissionStatus(submissionStatus);
     updateLessonStatus(passedIndex, Number(submissionStatus[0])); // This Number cast works because of the enum order in singleLine.enum.ts
+    // Save the answer to localStorage
+    onSaveAnswer?.(passedIndex, lineContent);
 
     setShowAnswerEvaluation(true);
   };

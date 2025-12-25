@@ -8,6 +8,11 @@ import { TranscriptionArea } from "./TranscriptionArea";
 const mockChangeManuscript = vi.fn();
 
 describe("TranscriptionArea", () => {
+  beforeEach(() => {
+    // Clear localStorage before each test to ensure clean state
+    localStorage.clear();
+  });
+
   afterEach(() => {
     vi.clearAllMocks();
   });
