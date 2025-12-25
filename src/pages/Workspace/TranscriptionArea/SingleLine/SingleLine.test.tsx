@@ -20,15 +20,21 @@ const mockNewConceptLine: Line = {
 
 describe("SingeLine", () => {
   it("renders correctly for titles", async () => {
-    render(<SingleLine line={mockTitleLine} passedIndex={0} />);
+    render(
+      <SingleLine
+        line={mockTitleLine}
+        passedIndex={0}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
-    expect(screen.getByRole("textbox", { name: "T" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "title" })).toBeInTheDocument();
     const checkButton = screen.getByRole("button", { name: "Check" });
     expect(checkButton).toBeInTheDocument();
     expect(checkButton).toBeDisabled();
 
-    await user.hover(screen.getByRole("button", { name: "T" }));
+    await user.hover(screen.getByRole("img", { name: "title" }));
     expect(
       screen.getByText(
         "Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don't worry about them as much early on. Type them as a single line."
@@ -37,9 +43,17 @@ describe("SingeLine", () => {
   });
 
   it("renders correctly for new concept lines", () => {
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
-    expect(screen.queryByRole("button", { name: "T" })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("img", { name: "title" })
+    ).not.toBeInTheDocument();
     expect(screen.getByRole("textbox", { name: "L1" })).toBeInTheDocument();
 
     expect(screen.getByText(/Helpful caption/)).toBeInTheDocument();
@@ -55,7 +69,13 @@ describe("SingeLine", () => {
   });
 
   it("enables the check button when text is present", async () => {
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -69,7 +89,13 @@ describe("SingeLine", () => {
   });
 
   it("shows a help message when user types non-Greek characters", async () => {
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -91,7 +117,13 @@ describe("SingeLine", () => {
   });
 
   it("shows a help message when user types numbers", async () => {
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -108,7 +140,13 @@ describe("SingeLine", () => {
 
   it("showσ a check when user has submitted a correct answer", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -122,12 +160,18 @@ describe("SingeLine", () => {
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
 
-    expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
   });
 
   it("allows final sigmas", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -141,12 +185,18 @@ describe("SingeLine", () => {
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
 
-    expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
   });
 
   it("is case insensitive", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -160,12 +210,18 @@ describe("SingeLine", () => {
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
 
-    expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
   });
 
   it("clears the incorrect answer symbol after user changes input", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -178,15 +234,23 @@ describe("SingeLine", () => {
 
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
-    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "incorrect" })).toBeInTheDocument();
 
     await user.type(lineInput, "{backspace}");
-    expect(screen.queryByRole("button", { name: "X" })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("img", { name: "incorrect" })
+    ).not.toBeInTheDocument();
   });
 
   it("tells the user their incorrect answer is too short when appropriate", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -200,7 +264,7 @@ describe("SingeLine", () => {
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
 
-    const incorrectButton = screen.getByRole("button", { name: "X" });
+    const incorrectButton = screen.getByRole("img", { name: "incorrect" });
     expect(incorrectButton).toBeInTheDocument();
     await user.hover(incorrectButton);
     expect(
@@ -210,7 +274,13 @@ describe("SingeLine", () => {
 
   it("tells the user their incorrect answer is too long when appropriate", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -224,7 +294,7 @@ describe("SingeLine", () => {
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
 
-    const incorrectButton = screen.getByRole("button", { name: "X" });
+    const incorrectButton = screen.getByRole("img", { name: "incorrect" });
     expect(incorrectButton).toBeInTheDocument();
     await user.hover(incorrectButton);
     expect(
@@ -234,7 +304,13 @@ describe("SingeLine", () => {
 
   it("indicates an answer is incorrect when it is wrong but the correct length", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -248,7 +324,7 @@ describe("SingeLine", () => {
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
 
-    const incorrectButton = screen.getByRole("button", { name: "X" });
+    const incorrectButton = screen.getByRole("img", { name: "incorrect" });
     expect(incorrectButton).toBeInTheDocument();
     await user.hover(incorrectButton);
     expect(screen.getByText("Answer is incorrect.")).toBeInTheDocument();
@@ -256,7 +332,13 @@ describe("SingeLine", () => {
 
   it("shows a hint after three incorrect guesses of correct length", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -268,26 +350,30 @@ describe("SingeLine", () => {
     await user.type(lineInput, "αδελφοο");
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
-    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "incorrect" })).toBeInTheDocument();
 
     await user.type(lineInput, "{backspace}{backspace}ωσ");
     await user.click(checkButton);
-    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "incorrect" })).toBeInTheDocument();
 
     await user.type(lineInput, "{backspace}{backspace}οω");
     await user.click(checkButton);
-    expect(screen.queryByRole("button", { name: "X" })).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "?" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("img", { name: "incorrect" })
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "help" })).toBeInTheDocument();
 
-    await user.hover(screen.getByRole("button", { name: "?" }));
+    await user.hover(screen.getByRole("img", { name: "help" }));
     expect(screen.getByText("Incorrect letter: ω(7).")).toBeInTheDocument();
 
     await user.type(lineInput, "{backspace}{backspace}ωζ");
     await user.click(checkButton);
-    expect(screen.queryByRole("button", { name: "X" })).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "?" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("img", { name: "incorrect" })
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "help" })).toBeInTheDocument();
 
-    await user.hover(screen.getByRole("button", { name: "?" }));
+    await user.hover(screen.getByRole("img", { name: "help" }));
     expect(
       screen.getByText("Incorrect letters: ω(6), ζ(7).")
     ).toBeInTheDocument();
@@ -295,7 +381,13 @@ describe("SingeLine", () => {
 
   it("does not show a hint after three incorrect guesses of incorrect length", async () => {
     // Answer is αδελφοσ
-    render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+    render(
+      <SingleLine
+        line={mockNewConceptLine}
+        passedIndex={1}
+        updateLessonStatus={() => {}}
+      />
+    );
 
     const user = userEvent.setup();
     const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -307,15 +399,15 @@ describe("SingeLine", () => {
     await user.type(lineInput, "αδελφ");
     expect(checkButton).toBeEnabled();
     await user.click(checkButton);
-    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "incorrect" })).toBeInTheDocument();
 
     await user.type(lineInput, "ω");
     await user.click(checkButton);
-    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "incorrect" })).toBeInTheDocument();
 
     await user.type(lineInput, "{backspace}ο");
     await user.click(checkButton);
-    expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "incorrect" })).toBeInTheDocument();
   });
 
   describe("Requiring spaces", () => {
@@ -324,6 +416,7 @@ describe("SingeLine", () => {
         <SingleLine
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
+          updateLessonStatus={() => {}}
         />
       );
 
@@ -337,7 +430,7 @@ describe("SingeLine", () => {
       expect(checkButton).toBeEnabled();
       await user.click(checkButton);
 
-      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+      expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
     });
 
     it("does not consider extra spaces when requireSpaces is false", async () => {
@@ -345,6 +438,7 @@ describe("SingeLine", () => {
         <SingleLine
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
+          updateLessonStatus={() => {}}
         />
       );
 
@@ -358,7 +452,7 @@ describe("SingeLine", () => {
       expect(checkButton).toBeEnabled();
       await user.click(checkButton);
 
-      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+      expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
     });
 
     it("does not consider incorrect spacing when requireSpaces is false", async () => {
@@ -366,6 +460,7 @@ describe("SingeLine", () => {
         <SingleLine
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
+          updateLessonStatus={() => {}}
         />
       );
 
@@ -379,7 +474,7 @@ describe("SingeLine", () => {
       expect(checkButton).toBeEnabled();
       await user.click(checkButton);
 
-      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+      expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
     });
 
     it("marks the asnwer as correct when answer is correctly spaced adn when requireSpaces is true", async () => {
@@ -388,6 +483,7 @@ describe("SingeLine", () => {
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
           requireSpaces
+          updateLessonStatus={() => {}}
         />
       );
 
@@ -401,7 +497,7 @@ describe("SingeLine", () => {
       expect(checkButton).toBeEnabled();
       await user.click(checkButton);
 
-      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+      expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
     });
 
     it("considers missing spaces when requireSpaces is true", async () => {
@@ -410,6 +506,7 @@ describe("SingeLine", () => {
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
           requireSpaces
+          updateLessonStatus={() => {}}
         />
       );
 
@@ -424,9 +521,11 @@ describe("SingeLine", () => {
       await user.click(checkButton);
 
       expect(
-        screen.queryByRole("button", { name: "✓" })
+        screen.queryByRole("img", { name: "correct" })
       ).not.toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("img", { name: "incorrect" })
+      ).toBeInTheDocument();
     });
 
     it("considers extra spaces when requireSpaces is true", async () => {
@@ -435,6 +534,7 @@ describe("SingeLine", () => {
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
           requireSpaces
+          updateLessonStatus={() => {}}
         />
       );
 
@@ -449,9 +549,11 @@ describe("SingeLine", () => {
       await user.click(checkButton);
 
       expect(
-        screen.queryByRole("button", { name: "✓" })
+        screen.queryByRole("img", { name: "correct" })
       ).not.toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("img", { name: "incorrect" })
+      ).toBeInTheDocument();
     });
 
     it("considers incorrect spacing when requireSpaces is true", async () => {
@@ -460,6 +562,7 @@ describe("SingeLine", () => {
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
           requireSpaces
+          updateLessonStatus={() => {}}
         />
       );
 
@@ -474,16 +577,24 @@ describe("SingeLine", () => {
       await user.click(checkButton);
 
       expect(
-        screen.queryByRole("button", { name: "✓" })
+        screen.queryByRole("img", { name: "correct" })
       ).not.toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "X" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("img", { name: "incorrect" })
+      ).toBeInTheDocument();
     });
   });
 
   describe("a11y", () => {
     it("has keyboard accessible answer checking", async () => {
       // Answer is αδελφοσ
-      render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+      render(
+        <SingleLine
+          line={mockNewConceptLine}
+          passedIndex={1}
+          updateLessonStatus={() => {}}
+        />
+      );
 
       const user = userEvent.setup();
       const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -499,12 +610,18 @@ describe("SingeLine", () => {
       await user.keyboard("{tab}");
       await user.keyboard("{enter}");
 
-      expect(screen.getByRole("button", { name: "✓" })).toBeInTheDocument();
+      expect(screen.getByRole("img", { name: "correct" })).toBeInTheDocument();
     });
 
     it("has keyboard accessible title messaging", async () => {
       // Answer is αδελφοσ
-      render(<SingleLine line={mockTitleLine} passedIndex={1} />);
+      render(
+        <SingleLine
+          line={mockTitleLine}
+          passedIndex={1}
+          updateLessonStatus={() => {}}
+        />
+      );
 
       const user = userEvent.setup();
 
@@ -519,7 +636,13 @@ describe("SingeLine", () => {
 
     it("has keyboard accessible incorrect answer messaging", async () => {
       // Answer is αδελφοσ
-      render(<SingleLine line={mockNewConceptLine} passedIndex={1} />);
+      render(
+        <SingleLine
+          line={mockNewConceptLine}
+          passedIndex={1}
+          updateLessonStatus={() => {}}
+        />
+      );
 
       const user = userEvent.setup();
       const lineInput = screen.getByRole("textbox", { name: "L1" });
@@ -535,7 +658,7 @@ describe("SingeLine", () => {
       await user.keyboard("{tab}");
       await user.keyboard("{enter}");
 
-      const incorrectButton = screen.getByRole("button", { name: "X" });
+      const incorrectButton = screen.getByRole("img", { name: "incorrect" });
       expect(incorrectButton).toBeInTheDocument();
       await user.keyboard("{tab}");
       expect(

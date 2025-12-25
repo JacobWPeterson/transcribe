@@ -1,5 +1,12 @@
 @use "@styles/theme";
 
+@font-face {
+  font-family: "Brill-Roman";
+  src:
+    local("Brill-Roman"),
+    url("../../../../static/fonts/Brill-Roman.ttf") format("truetype");
+}
+
 .Form {
   padding: 10px 0;
   display: flex;
@@ -12,7 +19,6 @@
   .Upper {
     width: 100%;
     display: flex;
-    align-items: baseline;
 
     .Label {
       color: theme.$primary03;
@@ -31,9 +37,11 @@
       margin: 0 10px;
 
       .Input {
+        font-family: "Brill-Roman";
+        font-size: 22px;
+        line-height: normal;
         height: 30px;
-        font-size: 16px;
-        padding: 2px 5px;
+        padding: 4px 5px;
       }
     }
 

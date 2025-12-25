@@ -7,16 +7,16 @@ import classnames from "classnames";
 
 import glosses from "../../../../files/glosses";
 import type { Line } from "../../../../files/manifests";
-import { Badge } from "../../../../components/Badge/Badge";
-import { BadgeTypes } from "../../../../components/Badge/badge.enum";
 import evaluateSubmission from "../validators";
 
 import styles from "./SingleLine.module.scss";
+import { LessonStatus } from "./singleLine.enum";
 
 interface SingleLineProps {
   line: Line;
   passedIndex: number;
   requireSpaces?: boolean;
+  updateLessonStatus: (index: number, status: LessonStatus) => void;
 }
 
 const includesNonGreekChars = (text: string): boolean => {
@@ -27,6 +27,7 @@ export const SingleLine = ({
   line,
   passedIndex,
   requireSpaces = false,
+  updateLessonStatus,
 }: SingleLineProps): ReactElement => {
   const [lineContent, setLineContent] = useState<string>("");
   const [submissionStatus, setSubmissionStatus] =
@@ -70,9 +71,13 @@ export const SingleLine = ({
     if (!lineContent) {
       return;
     }
-    setSubmissionStatus(
-      evaluateSubmission(lineContent, line.text, requireSpaces)
+    const submissionStatus = evaluateSubmission(
+      lineContent,
+      line.text,
+      requireSpaces
     );
+    setSubmissionStatus(submissionStatus);
+    updateLessonStatus(passedIndex, Number(submissionStatus[0])); // This Number cast works because of the enum order in singleLine.enum.ts
   }, [requireSpaces]);
 
   const clearMessages = (): void => {
@@ -83,14 +88,20 @@ export const SingleLine = ({
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event.persist();
     setLineContent(event.target.value);
+    updateLessonStatus(passedIndex, LessonStatus.INCOMPLETE);
     clearMessages();
   };
 
   const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
-    setSubmissionStatus(
-      evaluateSubmission(lineContent, line.text, requireSpaces)
+    const submissionStatus = evaluateSubmission(
+      lineContent,
+      line.text,
+      requireSpaces
     );
+    setSubmissionStatus(submissionStatus);
+    updateLessonStatus(passedIndex, Number(submissionStatus[0])); // This Number cast works because of the enum order in singleLine.enum.ts
+
     setShowAnswerEvaluation(true);
   };
 
@@ -108,12 +119,12 @@ export const SingleLine = ({
           </Popover>
         }
       >
-        <span>
-          <Badge type={BadgeTypes.ERROR}>X</Badge>
-        </span>
+        <div role="button" tabIndex={0}>
+          <img src="/icons/x-octagon.png" alt="incorrect" />
+        </div>
       </OverlayTrigger>
     ) : (
-      <Badge type={BadgeTypes.SUCCESS}>✓</Badge>
+      <img src="/icons/check-circle.png" alt="correct" />
     );
 
   const getHint = (guess: string, answer: string): string => {
@@ -145,9 +156,9 @@ export const SingleLine = ({
         </Popover>
       }
     >
-      <span>
-        <Badge>?</Badge>
-      </span>
+      <div role="button" tabIndex={0}>
+        <img src="/icons/help-circle.png" alt="help" />
+      </div>
     </OverlayTrigger>
   );
 
@@ -170,9 +181,9 @@ export const SingleLine = ({
         </Popover>
       }
     >
-      <span>
-        <Badge small>T</Badge>
-      </span>
+      <div role="button" tabIndex={0}>
+        <img src="/icons/type.png" alt="title" />
+      </div>
     </OverlayTrigger>
   );
 

@@ -1,10 +1,15 @@
 import { type ReactElement, useEffect, useRef, useState } from "react";
+import { jsPDF } from "jspdf";
 import classNames from "classnames";
+import { ArrowLeft, ArrowRight, Download } from "react-feather";
 
 import type { Line, Manifest } from "../../../files/manifests";
+import { StatusReport } from "../../../components/StatusReport/StatusReport";
 
 import { SingleLine } from "./SingleLine/SingleLine";
 import styles from "./TranscriptionArea.module.scss";
+import { brillBase64 } from "./constants";
+import { LessonStatus } from "./SingleLine/singleLine.enum";
 
 interface TranscriptionAreaProps {
   changeManuscript: (type: "next" | "previous") => void;
@@ -21,19 +26,73 @@ export const TranscriptionArea = ({
 }: TranscriptionAreaProps): ReactElement => {
   const [requireSpaces, setRequireSpaces] = useState(false);
   const transcriptionAreaRef = useRef<HTMLDivElement>(null);
+  const inputContainerRef = useRef<HTMLDivElement>(null);
   const { lines, instruction } = manifest;
+  const [lessonsStatus, setLessonsStatus] =
+    useState<Record<number, LessonStatus>>(null);
+
+  useEffect(() => {
+    inputContainerRef.current.scrollTop = 0;
+  }, [lessonNumber]);
+
+  useEffect(() => {
+    const lessonsStatusObj = lines.reduce(
+      (obj, _, index) => ({ ...obj, [index]: LessonStatus.INCOMPLETE }),
+      {}
+    );
+    setLessonsStatus(lessonsStatusObj);
+  }, []);
+
   const handleClick = (type: "next" | "previous"): void => {
     changeManuscript(type);
   };
 
-  useEffect(() => {
-    transcriptionAreaRef.current.scrollTop = 0;
-  }, [lessonNumber]);
+  const handleUpdateLessonStatus = (
+    index: number,
+    status: LessonStatus
+  ): void => {
+    setLessonsStatus(
+      (
+        prevStatus: Record<number, LessonStatus>
+      ): Record<number, LessonStatus> => {
+        return { ...prevStatus, [index]: status };
+      }
+    );
+  };
+
+  const handleDownloadPDF = (): void => {
+    const element = transcriptionAreaRef.current;
+    element.style.setProperty("width", "790px");
+
+    const pdf = new jsPDF({ format: "a4" });
+    pdf.addFileToVFS("Brill-Roman.ttf", brillBase64);
+    pdf.addFont("Brill-Roman.ttf", "Brill-Roman", "normal");
+    pdf.setFont("Brill-Roman");
+    pdf.setProperties({ title: `Lesson ${lessonNumber} Report` });
+
+    pdf
+      .html(element, {
+        margin: [10, 7, 10, 7],
+        html2canvas: {
+          scale: 0.25,
+          ignoreElements: ({ id }) =>
+            id === "prevButton" ||
+            id === "downloadButton" ||
+            id === "nextButton",
+        },
+      })
+      .then(() => {
+        pdf.output("pdfobjectnewwindow");
+      })
+      .finally(() => {
+        element.style.removeProperty("width");
+      });
+  };
 
   let titleAdjustments = 0;
 
   return (
-    <div className={styles.Container}>
+    <div className={styles.Container} ref={transcriptionAreaRef}>
       <div className={styles.HeaderContainer}>
         <h2 className={styles.Header}>{`Lesson ${lessonNumber}`}</h2>
         <div className={styles.FormSwitch}>
@@ -56,7 +115,8 @@ export const TranscriptionArea = ({
           {`: ${instruction}`}
         </small>
       ) : null}
-      <div className={styles.TranscriptionArea} ref={transcriptionAreaRef}>
+      {<StatusReport lessonsStatus={lessonsStatus} />}
+      <div className={styles.TranscriptionArea} ref={inputContainerRef}>
         <div className={styles.LinesContainer}>
           {lines.map((line: Line, index) => {
             if (line.isTitle) {
@@ -68,6 +128,7 @@ export const TranscriptionArea = ({
                 passedIndex={index + 1 - titleAdjustments}
                 line={line}
                 requireSpaces={requireSpaces}
+                updateLessonStatus={handleUpdateLessonStatus}
               />
             );
           })}
@@ -75,23 +136,35 @@ export const TranscriptionArea = ({
         <div className={styles.ButtonsContainer}>
           {lessonNumber > 1 ? (
             <button
-              className={classNames(styles.Button, styles.Back)}
+              aria-label="Previous"
+              className={styles.Button}
               onClick={() => handleClick("previous")}
+              id="prevButton"
             >
-              Previous
+              <ArrowLeft size={18} />
             </button>
           ) : (
-            <div />
+            <div className={styles.DummyButton} />
           )}
+          <button
+            className={classNames(styles.Button, styles.Download)}
+            onClick={handleDownloadPDF}
+            id="downloadButton"
+          >
+            Report
+            <Download className={styles.DownloadIcon} size={14} />
+          </button>
           {lessonNumber < numberOfLessons ? (
             <button
+              aria-label="Next"
               className={styles.Button}
               onClick={() => handleClick("next")}
+              id="nextButton"
             >
-              Next
+              <ArrowRight size={18} />
             </button>
           ) : (
-            <div />
+            <div className={styles.DummyButton} />
           )}
         </div>
       </div>

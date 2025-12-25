@@ -3,8 +3,6 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 
 import styles from "../Help.module.scss";
-import { Badge } from "../../../components/Badge/Badge";
-import { BadgeTypes } from "../../../components/Badge/badge.enum";
 
 export const Guide = (): ReactElement => (
   <div className="PageWrapper">
@@ -32,9 +30,9 @@ export const Guide = (): ReactElement => (
                   </Popover>
                 }
               >
-                <span>
-                  <Badge small>T</Badge>
-                </span>
+                <div role="button" tabIndex={0}>
+                  <img src="/icons/type.png" alt="title" />
+                </div>
               </OverlayTrigger>
             </td>
             <td>
@@ -61,9 +59,9 @@ export const Guide = (): ReactElement => (
                   </Popover>
                 }
               >
-                <span>
-                  <Badge type={BadgeTypes.ERROR}>X</Badge>
-                </span>
+                <div role="button" tabIndex={0}>
+                  <img src="/icons/x-octagon.png" alt="incorrect" />
+                </div>
               </OverlayTrigger>
             </td>
             <td className={styles.TextCell}>
@@ -88,9 +86,9 @@ export const Guide = (): ReactElement => (
                   </Popover>
                 }
               >
-                <span>
-                  <Badge>?</Badge>
-                </span>
+                <div role="button" tabIndex={0}>
+                  <img src="/icons/help-circle.png" alt="help" />
+                </div>
               </OverlayTrigger>
             </td>
             <td className={styles.TextCell}>
@@ -104,7 +102,7 @@ export const Guide = (): ReactElement => (
           </tr>
           <tr className={styles.Row}>
             <td className={styles.SymbolCell}>
-              <Badge type={BadgeTypes.SUCCESS}>✓</Badge>
+              <img src="/icons/check-circle.png" alt="correct" />
             </td>
             <td className={styles.TextCell}>
               <p className={styles.LegendText}>
