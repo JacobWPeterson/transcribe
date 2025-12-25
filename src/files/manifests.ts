@@ -734,8 +734,7 @@ const manifests: ManifestSet = {
         },
         {
           text: "τι δητ αν ετερον ει πυθοιο σωκρατουσ",
-          caption:
-            "Theres is a correction by the original scribe on this line.",
+          caption: "There is a correction by the original scribe on this line.",
         },
         {
           text: "φροντισμα ποιον αντιβολω κατειπε μοι",
