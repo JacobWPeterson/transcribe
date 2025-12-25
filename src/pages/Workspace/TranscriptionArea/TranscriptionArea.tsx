@@ -32,16 +32,13 @@ export const TranscriptionArea = ({
     useState<Record<number, LessonStatus>>(null);
 
   useEffect(() => {
-    inputContainerRef.current.scrollTop = 0;
-  }, [lessonNumber]);
-
-  useEffect(() => {
     const lessonsStatusObj = lines.reduce(
       (obj, _, index) => ({ ...obj, [index]: LessonStatus.INCOMPLETE }),
       {}
     );
     setLessonsStatus(lessonsStatusObj);
-  }, []);
+    inputContainerRef.current.scrollTop = 0;
+  }, [lessonNumber]);
 
   const handleClick = (type: "next" | "previous"): void => {
     changeManuscript(type);
