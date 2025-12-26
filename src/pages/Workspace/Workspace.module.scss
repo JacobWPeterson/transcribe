@@ -10,7 +10,7 @@
 
   .InvalidDevice {
     display: none;
-    color: theme.$grey10;
+    color: theme.$text;
     text-align: center;
 
     @media ((width < 720px) and (orientation: portrait)) or ((width < 1024px) and (orientation: landscape)) {

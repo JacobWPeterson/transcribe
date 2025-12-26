@@ -1,0 +1,99 @@
+@use "@styles/theme";
+@use "@styles/variables";
+
+.CustomToggleButton {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  &:hover {
+    > svg {
+      transform: rotate(180deg);
+      transform-origin: 50% 50%;
+      transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+  }
+}
+
+.DropdownMenu {
+  background-color: theme.$grey00;
+  border: 1px solid theme.$grey03;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  .DropdownItem {
+    padding: 8px;
+
+    .ControlButton {
+      color: theme.$primary03;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: theme.$fontSizeDefault;
+      width: 100%;
+      text-align: left;
+
+      &:focus,
+      &:hover {
+        outline: 2px solid theme.$primary03;
+        outline-offset: 2px;
+      }
+    }
+  }
+
+  .Divider {
+    border-bottom: variables.$defaultBorderStyle;
+  }
+
+  .FontSizeControls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    color: theme.$primary03;
+
+    span {
+      font-size: theme.$fontSizeDefault;
+      font-weight: 500;
+      text-wrap: nowrap;
+    }
+
+    .FontSizeButtons {
+      display: flex;
+      gap: 6px;
+
+      .FontSizeButton {
+        background: none;
+        border: 1px solid theme.$primary03;
+        color: theme.$primary03;
+        cursor: pointer;
+        font-size: theme.$fontSizeDefault;
+        padding: 2px 6px;
+        border-radius: 3px;
+
+        &:hover {
+          background-color: theme.$grey02;
+        }
+
+        &.Active {
+          background-color: theme.$primary03;
+          color: theme.$grey00;
+          border-color: theme.$primary03;
+        }
+
+        &:focus,
+        &:hover {
+          outline: 2px solid theme.$primary03;
+          outline-offset: 2px;
+        }
+      }
+    }
+  }
+}

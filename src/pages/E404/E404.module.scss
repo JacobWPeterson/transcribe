@@ -42,15 +42,15 @@
     }
 
     .Text {
-      font-size: 18px;
+      font-size: theme.$fontSizeLarger;
       text-align: center;
       width: 40dvw;
-      color: theme.$grey10;
+      color: theme.$text;
       margin: 0 auto;
 
       @media (width < 1280px) {
         width: 35dvw;
-        font-size: 16px;
+        font-size: theme.$fontSizeDefault;
       }
 
       @media (width < 1024px) {
@@ -63,7 +63,7 @@
       align-items: center;
       justify-content: center;
       color: theme.$grey00;
-      font-size: 20px;
+      font-size: theme.$fontSizeLargest;
       background: theme.$primary03;
       height: 38px;
       width: 90px;

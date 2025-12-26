@@ -1,6 +1,18 @@
 @use "@styles/theme";
 @use "@styles/variables";
 
+html {
+  font-size: var(--font-size-default);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
 .Link {
   color: theme.$primary03;
   margin-bottom: 0;
