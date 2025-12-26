@@ -7,21 +7,21 @@
   font-size: 24px;
 
   @media (width < 800px) {
-    font-size: 18px;
+    font-size: theme.$fontSizeLarger;
   }
 }
 
 .GuideText {
   width: 100%;
   margin: 6px auto;
-  color: theme.$grey07;
-  font-size: 16px;
+  color: theme.$helpText;
+  font-size: theme.$fontSizeDefault;
   text-align: justify;
   text-indent: 24px;
   letter-spacing: 0.03em;
 
   @media (width < 1024px) {
-    font-size: 14px;
+    font-size: theme.$fontSizeSmaller;
   }
 }
 
@@ -34,23 +34,23 @@
 .H2 {
   font-size: 24px;
   font-weight: 600;
-  color: theme.$grey10;
+  color: theme.$text;
   text-align: left;
 
   @media (width < 800px) {
-    font-size: 18px;
+    font-size: theme.$fontSizeLarger;
   }
 }
 
 .H3 {
-  font-size: 20px;
+  font-size: theme.$fontSizeLargest;
   font-weight: 500;
-  color: theme.$grey10;
+  color: theme.$text;
   text-align: left;
   font-style: italic;
 
   @media (width < 800px) {
-    font-size: 16px;
+    font-size: theme.$fontSizeDefault;
   }
 }
 
@@ -72,13 +72,13 @@
 }
 
 .HelpText {
-  color: theme.$grey07;
+  color: theme.$helpText;
   text-align: justify;
   margin: 0 0 12px 24px;
   letter-spacing: 0.03rem;
 
   @media (width < 800px) {
-    font-size: 12px;
+    font-size: theme.$fontSizeSmallest;
     letter-spacing: 0;
     margin: 0 0 6px 18px;
   }
@@ -87,13 +87,13 @@
 .LegendText {
   width: 100%;
   margin: 0 auto;
-  color: theme.$grey07;
-  font-size: 14px;
+  color: theme.$helpText;
+  font-size: theme.$fontSizeSmaller;
   text-align: justify;
   letter-spacing: 0.03em;
 
   @media (width < 800px) {
-    font-size: 12px;
+    font-size: theme.$fontSizeSmallest;
     letter-spacing: 0;
   }
 }
@@ -113,10 +113,10 @@
   color: theme.$primary03;
   text-decoration: none;
   padding: 0;
-  font-size: 18px;
+  font-size: theme.$fontSizeLarger;
 
   @media (width < 800px) {
-    font-size: 16px;
+    font-size: theme.$fontSizeDefault;
   }
 
   &:hover,
@@ -136,8 +136,8 @@
 }
 
 .Span {
-  color: theme.$grey07;
-  font-size: 14px;
+  color: theme.$helpText;
+  font-size: theme.$fontSizeSmaller;
   text-align: left;
   letter-spacing: 0.03em;
 }

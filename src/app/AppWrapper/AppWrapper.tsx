@@ -1,13 +1,37 @@
 import type { PropsWithChildren, ReactElement } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 import { ContactModal } from "../../components/ContactModal/ContactModal";
+import { ThemeControls } from "../../components/ThemeControls/ThemeControls";
+import { useTheme } from "../../contexts/ThemeContext";
 
 import styles from "./AppWrapper.module.scss";
 
 export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
   const [showModal, setShowModal] = useState(false);
+  const { settings } = useTheme();
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (settings.darkMode) {
+      root.setAttribute("data-theme", "dark");
+    } else {
+      root.removeAttribute("data-theme");
+    }
+
+    if (settings.highContrast) {
+      root.setAttribute("data-high-contrast", "true");
+    } else {
+      root.removeAttribute("data-high-contrast");
+    }
+
+    root.setAttribute("data-font-size", settings.fontSize);
+
+    // Update body styles
+    document.body.style.backgroundColor = "var(--background)";
+    document.body.style.color = "var(--text)";
+  }, [settings]);
 
   return (
     <div className={styles.AppWrapper}>
@@ -43,6 +67,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
           <a className={styles.NavLink} href="/about" data-replace="About">
             <span>About</span>
           </a>
+          <ThemeControls />
         </div>
       </div>
       {children}

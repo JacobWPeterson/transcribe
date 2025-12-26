@@ -44,8 +44,8 @@
 }
 
 .ProgressText {
-  font-size: 14px;
-  color: theme.$grey08;
+  font-size: theme.$fontSizeSmaller;
+  color: theme.$helpText;
   text-align: center;
 }
 
@@ -59,8 +59,8 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
-  color: theme.$grey08;
+  font-size: theme.$fontSizeSmallest;
+  color: theme.$helpText;
 }
 
 .StatusDot {

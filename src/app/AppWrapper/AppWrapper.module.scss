@@ -4,7 +4,7 @@
 .AppWrapper {
   font-family: Montserrat, sans-serif;
   font-weight: 300;
-  color: theme.$grey10;
+  color: theme.$text;
   letter-spacing: 0.02em;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@
       text-decoration: none;
 
       @media (width <= 600px) {
-        font-size: 20px;
+        font-size: theme.$fontSizeLargest;
       }
     }
 
@@ -56,7 +56,7 @@
         color: theme.$primary03;
         font-weight: 400;
         padding: 0;
-        font-size: 16px;
+        font-size: theme.$fontSizeDefault;
         overflow: hidden;
         position: relative;
         display: inline-block;
@@ -116,6 +116,13 @@
       color: theme.$primary03;
       font-weight: 400;
 
+      > div {
+        background-color: theme.$grey00;
+        border: 1px solid theme.$grey03;
+        border-radius: 4px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
       > a {
         &:hover,
         &:focus {
@@ -139,24 +146,19 @@
 
       .DropdownItem {
         padding: 8px;
+        cursor: pointer;
 
         > a {
+          display: flex;
           color: theme.$primary03;
           text-decoration: none;
+          border-radius: 6px;
+          width: 100%;
 
-          &:hover,
-          &:focus {
-            outline: none;
-            cursor: pointer;
-            color: theme.$primary04;
-          }
-
-          &:focus {
-            text-decoration: underline;
-          }
-
+          &:focus,
           &:hover {
-            transition: 500ms ease;
+            outline: 2px solid theme.$primary03;
+            outline-offset: 2px;
           }
         }
       }
@@ -190,7 +192,7 @@
   color: theme.$primary03;
   text-decoration: none;
   padding: 0;
-  font-size: 16px;
+  font-size: theme.$fontSizeDefault;
 
   &:hover,
   &:focus {

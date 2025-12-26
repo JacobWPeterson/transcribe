@@ -11,7 +11,7 @@
     align-items: baseline;
     width: 100%;
     gap: 24px;
-    color: theme.$grey07;
+    color: theme.$helpText;
 
     .Header {
       color: theme.$primary03;
@@ -35,7 +35,7 @@
   }
 
   .Small {
-    color: theme.$grey08;
+    color: theme.$helpText;
     margin: 4px 0 0;
     font-size: 0.8em;
   }
@@ -70,7 +70,7 @@
         &.Download {
           color: theme.$primary03;
           background: theme.$grey01;
-          font-size: 14px;
+          font-size: theme.$fontSizeSmaller;
         }
 
         &:focus,
