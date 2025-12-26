@@ -25,7 +25,7 @@ describe("ErrorBoundary", () => {
     render(
       <ErrorBoundary>
         <SafeComponent />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     expect(screen.getByText("Safe content")).toBeInTheDocument();
@@ -35,18 +35,18 @@ describe("ErrorBoundary", () => {
     render(
       <ErrorBoundary>
         <ErrorComponent />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     expect(screen.getByText("Something went wrong")).toBeInTheDocument();
-    expect(screen.getByText("Try Again")).toBeInTheDocument();
+    expect(screen.getByText("Try again")).toBeInTheDocument();
   });
 
   it("renders custom fallback when provided", () => {
     render(
       <ErrorBoundary fallback={<div>Custom error message</div>}>
         <ErrorComponent />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     expect(screen.getByText("Custom error message")).toBeInTheDocument();
@@ -59,17 +59,17 @@ describe("ErrorBoundary", () => {
     render(
       <ErrorBoundary>
         <ErrorComponent />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     expect(screen.getByText("Something went wrong")).toBeInTheDocument();
 
     // Click retry - this should reset the error state
-    await user.click(screen.getByText("Try Again"));
+    await user.click(screen.getByText("Try again"));
 
     // The error boundary should have reset, but since we still render ErrorComponent,
     // it will show the error again. The important thing is that the retry functionality works.
-    expect(screen.getByText("Try Again")).toBeInTheDocument();
+    expect(screen.getByText("Try again")).toBeInTheDocument();
   });
 
   it("shows error details in development mode", () => {
@@ -80,7 +80,7 @@ describe("ErrorBoundary", () => {
     render(
       <ErrorBoundary>
         <ErrorComponent />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     expect(screen.getByText("Error Details (Development)")).toBeInTheDocument();
@@ -95,12 +95,12 @@ describe("ErrorBoundary", () => {
     render(
       <ErrorBoundary onError={onErrorMock}>
         <ErrorComponent />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     expect(onErrorMock).toHaveBeenCalledWith(
       expect.any(Error),
-      expect.any(Object),
+      expect.any(Object)
     );
   });
 });
