@@ -1,4 +1,10 @@
-import { type ReactElement, useEffect, useRef, useState } from "react";
+import {
+  type ReactElement,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { jsPDF } from "jspdf";
 import classNames from "classnames";
 import { ArrowLeft, ArrowRight, Download } from "react-feather";
@@ -35,11 +41,35 @@ export const TranscriptionArea = ({
   const [requireSpaces, setRequireSpaces] = useState(false);
   const transcriptionAreaRef = useRef<HTMLDivElement>(null);
   const inputContainerRef = useRef<HTMLDivElement>(null);
+  const debounceTimeoutRef = useRef<NodeJS.Timeout>(null);
   const { lines, instruction } = manifest;
   const [lessonsStatus, setLessonsStatus] =
     useState<Record<number, LessonStatus>>(null);
 
   const [savedAnswers, setSavedAnswers] = useState<Record<number, string>>({});
+
+  // Debounced save function
+  const debouncedSave = useCallback(() => {
+    if (debounceTimeoutRef.current) {
+      clearTimeout(debounceTimeoutRef.current);
+    }
+    debounceTimeoutRef.current = setTimeout(() => {
+      if (lessonsStatus) {
+        const progress = {
+          answers: savedAnswers,
+          status: lessonsStatus,
+          requireSpaces,
+          lastUpdated: Date.now(),
+        };
+        try {
+          saveLessonProgress(lessonNumber, progress);
+        } catch (error) {
+          console.error("Error saving lesson progress:", error);
+          // Could show a user notification here, but since we have error boundaries, the LocalStorageErrorBoundary will catch this
+        }
+      }
+    }, 500);
+  }, [lessonNumber, lessonsStatus, savedAnswers, requireSpaces]);
 
   useEffect(() => {
     // Load saved progress for this lesson
@@ -75,24 +105,16 @@ export const TranscriptionArea = ({
     }
   }, [lessonNumber, lines]);
 
-  // Save progress whenever it changes
+  // Save progress with debouncing whenever it changes
   useEffect(() => {
-    if (lessonsStatus) {
-      const progress = {
-        answers: savedAnswers,
-        status: lessonsStatus,
-        requireSpaces,
-        lastUpdated: Date.now(),
-      };
-      try {
-        saveLessonProgress(lessonNumber, progress);
-      } catch (error) {
-        console.error("Error saving lesson progress:", error);
-        // Could show a user notification here, but since we have error boundaries,
-        // the LocalStorageErrorBoundary will catch this
+    debouncedSave();
+    // Cleanup timeout on unmount or dependency change
+    return (): void => {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
       }
-    }
-  }, [lessonNumber, lessonsStatus, savedAnswers, requireSpaces]);
+    };
+  }, [debouncedSave]);
 
   const handleClick = (type: "next" | "previous"): void => {
     changeManuscript(type);
@@ -197,7 +219,7 @@ export const TranscriptionArea = ({
               return (
                 <SingleLine
                   key={`${lessonNumber}-line.${index + 1 - titleAdjustments}`}
-                  passedIndex={index + 1 - titleAdjustments}
+                  passedIndex={index}
                   line={line}
                   requireSpaces={requireSpaces}
                   updateLessonStatus={handleUpdateLessonStatus}
