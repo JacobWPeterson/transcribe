@@ -16,7 +16,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "strictNullChecks": false,
-    "types": ["vitest/globals"],
+    "types": ["vitest/globals", "node"],
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,

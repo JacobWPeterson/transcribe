@@ -45,14 +45,14 @@ vi.mock("./TranscriptionArea/TranscriptionArea", () => {
         createElement(
           "button",
           { onClick: () => changeManuscript("previous") },
-          "Previous"
+          "Previous",
         ),
         createElement(
           "button",
           { onClick: () => changeManuscript("next") },
-          "Next"
+          "Next",
         ),
-        createElement("div", null, manifest?.instruction || "")
+        createElement("div", null, manifest?.instruction || ""),
       ),
   };
 });
@@ -72,16 +72,16 @@ describe("Workspace", () => {
             element={<Workspace set={ManifestSets.CORE} />}
           />
         </Routes>
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(screen.getByTestId("mirador")).toBeInTheDocument();
     expect(screen.getByTestId("transcription")).toBeInTheDocument();
     expect(
-      screen.queryByText(/left the target image/i)
+      screen.queryByText(/left the target image/i),
     ).not.toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { level: 2, name: "Lesson 1" })
+      screen.getByRole("heading", { level: 2, name: "Lesson 1" }),
     ).toBeInTheDocument();
   });
 
@@ -97,14 +97,14 @@ describe("Workspace", () => {
             element={<Workspace set={ManifestSets.CORE} />}
           />
         </Routes>
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     // Alert should appear mentioning the target canvas index
     expect(
       screen.getByText(
-        `Feel free to explore, but you have left the target image (${manifests[ManifestSets.CORE][1].canvasIndex}).`
-      )
+        `Feel free to explore, but you have left the target image (${manifests[ManifestSets.CORE][1].canvasIndex}).`,
+      ),
     ).toBeInTheDocument();
   });
 
@@ -117,7 +117,7 @@ describe("Workspace", () => {
             element={<Workspace set={ManifestSets.CORE} />}
           />
         </Routes>
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(screen.getByText(/Οοπς, παγε νοτ φουνδ!/i)).toBeInTheDocument();

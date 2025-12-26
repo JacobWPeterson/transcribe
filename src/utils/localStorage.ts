@@ -18,9 +18,17 @@ export const saveLessonProgress = (
 ): void => {
   try {
     const key = `${STORAGE_PREFIX}${lessonId}`;
-    localStorage.setItem(key, JSON.stringify(progress));
+    const serialized = JSON.stringify(progress);
+    localStorage.setItem(key, serialized);
   } catch (error) {
-    console.warn("Failed to save lesson progress:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    console.warn("Failed to save lesson progress:", errorMessage);
+
+    // Re-throw with more context for error boundaries
+    throw new Error(
+      `Failed to save lesson progress for lesson ${lessonId}: ${errorMessage}`
+    );
   }
 };
 
@@ -31,10 +39,19 @@ export const loadLessonProgress = (lessonId: number): LessonProgress | null => {
   try {
     const key = `${STORAGE_PREFIX}${lessonId}`;
     const stored = localStorage.getItem(key);
-    return stored ? JSON.parse(stored) : null;
+    if (!stored) {
+      return null;
+    }
+    return JSON.parse(stored);
   } catch (error) {
-    console.warn("Failed to load lesson progress:", error);
-    return null;
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    console.warn("Failed to load lesson progress:", errorMessage);
+
+    // Re-throw with more context for error boundaries
+    throw new Error(
+      `Failed to load lesson progress for lesson ${lessonId}: ${errorMessage}`
+    );
   }
 };
 
@@ -46,7 +63,14 @@ export const clearLessonProgress = (lessonId: number): void => {
     const key = `${STORAGE_PREFIX}${lessonId}`;
     localStorage.removeItem(key);
   } catch (error) {
-    console.warn("Failed to clear lesson progress:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    console.warn("Failed to clear lesson progress:", errorMessage);
+
+    // Re-throw with more context for error boundaries
+    throw new Error(
+      `Failed to clear lesson progress for lesson ${lessonId}: ${errorMessage}`
+    );
   }
 };
 
@@ -61,7 +85,11 @@ export const getStoredLessonIds = (): number[] => {
       .map((key) => parseInt(key.replace(STORAGE_PREFIX, ""), 10))
       .filter((id) => !isNaN(id));
   } catch (error) {
-    console.warn("Failed to get stored lesson IDs:", error);
-    return [];
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    console.warn("Failed to get stored lesson IDs:", errorMessage);
+
+    // Re-throw with more context for error boundaries
+    throw new Error(`Failed to get stored lesson IDs: ${errorMessage}`);
   }
 };

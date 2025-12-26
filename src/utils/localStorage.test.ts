@@ -98,11 +98,13 @@ describe("localStorage utils", () => {
       lastUpdated: Date.now(),
     };
 
-    // Should not throw
-    expect(() => saveLessonProgress(1, progress)).not.toThrow();
+    // Should throw an error that can be caught by error boundaries
+    expect(() => saveLessonProgress(1, progress)).toThrow(
+      "Failed to save lesson progress for lesson 1: Storage quota exceeded",
+    );
     expect(consoleWarnSpy).toHaveBeenCalledWith(
       "Failed to save lesson progress:",
-      expect.any(Error)
+      "Storage quota exceeded",
     );
 
     // Restore original localStorage

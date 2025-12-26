@@ -16,13 +16,13 @@ export const StatusReport = ({
   }
   const totalLines = Object.keys(lessonsStatus)?.length;
   const correctLines = Object.values(lessonsStatus).filter(
-    (status) => status === LessonStatus.CORRECT
+    (status) => status === LessonStatus.CORRECT,
   ).length;
   const incorrectLines = Object.values(lessonsStatus).filter(
-    (status) => status === LessonStatus.INCORRECT
+    (status) => status === LessonStatus.INCORRECT,
   ).length;
   const incompleteLines = Object.values(lessonsStatus).filter(
-    (status) => status === LessonStatus.INCOMPLETE
+    (status) => status === LessonStatus.INCOMPLETE,
   ).length;
 
   const correctPercentage =
