@@ -26,7 +26,7 @@ describe("SingeLine", () => {
         line={mockTitleLine}
         passedIndex={0}
         updateLessonStatus={() => {}}
-      />
+      />,
     );
 
     const user = userEvent.setup();
@@ -38,8 +38,8 @@ describe("SingeLine", () => {
     await user.hover(screen.getByRole("img", { name: "title" }));
     expect(
       screen.getByText(
-        "Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don't worry about them as much early on. Type them as a single line."
-      )
+        "Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don't worry about them as much early on. Type them as a single line.",
+      ),
     ).toBeInTheDocument();
   });
 
@@ -49,11 +49,11 @@ describe("SingeLine", () => {
         line={mockNewConceptLine}
         passedIndex={1}
         updateLessonStatus={() => {}}
-      />
+      />,
     );
 
     expect(
-      screen.queryByRole("img", { name: "title" })
+      screen.queryByRole("img", { name: "title" }),
     ).not.toBeInTheDocument();
     expect(screen.getByRole("textbox", { name: "L1" })).toBeInTheDocument();
 
@@ -64,8 +64,8 @@ describe("SingeLine", () => {
     expect(screen.getByText(/New concept: Ekthesis./)).toBeInTheDocument();
     expect(
       screen.getByText(
-        /A large, decorative letter at the beginning of a line that is often in the margin./
-      )
+        /A large, decorative letter at the beginning of a line that is often in the margin./,
+      ),
     ).toBeInTheDocument();
   });
 
@@ -75,7 +75,7 @@ describe("SingeLine", () => {
         line={mockNewConceptLine}
         passedIndex={1}
         updateLessonStatus={() => {}}
-      />
+      />,
     );
 
     const user = userEvent.setup();
@@ -95,7 +95,7 @@ describe("SingeLine", () => {
         line={mockNewConceptLine}
         passedIndex={1}
         updateLessonStatus={() => {}}
-      />
+      />,
     );
 
     const user = userEvent.setup();
@@ -107,12 +107,12 @@ describe("SingeLine", () => {
 
     expect(screen.queryByText(/Helpful caption/)).not.toBeInTheDocument();
     expect(
-      screen.getByText("Non-Greek characters have been detected")
+      screen.getByText("Non-Greek characters have been detected"),
     ).toBeInTheDocument();
 
     await user.clear(lineInput);
     expect(
-      screen.queryByText("Non-Greek characters have been detected")
+      screen.queryByText("Non-Greek characters have been detected"),
     ).not.toBeInTheDocument();
     expect(screen.getByText(/Helpful caption/)).toBeInTheDocument();
   });
@@ -123,7 +123,7 @@ describe("SingeLine", () => {
         line={mockNewConceptLine}
         passedIndex={1}
         updateLessonStatus={() => {}}
-      />
+      />,
     );
 
     const user = userEvent.setup();
@@ -135,7 +135,7 @@ describe("SingeLine", () => {
 
     expect(screen.queryByText(/Helpful caption/)).not.toBeInTheDocument();
     expect(
-      screen.getByText("Non-Greek characters have been detected")
+      screen.getByText("Non-Greek characters have been detected"),
     ).toBeInTheDocument();
   });
 
@@ -146,7 +146,7 @@ describe("SingeLine", () => {
         line={mockNewConceptLine}
         passedIndex={1}
         updateLessonStatus={() => {}}
-      />
+      />,
     );
 
     const user = userEvent.setup();
@@ -171,7 +171,7 @@ describe("SingeLine", () => {
         line={mockNewConceptLine}
         passedIndex={1}
         updateLessonStatus={() => {}}
-      />
+      />,
     );
 
     const user = userEvent.setup();
@@ -196,7 +196,7 @@ describe("SingeLine", () => {
         line={mockNewConceptLine}
         passedIndex={1}
         updateLessonStatus={() => {}}
-      />
+      />,
     );
 
     const user = userEvent.setup();
@@ -221,7 +221,7 @@ describe("SingeLine", () => {
         line={mockNewConceptLine}
         passedIndex={1}
         updateLessonStatus={() => {}}
-      />
+      />,
     );
 
     const user = userEvent.setup();
@@ -239,7 +239,7 @@ describe("SingeLine", () => {
 
     await user.type(lineInput, "{backspace}");
     expect(
-      screen.queryByRole("img", { name: "incorrect" })
+      screen.queryByRole("img", { name: "incorrect" }),
     ).not.toBeInTheDocument();
   });
 
@@ -250,7 +250,7 @@ describe("SingeLine", () => {
         line={mockNewConceptLine}
         passedIndex={1}
         updateLessonStatus={() => {}}
-      />
+      />,
     );
 
     const user = userEvent.setup();
@@ -269,7 +269,7 @@ describe("SingeLine", () => {
     expect(incorrectButton).toBeInTheDocument();
     await user.hover(incorrectButton);
     expect(
-      screen.getByText("Your answer is 1 letter too short.")
+      screen.getByText("Your answer is 1 letter too short."),
     ).toBeInTheDocument();
   });
 
@@ -280,7 +280,7 @@ describe("SingeLine", () => {
         line={mockNewConceptLine}
         passedIndex={1}
         updateLessonStatus={() => {}}
-      />
+      />,
     );
 
     const user = userEvent.setup();
@@ -299,7 +299,7 @@ describe("SingeLine", () => {
     expect(incorrectButton).toBeInTheDocument();
     await user.hover(incorrectButton);
     expect(
-      screen.getByText("Your answer is 2 letters too long.")
+      screen.getByText("Your answer is 2 letters too long."),
     ).toBeInTheDocument();
   });
 
@@ -310,7 +310,7 @@ describe("SingeLine", () => {
         line={mockNewConceptLine}
         passedIndex={1}
         updateLessonStatus={() => {}}
-      />
+      />,
     );
 
     const user = userEvent.setup();
@@ -338,7 +338,7 @@ describe("SingeLine", () => {
         line={mockNewConceptLine}
         passedIndex={1}
         updateLessonStatus={() => {}}
-      />
+      />,
     );
 
     const user = userEvent.setup();
@@ -360,7 +360,7 @@ describe("SingeLine", () => {
     await user.type(lineInput, "{backspace}{backspace}οω");
     await user.click(checkButton);
     expect(
-      screen.queryByRole("img", { name: "incorrect" })
+      screen.queryByRole("img", { name: "incorrect" }),
     ).not.toBeInTheDocument();
     expect(screen.getByRole("img", { name: "help" })).toBeInTheDocument();
 
@@ -370,13 +370,13 @@ describe("SingeLine", () => {
     await user.type(lineInput, "{backspace}{backspace}ωζ");
     await user.click(checkButton);
     expect(
-      screen.queryByRole("img", { name: "incorrect" })
+      screen.queryByRole("img", { name: "incorrect" }),
     ).not.toBeInTheDocument();
     expect(screen.getByRole("img", { name: "help" })).toBeInTheDocument();
 
     await user.hover(screen.getByRole("img", { name: "help" }));
     expect(
-      screen.getByText("Incorrect letters: ω(6), ζ(7).")
+      screen.getByText("Incorrect letters: ω(6), ζ(7)."),
     ).toBeInTheDocument();
   });
 
@@ -387,7 +387,7 @@ describe("SingeLine", () => {
         line={mockNewConceptLine}
         passedIndex={1}
         updateLessonStatus={() => {}}
-      />
+      />,
     );
 
     const user = userEvent.setup();
@@ -418,7 +418,7 @@ describe("SingeLine", () => {
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
           updateLessonStatus={() => {}}
-        />
+        />,
       );
 
       const user = userEvent.setup();
@@ -440,7 +440,7 @@ describe("SingeLine", () => {
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
           updateLessonStatus={() => {}}
-        />
+        />,
       );
 
       const user = userEvent.setup();
@@ -462,7 +462,7 @@ describe("SingeLine", () => {
           line={{ ...mockNewConceptLine, text: "αδελφοσ μου" }}
           passedIndex={1}
           updateLessonStatus={() => {}}
-        />
+        />,
       );
 
       const user = userEvent.setup();
@@ -485,7 +485,7 @@ describe("SingeLine", () => {
           passedIndex={1}
           requireSpaces
           updateLessonStatus={() => {}}
-        />
+        />,
       );
 
       const user = userEvent.setup();
@@ -508,7 +508,7 @@ describe("SingeLine", () => {
           passedIndex={1}
           requireSpaces
           updateLessonStatus={() => {}}
-        />
+        />,
       );
 
       const user = userEvent.setup();
@@ -522,10 +522,10 @@ describe("SingeLine", () => {
       await user.click(checkButton);
 
       expect(
-        screen.queryByRole("img", { name: "correct" })
+        screen.queryByRole("img", { name: "correct" }),
       ).not.toBeInTheDocument();
       expect(
-        screen.getByRole("img", { name: "incorrect" })
+        screen.getByRole("img", { name: "incorrect" }),
       ).toBeInTheDocument();
     });
 
@@ -536,7 +536,7 @@ describe("SingeLine", () => {
           passedIndex={1}
           requireSpaces
           updateLessonStatus={() => {}}
-        />
+        />,
       );
 
       const user = userEvent.setup();
@@ -550,10 +550,10 @@ describe("SingeLine", () => {
       await user.click(checkButton);
 
       expect(
-        screen.queryByRole("img", { name: "correct" })
+        screen.queryByRole("img", { name: "correct" }),
       ).not.toBeInTheDocument();
       expect(
-        screen.getByRole("img", { name: "incorrect" })
+        screen.getByRole("img", { name: "incorrect" }),
       ).toBeInTheDocument();
     });
 
@@ -564,7 +564,7 @@ describe("SingeLine", () => {
           passedIndex={1}
           requireSpaces
           updateLessonStatus={() => {}}
-        />
+        />,
       );
 
       const user = userEvent.setup();
@@ -578,10 +578,10 @@ describe("SingeLine", () => {
       await user.click(checkButton);
 
       expect(
-        screen.queryByRole("img", { name: "correct" })
+        screen.queryByRole("img", { name: "correct" }),
       ).not.toBeInTheDocument();
       expect(
-        screen.getByRole("img", { name: "incorrect" })
+        screen.getByRole("img", { name: "incorrect" }),
       ).toBeInTheDocument();
     });
   });
@@ -594,7 +594,7 @@ describe("SingeLine", () => {
           line={mockNewConceptLine}
           passedIndex={1}
           updateLessonStatus={() => {}}
-        />
+        />,
       );
 
       const user = userEvent.setup();
@@ -621,7 +621,7 @@ describe("SingeLine", () => {
           line={mockTitleLine}
           passedIndex={1}
           updateLessonStatus={() => {}}
-        />
+        />,
       );
 
       const user = userEvent.setup();
@@ -630,8 +630,8 @@ describe("SingeLine", () => {
 
       expect(
         screen.getByText(
-          "Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don't worry about them as much early on. Type them as a single line."
-        )
+          "Titles can be plain or feature elaborate patterns. Titles often feature ligatures and abbreviations and can be much more difficult to read, so don't worry about them as much early on. Type them as a single line.",
+        ),
       ).toBeInTheDocument();
     });
 
@@ -642,7 +642,7 @@ describe("SingeLine", () => {
           line={mockNewConceptLine}
           passedIndex={1}
           updateLessonStatus={() => {}}
-        />
+        />,
       );
 
       const user = userEvent.setup();
@@ -663,7 +663,7 @@ describe("SingeLine", () => {
       expect(incorrectButton).toBeInTheDocument();
       await user.keyboard("{tab}");
       expect(
-        screen.getByText("Your answer is 1 letter too short.")
+        screen.getByText("Your answer is 1 letter too short."),
       ).toBeInTheDocument();
     });
 
@@ -677,7 +677,7 @@ describe("SingeLine", () => {
           savedAnswer="αδελφοσμου"
           savedStatus={LessonStatus.CORRECT}
           updateLessonStatus={mockUpdateLessonStatus}
-        />
+        />,
       );
 
       // Initially should show correct status
@@ -693,13 +693,13 @@ describe("SingeLine", () => {
           savedAnswer="αδελφοσμου"
           savedStatus={LessonStatus.CORRECT}
           updateLessonStatus={mockUpdateLessonStatus}
-        />
+        />,
       );
 
       // Should have re-evaluated and called updateLessonStatus with INCORRECT
       expect(mockUpdateLessonStatus).toHaveBeenCalledWith(
         1,
-        LessonStatus.INCORRECT
+        LessonStatus.INCORRECT,
       );
     });
 
@@ -713,7 +713,7 @@ describe("SingeLine", () => {
           savedAnswer="αδελφοσμου"
           savedStatus={LessonStatus.INCOMPLETE}
           updateLessonStatus={mockUpdateLessonStatus}
-        />
+        />,
       );
 
       expect(mockUpdateLessonStatus).not.toHaveBeenCalled();
@@ -727,13 +727,13 @@ describe("SingeLine", () => {
           savedAnswer="αδελφοσμου"
           savedStatus={LessonStatus.INCOMPLETE}
           updateLessonStatus={mockUpdateLessonStatus}
-        />
+        />,
       );
 
       // Should have re-evaluated the savedAnswer and called updateLessonStatus with INCORRECT
       expect(mockUpdateLessonStatus).toHaveBeenCalledWith(
         1,
-        LessonStatus.INCORRECT
+        LessonStatus.INCORRECT,
       );
     });
   });

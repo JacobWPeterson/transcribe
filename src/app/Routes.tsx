@@ -40,8 +40,8 @@ const router = createBrowserRouter(
       />
       <Route path="about" element={<About />} />
       <Route path="*" element={<E404 />} />
-    </Route>
-  )
+    </Route>,
+  ),
 );
 
 export const Routes = (): ReactElement => <RouterProvider router={router} />;

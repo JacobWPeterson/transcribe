@@ -33,9 +33,7 @@ export const ContactModal = ({
     watch,
   } = useForm<ContactFormData>({ mode: "onTouched" });
 
-  const nameInput = watch("name");
-  const emailInput = watch("email");
-  const messageInput = watch("message");
+  const { name: nameInput, email: emailInput, message: messageInput } = watch();
 
   // Mid-strength solution comes from https://www.regular-expressions.info/email.html
   const emailRegex =

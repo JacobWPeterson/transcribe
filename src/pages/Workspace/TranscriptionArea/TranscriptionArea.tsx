@@ -1,10 +1,20 @@
-import { type ReactElement, useEffect, useRef, useState } from "react";
+import {
+  type ReactElement,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { jsPDF } from "jspdf";
 import classNames from "classnames";
 import { ArrowLeft, ArrowRight, Download } from "react-feather";
 
 import type { Line, Manifest } from "../../../files/manifests";
 import { StatusReport } from "../../../components/StatusReport/StatusReport";
+import {
+  LocalStorageErrorBoundary,
+  PDFErrorBoundary,
+} from "../../../components/ErrorBoundary/SpecializedErrorBoundaries";
 import {
   loadLessonProgress,
   saveLessonProgress,
@@ -31,21 +41,57 @@ export const TranscriptionArea = ({
   const [requireSpaces, setRequireSpaces] = useState(false);
   const transcriptionAreaRef = useRef<HTMLDivElement>(null);
   const inputContainerRef = useRef<HTMLDivElement>(null);
+  const debounceTimeoutRef = useRef<NodeJS.Timeout>(null);
   const { lines, instruction } = manifest;
   const [lessonsStatus, setLessonsStatus] =
     useState<Record<number, LessonStatus>>(null);
 
   const [savedAnswers, setSavedAnswers] = useState<Record<number, string>>({});
 
+  // Debounced save function
+  const debouncedSave = useCallback(() => {
+    if (debounceTimeoutRef.current) {
+      clearTimeout(debounceTimeoutRef.current);
+    }
+    debounceTimeoutRef.current = setTimeout(() => {
+      if (lessonsStatus) {
+        const progress = {
+          answers: savedAnswers,
+          status: lessonsStatus,
+          requireSpaces,
+          lastUpdated: Date.now(),
+        };
+        try {
+          saveLessonProgress(lessonNumber, progress);
+        } catch (error) {
+          console.error("Error saving lesson progress:", error);
+          // Could show a user notification here, but since we have error boundaries, the LocalStorageErrorBoundary will catch this
+        }
+      }
+    }, 500);
+  }, [lessonNumber, lessonsStatus, savedAnswers, requireSpaces]);
+
   useEffect(() => {
     // Load saved progress for this lesson
-    const savedProgress = loadLessonProgress(lessonNumber);
-    if (savedProgress && Object.entries(savedProgress.answers).length) {
-      setLessonsStatus(savedProgress.status);
-      setSavedAnswers(savedProgress.answers);
-      setRequireSpaces(savedProgress.requireSpaces);
-    } else {
-      // Initialize with default values if no saved progress
+    try {
+      const savedProgress = loadLessonProgress(lessonNumber);
+      if (savedProgress && Object.entries(savedProgress.answers).length) {
+        setLessonsStatus(savedProgress.status);
+        setSavedAnswers(savedProgress.answers);
+        setRequireSpaces(savedProgress.requireSpaces);
+      } else {
+        // Initialize with default values if no saved progress
+        const lessonsStatusObj = lines.reduce(
+          (obj, _, index) => ({ ...obj, [index]: LessonStatus.INCOMPLETE }),
+          {}
+        );
+        setLessonsStatus(lessonsStatusObj);
+        setSavedAnswers({});
+        setRequireSpaces(false);
+      }
+    } catch (error) {
+      console.error("Error loading lesson progress:", error);
+      // Initialize with default values if loading failed
       const lessonsStatusObj = lines.reduce(
         (obj, _, index) => ({ ...obj, [index]: LessonStatus.INCOMPLETE }),
         {}
@@ -54,21 +100,21 @@ export const TranscriptionArea = ({
       setSavedAnswers({});
       setRequireSpaces(false);
     }
-    inputContainerRef.current.scrollTop = 0;
+    if (inputContainerRef.current) {
+      inputContainerRef.current.scrollTop = 0;
+    }
   }, [lessonNumber, lines]);
 
-  // Save progress whenever it changes
+  // Save progress with debouncing whenever it changes
   useEffect(() => {
-    if (lessonsStatus) {
-      const progress = {
-        answers: savedAnswers,
-        status: lessonsStatus,
-        requireSpaces,
-        lastUpdated: Date.now(),
-      };
-      saveLessonProgress(lessonNumber, progress);
-    }
-  }, [lessonNumber, lessonsStatus, savedAnswers, requireSpaces]);
+    debouncedSave();
+    // Cleanup timeout on unmount or dependency change
+    return (): void => {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+    };
+  }, [debouncedSave]);
 
   const handleClick = (type: "next" | "previous"): void => {
     changeManuscript(type);
@@ -92,32 +138,47 @@ export const TranscriptionArea = ({
   };
 
   const handleDownloadPDF = (): void => {
-    const element = transcriptionAreaRef.current;
-    element.style.setProperty("width", "790px");
+    try {
+      const element = transcriptionAreaRef.current;
+      if (!element) {
+        throw new Error("Transcription area element not found");
+      }
 
-    const pdf = new jsPDF({ format: "a4" });
-    pdf.addFileToVFS("Brill-Roman.ttf", brillBase64);
-    pdf.addFont("Brill-Roman.ttf", "Brill-Roman", "normal");
-    pdf.setFont("Brill-Roman");
-    pdf.setProperties({ title: `Lesson ${lessonNumber} Report` });
+      element.style.setProperty("width", "790px");
 
-    pdf
-      .html(element, {
-        margin: [10, 7, 10, 7],
-        html2canvas: {
-          scale: 0.25,
-          ignoreElements: ({ id }) =>
-            id === "prevButton" ||
-            id === "downloadButton" ||
-            id === "nextButton",
-        },
-      })
-      .then(() => {
-        pdf.output("pdfobjectnewwindow");
-      })
-      .finally(() => {
-        element.style.removeProperty("width");
-      });
+      const pdf = new jsPDF({ format: "a4" });
+      pdf.addFileToVFS("Brill-Roman.ttf", brillBase64);
+      pdf.addFont("Brill-Roman.ttf", "Brill-Roman", "normal");
+      pdf.setFont("Brill-Roman");
+      pdf.setProperties({ title: `Lesson ${lessonNumber} Report` });
+
+      pdf
+        .html(element, {
+          margin: [10, 7, 10, 7],
+          html2canvas: {
+            scale: 0.25,
+            ignoreElements: ({ id }) =>
+              id === "prevButton" ||
+              id === "downloadButton" ||
+              id === "nextButton",
+          },
+        })
+        .then(() => {
+          pdf.output("pdfobjectnewwindow");
+        })
+        .catch((error) => {
+          console.error("PDF generation error:", error);
+          throw new Error(
+            `Failed to generate PDF: ${error.message || "Unknown error"}`
+          );
+        })
+        .finally(() => {
+          element.style.removeProperty("width");
+        });
+    } catch (error) {
+      console.error("PDF download error:", error);
+      throw error; // Let the error boundary handle it
+    }
   };
 
   let titleAdjustments = 0;
@@ -147,62 +208,66 @@ export const TranscriptionArea = ({
           {`: ${instruction}`}
         </small>
       ) : null}
-      {<StatusReport lessonsStatus={lessonsStatus} />}
-      <div className={styles.TranscriptionArea} ref={inputContainerRef}>
-        <div className={styles.LinesContainer}>
-          {lines.map((line: Line, index) => {
-            if (line.isTitle) {
-              titleAdjustments++;
-            }
-            return (
-              <SingleLine
-                key={`${lessonNumber}-line.${index + 1 - titleAdjustments}`}
-                passedIndex={index + 1 - titleAdjustments}
-                line={line}
-                requireSpaces={requireSpaces}
-                updateLessonStatus={handleUpdateLessonStatus}
-                savedAnswer={savedAnswers[index]}
-                savedStatus={lessonsStatus?.[index]}
-                onSaveAnswer={handleSaveAnswer}
-              />
-            );
-          })}
+      <LocalStorageErrorBoundary>
+        {<StatusReport lessonsStatus={lessonsStatus} />}
+        <div className={styles.TranscriptionArea} ref={inputContainerRef}>
+          <div className={styles.LinesContainer}>
+            {lines.map((line: Line, index) => {
+              if (line.isTitle) {
+                titleAdjustments++;
+              }
+              return (
+                <SingleLine
+                  key={`${lessonNumber}-line.${index + 1 - titleAdjustments}`}
+                  passedIndex={index}
+                  line={line}
+                  requireSpaces={requireSpaces}
+                  updateLessonStatus={handleUpdateLessonStatus}
+                  savedAnswer={savedAnswers[index]}
+                  savedStatus={lessonsStatus?.[index]}
+                  onSaveAnswer={handleSaveAnswer}
+                />
+              );
+            })}
+          </div>
+          <div className={styles.ButtonsContainer}>
+            {lessonNumber > 1 ? (
+              <button
+                aria-label="Previous"
+                className={styles.Button}
+                onClick={() => handleClick("previous")}
+                id="prevButton"
+              >
+                <ArrowLeft size={18} />
+              </button>
+            ) : (
+              <div className={styles.DummyButton} />
+            )}
+            <PDFErrorBoundary>
+              <button
+                className={classNames(styles.Button, styles.Download)}
+                onClick={handleDownloadPDF}
+                id="downloadButton"
+              >
+                Report
+                <Download className={styles.DownloadIcon} size={14} />
+              </button>
+            </PDFErrorBoundary>
+            {lessonNumber < numberOfLessons ? (
+              <button
+                aria-label="Next"
+                className={styles.Button}
+                onClick={() => handleClick("next")}
+                id="nextButton"
+              >
+                <ArrowRight size={18} />
+              </button>
+            ) : (
+              <div className={styles.DummyButton} />
+            )}
+          </div>
         </div>
-        <div className={styles.ButtonsContainer}>
-          {lessonNumber > 1 ? (
-            <button
-              aria-label="Previous"
-              className={styles.Button}
-              onClick={() => handleClick("previous")}
-              id="prevButton"
-            >
-              <ArrowLeft size={18} />
-            </button>
-          ) : (
-            <div className={styles.DummyButton} />
-          )}
-          <button
-            className={classNames(styles.Button, styles.Download)}
-            onClick={handleDownloadPDF}
-            id="downloadButton"
-          >
-            Report
-            <Download className={styles.DownloadIcon} size={14} />
-          </button>
-          {lessonNumber < numberOfLessons ? (
-            <button
-              aria-label="Next"
-              className={styles.Button}
-              onClick={() => handleClick("next")}
-              id="nextButton"
-            >
-              <ArrowRight size={18} />
-            </button>
-          ) : (
-            <div className={styles.DummyButton} />
-          )}
-        </div>
-      </div>
+      </LocalStorageErrorBoundary>
     </div>
   );
 };

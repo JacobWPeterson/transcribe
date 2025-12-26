@@ -5,6 +5,7 @@ import type { ManifestSets } from "../../files/manifests";
 import manifests from "../../files/manifests";
 import { E404 } from "../E404/E404";
 import { Alert } from "../../components/Alert/Alert";
+import { ExternalContentErrorBoundary } from "../../components/ErrorBoundary/ExternalContentErrorBoundary";
 
 import { TranscriptionArea } from "./TranscriptionArea/TranscriptionArea";
 import { Mirador } from "./Mirador/index";
@@ -75,13 +76,17 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
         </Alert>
       )}
       <div className={styles.MiradorWrapper}>
-        <Mirador
-          index={canvasIndex - 1}
-          manifest={currentManifest.manifestId}
-          setPageNumber={setPageNumber}
-          specialIndexHandlingStart={currentManifest?.specialIndexHandlingStart}
-          specialIndexHandlingEnd={currentManifest?.specialIndexHandlingEnd}
-        />
+        <ExternalContentErrorBoundary contentType="viewer">
+          <Mirador
+            index={canvasIndex - 1}
+            manifest={currentManifest.manifestId}
+            setPageNumber={setPageNumber}
+            specialIndexHandlingStart={
+              currentManifest?.specialIndexHandlingStart
+            }
+            specialIndexHandlingEnd={currentManifest?.specialIndexHandlingEnd}
+          />
+        </ExternalContentErrorBoundary>
       </div>
       <div className={styles.TranscriptionPanel}>
         <TranscriptionArea
