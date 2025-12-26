@@ -22,8 +22,10 @@ interface SingleLineProps {
   onSaveAnswer?: (index: number, answer: string) => void;
 }
 
+const NON_GREEK_CHARS_REGEX = /[^Α-Ωα-ωϛ\s]/g;
+
 const includesNonGreekChars = (text: string): boolean => {
-  return !!text.match(/[^Α-Ωα-ωϛ\s]/g)?.length;
+  return !!text.match(NON_GREEK_CHARS_REGEX)?.length;
 };
 
 export const SingleLine = ({
@@ -100,7 +102,7 @@ export const SingleLine = ({
       const submissionStatus = evaluateSubmission(
         savedAnswer,
         line.text,
-        requireSpaces
+        requireSpaces,
       );
       setSubmissionStatus(submissionStatus);
       updateLessonStatus(passedIndex, Number(submissionStatus[0]));
@@ -125,7 +127,7 @@ export const SingleLine = ({
     const submissionStatus = evaluateSubmission(
       lineContent,
       line.text,
-      requireSpaces
+      requireSpaces,
     );
     setSubmissionStatus(submissionStatus);
     updateLessonStatus(passedIndex, Number(submissionStatus[0])); // This Number cast works because of the enum order in singleLine.enum.ts
