@@ -100,7 +100,7 @@
     .Line2 {
       display: flex;
       align-self: flex-start;
-      color: theme.$grey07;
+      color: theme.$helpText;
       font-size: 32px;
       padding-left: 36px;
 
@@ -117,7 +117,7 @@
     .Line3 {
       display: flex;
       align-self: flex-end;
-      color: theme.$grey10;
+      color: theme.$text;
       font-size: 40px;
 
       @media (width < 1440px) {
@@ -147,14 +147,14 @@
   .FeaturesText {
     width: 70%;
     margin: 0 auto;
-    color: theme.$grey10;
-    font-size: 20px;
+    color: theme.$text;
+    font-size: theme.$fontSizeLargest;
     font-style: italic;
     text-align: center;
     letter-spacing: 0.03em;
 
     @media (width < 1280px) {
-      font-size: 18px;
+      font-size: theme.$fontSizeLarger;
     }
 
     @media (width < 600px) {
@@ -207,14 +207,14 @@
         color: theme.$primary03;
         margin-left: 20px;
         padding: 4px 0 4px 4px;
-        font-size: 18px;
+        font-size: theme.$fontSizeLarger;
 
         @media (width < 1550px) {
           margin-left: 0;
         }
 
         @media (width < 1280px) {
-          font-size: 16px;
+          font-size: theme.$fontSizeDefault;
         }
 
         @media (width < 1024px) {
@@ -227,7 +227,7 @@
         }
 
         > span {
-          color: theme.$grey10;
+          color: theme.$text;
         }
       }
     }
@@ -246,11 +246,11 @@
   align-items: center;
 
   @media (width < 1280px) {
-    font-size: 20px;
+    font-size: theme.$fontSizeLargest;
   }
 
   @media (width < 800px) {
-    font-size: 16px;
+    font-size: theme.$fontSizeDefault;
     text-align: center;
     padding: 12px 20px;
   }
@@ -260,7 +260,7 @@
     align-items: center;
     justify-content: center;
     color: theme.$grey00;
-    font-size: 20px;
+    font-size: theme.$fontSizeLargest;
     background: theme.$primary03;
     height: 38px;
     width: 150px;
@@ -275,7 +275,7 @@
     }
 
     @media (width < 1280px) {
-      font-size: 16px;
+      font-size: theme.$fontSizeDefault;
     }
   }
 }

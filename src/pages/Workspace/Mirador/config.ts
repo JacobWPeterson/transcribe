@@ -1,3 +1,11 @@
+import { getThemeColor } from "../../../utils/cssVariables";
+
+const primaryColor = getThemeColor("primary03");
+const secondaryColor = getThemeColor("secondary03");
+const grey00Color = getThemeColor("grey00");
+const grey01Color = getThemeColor("grey01");
+const grey02Color = getThemeColor("grey02");
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const config: any = {
   id: "transcribe",
@@ -28,13 +36,13 @@ const config: any = {
   views: [{ key: "single", behaviors: ["individuals"] }],
   theme: {
     palette: {
-      primary: { main: "#c9ac5f" },
-      secondary: { main: "#65743a" },
+      primary: { main: secondaryColor },
+      secondary: { main: primaryColor },
       shades: {
         // Shades that can be used to offset color areas of the Workspace / Window
-        dark: "#d6d6d6",
-        main: "#fbfafb",
-        light: "#ebebeb",
+        dark: grey02Color,
+        main: grey00Color,
+        light: grey01Color,
       },
     },
   },
