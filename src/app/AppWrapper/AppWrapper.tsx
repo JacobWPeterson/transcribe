@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 import { ContactModal } from "../../components/ContactModal/ContactModal";
-import { ThemeControls } from "../../components/ThemeControls/ThemeControls";
+import { SettingsMenu } from "../../components/SettingsMenu/SettingsMenu";
 import { useTheme } from "../../contexts/ThemeContext";
 
 import styles from "./AppWrapper.module.scss";
@@ -67,7 +67,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
           <a className={styles.NavLink} href="/about" data-replace="About">
             <span>About</span>
           </a>
-          <ThemeControls />
+          <SettingsMenu />
         </div>
       </div>
       {children}

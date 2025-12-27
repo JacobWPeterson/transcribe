@@ -97,3 +97,78 @@
     }
   }
 }
+
+.ModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.Modal {
+  background-color: theme.$grey00;
+  border: 1px solid theme.$grey03;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+
+  h3 {
+    margin: 0 0 16px 0;
+    color: theme.$primary03;
+    font-size: theme.$fontSizeLarger;
+  }
+
+  p {
+    margin: 0 0 12px 0;
+    color: theme.$text;
+    line-height: 1.5;
+  }
+
+  .ModalButtons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 16px;
+
+    .CancelButton,
+    .ConfirmButton {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: theme.$fontSizeDefault;
+      font-weight: 500;
+    }
+
+    .CancelButton {
+      background-color: theme.$grey01;
+      border: 1px solid theme.$grey03;
+      color: theme.$text;
+
+      &:focus,
+      &:hover {
+        outline: 2px solid theme.$grey03;
+        outline-offset: 2px;
+      }
+    }
+
+    .ConfirmButton {
+      background-color: theme.$error;
+      color: theme.$grey00;
+
+      &:focus,
+      &:hover {
+        outline: 2px solid theme.$error;
+        outline-offset: 2px;
+      }
+    }
+  }
+}

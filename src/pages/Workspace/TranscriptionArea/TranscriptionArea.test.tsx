@@ -23,6 +23,7 @@ describe("TranscriptionArea", () => {
         numberOfLessons={3}
         lessonNumber={1}
         manifest={manifests[ManifestSets.CORE][1]}
+        set={ManifestSets.CORE}
       />,
     );
     const user = userEvent.setup();
@@ -50,6 +51,11 @@ describe("TranscriptionArea", () => {
     expect(screen.getAllByRole("textbox")).toHaveLength(
       manifests[ManifestSets.CORE][1].lines.length,
     );
+    expect(screen.getByRole("textbox", { name: "title" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("textbox", { name: "L0" }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "L1" })).toBeInTheDocument();
 
     // Buttons
     expect(
@@ -67,6 +73,7 @@ describe("TranscriptionArea", () => {
         numberOfLessons={3}
         lessonNumber={2}
         manifest={manifests[ManifestSets.CORE][2]}
+        set={ManifestSets.CORE}
       />,
     );
     const user = userEvent.setup();
@@ -94,6 +101,13 @@ describe("TranscriptionArea", () => {
     expect(screen.getAllByRole("textbox")).toHaveLength(
       manifests[ManifestSets.CORE][2].lines.length,
     );
+    expect(
+      screen.queryByRole("textbox", { name: "title" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("textbox", { name: "L0" }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "L1" })).toBeInTheDocument();
 
     // Buttons
     expect(
@@ -113,6 +127,7 @@ describe("TranscriptionArea", () => {
         numberOfLessons={3}
         lessonNumber={3}
         manifest={manifests[ManifestSets.CORE][3]}
+        set={ManifestSets.CORE}
       />,
     );
     const user = userEvent.setup();
@@ -140,6 +155,11 @@ describe("TranscriptionArea", () => {
     expect(screen.getAllByRole("textbox")).toHaveLength(
       manifests[ManifestSets.CORE][3].lines.length,
     );
+    expect(screen.getByRole("textbox", { name: "title" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("textbox", { name: "L0" }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "L1" })).toBeInTheDocument();
 
     // Buttons
     expect(
@@ -159,6 +179,7 @@ describe("TranscriptionArea", () => {
         numberOfLessons={3}
         lessonNumber={3}
         manifest={manifests[ManifestSets.CORE][3]}
+        set={ManifestSets.CORE}
       />,
     );
     const user = userEvent.setup();
@@ -196,6 +217,7 @@ describe("TranscriptionArea", () => {
         numberOfLessons={3}
         lessonNumber={3}
         manifest={manifests[ManifestSets.CORE][3]}
+        set={ManifestSets.CORE}
       />,
     );
     const user = userEvent.setup();
