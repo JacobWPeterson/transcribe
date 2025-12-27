@@ -20,7 +20,7 @@ const CustomToggle = forwardRef<HTMLButtonElement, CustomToggleProps>(
         ref={ref}
         onClick={onClick}
         className={styles.CustomToggleButton}
-        aria-label="Theme controls"
+        aria-label="Settings"
       >
         <Settings
           size={settings.fontSize === "L" ? 22 : 18}
