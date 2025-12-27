@@ -1,21 +1,21 @@
-import type { RenderResult } from "@testing-library/react";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import type { RenderResult } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 
-import { ThemeProvider } from "../../contexts/ThemeContext";
+import { ThemeProvider } from '../../contexts/ThemeContext';
 
-import { SettingsMenu } from "./SettingsMenu";
+import { SettingsMenu } from './SettingsMenu';
 
 const renderWithThemeProvider = (): RenderResult => {
   return render(
     <ThemeProvider>
       <SettingsMenu />
-    </ThemeProvider>,
+    </ThemeProvider>
   );
 };
 
-describe("SettingsMenu", () => {
+describe('SettingsMenu', () => {
   beforeEach(() => {
     localStorage.clear();
   });
@@ -24,35 +24,33 @@ describe("SettingsMenu", () => {
     localStorage.clear();
   });
 
-  it("should render the settings menu button", () => {
+  it('should render the settings menu button', () => {
     renderWithThemeProvider();
-    const settingsButton = screen.getByLabelText("Settings");
+    const settingsButton = screen.getByLabelText('Settings');
     expect(settingsButton).toBeInTheDocument();
   });
 
-  it("should render all menu items when dropdown is opened", async () => {
+  it('should render all menu items when dropdown is opened', async () => {
     const user = userEvent.setup();
     renderWithThemeProvider();
 
-    const settingsButton = screen.getByLabelText("Settings");
+    const settingsButton = screen.getByLabelText('Settings');
     await user.click(settingsButton);
 
-    expect(screen.getByLabelText("Switch to dark mode")).toBeInTheDocument();
-    expect(screen.getByText("Font size:")).toBeInTheDocument();
-    expect(screen.getByLabelText("Enable high contrast")).toBeInTheDocument();
-    expect(
-      screen.getByLabelText("Reset all saved answers"),
-    ).toBeInTheDocument();
+    expect(screen.getByLabelText('Switch to dark mode')).toBeInTheDocument();
+    expect(screen.getByText('Font size:')).toBeInTheDocument();
+    expect(screen.getByLabelText('Enable high contrast')).toBeInTheDocument();
+    expect(screen.getByLabelText('Reset all saved answers')).toBeInTheDocument();
   });
 
-  it("should toggle dark mode when dark mode checkbox is clicked", async () => {
+  it('should toggle dark mode when dark mode checkbox is clicked', async () => {
     const user = userEvent.setup();
     renderWithThemeProvider();
 
-    const settingsButton = screen.getByLabelText("Settings");
+    const settingsButton = screen.getByLabelText('Settings');
     await user.click(settingsButton);
 
-    const darkModeCheckbox = screen.getByLabelText("Switch to dark mode");
+    const darkModeCheckbox = screen.getByLabelText('Switch to dark mode');
     expect(darkModeCheckbox).not.toBeChecked();
 
     await user.click(darkModeCheckbox);
@@ -62,14 +60,14 @@ describe("SettingsMenu", () => {
     expect(darkModeCheckbox).not.toBeChecked();
   });
 
-  it("should toggle high contrast when high contrast checkbox is clicked", async () => {
+  it('should toggle high contrast when high contrast checkbox is clicked', async () => {
     const user = userEvent.setup();
     renderWithThemeProvider();
 
-    const settingsButton = screen.getByLabelText("Settings");
+    const settingsButton = screen.getByLabelText('Settings');
     await user.click(settingsButton);
 
-    const highContrastCheckbox = screen.getByLabelText("Enable high contrast");
+    const highContrastCheckbox = screen.getByLabelText('Enable high contrast');
     expect(highContrastCheckbox).not.toBeChecked();
 
     await user.click(highContrastCheckbox);
@@ -79,15 +77,15 @@ describe("SettingsMenu", () => {
     expect(highContrastCheckbox).not.toBeChecked();
   });
 
-  it("should disable dark mode checkbox when high contrast is enabled", async () => {
+  it('should disable dark mode checkbox when high contrast is enabled', async () => {
     const user = userEvent.setup();
     renderWithThemeProvider();
 
-    const settingsButton = screen.getByLabelText("Settings");
+    const settingsButton = screen.getByLabelText('Settings');
     await user.click(settingsButton);
 
-    const highContrastCheckbox = screen.getByLabelText("Enable high contrast");
-    const darkModeCheckbox = screen.getByLabelText("Switch to dark mode");
+    const highContrastCheckbox = screen.getByLabelText('Enable high contrast');
+    const darkModeCheckbox = screen.getByLabelText('Switch to dark mode');
 
     expect(darkModeCheckbox).not.toBeDisabled();
 
@@ -98,16 +96,16 @@ describe("SettingsMenu", () => {
     expect(darkModeCheckbox).not.toBeDisabled();
   });
 
-  it("should change font size when font size button is clicked", async () => {
+  it('should change font size when font size button is clicked', async () => {
     const user = userEvent.setup();
     renderWithThemeProvider();
 
-    const settingsButton = screen.getByLabelText("Settings");
+    const settingsButton = screen.getByLabelText('Settings');
     await user.click(settingsButton);
 
-    const fontSizeSmallButton = screen.getByLabelText("Set font size to S");
-    const fontSizeMediumButton = screen.getByLabelText("Set font size to M");
-    const fontSizeLargeButton = screen.getByLabelText("Set font size to L");
+    const fontSizeSmallButton = screen.getByLabelText('Set font size to S');
+    const fontSizeMediumButton = screen.getByLabelText('Set font size to M');
+    const fontSizeLargeButton = screen.getByLabelText('Set font size to L');
 
     // Medium should be active by default (className includes the Active class)
     expect(fontSizeMediumButton.className).toMatch(/Active/);
@@ -121,70 +119,64 @@ describe("SettingsMenu", () => {
     expect(fontSizeSmallButton.className).not.toMatch(/Active/);
   });
 
-  it("should show reset confirmation modal when reset button is clicked", async () => {
+  it('should show reset confirmation modal when reset button is clicked', async () => {
     const user = userEvent.setup();
     renderWithThemeProvider();
 
-    const settingsButton = screen.getByLabelText("Settings");
+    const settingsButton = screen.getByLabelText('Settings');
     await user.click(settingsButton);
 
-    const resetButton = screen.getByLabelText("Reset all saved answers");
+    const resetButton = screen.getByLabelText('Reset all saved answers');
     await user.click(resetButton);
 
-    expect(screen.getByText("Reset all answers")).toBeInTheDocument();
+    expect(screen.getByText('Reset all answers')).toBeInTheDocument();
     expect(
-      screen.getByText(/This will permanently delete all your saved answers/),
+      screen.getByText(/This will permanently delete all your saved answers/)
     ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Cancel" })).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "Yes, reset everything" }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Cancel' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Yes, reset everything' })).toBeInTheDocument();
   });
 
-  it("should close modal when cancel button is clicked", async () => {
+  it('should close modal when cancel button is clicked', async () => {
     const user = userEvent.setup();
     renderWithThemeProvider();
 
-    const settingsButton = screen.getByLabelText("Settings");
+    const settingsButton = screen.getByLabelText('Settings');
     await user.click(settingsButton);
 
-    const resetButton = screen.getByLabelText("Reset all saved answers");
+    const resetButton = screen.getByLabelText('Reset all saved answers');
     await user.click(resetButton);
 
-    expect(screen.getByText("Reset all answers")).toBeInTheDocument();
+    expect(screen.getByText('Reset all answers')).toBeInTheDocument();
 
-    const cancelButton = screen.getByRole("button", { name: "Cancel" });
+    const cancelButton = screen.getByRole('button', { name: 'Cancel' });
     await user.click(cancelButton);
 
-    expect(screen.queryByText("Reset all answers")).not.toBeInTheDocument();
+    expect(screen.queryByText('Reset all answers')).not.toBeInTheDocument();
   });
 
-  it("should clear localStorage when confirming reset", async () => {
+  it('should clear localStorage when confirming reset', async () => {
     const user = userEvent.setup();
 
     // Add some test data to localStorage
-    localStorage.setItem("transcribe-progress-lessons-1", "test data 1");
-    localStorage.setItem("transcribe-progress-UoEDiv-2", "test data 2");
-    localStorage.setItem("other-key", "other data");
+    localStorage.setItem('transcribe-progress-lessons-1', 'test data 1');
+    localStorage.setItem('transcribe-progress-UoEDiv-2', 'test data 2');
+    localStorage.setItem('other-key', 'other data');
 
     renderWithThemeProvider();
 
-    const settingsButton = screen.getByLabelText("Settings");
+    const settingsButton = screen.getByLabelText('Settings');
     await user.click(settingsButton);
 
-    const resetButton = screen.getByLabelText("Reset all saved answers");
+    const resetButton = screen.getByLabelText('Reset all saved answers');
     await user.click(resetButton);
 
     // Before confirming, data should still exist
-    expect(localStorage.getItem("transcribe-progress-lessons-1")).toBe(
-      "test data 1",
-    );
-    expect(localStorage.getItem("transcribe-progress-UoEDiv-2")).toBe(
-      "test data 2",
-    );
+    expect(localStorage.getItem('transcribe-progress-lessons-1')).toBe('test data 1');
+    expect(localStorage.getItem('transcribe-progress-UoEDiv-2')).toBe('test data 2');
 
-    const confirmButton = screen.getByRole("button", {
-      name: "Yes, reset everything",
+    const confirmButton = screen.getByRole('button', {
+      name: 'Yes, reset everything'
     });
 
     // Clear the keysToRemove array and manually test the localStorage clearing logic
@@ -192,90 +184,78 @@ describe("SettingsMenu", () => {
     const keysToRemove: string[] = [];
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key?.startsWith("transcribe-progress-")) {
+      if (key?.startsWith('transcribe-progress-')) {
         keysToRemove.push(key);
       }
     }
 
     // Verify we found the progress keys
     expect(keysToRemove.length).toBeGreaterThan(0);
-    expect(keysToRemove).toContain("transcribe-progress-lessons-1");
-    expect(keysToRemove).toContain("transcribe-progress-UoEDiv-2");
+    expect(keysToRemove).toContain('transcribe-progress-lessons-1');
+    expect(keysToRemove).toContain('transcribe-progress-UoEDiv-2');
 
     // Confirm clear
     await user.click(confirmButton);
 
     // Verify transcribe-progress-* keys were removed
-    expect(localStorage.getItem("transcribe-progress-lessons-1")).toBeNull();
-    expect(localStorage.getItem("transcribe-progress-UoEDiv-2")).toBeNull();
+    expect(localStorage.getItem('transcribe-progress-lessons-1')).toBeNull();
+    expect(localStorage.getItem('transcribe-progress-UoEDiv-2')).toBeNull();
 
     // Verify non-transcribe-progress keys are still there
-    expect(localStorage.getItem("other-key")).toBe("other data");
+    expect(localStorage.getItem('other-key')).toBe('other data');
   });
 
-  it("should have proper accessibility labels", async () => {
+  it('should have proper accessibility labels', async () => {
     const user = userEvent.setup();
     renderWithThemeProvider();
 
-    const settingsButton = screen.getByLabelText("Settings");
+    const settingsButton = screen.getByLabelText('Settings');
     await user.click(settingsButton);
 
     // Check dark mode label
-    const darkModeCheckbox = screen.getByLabelText("Switch to dark mode");
-    expect(darkModeCheckbox).toHaveAttribute("aria-label");
+    const darkModeCheckbox = screen.getByLabelText('Switch to dark mode');
+    expect(darkModeCheckbox).toHaveAttribute('aria-label');
 
     // Check high contrast label
-    const highContrastCheckbox = screen.getByLabelText("Enable high contrast");
-    expect(highContrastCheckbox).toHaveAttribute("aria-label");
+    const highContrastCheckbox = screen.getByLabelText('Enable high contrast');
+    expect(highContrastCheckbox).toHaveAttribute('aria-label');
 
     // Check font size labels
-    const fontSizeSmall = screen.getByLabelText("Set font size to S");
-    expect(fontSizeSmall).toHaveAttribute("aria-label");
+    const fontSizeSmall = screen.getByLabelText('Set font size to S');
+    expect(fontSizeSmall).toHaveAttribute('aria-label');
   });
 
-  it("should update aria-label when dark mode is toggled", async () => {
+  it('should update aria-label when dark mode is toggled', async () => {
     const user = userEvent.setup();
     renderWithThemeProvider();
 
-    const settingsButton = screen.getByLabelText("Settings");
+    const settingsButton = screen.getByLabelText('Settings');
     await user.click(settingsButton);
 
-    const darkModeCheckbox = screen.getByLabelText("Switch to dark mode");
+    const darkModeCheckbox = screen.getByLabelText('Switch to dark mode');
 
-    expect(darkModeCheckbox).toHaveAttribute(
-      "aria-label",
-      "Switch to dark mode",
-    );
+    expect(darkModeCheckbox).toHaveAttribute('aria-label', 'Switch to dark mode');
 
     await user.click(darkModeCheckbox);
 
     // After clicking, the aria-label should change
-    expect(darkModeCheckbox).toHaveAttribute(
-      "aria-label",
-      "Switch to light mode",
-    );
+    expect(darkModeCheckbox).toHaveAttribute('aria-label', 'Switch to light mode');
   });
 
-  it("should update aria-label when high contrast is toggled", async () => {
+  it('should update aria-label when high contrast is toggled', async () => {
     const user = userEvent.setup();
     renderWithThemeProvider();
 
-    const settingsButton = screen.getByLabelText("Settings");
+    const settingsButton = screen.getByLabelText('Settings');
     await user.click(settingsButton);
 
-    const highContrastCheckbox = screen.getByLabelText("Enable high contrast");
+    const highContrastCheckbox = screen.getByLabelText('Enable high contrast');
 
-    expect(highContrastCheckbox).toHaveAttribute(
-      "aria-label",
-      "Enable high contrast",
-    );
+    expect(highContrastCheckbox).toHaveAttribute('aria-label', 'Enable high contrast');
 
     await user.click(highContrastCheckbox);
 
     // After clicking, the aria-label should change
-    expect(highContrastCheckbox).toHaveAttribute(
-      "aria-label",
-      "Disable high contrast",
-    );
+    expect(highContrastCheckbox).toHaveAttribute('aria-label', 'Disable high contrast');
   });
 });

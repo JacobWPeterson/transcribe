@@ -1,16 +1,13 @@
-import type { ReactElement } from "react";
+import type { ReactElement } from 'react';
 
-import styles from "../../Help.module.scss";
+import styles from '../../Help.module.scss';
 
 interface GlossaryEntryProps {
   word: string;
   gloss: string;
 }
 
-export const GlossaryEntry = ({
-  word,
-  gloss,
-}: GlossaryEntryProps): ReactElement => (
+export const GlossaryEntry = ({ word, gloss }: GlossaryEntryProps): ReactElement => (
   <div>
     <h2 className={styles.Word} id={word}>
       {word}

@@ -25,8 +25,8 @@ export type ManifestSet = {
 };
 
 export enum ManifestSets {
-  CORE = "lessons",
-  UoEDiv = "UoEDiv",
+  CORE = 'lessons',
+  UoEDiv = 'UoEDiv'
 }
 
 export type Manifests = {
@@ -36,1663 +36,1652 @@ export type Manifests = {
 const manifests: ManifestSet = {
   [ManifestSets.CORE]: {
     1: {
-      manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json",
+      manifestId: 'https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json',
       canvasIndex: 773,
       instruction:
-        "This lesson is about the right column. The title is above the green rectangle. Treat indented lines as part of the preceding line when entering them in the forms.",
+        'This lesson is about the right column. The title is above the green rectangle. Treat indented lines as part of the preceding line when entering them in the forms.',
       lines: [
         {
-          text: "ιωβ",
-          isTitle: true,
+          text: 'ιωβ',
+          isTitle: true
         },
         {
-          text: "ανθρωποσ τισ ην εν χωρα τη αυσιτιδι ω ονομα ιωβ",
-          newConcept: "Ekthesis",
-          caption:
-            "The ekthesis was made possible by the erasure of the first letter on this line.",
+          text: 'ανθρωποσ τισ ην εν χωρα τη αυσιτιδι ω ονομα ιωβ',
+          newConcept: 'Ekthesis',
+          caption: 'The ekthesis was made possible by the erasure of the first letter on this line.'
         },
         {
-          text: "και ην ο ανθρωποσ εκεινοσ αληθινοσ αμεμπτοσ δικαιοσ θεοσεβησ",
+          text: 'και ην ο ανθρωποσ εκεινοσ αληθινοσ αμεμπτοσ δικαιοσ θεοσεβησ'
         },
         {
-          text: "απεχομενοσ απο παντοσ πονηρου πραγματοσ",
+          text: 'απεχομενοσ απο παντοσ πονηρου πραγματοσ'
         },
         {
-          text: "εγενοντο δε αυτω υιοι επτα και θυγατερεσ τρεισ",
+          text: 'εγενοντο δε αυτω υιοι επτα και θυγατερεσ τρεισ'
         },
         {
-          text: "και ην τα κτηνη αυτου προβατα επτακισχιλια",
+          text: 'και ην τα κτηνη αυτου προβατα επτακισχιλια'
         },
         {
-          text: "καμηλοι τρισχιλιαι",
+          text: 'καμηλοι τρισχιλιαι'
         },
         {
-          text: "ζευγη βοων πεντακοσια",
+          text: 'ζευγη βοων πεντακοσια'
         },
         {
-          text: "ονοι θηλειαι νομαδεσ πεντακοσιαι",
+          text: 'ονοι θηλειαι νομαδεσ πεντακοσιαι'
         },
         {
-          text: "και υπηρεσια πολλη σφοδρα",
+          text: 'και υπηρεσια πολλη σφοδρα'
         },
         {
-          text: "και εργα μεγαλα ην αυτω επι τησ γησ",
+          text: 'και εργα μεγαλα ην αυτω επι τησ γησ'
         },
         {
-          text: "και ην ο ανθρωποσ εκεινοσ ευγενησ των αφ ηλιου ανατολων",
-          newConcept: "Final nu",
+          text: 'και ην ο ανθρωποσ εκεινοσ ευγενησ των αφ ηλιου ανατολων',
+          newConcept: 'Final nu'
         },
         {
-          text: "συμπορευομενοι δε οι υιοι αυτου προσ αλληλουσ",
+          text: 'συμπορευομενοι δε οι υιοι αυτου προσ αλληλουσ'
         },
         {
-          text: "εποιουσαν ποτον καθ εκαστην ημεραν",
+          text: 'εποιουσαν ποτον καθ εκαστην ημεραν'
         },
         {
-          text: "συμπαραλαμβανοντεσ αμα και τασ τρεισ αδελφασ αυτων",
+          text: 'συμπαραλαμβανοντεσ αμα και τασ τρεισ αδελφασ αυτων'
         },
         {
-          text: "εσθιειν και πινειν μετ αυτων",
+          text: 'εσθιειν και πινειν μετ αυτων'
         },
         {
-          text: "και ωσ αν συνετελεσθησαν αι ημεραι του ποτου",
+          text: 'και ωσ αν συνετελεσθησαν αι ημεραι του ποτου'
         },
         {
-          text: "απεστελλεν ιωβ και εκαθαριζεν αυτουσ ανισταμενοσ το πρωι",
-          newConcept: "Diaeresis",
+          text: 'απεστελλεν ιωβ και εκαθαριζεν αυτουσ ανισταμενοσ το πρωι',
+          newConcept: 'Diaeresis'
         },
         {
-          text: "και προσεφερεν περι αυτων θυσιαν κατα τον αριθμον αυτων",
+          text: 'και προσεφερεν περι αυτων θυσιαν κατα τον αριθμον αυτων'
         },
         {
-          text: "και μοσχον ενα περι αμαρτιασ περι των ψυχων αυτων",
+          text: 'και μοσχον ενα περι αμαρτιασ περι των ψυχων αυτων'
         },
         {
-          text: "ελεγεν γαρ ιωβ μηποτε οι υιοι μου εν τη διανοια αυτων κακα ενενοησαν προσ θν",
-          newConcept: "Nomina sacra",
+          text: 'ελεγεν γαρ ιωβ μηποτε οι υιοι μου εν τη διανοια αυτων κακα ενενοησαν προσ θν',
+          newConcept: 'Nomina sacra'
         },
         {
-          text: "ουτωσ ουν εποιει ιωβ πασασ τασ ημερασ",
+          text: 'ουτωσ ουν εποιει ιωβ πασασ τασ ημερασ'
         },
         {
-          text: "και ωσ εγενετο η ημερα αυτη",
+          text: 'και ωσ εγενετο η ημερα αυτη'
         },
         {
-          text: "και ιδου ηλθον οι αγγελοι του θυ παραστηναι ενωπιον του κυ",
+          text: 'και ιδου ηλθον οι αγγελοι του θυ παραστηναι ενωπιον του κυ'
         },
         {
-          text: "και ο διαβολοσ ηλθεν μετ αυτων",
-          caption: "Include the faded nu in your transcription.",
-        },
-      ],
+          text: 'και ο διαβολοσ ηλθεν μετ αυτων',
+          caption: 'Include the faded nu in your transcription.'
+        }
+      ]
     },
     2: {
-      manifestId:
-        "https://viewer.cbl.ie/viewer/api/v1/records/BP_X_f_77/manifest",
+      manifestId: 'https://viewer.cbl.ie/viewer/api/v1/records/BP_X_f_77/manifest',
       canvasIndex: 1,
-      specialIndexHandlingStart: "pages/",
+      specialIndexHandlingStart: 'pages/',
       instruction:
-        "A papyrus manuscript by a trained scribe in a slightly irregular majuscule script. This lesson ends when the papyrus becomes damaged. Ignore the page number (πνγ) at the top of the leaf. No new concepts here, just new letter forms different the uniform block capitals of the prior manuscript.",
+        'A papyrus manuscript by a trained scribe in a slightly irregular majuscule script. This lesson ends when the papyrus becomes damaged. Ignore the page number (πνγ) at the top of the leaf. No new concepts here, just new letter forms different the uniform block capitals of the prior manuscript.',
       lines: [
         {
-          text: "και ιδου οφθαλμοι ωσει οφθαλ",
+          text: 'και ιδου οφθαλμοι ωσει οφθαλ'
         },
         {
-          text: "μοι ανθρωπινοι εν τω κε",
+          text: 'μοι ανθρωπινοι εν τω κε'
         },
         {
-          text: "ρατι τουτω και στομα λαλουν",
+          text: 'ρατι τουτω και στομα λαλουν'
         },
         {
-          text: "μεγαλα και εποιει πολε",
+          text: 'μεγαλα και εποιει πολε'
         },
         {
-          text: "μον προσ τουσ αγιουσ εθε",
+          text: 'μον προσ τουσ αγιουσ εθε'
         },
         {
-          text: "ωρουν εωσ οτου θρονοι",
+          text: 'ωρουν εωσ οτου θρονοι'
         },
         {
-          text: "ετεθησαν και παλαιοσ η",
+          text: 'ετεθησαν και παλαιοσ η'
         },
         {
-          text: "μερων εκαθητο εχων",
+          text: 'μερων εκαθητο εχων'
         },
         {
-          text: "περιβολην ωσει χειονα",
+          text: 'περιβολην ωσει χειονα'
         },
         {
-          text: "και το τριχωμα τησ κεφα",
+          text: 'και το τριχωμα τησ κεφα'
         },
         {
-          text: "λησ αυτου ωσει εριον λευ",
+          text: 'λησ αυτου ωσει εριον λευ'
         },
         {
-          text: "κον καθαρον ο θρονοσ",
+          text: 'κον καθαρον ο θρονοσ'
         },
         {
-          text: "ωσει φλοξ πυροσ βαδι",
+          text: 'ωσει φλοξ πυροσ βαδι'
         },
         {
-          text: "ζουσα και εξεπορευε",
+          text: 'ζουσα και εξεπορευε'
         },
         {
-          text: "το κατα προσωπον αυτου",
+          text: 'το κατα προσωπον αυτου'
         },
         {
-          text: "ποταμοσ πυροσ χειλεαι",
+          text: 'ποταμοσ πυροσ χειλεαι'
         },
         {
-          text: "χειλειαδεσ εθεραπευον",
+          text: 'χειλειαδεσ εθεραπευον'
         },
         {
-          text: "αυτον και μυριαι μυρια",
-        },
-      ],
+          text: 'αυτον και μυριαι μυρια'
+        }
+      ]
     },
     3: {
-      manifestId: "https://cudl.lib.cam.ac.uk/iiif/MS-ADD-06594",
+      manifestId: 'https://cudl.lib.cam.ac.uk/iiif/MS-ADD-06594',
       canvasIndex: 161,
       instruction:
-        "No new concepts again in this lesson, just more examples of those learned in the previous lessons but in a different style of majuscule script.",
+        'No new concepts again in this lesson, just more examples of those learned in the previous lessons but in a different style of majuscule script.',
       lines: [
         {
-          text: "ευαγγελιον κατα μαρκον",
-          isTitle: true,
+          text: 'ευαγγελιον κατα μαρκον',
+          isTitle: true
         },
         {
-          text: "αρχη του ευαγγελιου ιυ χυ υυ του θυ",
+          text: 'αρχη του ευαγγελιου ιυ χυ υυ του θυ',
           caption:
-            "The red αρ with superscript χ is shorthand for αρχη and marks the start of a section. Exclude it from your transcription.",
+            'The red αρ with superscript χ is shorthand for αρχη and marks the start of a section. Exclude it from your transcription.'
         },
         {
-          text: "ωσ γεγραπται εν τοισ προφηταισ",
+          text: 'ωσ γεγραπται εν τοισ προφηταισ'
         },
         {
-          text: "ιδου εγω αποστελλω τον αγγε",
+          text: 'ιδου εγω αποστελλω τον αγγε'
         },
         {
-          text: "λον μου προ προσωπου σου οσ",
+          text: 'λον μου προ προσωπου σου οσ'
         },
         {
-          text: "κατασκευασει την οδον σου εμπρο",
+          text: 'κατασκευασει την οδον σου εμπρο'
         },
         {
-          text: "σθεν σου φωνη βοωντοσ εν τη ερημω",
+          text: 'σθεν σου φωνη βοωντοσ εν τη ερημω',
           caption:
-            "You'll notice a superscript ω at the end of the line. This is part of the final word.",
+            "You'll notice a superscript ω at the end of the line. This is part of the final word."
         },
         {
-          text: "ετοιμασατε την οδον κυ ευθειασ ποι",
+          text: 'ετοιμασατε την οδον κυ ευθειασ ποι'
         },
         {
-          text: "ειτε τασ τριβουσ αυτου εγενετο ιω",
-        },
-      ],
+          text: 'ειτε τασ τριβουσ αυτου εγενετο ιω'
+        }
+      ]
     },
     4: {
-      manifestId:
-        "https://www.e-codices.unifr.ch/metadata/iiif/csg-0048/manifest.json",
+      manifestId: 'https://www.e-codices.unifr.ch/metadata/iiif/csg-0048/manifest.json',
       canvasIndex: 78,
-      specialIndexHandlingStart: "_",
-      specialIndexHandlingEnd: ".json",
+      specialIndexHandlingStart: '_',
+      specialIndexHandlingEnd: '.json',
       canvasIndexToPageNumberAdj: -2,
       instruction:
         "Welcome to an intralinear Greek-Latin diglot. Don't worry, you only need to transcribe the Greek. You should feel comfortable transitioning to the semi-majuscule letter forms, so this will mostly be an exercise in attention to detail and ignoring extraneous material. Skip the initial κατα.",
       lines: [
         {
-          text: "και το δανιον αφηκεν αυτο εξελθων δε ο δουλοσ εκεινοσ",
+          text: 'και το δανιον αφηκεν αυτο εξελθων δε ο δουλοσ εκεινοσ'
         },
         {
-          text: "ευρεν ινα των συνδουλων αυτου οσ ωφειλεν αυτω εκατον",
+          text: 'ευρεν ινα των συνδουλων αυτου οσ ωφειλεν αυτω εκατον'
         },
         {
-          text: "δηναρια και κρατησασ αυτον επνιγεν λεγων αποδοσ μοι",
+          text: 'δηναρια και κρατησασ αυτον επνιγεν λεγων αποδοσ μοι'
         },
         {
-          text: "ει τι οφειλεισ πεσων ουν ο συνδουλοσ αυτου εισ τουσ",
+          text: 'ει τι οφειλεισ πεσων ουν ο συνδουλοσ αυτου εισ τουσ'
         },
         {
-          text: "πασασ αυτου παρεκαλει αυτον λεγων μακροθυμησον",
+          text: 'πασασ αυτου παρεκαλει αυτον λεγων μακροθυμησον'
         },
         {
-          text: "επε μοι και αποδωσω σοι ο δε ουκ ηθελεν αλλ απελ",
+          text: 'επε μοι και αποδωσω σοι ο δε ουκ ηθελεν αλλ απελ'
         },
         {
-          text: "θων εβαλεν αυτον εισ φυλακην εωσ ου αποδω το οφειλο",
+          text: 'θων εβαλεν αυτον εισ φυλακην εωσ ου αποδω το οφειλο'
         },
         {
-          text: "μενον ιδοντεσ δε οι συνδουλοι αυτου τα γενομενα",
+          text: 'μενον ιδοντεσ δε οι συνδουλοι αυτου τα γενομενα'
         },
         {
-          text: "ελυπηθησαν σφοδρα και ελθοντεσ διεσαφησαν τω κω",
+          text: 'ελυπηθησαν σφοδρα και ελθοντεσ διεσαφησαν τω κω'
         },
         {
-          text: "εαυτων παντα γενομενα τοτε προσκαλεσαμενοσ αυτον",
+          text: 'εαυτων παντα γενομενα τοτε προσκαλεσαμενοσ αυτον'
         },
         {
-          text: "ο κυριοσ αυτου λεγει αυτω δουλε πονηρε πασαν την",
+          text: 'ο κυριοσ αυτου λεγει αυτω δουλε πονηρε πασαν την'
         },
         {
-          text: "οφειλην εκεινη αφηκα σοι επει παρεκαλεσασ με ουκ εδει και σε",
+          text: 'οφειλην εκεινη αφηκα σοι επει παρεκαλεσασ με ουκ εδει και σε'
         },
         {
-          text: "ελεησαι τον συνδουλον σου ωσ και ετω σε ηλεησα και",
+          text: 'ελεησαι τον συνδουλον σου ωσ και ετω σε ηλεησα και'
         },
         {
-          text: "οργισθεισ ο κυριοσ αυτου παρεδωκεν αυτον τοισ βασανισταισ",
+          text: 'οργισθεισ ο κυριοσ αυτου παρεδωκεν αυτον τοισ βασανισταισ'
         },
         {
-          text: "εωσ ου αποδω παν το οφειλομενον αυτω ουτωσ και ο πηρ",
+          text: 'εωσ ου αποδω παν το οφειλομενον αυτω ουτωσ και ο πηρ',
           caption:
-            "Be careful with one of the vowels on this line. Consult other examples on the page.",
+            'Be careful with one of the vowels on this line. Consult other examples on the page.'
         },
         {
-          text: "μου ο επουρανιοσ ποιησει υμιν εαν μη αφητε εκατοσ",
+          text: 'μου ο επουρανιοσ ποιησει υμιν εαν μη αφητε εκατοσ'
         },
         {
-          text: "τω αδελφω αυτου απο των καρδιων υμων τα παραπτωμα",
+          text: 'τω αδελφω αυτου απο των καρδιων υμων τα παραπτωμα'
         },
         {
-          text: "τα αυτων και εγενετο οτε ετελεσεν ο ισ τουσ λογουσ του",
+          text: 'τα αυτων και εγενετο οτε ετελεσεν ο ισ τουσ λογουσ του'
         },
         {
-          text: "τουσ μετηρεν απο τησ γαλιλαιασ και ηλθεν εισ τα ορια",
+          text: 'τουσ μετηρεν απο τησ γαλιλαιασ και ηλθεν εισ τα ορια'
         },
         {
-          text: "τησ ιουδαιασ περαν του ιορδανου και ηκολουθησαν αυ",
+          text: 'τησ ιουδαιασ περαν του ιορδανου και ηκολουθησαν αυ'
         },
         {
-          text: "τω οχλοι πολλοι και εθεραπευσεν αυτουσ εκει περι",
+          text: 'τω οχλοι πολλοι και εθεραπευσεν αυτουσ εκει περι'
         },
         {
-          text: "των επερωτησαντων ει εξεστιν απολυσαι την",
-        },
-      ],
+          text: 'των επερωτησαντων ει εξεστιν απολυσαι την'
+        }
+      ]
     },
     5: {
-      manifestId:
-        "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00058840/manifest",
+      manifestId: 'https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00058840/manifest',
       canvasIndex: 51,
       instruction:
         "This lesson features a relatively easy to read decorative semi-uncial text but introduces ligatures, abbreviations, and numbers, so be sure to consult the 'Online resources' under the Help tab for resources to help intrepret these. This is a page of kephalaia (ancient chapter divisions) where each line contains a Greek number and then a short title for that section. Many lines begin with an abbreviation for περι (the stacked πε).",
       lines: [
         {
-          text: "α περι των μαγων",
-          newConcept: "Numbers",
+          text: 'α περι των μαγων',
+          newConcept: 'Numbers'
         },
         {
-          text: "β περι των αναιρεθεντων παιδιων",
+          text: 'β περι των αναιρεθεντων παιδιων'
         },
         {
-          text: "γ πρωτοσ ιωαννησ εκηρυξεν βασιλειαν ουνω",
-          caption:
-            "The end of this line features a nomen sacrum plus final nu.",
+          text: 'γ πρωτοσ ιωαννησ εκηρυξεν βασιλειαν ουνω',
+          caption: 'The end of this line features a nomen sacrum plus final nu.'
         },
         {
-          text: "δ περι διδασκαλιασ του σρσ",
-          newConcept: "Ligature",
-          caption: "Note the ligature here contains parts of two words.",
+          text: 'δ περι διδασκαλιασ του σρσ',
+          newConcept: 'Ligature',
+          caption: 'Note the ligature here contains parts of two words.'
         },
         {
-          text: "ε περι των μακαρισμων",
+          text: 'ε περι των μακαρισμων'
         },
         {
-          text: "ϛ περι του λεπρου",
-          newConcept: "Stigma",
+          text: 'ϛ περι του λεπρου',
+          newConcept: 'Stigma'
         },
         {
-          text: "ζ περι του εκατονταρχου",
+          text: 'ζ περι του εκατονταρχου'
         },
         {
-          text: "η περι τησ πενθερασ πετρου",
+          text: 'η περι τησ πενθερασ πετρου'
         },
         {
-          text: "θ περι των ιαθεντων απο ποικιλων νοσων",
+          text: 'θ περι των ιαθεντων απο ποικιλων νοσων'
         },
         {
-          text: "ι περι του μη επιτρεπομενου ακολουθειν",
+          text: 'ι περι του μη επιτρεπομενου ακολουθειν'
         },
         {
-          text: "ια περι τησ επιτημησεωσ των υδατων",
+          text: 'ια περι τησ επιτημησεωσ των υδατων'
         },
         {
-          text: "ιβ περι των δαιμονιζωμενων",
+          text: 'ιβ περι των δαιμονιζωμενων'
         },
         {
-          text: "ιγ περι του παραλυτικου",
+          text: 'ιγ περι του παραλυτικου'
         },
         {
-          text: "ιδ περι ματθαιου",
+          text: 'ιδ περι ματθαιου'
         },
         {
-          text: "ιε περι τησ θυγατροσ του αρχησυναγωγου",
-          newConcept: "Abbreviation",
-          caption: "This abbreviation results in a variant reading.",
+          text: 'ιε περι τησ θυγατροσ του αρχησυναγωγου',
+          newConcept: 'Abbreviation',
+          caption: 'This abbreviation results in a variant reading.'
         },
         {
-          text: "ιϛ περι τησ αιμορροουσησ",
+          text: 'ιϛ περι τησ αιμορροουσησ'
         },
         {
-          text: "ιζ περι των δυο τυφλων",
-          caption:
-            "Be careful with the letter after δυ; it appears to be damaged.",
+          text: 'ιζ περι των δυο τυφλων',
+          caption: 'Be careful with the letter after δυ; it appears to be damaged.'
         },
         {
-          text: "ιη περι κωφου δαιμονιζομενου",
+          text: 'ιη περι κωφου δαιμονιζομενου'
         },
         {
-          text: "ιθ περι τησ των αποστολων διαταγησ",
-          caption: "The large abbreviation/ligature is for αποστολων",
+          text: 'ιθ περι τησ των αποστολων διαταγησ',
+          caption: 'The large abbreviation/ligature is for αποστολων'
         },
         {
-          text: "κ περι των αποσταλεντων παρα ιωαννου",
-        },
-      ],
+          text: 'κ περι των αποσταλεντων παρα ιωαννου'
+        }
+      ]
     },
     6: {
-      manifestId:
-        "https://viewer.cbl.ie/viewer/api/v2/records/MP_2_86/manifest",
+      manifestId: 'https://viewer.cbl.ie/viewer/api/v2/records/MP_2_86/manifest',
       canvasIndex: 2,
-      specialIndexHandlingStart: "pages/",
+      specialIndexHandlingStart: 'pages/',
       instruction:
-        "This manuscript features more irregular letter forms than you have seen so far. Be particularly careful with letters that might easily be confused for others.",
+        'This manuscript features more irregular letter forms than you have seen so far. Be particularly careful with letters that might easily be confused for others.',
       lines: [
         {
-          text: "κουσατε μου και ζησεται ε",
+          text: 'κουσατε μου και ζησεται ε'
         },
         {
-          text: "ν αγαθοισ η ψυχη υμων και",
+          text: 'ν αγαθοισ η ψυχη υμων και'
         },
         {
-          text: "διαθησομαι υμιν διαθη",
+          text: 'διαθησομαι υμιν διαθη'
         },
         {
-          text: "κην αιωνιον τα οσια δαυιδ",
+          text: 'κην αιωνιον τα οσια δαυιδ',
           caption:
-            "There's a correction on this line after the tau. It looks as if the scribe skipped a letter, starting writing the next word for two letters, then made the correction. Transcribe these two letters as α ο.",
+            "There's a correction on this line after the tau. It looks as if the scribe skipped a letter, starting writing the next word for two letters, then made the correction. Transcribe these two letters as α ο."
         },
         {
-          text: "τα πιστα ιδου μαρτυριαν εν ε",
+          text: 'τα πιστα ιδου μαρτυριαν εν ε'
         },
         {
-          text: "θνεσιν αυτον δεδωκα αρχον",
+          text: 'θνεσιν αυτον δεδωκα αρχον',
           caption:
-            "Another correction here by a later scribe; don't include it in your transcription.",
+            "Another correction here by a later scribe; don't include it in your transcription."
         },
         {
-          text: "τα και προστασσοντα εθνεσιν",
+          text: 'τα και προστασσοντα εθνεσιν'
         },
         {
-          text: "εθνη α ουκ ηδεισαν σε επικα",
+          text: 'εθνη α ουκ ηδεισαν σε επικα'
         },
         {
-          text: "λεσονται σε λαοι οι ουκ επισ",
+          text: 'λεσονται σε λαοι οι ουκ επισ'
         },
         {
-          text: "ταντα σε επι σε καταφευξον",
+          text: 'ταντα σε επι σε καταφευξον'
         },
         {
-          text: "ται εινεκεν του θυ σου του",
+          text: 'ται εινεκεν του θυ σου του'
         },
         {
-          text: "αγιου ισραηλ οτι εδοξασεν",
+          text: 'αγιου ισραηλ οτι εδοξασεν',
           caption:
-            "The hole on this line affected one whole letter and part of another. Notice the overline indicating this began a nomen sacrum; the following four letters should allow you to figure out the missing letters. Include them in your transcription.",
-          newConcept: "Reconstruction",
+            'The hole on this line affected one whole letter and part of another. Notice the overline indicating this began a nomen sacrum; the following four letters should allow you to figure out the missing letters. Include them in your transcription.',
+          newConcept: 'Reconstruction'
         },
         {
-          text: "σε ζητησατε τον θν και εν",
-        },
-      ],
+          text: 'σε ζητησατε τον θν και εν'
+        }
+      ]
     },
     7: {
-      manifestId: "https://digi.vatlib.it/iiif/MSS_Ott.gr.326/manifest.json",
+      manifestId: 'https://digi.vatlib.it/iiif/MSS_Ott.gr.326/manifest.json',
       instruction:
-        "An introduction to minuscule featuring dyed parchment and silver letters. The script is fairly clear, upright, and regular and the ligatures are all very common. Consult the resources for minuscules and ligatures on the Online resources help page. Ignore the title in gold at the top of the leaf.",
+        'An introduction to minuscule featuring dyed parchment and silver letters. The script is fairly clear, upright, and regular and the ligatures are all very common. Consult the resources for minuscules and ligatures on the Online resources help page. Ignore the title in gold at the top of the leaf.',
       canvasIndex: 42,
       lines: [
         {
-          text: "προ εξ ημερων του πασ",
+          text: 'προ εξ ημερων του πασ'
         },
         {
-          text: "χα ηλθεν ο ισ εισ βη",
+          text: 'χα ηλθεν ο ισ εισ βη',
           caption:
-            'Be very careful with the second to last letter. In some scripts, β, μ, ν, and υ are only differentiated by how the "tails" to the lower left and right side of the letters are formed and connect (or not!) to the surrounding letters.',
+            'Be very careful with the second to last letter. In some scripts, β, μ, ν, and υ are only differentiated by how the "tails" to the lower left and right side of the letters are formed and connect (or not!) to the surrounding letters.'
         },
         {
-          text: "θανιαν οπου ην λα",
+          text: 'θανιαν οπου ην λα'
         },
         {
-          text: "ζαροσ ο τεθνηκωσ",
+          text: 'ζαροσ ο τεθνηκωσ'
         },
         {
-          text: "ον ηγειρεν εκ νεκρων",
+          text: 'ον ηγειρεν εκ νεκρων'
         },
         {
-          text: "εποιησαν ουν αυτω",
+          text: 'εποιησαν ουν αυτω'
         },
         {
-          text: "δειπνον εκει και η μαρ",
+          text: 'δειπνον εκει και η μαρ'
         },
         {
-          text: "θα διηκονει ο δε λαζα",
+          text: 'θα διηκονει ο δε λαζα'
         },
         {
-          text: "ροσ εισ ην των ανακει",
+          text: 'ροσ εισ ην των ανακει'
         },
         {
-          text: "μενων συν αυτω η ουν",
+          text: 'μενων συν αυτω η ουν'
         },
         {
-          text: "μαρια λαβουσα λιτ",
-        },
-      ],
+          text: 'μαρια λαβουσα λιτ'
+        }
+      ]
     },
     8: {
       // Edition of Epiphanius: http://khazarzar.skeptik.net/books/panariog.htm
-      manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.503/manifest.json",
+      manifestId: 'https://digi.vatlib.it/iiif/MSS_Vat.gr.503/manifest.json',
       canvasIndex: 56,
       instruction:
-        "A slightly more angular form of minuscule featuring evermore ligatures. Transcribe the left column.",
+        'A slightly more angular form of minuscule featuring evermore ligatures. Transcribe the left column.',
       lines: [
         {
-          text: "δικαιου μονον υψωθησεται",
+          text: 'δικαιου μονον υψωθησεται'
         },
         {
-          text: "οπερ εστιν πιστισ αληθειασ",
+          text: 'οπερ εστιν πιστισ αληθειασ'
         },
         {
-          text: "διο και τουτον συντριψαντεσ",
+          text: 'διο και τουτον συντριψαντεσ'
         },
         {
-          text: "τη τησ αληθειασ διδασκα",
+          text: 'τη τησ αληθειασ διδασκα'
         },
         {
-          text: "λια επι τασ μετεπειτα διελ",
+          text: 'λια επι τασ μετεπειτα διελ'
         },
         {
-          text: "θωμεν θν βοηθον επικαλου",
+          text: 'θωμεν θν βοηθον επικαλου'
         },
         {
-          text: "μενοι ω δοξα τιμη και",
+          text: 'μενοι ω δοξα τιμη και'
         },
         {
-          text: "κρατοσ εισ τουσ αιωνασ",
+          text: 'κρατοσ εισ τουσ αιωνασ'
         },
         {
-          text: "των αιωνων αμην",
+          text: 'των αιωνων αμην'
         },
         {
-          text: "κατα βασιλειδου",
+          text: 'κατα βασιλειδου'
         },
         {
-          text: "κατα νικολαιτων",
+          text: 'κατα νικολαιτων'
         },
         {
-          text: "πεμπτη η και κε",
+          text: 'πεμπτη η και κε',
           caption:
-            'It appears this line originally read "πεντοτε και κε." Try to work out what it has been corrected to. Hint: The first τ and what remains of the next letter now form one letter.',
+            'It appears this line originally read "πεντοτε και κε." Try to work out what it has been corrected to. Hint: The first τ and what remains of the next letter now form one letter.'
         },
         {
-          text: "νικολαοσ γεγονεν εισ απο",
+          text: 'νικολαοσ γεγονεν εισ απο'
         },
         {
-          text: "των επτα διακονων των",
+          text: 'των επτα διακονων των'
         },
         {
-          text: "εκλελεγμενων υπο των",
+          text: 'εκλελεγμενων υπο των'
         },
         {
-          text: "αποστολων αμα στεφανω",
+          text: 'αποστολων αμα στεφανω'
         },
         {
-          text: "τω αγιω και πρωτομαρτυρι",
+          text: 'τω αγιω και πρωτομαρτυρι'
         },
         {
-          text: "και προχορω και παρμενα",
+          text: 'και προχορω και παρμενα'
         },
         {
-          text: "και τοισ αλλοισ",
+          text: 'και τοισ αλλοισ'
         },
         {
-          text: "ουτοσ απο των αντιοχεων",
+          text: 'ουτοσ απο των αντιοχεων'
         },
         {
-          text: "ορμωμενοσ προσηλυτοσ",
+          text: 'ορμωμενοσ προσηλυτοσ'
         },
         {
-          text: "γινεται μετεπειτα δε κατα",
+          text: 'γινεται μετεπειτα δε κατα'
         },
         {
-          text: "δεξαμενοσ τον περι χυ",
-        },
-      ],
+          text: 'δεξαμενοσ τον περι χυ'
+        }
+      ]
     },
     9: {
       // helpful edition https://books.google.com/books?id=2c5hAAAAcAAJ&pg=PP118&lpg=PP118&dq=ephrem+syrus+%CE%BA%CE%B1%CF%84%CE%B1%CE%BD%CE%B9%CE%BA%CF%84%CE%B9%CE%BA%CE%BF%CF%82+%CE%BB%CE%BF%CE%B3%CE%BF%CF%82+%CE%B1&source=bl&ots=LeXDEgtDAt&sig=ACfU3U1qoHsw12pFlyLR5Tae8UnNklc6kg&hl=en&sa=X&ved=2ahUKEwif16uHiNH0AhX-Ap0JHUBGA_QQ6AF6BAgYEAM#v=onepage&q=ephrem%20syrus%20%CE%BA%CE%B1%CF%84%CE%B1%CE%BD%CE%B9%CE%BA%CF%84%CE%B9%CE%BA%CE%BF%CF%82%20%CE%BB%CE%BF%CE%B3%CE%BF%CF%82%20%CE%B1&f=false
-      manifestId:
-        "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00050975/manifest",
+      manifestId: 'https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00050975/manifest',
       canvasIndex: 157,
       lines: [
         {
-          text: "λογοσ αυτων κατανυκτικοσ λογοσ α",
-          isTitle: true,
+          text: 'λογοσ αυτων κατανυκτικοσ λογοσ α',
+          isTitle: true
         },
         {
-          text: "εν μια ουν των ημερων",
+          text: 'εν μια ουν των ημερων'
         },
         {
-          text: "ορθρου μι αναστασ επορευομην",
+          text: 'ορθρου μι αναστασ επορευομην'
         },
         {
-          text: "εγω συν τοισ δυο αδελφοισ εξωθεν",
+          text: 'εγω συν τοισ δυο αδελφοισ εξωθεν'
         },
         {
-          text: "τοισ πολεωσ εδεσων ευλογημενησ",
+          text: 'τοισ πολεωσ εδεσων ευλογημενησ'
         },
         {
-          text: "και ειρα τοισ οφθαλμοισ μου εισ τον",
+          text: 'και ειρα τοισ οφθαλμοισ μου εισ τον'
         },
         {
-          text: "ουνον ωσ εσοπρον καθορων λαμπον",
+          text: 'ουνον ωσ εσοπρον καθορων λαμπον'
         },
         {
-          text: "τα συν τοισ αστρισ μετα δοξησ επι γησ και",
+          text: 'τα συν τοισ αστρισ μετα δοξησ επι γησ και'
         },
         {
-          text: "θαυμασασ ελεγον αν αρα ταυτα ουτοσ λα",
+          text: 'θαυμασασ ελεγον αν αρα ταυτα ουτοσ λα'
         },
         {
-          text: "μποσιν μετα δοξησ δικαιοι και αγιοι ποι",
+          text: 'μποσιν μετα δοξησ δικαιοι και αγιοι ποι'
         },
         {
-          text: "ησαντεσ το θελημα του θυ του αγιου εν",
+          text: 'ησαντεσ το θελημα του θυ του αγιου εν'
         },
         {
-          text: "τη ωρα εκεινη οταν ελθη ο κσ ποσω",
+          text: 'τη ωρα εκεινη οταν ελθη ο κσ ποσω'
         },
         {
-          text: "μαιλον λαμψουσιν φωτι ανεκλαλητω",
+          text: 'μαιλον λαμψουσιν φωτι ανεκλαλητω'
         },
         {
-          text: "τησ δοξησ του σρσ παραχριμα δε μνη",
+          text: 'τησ δοξησ του σρσ παραχριμα δε μνη'
         },
         {
-          text: "σθησ τησ φοβερασ εκεινησ ελευσεωσ",
-        },
-      ],
+          text: 'σθησ τησ φοβερασ εκεινησ ελευσεωσ'
+        }
+      ]
     },
     10: {
-      manifestId:
-        "https://viewer.cbl.ie/viewer/api/v1/records/W_143_5_1/manifest/",
+      manifestId: 'https://viewer.cbl.ie/viewer/api/v1/records/W_143_5_1/manifest/',
       canvasIndex: 2,
       lines: [
         {
-          text: "γεγονεν εν αυτω ζωη ην και η",
-          caption: "The flourish above the line contains two letters.",
+          text: 'γεγονεν εν αυτω ζωη ην και η',
+          caption: 'The flourish above the line contains two letters.'
         },
         {
-          text: "ζωη ην το φωσ των ανων και",
+          text: 'ζωη ην το φωσ των ανων και'
         },
         {
-          text: "το φωσ εν τη σκοτια φαινει και η",
+          text: 'το φωσ εν τη σκοτια φαινει και η'
         },
         {
-          text: "σκοτια αυτο ου κατελαβεν εγενετο",
+          text: 'σκοτια αυτο ου κατελαβεν εγενετο'
         },
         {
-          text: "ανοσ απεσταλμενοσ παρα θυ ο",
+          text: 'ανοσ απεσταλμενοσ παρα θυ ο'
         },
         {
-          text: "νομα αυτω ιωαννησ ουτοσ ηλθεν",
+          text: 'νομα αυτω ιωαννησ ουτοσ ηλθεν'
         },
         {
-          text: "εισ μαρτυριαν ινα μαρτυριση περι",
+          text: 'εισ μαρτυριαν ινα μαρτυριση περι'
         },
         {
-          text: "του φωτοσ ινα παντεσ πιστευ",
+          text: 'του φωτοσ ινα παντεσ πιστευ'
         },
         {
-          text: "σωσι δι αυτου ουκ ην εκεινοσ το φωσ",
+          text: 'σωσι δι αυτου ουκ ην εκεινοσ το φωσ'
         },
         {
-          text: "αλλ ινα μαρτυριση περι του φωτοσ",
+          text: 'αλλ ινα μαρτυριση περι του φωτοσ'
         },
         {
-          text: "ην το φωσ το αληθινον ο φωτι",
+          text: 'ην το φωσ το αληθινον ο φωτι'
         },
         {
-          text: "ζει παντα ανον ερχομενον εισ τον κοσ",
+          text: 'ζει παντα ανον ερχομενον εισ τον κοσ'
         },
         {
-          text: "μον εν τω κοσμω ην και ο κοσμοσ",
-          caption:
-            "A new form of the και compendium appears here and several more times below.",
+          text: 'μον εν τω κοσμω ην και ο κοσμοσ',
+          caption: 'A new form of the και compendium appears here and several more times below.'
         },
         {
-          text: "δι αυτου εγενετο και ο κοσμοσ αυτον",
+          text: 'δι αυτου εγενετο και ο κοσμοσ αυτον'
         },
         {
-          text: "ουκ εγνω εισ τα ιδια ηλθε και",
+          text: 'ουκ εγνω εισ τα ιδια ηλθε και'
         },
         {
-          text: "οι ιδιοι αυτον ου παρελαβον ο",
+          text: 'οι ιδιοι αυτον ου παρελαβον ο'
         },
         {
-          text: "σοι δε ελαβον αυτον εδωκεν",
+          text: 'σοι δε ελαβον αυτον εδωκεν'
         },
         {
-          text: "αυτοισ εξουσιαν τεκνα θεου γενεσ",
+          text: 'αυτοισ εξουσιαν τεκνα θεου γενεσ'
         },
         {
-          text: "θαι τοισ πιστευουσιν εισ το ονομα αυτου",
+          text: 'θαι τοισ πιστευουσιν εισ το ονομα αυτου'
         },
         {
-          text: "οι ουκ εξ αιματων ουδε εκ θε",
+          text: 'οι ουκ εξ αιματων ουδε εκ θε'
         },
         {
-          text: "ληματοσ σαρκοσ ουδε εκ θεληματοσ",
-          caption: "There are four letters being abbreviated after the last μ.",
+          text: 'ληματοσ σαρκοσ ουδε εκ θεληματοσ',
+          caption: 'There are four letters being abbreviated after the last μ.'
         },
         {
-          text: "ανδροσ αλλ εκ θεου εγεννηθησαν",
+          text: 'ανδροσ αλλ εκ θεου εγεννηθησαν'
         },
         {
-          text: "και ο λογοσ σαρξ εγενετο και εσκη",
+          text: 'και ο λογοσ σαρξ εγενετο και εσκη'
         },
         {
-          text: "νωσεν εν ημιν και εθεασαμεθα την",
+          text: 'νωσεν εν ημιν και εθεασαμεθα την'
         },
         {
-          text: "δοξαν αυτου δοξαν ωσ μονογε",
+          text: 'δοξαν αυτου δοξαν ωσ μονογε'
         },
         {
-          text: "νουσ παρα πρσ πληρησ χαριτοσ",
+          text: 'νουσ παρα πρσ πληρησ χαριτοσ'
         },
         {
-          text: "και αληθειασ ιωαννησ μαρτυρει",
+          text: 'και αληθειασ ιωαννησ μαρτυρει'
         },
         {
-          text: "περι αυτου κεκεκραγε λεγων",
+          text: 'περι αυτου κεκεκραγε λεγων'
         },
         {
-          text: "ουτοσ ην ον ειπον ο οπισω μου",
-        },
-      ],
+          text: 'ουτοσ ην ον ειπον ο οπισω μου'
+        }
+      ]
     },
     11: {
       // Lines 153-179 of Aristophanes, The Clouds. Diglot: https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0019.tlg003.perseus-eng2:0-1200?right=perseus-grc2
-      manifestId:
-        "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00069327/manifest",
+      manifestId: 'https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00069327/manifest',
       canvasIndex: 65,
       instruction:
-        "Ignore the text in red. These indicate changes in character in the play; see if you can figure out the abbreviations.",
+        'Ignore the text in red. These indicate changes in character in the play; see if you can figure out the abbreviations.',
       lines: [
         {
-          text: "ω ζευ βασιλευ τησ λεπτοτητοσ των φρενων",
+          text: 'ω ζευ βασιλευ τησ λεπτοτητοσ των φρενων'
         },
         {
-          text: "τι δητ αν ετερον ει πυθοιο σωκρατουσ",
-          caption: "There is a correction by the original scribe on this line.",
+          text: 'τι δητ αν ετερον ει πυθοιο σωκρατουσ',
+          caption: 'There is a correction by the original scribe on this line.'
         },
         {
-          text: "φροντισμα ποιον αντιβολω κατειπε μοι",
+          text: 'φροντισμα ποιον αντιβολω κατειπε μοι'
         },
         {
-          text: "ανηρετ αυτον χαιρεφων ο σφηττιοσ οποτερα",
+          text: 'ανηρετ αυτον χαιρεφων ο σφηττιοσ οποτερα'
         },
         {
-          text: "την γνωμην εχει τασ εμπιδασ κατα το στομ αδειν η",
+          text: 'την γνωμην εχει τασ εμπιδασ κατα το στομ αδειν η',
           caption:
-            "The 17th character in this line may be hard to identify; it appears twice in slightly more regular ligature appearance on line 1. You will see it again on the following lines.",
+            'The 17th character in this line may be hard to identify; it appears twice in slightly more regular ligature appearance on line 1. You will see it again on the following lines.'
         },
         {
-          text: "κατα τουρροπυγιον τι δητ εκεινοσ ειπε περι τησ εμπιδοσ",
+          text: 'κατα τουρροπυγιον τι δητ εκεινοσ ειπε περι τησ εμπιδοσ'
         },
         {
-          text: "",
+          text: ''
         },
         {
-          text: "",
+          text: ''
         },
         {
-          text: "",
+          text: ''
         },
         {
-          text: "",
+          text: ''
         },
         {
-          text: "",
+          text: ''
         },
         {
-          text: "",
+          text: ''
         },
         {
-          text: "",
+          text: ''
         },
         {
-          text: "",
-        },
-      ],
+          text: ''
+        }
+      ]
     },
     12: {
       // Transcription (which has errors): https://spotlight.vatlib.it/greek-paleography/catalog/71fcddac-57f2-4a02-a97a-35469f00ba9b
       // Commentary on the script: https://spotlight.vatlib.it/greek-paleography/feature/2-introduction-to-minuscule-bookhands)
-      manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.2200/manifest.json",
+      manifestId: 'https://digi.vatlib.it/iiif/MSS_Vat.gr.2200/manifest.json',
       canvasIndex: 277,
       instruction:
         'The minuscule scripts you have worked through so far have been of the "Studite" variety. However, in the early development of minuscule script there were other contenders. The manuscript in this exercise features one of them: the "Hagiopolitan" script.',
       lines: [
         {
-          text: "λαττουσα και τουτοισ ακολουθει καθαπερ νο",
+          text: 'λαττουσα και τουτοισ ακολουθει καθαπερ νο'
         },
         {
-          text: "μοισ τισιν αρραγεσι και αλισκεσθαι μη δυ",
+          text: 'μοισ τισιν αρραγεσι και αλισκεσθαι μη δυ'
         },
         {
-          text: "ναμενοισ πορρω φευγουσα την ευτυχε",
+          text: 'ναμενοισ πορρω φευγουσα την ευτυχε'
         },
         {
-          text: "οσ μανιαν και το βλασφημον νεστοριου",
+          text: 'οσ μανιαν και το βλασφημον νεστοριου'
         },
         {
-          text: "στομα μακραν εαυτησ απωθουμενη και",
+          text: 'στομα μακραν εαυτησ απωθουμενη και'
         },
         {
-          text: "κατηγορουσα τησ τουτου θρασυτητοσ",
+          text: 'κατηγορουσα τησ τουτου θρασυτητοσ'
         },
         {
-          text: "ωσπερ οι σοφοι εκεινοι και τησ πιστεωσ συ",
+          text: 'ωσπερ οι σοφοι εκεινοι και τησ πιστεωσ συ'
         },
         {
-          text: "νηγοροι οτι δε ουτωσ εχει και τουτον οι πρσ",
+          text: 'νηγοροι οτι δε ουτωσ εχει και τουτον οι πρσ'
         },
         {
-          text: "εκεινοι μετα τησ αληθειασ προειλαντο",
+          text: 'εκεινοι μετα τησ αληθειασ προειλαντο'
         },
         {
-          text: "τον αγωνα κοινον χαριζομενοι κερδοσ",
+          text: 'τον αγωνα κοινον χαριζομενοι κερδοσ'
         },
         {
-          text: "εξ αυτησ τησ υποθεσεωσ εξεστι μαθειν και σα",
+          text: 'εξ αυτησ τησ υποθεσεωσ εξεστι μαθειν και σα'
         },
         {
-          text: "φη την μαρτυριαν λαμβανειν παντα",
+          text: 'φη την μαρτυριαν λαμβανειν παντα'
         },
         {
-          text: "γαρ τα αυτων συναγαγοντεσ και παραλληλα",
+          text: 'γαρ τα αυτων συναγαγοντεσ και παραλληλα'
         },
         {
-          text: "θεντεσ εκεινοισ προστεθηκαμεν τοισ",
+          text: 'θεντεσ εκεινοισ προστεθηκαμεν τοισ'
         },
         {
-          text: "βουλομενοισ ορθωσ εξεταζειν και την αλη",
+          text: 'βουλομενοισ ορθωσ εξεταζειν και την αλη'
         },
         {
-          text: "θειαν διαγινωσκειν τοισ λεγομενοισ",
+          text: 'θειαν διαγινωσκειν τοισ λεγομενοισ'
         },
         {
-          text: "τοινυν προσεχοντεσ ραδιαν ληψεσθε",
+          text: 'τοινυν προσεχοντεσ ραδιαν ληψεσθε'
         },
         {
-          text: "την αποδειξιν ωσ ουδε κατα μικρον εκ",
+          text: 'την αποδειξιν ωσ ουδε κατα μικρον εκ'
         },
         {
-          text: "βεβηκε τησ ορθησ των αγιων πρων δο",
+          text: 'βεβηκε τησ ορθησ των αγιων πρων δο'
         },
         {
-          text: "ξησ η εν χαλκηδονι γενομενη αγια συνοδοσ",
+          text: 'ξησ η εν χαλκηδονι γενομενη αγια συνοδοσ'
         },
         {
-          text: "εκθεσισ περι πιστεωσ τησ αγιασ συνοδου",
+          text: 'εκθεσισ περι πιστεωσ τησ αγιασ συνοδου'
         },
         {
-          text: "τησ εν χαλκηδονι συναθροισθεισησ",
+          text: 'τησ εν χαλκηδονι συναθροισθεισησ',
           caption:
-            "The full form of the abbreviation on this line appears on the last line of minuscule script above.",
+            'The full form of the abbreviation on this line appears on the last line of minuscule script above.'
         },
         {
-          text: "των χλ αγιων πρων",
+          text: 'των χλ αγιων πρων'
         },
         {
-          text: "επομενοι τοινυν τοισ αγιοισ πρασιν ενα και",
+          text: 'επομενοι τοινυν τοισ αγιοισ πρασιν ενα και'
         },
         {
-          text: "τον αυτον ομολογειν υν τον κν ημων ιν χν συμ",
+          text: 'τον αυτον ομολογειν υν τον κν ημων ιν χν συμ'
         },
         {
-          text: "φωνωσ απαντεσ εκδιδασκομεν",
+          text: 'φωνωσ απαντεσ εκδιδασκομεν'
         },
         {
-          text: "κυριλλου εκ τησ προσ σουκενσον επιστολησ",
-          caption: 'The abbreviation here is "κυριλλου"',
+          text: 'κυριλλου εκ τησ προσ σουκενσον επιστολησ',
+          caption: 'The abbreviation here is "κυριλλου"'
         },
         {
-          text: "εδιδαχθημεν παρα τε τησ θειασ γραφησ",
+          text: 'εδιδαχθημεν παρα τε τησ θειασ γραφησ'
         },
         {
-          text: "και των αγιων πρων ενα υν και χν ομολογειν",
+          text: 'και των αγιων πρων ενα υν και χν ομολογειν'
         },
         {
-          text: "τησ συνοδου",
-        },
-      ],
-    },
+          text: 'τησ συνοδου'
+        }
+      ]
+    }
   },
   [ManifestSets.UoEDiv]: {
     1: {
-      manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json",
+      manifestId: 'https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json',
       canvasIndex: 1243,
-      instruction: "This lesson is about the left column.",
+      instruction: 'This lesson is about the left column.',
       lines: [
         {
-          text: "λυμων και ιουδαιασ και",
+          text: 'λυμων και ιουδαιασ και',
           caption:
             'The line ends with a decorative kappa; this is a "και compendium." Write it out in full.',
-          newConcept: "Abbreviation",
+          newConcept: 'Abbreviation'
         },
         {
-          text: "περαν του ιορδανου",
+          text: 'περαν του ιορδανου'
         },
         {
-          text: "ιδων δε τουσ οχλουσ",
+          text: 'ιδων δε τουσ οχλουσ',
           caption:
-            "Chapter 5 begins on this line with the kephalaia number, ΚΓ, followed by the outdented iota. Do not include the ΚΓ in your transcription.",
-          newConcept: "Numbers",
+            'Chapter 5 begins on this line with the kephalaia number, ΚΓ, followed by the outdented iota. Do not include the ΚΓ in your transcription.',
+          newConcept: 'Numbers'
         },
         {
-          text: "ανεβη εισ το οροσ και",
+          text: 'ανεβη εισ το οροσ και'
         },
         {
-          text: "καθισαντοσ αυτου",
+          text: 'καθισαντοσ αυτου'
         },
         {
-          text: "προσηλθαν οι μαθηται",
+          text: 'προσηλθαν οι μαθηται',
           caption:
-            "There is an intralinear letter on this line; it is by a later corrector and suggests a variant reading. Do not include it.",
+            'There is an intralinear letter on this line; it is by a later corrector and suggests a variant reading. Do not include it.'
         },
         {
-          text: "αυτου και ανοιξασ το",
+          text: 'αυτου και ανοιξασ το'
         },
         {
-          text: "στομα αυτου εδιδα",
+          text: 'στομα αυτου εδιδα'
         },
         {
-          text: "σκεν αυτουσ λεγων",
+          text: 'σκεν αυτουσ λεγων'
         },
         {
-          text: "μακαριοι οι πτωχοι τω",
+          text: 'μακαριοι οι πτωχοι τω'
         },
         {
-          text: "πνευματι οτι αυτων",
-          newConcept: "Final nu",
+          text: 'πνευματι οτι αυτων',
+          newConcept: 'Final nu'
         },
         {
-          text: "εστιν η βασιλεια των",
+          text: 'εστιν η βασιλεια των'
         },
         {
-          text: "ουρανων",
+          text: 'ουρανων'
         },
         {
-          text: "μακαριοι οι πενθουντεσ",
+          text: 'μακαριοι οι πενθουντεσ'
         },
         {
-          text: "οτι αυτοι παρακληθη",
+          text: 'οτι αυτοι παρακληθη'
         },
         {
-          text: "σονται",
+          text: 'σονται'
         },
         {
-          text: "μακαριοι οι πραεισ οτι",
+          text: 'μακαριοι οι πραεισ οτι'
         },
         {
-          text: "αυτοι κληρονομησου",
+          text: 'αυτοι κληρονομησου'
         },
         {
-          text: "σι την γην",
+          text: 'σι την γην'
         },
         {
-          text: "μακαριοι οι πεινωντεσ",
+          text: 'μακαριοι οι πεινωντεσ'
         },
         {
-          text: "και διψωντεσ την δι",
+          text: 'και διψωντεσ την δι'
         },
         {
-          text: "καιοσυνην οτι αυτοι",
+          text: 'καιοσυνην οτι αυτοι'
         },
         {
-          text: "χορτασθησονται",
+          text: 'χορτασθησονται'
         },
         {
-          text: "μακαριοι οι ελεημονεσ",
+          text: 'μακαριοι οι ελεημονεσ'
         },
         {
-          text: "οτι αυτοι ελεηθησον",
+          text: 'οτι αυτοι ελεηθησον'
         },
         {
-          text: "ται",
+          text: 'ται'
         },
         {
-          text: "μακαριοι οι καθαροι τη",
+          text: 'μακαριοι οι καθαροι τη'
         },
         {
-          text: "καρδια οτι αυτοι τον",
+          text: 'καρδια οτι αυτοι τον'
         },
         {
-          text: "θν οψονται",
-          newConcept: "Nomina sacra",
-          caption: "Leave the nomen sacrum abbreviated in your transcription.",
+          text: 'θν οψονται',
+          newConcept: 'Nomina sacra',
+          caption: 'Leave the nomen sacrum abbreviated in your transcription.'
         },
         {
-          text: "μακαριοι οι ειρηνοποιοι",
+          text: 'μακαριοι οι ειρηνοποιοι'
         },
         {
-          text: "οτι αυτοι υιοι θυ κλη",
+          text: 'οτι αυτοι υιοι θυ κλη'
         },
         {
-          text: "θησονται",
+          text: 'θησονται'
         },
         {
-          text: "μακαριοι οι δεδιωγμενοι",
+          text: 'μακαριοι οι δεδιωγμενοι'
         },
         {
-          text: "ενεκα δικαιοσυνησ ο",
+          text: 'ενεκα δικαιοσυνησ ο'
         },
         {
-          text: "τι αυτων εστιν η βασι",
+          text: 'τι αυτων εστιν η βασι'
         },
         {
-          text: "λεια των ουρανων",
+          text: 'λεια των ουρανων'
         },
         {
-          text: "μακαριοι εστε οταν ονει",
+          text: 'μακαριοι εστε οταν ονει'
         },
         {
-          text: "δισωσιν υμασ και διω",
+          text: 'δισωσιν υμασ και διω'
         },
         {
-          text: "ξωσιν και ειπωσιν παν",
+          text: 'ξωσιν και ειπωσιν παν',
           caption:
-            "A later corrector partially erased the two final nus on this line; leave them in your transcription.",
+            'A later corrector partially erased the two final nus on this line; leave them in your transcription.'
         },
         {
-          text: "πονηρον καθ υμων",
+          text: 'πονηρον καθ υμων'
         },
         {
-          text: "ψευδομενοι ενεκα ε",
+          text: 'ψευδομενοι ενεκα ε'
         },
         {
-          text: "μου χαιρετε και αγαλ",
-        },
-      ],
+          text: 'μου χαιρετε και αγαλ'
+        }
+      ]
     },
     2: {
-      manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json",
+      manifestId: 'https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json',
       canvasIndex: 1243,
-      instruction: "This lesson is about the middle column.",
+      instruction: 'This lesson is about the middle column.',
       lines: [
         {
-          text: "λιασθε οτι ο μισθοσ υ",
+          text: 'λιασθε οτι ο μισθοσ υ'
         },
         {
-          text: "μων πολυσ εν τοισ ου",
+          text: 'μων πολυσ εν τοισ ου'
         },
         {
-          text: "ρανοισ ουτωσ γαρ εδι",
+          text: 'ρανοισ ουτωσ γαρ εδι'
         },
         {
-          text: "ωξαν τουσ προφητασ",
+          text: 'ωξαν τουσ προφητασ'
         },
         {
-          text: "τουσ προ υμων υμεισ",
+          text: 'τουσ προ υμων υμεισ'
         },
         {
-          text: "εστε το αλασ τησ γησ",
+          text: 'εστε το αλασ τησ γησ'
         },
         {
-          text: "αν δε το αλασ μωραν",
+          text: 'αν δε το αλασ μωραν'
         },
         {
-          text: "θη εν τινι αλισθησεται",
+          text: 'θη εν τινι αλισθησεται'
         },
         {
-          text: "εισ ουδεν ισχυει ετι",
+          text: 'εισ ουδεν ισχυει ετι'
         },
         {
-          text: "ει μη βληθεν εξω κατα",
+          text: 'ει μη βληθεν εξω κατα'
         },
         {
-          text: "πατεισθαι υπο των αν",
+          text: 'πατεισθαι υπο των αν'
         },
         {
-          text: "θρωπων",
+          text: 'θρωπων'
         },
         {
-          text: "υμεισ εστε το φωσ του",
+          text: 'υμεισ εστε το φωσ του'
         },
         {
-          text: "κοσμου ου δυναται πο",
+          text: 'κοσμου ου δυναται πο'
         },
         {
-          text: "λισ κρυβηναι επανω ο",
+          text: 'λισ κρυβηναι επανω ο'
         },
         {
-          text: "ρουσ κειμενη ουδε και",
+          text: 'ρουσ κειμενη ουδε και'
         },
         {
-          text: "ουσιν λυχνον και τιθε",
+          text: 'ουσιν λυχνον και τιθε'
         },
         {
-          text: "ασιν αυτον υπο τον μο",
+          text: 'ασιν αυτον υπο τον μο'
         },
         {
-          text: "διον αλλ επι την λυχνι",
+          text: 'διον αλλ επι την λυχνι'
         },
         {
-          text: "αν και λαμπει πασι τοισ",
+          text: 'αν και λαμπει πασι τοισ'
         },
         {
-          text: "εν τη οικια ουτωσ λαμ",
+          text: 'εν τη οικια ουτωσ λαμ'
         },
         {
-          text: "ψατω το φωσ υμων",
+          text: 'ψατω το φωσ υμων'
         },
         {
-          text: "εμπροσθεν των ανθρω",
+          text: 'εμπροσθεν των ανθρω'
         },
         {
-          text: "πων οπωσ ιδωσιν υμων",
+          text: 'πων οπωσ ιδωσιν υμων'
         },
         {
-          text: "τα καλα και δοξασωσιν δοξασωσι δοξασωσιν",
+          text: 'τα καλα και δοξασωσιν δοξασωσι δοξασωσιν'
         },
         {
-          text: "τον πατερα υμων τον",
+          text: 'τον πατερα υμων τον'
         },
         {
-          text: "εν τοισ ουρανοισ",
+          text: 'εν τοισ ουρανοισ'
         },
         {
-          text: "μη νομισητε οτι ηλθον",
+          text: 'μη νομισητε οτι ηλθον'
         },
         {
-          text: "καταλυσαι τον νομον",
+          text: 'καταλυσαι τον νομον'
         },
         {
-          text: "η τουσ προφητασ ου",
+          text: 'η τουσ προφητασ ου'
         },
         {
-          text: "κ ηλθον καταλυσαι αλ",
+          text: 'κ ηλθον καταλυσαι αλ'
         },
         {
-          text: "λα πληρωσαι αμην γαρ",
+          text: 'λα πληρωσαι αμην γαρ'
         },
         {
-          text: "λεγω υμιν εωσ αν παρελ",
+          text: 'λεγω υμιν εωσ αν παρελ'
         },
         {
-          text: "θη ο ουρανοσ και η γη ι",
+          text: 'θη ο ουρανοσ και η γη ι'
         },
         {
-          text: "ωτα εν η μια κερεα ου μη",
+          text: 'ωτα εν η μια κερεα ου μη'
         },
         {
-          text: "παρελθη απο του νομου",
+          text: 'παρελθη απο του νομου'
         },
         {
-          text: "εωσ παντα γενηται",
+          text: 'εωσ παντα γενηται'
         },
         {
-          text: "οσ εαν ουν λυση μιαν",
+          text: 'οσ εαν ουν λυση μιαν'
         },
         {
-          text: "των εντολων τουτων",
+          text: 'των εντολων τουτων'
         },
         {
-          text: "των ελαχιστων και δι",
+          text: 'των ελαχιστων και δι'
         },
         {
-          text: "δαξη ουτωσ τουσ αν",
+          text: 'δαξη ουτωσ τουσ αν'
         },
         {
-          text: "θρωπουσ ελαχιστοσ",
-        },
-      ],
+          text: 'θρωπουσ ελαχιστοσ'
+        }
+      ]
     },
     3: {
-      manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json",
+      manifestId: 'https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json',
       canvasIndex: 1243,
-      instruction: "This lesson is about the right column.",
+      instruction: 'This lesson is about the right column.',
       lines: [
         {
-          text: "κληθησεται εν τη βασι",
+          text: 'κληθησεται εν τη βασι'
         },
         {
-          text: "λεια των ουρανων οσ",
+          text: 'λεια των ουρανων οσ'
         },
         {
-          text: "δ αν ποιηση και διδαξη",
+          text: 'δ αν ποιηση και διδαξη'
         },
         {
-          text: "ουτοσ μεγασ κληθησε",
+          text: 'ουτοσ μεγασ κληθησε'
         },
         {
-          text: "ται εν τη βασιλεια των",
+          text: 'ται εν τη βασιλεια των'
         },
         {
-          text: "ουρανων λεγω γαρ υ",
+          text: 'ουρανων λεγω γαρ υ'
         },
         {
-          text: "μιν οτι εαν μη περισευ",
+          text: 'μιν οτι εαν μη περισευ'
         },
         {
-          text: "ση υμων η δικαιοσυνη",
+          text: 'ση υμων η δικαιοσυνη'
         },
         {
-          text: "πλειον των γραμματε",
+          text: 'πλειον των γραμματε'
         },
         {
-          text: "ων και φαρεισαιων ου",
+          text: 'ων και φαρεισαιων ου'
         },
         {
-          text: "η εισελθητε εισ την",
+          text: 'η εισελθητε εισ την'
         },
         {
-          text: "βασιλειαν των ουρανων",
+          text: 'βασιλειαν των ουρανων'
         },
         {
-          text: "ηκουσατε οτι ερρεθη",
+          text: 'ηκουσατε οτι ερρεθη'
         },
         {
-          text: "τοισ αρχαιοισ ου φο",
+          text: 'τοισ αρχαιοισ ου φο'
         },
         {
-          text: "νευσεισ οσ δ αν φονευ",
+          text: 'νευσεισ οσ δ αν φονευ'
         },
         {
-          text: "ση ενοχοσ εσται τη κρι",
+          text: 'ση ενοχοσ εσται τη κρι'
         },
         {
-          text: "σει εγω δε λεγω υμιν",
+          text: 'σει εγω δε λεγω υμιν'
         },
         {
-          text: "οτι πασ ο οργιζομενοσ",
+          text: 'οτι πασ ο οργιζομενοσ'
         },
         {
-          text: "τω αδελφω αυτου ενο",
+          text: 'τω αδελφω αυτου ενο'
         },
         {
-          text: "χοσ εσται τη κρισει οσ",
+          text: 'χοσ εσται τη κρισει οσ'
         },
         {
-          text: "δ αν ειπη τω αδελφω",
+          text: 'δ αν ειπη τω αδελφω'
         },
         {
-          text: "αυτου ρακα ενοχοσ ε",
+          text: 'αυτου ρακα ενοχοσ ε'
         },
         {
-          text: "σται τω συνεδριω οσ",
+          text: 'σται τω συνεδριω οσ'
         },
         {
-          text: "δ αν ειπη μωρε ενοχοσ",
+          text: 'δ αν ειπη μωρε ενοχοσ'
         },
         {
-          text: "εσται εισ την γεενναν",
+          text: 'εσται εισ την γεενναν'
         },
         {
-          text: "του πυροσ εαν ουν προσ",
+          text: 'του πυροσ εαν ουν προσ'
         },
         {
-          text: "φερησ το δωρον σου ε",
+          text: 'φερησ το δωρον σου ε'
         },
         {
-          text: "πι το θυσιαστηριον κα",
+          text: 'πι το θυσιαστηριον κα'
         },
         {
-          text: "κει μνησθησ οτι ο αδελ",
+          text: 'κει μνησθησ οτι ο αδελ'
         },
         {
-          text: "φοσ σου εχει τι κατα",
+          text: 'φοσ σου εχει τι κατα'
         },
         {
-          text: "σου αφεσ εκει το δωρον",
+          text: 'σου αφεσ εκει το δωρον'
         },
         {
-          text: "σου εμπροσθεν του",
+          text: 'σου εμπροσθεν του'
         },
         {
-          text: "θυσιαστηριου και υπα",
+          text: 'θυσιαστηριου και υπα'
         },
         {
-          text: "γε πρωτον διαλλαγη",
+          text: 'γε πρωτον διαλλαγη'
         },
         {
-          text: "θι τω αδελφω σου και",
+          text: 'θι τω αδελφω σου και'
         },
         {
-          text: "οτε ελθων προσφε",
+          text: 'οτε ελθων προσφε'
         },
         {
-          text: "ρε το δωρον σου ισθι",
+          text: 'ρε το δωρον σου ισθι'
         },
         {
-          text: "ευνοων τω αντιδικω",
+          text: 'ευνοων τω αντιδικω'
         },
         {
-          text: "σου ταχυ εωσ οτου ει",
+          text: 'σου ταχυ εωσ οτου ει'
         },
         {
-          text: "μετ αυτου εν τη οδω",
+          text: 'μετ αυτου εν τη οδω'
         },
         {
-          text: "μηποτε σε παραδω ο",
+          text: 'μηποτε σε παραδω ο'
         },
         {
-          text: "αντιδικοσ τω κριτη",
-        },
-      ],
+          text: 'αντιδικοσ τω κριτη'
+        }
+      ]
     },
     4: {
-      manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json",
+      manifestId: 'https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json',
       canvasIndex: 1244,
-      instruction: "This lesson is about the left column.",
+      instruction: 'This lesson is about the left column.',
       lines: [
         {
-          text: "και ο κριτησ τω υπηρε",
+          text: 'και ο κριτησ τω υπηρε'
         },
         {
-          text: "τη και εισ φυλακην βλη",
+          text: 'τη και εισ φυλακην βλη'
         },
         {
-          text: "θηση αμην λεγω σοι",
+          text: 'θηση αμην λεγω σοι'
         },
         {
-          text: "ου μη εξελθησ εκειθεν",
+          text: 'ου μη εξελθησ εκειθεν'
         },
         {
-          text: "εωσ αν αποδωσ τον ε",
+          text: 'εωσ αν αποδωσ τον ε'
         },
         {
-          text: "σχατον κοδραντην",
+          text: 'σχατον κοδραντην'
         },
         {
-          text: "ηκουσατε οτι ερρεθη",
+          text: 'ηκουσατε οτι ερρεθη'
         },
         {
-          text: "ου μοιχευσεισ εγω δε",
+          text: 'ου μοιχευσεισ εγω δε'
         },
         {
-          text: "λεγω υμιν οτι πασ ο βλε",
+          text: 'λεγω υμιν οτι πασ ο βλε'
         },
         {
-          text: "πων γυναικα προσ το",
+          text: 'πων γυναικα προσ το'
         },
         {
-          text: "επιθυμησαι αυτην η",
+          text: 'επιθυμησαι αυτην η'
         },
         {
-          text: "δη εμοιχευσεν αυτην",
+          text: 'δη εμοιχευσεν αυτην'
         },
         {
-          text: "εν τη καρδια εαυτου",
+          text: 'εν τη καρδια εαυτου'
         },
         {
-          text: "ει δε ο οφθαλμοσ σου",
+          text: 'ει δε ο οφθαλμοσ σου'
         },
         {
-          text: "ο δεξιοσ σκανδαλιζει",
+          text: 'ο δεξιοσ σκανδαλιζει'
         },
         {
-          text: "σε εξελε αυτον και βα",
+          text: 'σε εξελε αυτον και βα'
         },
         {
-          text: "λε απο σου συμφερει",
+          text: 'λε απο σου συμφερει'
         },
         {
-          text: "αρ σοι ινα αποληται",
+          text: 'αρ σοι ινα αποληται'
         },
         {
-          text: "εν των μελων σου και",
+          text: 'εν των μελων σου και'
         },
         {
-          text: "μη ολον το σωμα σου",
+          text: 'μη ολον το σωμα σου'
         },
         {
-          text: "βληθη εισ γεενναν και",
+          text: 'βληθη εισ γεενναν και'
         },
         {
-          text: "ει η δεξια σου χειρ σκαν",
+          text: 'ει η δεξια σου χειρ σκαν'
         },
         {
-          text: "δαλιζει σε εκκοψον αυ",
+          text: 'δαλιζει σε εκκοψον αυ'
         },
         {
-          text: "την και βαλε απο σου",
+          text: 'την και βαλε απο σου'
         },
         {
-          text: "συμφερει γαρ σοι ινα",
+          text: 'συμφερει γαρ σοι ινα'
         },
         {
-          text: "αποληται εν των με",
+          text: 'αποληται εν των με'
         },
         {
-          text: "λων σου και μη ολον το",
+          text: 'λων σου και μη ολον το'
         },
         {
-          text: "σωμα σου εισ γεενναν",
+          text: 'σωμα σου εισ γεενναν'
         },
         {
-          text: "απελθη ερρεθη δε οσ",
+          text: 'απελθη ερρεθη δε οσ'
         },
         {
-          text: "αν απολυση την γυναι",
+          text: 'αν απολυση την γυναι'
         },
         {
-          text: "κα αυτου δοτω αυτη",
+          text: 'κα αυτου δοτω αυτη'
         },
         {
-          text: "αποστασιον εγω δε λε",
+          text: 'αποστασιον εγω δε λε'
         },
         {
-          text: "γω υμιν οτι πασ ο απο",
+          text: 'γω υμιν οτι πασ ο απο'
         },
         {
-          text: "λυων την γυναικα αυ",
+          text: 'λυων την γυναικα αυ'
         },
         {
-          text: "του παρεκτοσ λογου",
+          text: 'του παρεκτοσ λογου'
         },
         {
-          text: "πορνειασ ποιει αυτην",
+          text: 'πορνειασ ποιει αυτην'
         },
         {
-          text: "μοιχευθηναι και ο απο",
+          text: 'μοιχευθηναι και ο απο'
         },
         {
-          text: "λελυμενην γαμησασ",
+          text: 'λελυμενην γαμησασ'
         },
         {
-          text: "μοιχαται",
+          text: 'μοιχαται'
         },
         {
-          text: "παλιν ηκουσαται οτι ερ",
+          text: 'παλιν ηκουσαται οτι ερ'
         },
         {
-          text: "ρεθη τοισ αρχαιοισ ου",
+          text: 'ρεθη τοισ αρχαιοισ ου'
         },
         {
-          text: "κ επιορκησεισ αποδω",
-        },
-      ],
+          text: 'κ επιορκησεισ αποδω'
+        }
+      ]
     },
     5: {
-      manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json",
+      manifestId: 'https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json',
       canvasIndex: 1244,
-      instruction: "This lesson is about the middle column.",
+      instruction: 'This lesson is about the middle column.',
       lines: [
         {
-          text: "σεισ δε τω κω τουσ ορ",
+          text: 'σεισ δε τω κω τουσ ορ'
         },
         {
-          text: "κουσ σου εγω δε λεγω υ",
+          text: 'κουσ σου εγω δε λεγω υ'
         },
         {
-          text: "μιν μη ομοσαι ολωσ μη",
+          text: 'μιν μη ομοσαι ολωσ μη'
         },
         {
-          text: "τε εν τω ουρανω οτι θρο",
+          text: 'τε εν τω ουρανω οτι θρο'
         },
         {
-          text: "νοσ εστιν του θυ μητε",
+          text: 'νοσ εστιν του θυ μητε'
         },
         {
-          text: "εν τη γη οτι υποποδιον",
+          text: 'εν τη γη οτι υποποδιον'
         },
         {
-          text: "εστιν των ποδων αυτου",
+          text: 'εστιν των ποδων αυτου'
         },
         {
-          text: "μητε εισ ιεροσολυμα",
+          text: 'μητε εισ ιεροσολυμα'
         },
         {
-          text: "οτι πολισ εστιν του με",
+          text: 'οτι πολισ εστιν του με'
         },
         {
-          text: "γαλου βασιλεωσ μητε",
+          text: 'γαλου βασιλεωσ μητε'
         },
         {
-          text: "εν τη κεφαλη σου ομο",
+          text: 'εν τη κεφαλη σου ομο'
         },
         {
-          text: "σησ οτι ου δυνασαι μιαν",
+          text: 'σησ οτι ου δυνασαι μιαν'
         },
         {
-          text: "τριχα λευκην ποιησαι",
+          text: 'τριχα λευκην ποιησαι'
         },
         {
-          text: "η μελαιναν εσται δε ο",
+          text: 'η μελαιναν εσται δε ο'
         },
         {
-          text: "λογοσ υμων ναι ναι ου",
+          text: 'λογοσ υμων ναι ναι ου'
         },
         {
-          text: "ου το δε περισον του",
+          text: 'ου το δε περισον του'
         },
         {
-          text: "των εκ του πονηρου ε",
+          text: 'των εκ του πονηρου ε'
         },
         {
-          text: "στιν",
+          text: 'στιν'
         },
         {
-          text: "ηκουσατε οτι ερρεθη ο",
+          text: 'ηκουσατε οτι ερρεθη ο'
         },
         {
-          text: "φθαλμον αντι οφθαλ",
+          text: 'φθαλμον αντι οφθαλ'
         },
         {
-          text: "μου και οδοντα αντι",
+          text: 'μου και οδοντα αντι'
         },
         {
-          text: "οδοντοσ εγω δε λεγω",
+          text: 'οδοντοσ εγω δε λεγω'
         },
         {
-          text: "υμιν μη αντιστηναι τω",
+          text: 'υμιν μη αντιστηναι τω'
         },
         {
-          text: "πονηρω αλλ οστισ σε",
+          text: 'πονηρω αλλ οστισ σε'
         },
         {
-          text: "ραπιζει εισ την δεξιαν",
+          text: 'ραπιζει εισ την δεξιαν'
         },
         {
-          text: "σιαγονα σου στρεψον",
+          text: 'σιαγονα σου στρεψον'
         },
         {
-          text: "αυτω και την αλλην και",
+          text: 'αυτω και την αλλην και'
         },
         {
-          text: "τω θελοντι σοι κριθη",
+          text: 'τω θελοντι σοι κριθη'
         },
         {
-          text: "ναι και τον χιτωνα σου",
+          text: 'ναι και τον χιτωνα σου'
         },
         {
-          text: "λαβειν αφεσ αυτω και",
+          text: 'λαβειν αφεσ αυτω και'
         },
         {
-          text: "το ιματιον και οστισ σε",
+          text: 'το ιματιον και οστισ σε'
         },
         {
-          text: "αγγαρευσει μειλιον εν",
+          text: 'αγγαρευσει μειλιον εν'
         },
         {
-          text: "υπαγε μετ αυτου δυο",
+          text: 'υπαγε μετ αυτου δυο'
         },
         {
-          text: "τω αιτουντι σε δοσ και",
+          text: 'τω αιτουντι σε δοσ και'
         },
         {
-          text: "τον θελοντα απο σου",
+          text: 'τον θελοντα απο σου'
         },
         {
-          text: "δανισασθαι μη αποστρα",
+          text: 'δανισασθαι μη αποστρα'
         },
         {
-          text: "φησ",
+          text: 'φησ'
         },
         {
-          text: "ηκουσατε οτι ερρεθη αγα",
+          text: 'ηκουσατε οτι ερρεθη αγα'
         },
         {
-          text: "πησεισ τον πλησιον σου",
+          text: 'πησεισ τον πλησιον σου'
         },
         {
-          text: "και μεισησεισ τον εχθρον",
+          text: 'και μεισησεισ τον εχθρον'
         },
         {
-          text: "σου εγω δε λεγω υμιν",
+          text: 'σου εγω δε λεγω υμιν'
         },
         {
-          text: "αγαπατε τουσ εχθρουσ",
-        },
-      ],
+          text: 'αγαπατε τουσ εχθρουσ'
+        }
+      ]
     },
     6: {
-      manifestId: "https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json",
+      manifestId: 'https://digi.vatlib.it/iiif/MSS_Vat.gr.1209/manifest.json',
       canvasIndex: 1244,
-      instruction: "This lesson is about the right column.",
+      instruction: 'This lesson is about the right column.',
       lines: [
         {
-          text: "υμων και προσευχε",
+          text: 'υμων και προσευχε'
         },
         {
-          text: "σθε υπερ των διωκον",
+          text: 'σθε υπερ των διωκον'
         },
         {
-          text: "των υμασ οπωσ γενη",
+          text: 'των υμασ οπωσ γενη'
         },
         {
-          text: "σθε υιοι του πατροσ υ",
+          text: 'σθε υιοι του πατροσ υ'
         },
         {
-          text: "μων του εν ουρανοισ",
+          text: 'μων του εν ουρανοισ'
         },
         {
-          text: "οτι τον ηλιον αυτου",
+          text: 'οτι τον ηλιον αυτου'
         },
         {
-          text: "ανατελλει επι πονη",
+          text: 'ανατελλει επι πονη'
         },
         {
-          text: "ρουσ και αγαθουσ και",
+          text: 'ρουσ και αγαθουσ και'
         },
         {
-          text: "βρεχει επι δικαιουσ και",
+          text: 'βρεχει επι δικαιουσ και'
         },
         {
-          text: "αδικουσ εαν γαρ αγαπη",
+          text: 'αδικουσ εαν γαρ αγαπη'
         },
         {
-          text: "σητε τουσ αγαπωντασ",
+          text: 'σητε τουσ αγαπωντασ'
         },
         {
-          text: "υμασ τινα μισθον εχε",
+          text: 'υμασ τινα μισθον εχε'
         },
         {
-          text: "τε ουχι και οι τελωναι",
+          text: 'τε ουχι και οι τελωναι'
         },
         {
-          text: "το αυτο ποιουσι και εαν",
+          text: 'το αυτο ποιουσι και εαν'
         },
         {
-          text: "ασπασησθε τουσ αδελ",
+          text: 'ασπασησθε τουσ αδελ'
         },
         {
-          text: "φουσ υμων μονον τι",
+          text: 'φουσ υμων μονον τι'
         },
         {
-          text: "περισον ποιειτε ου",
+          text: 'περισον ποιειτε ου'
         },
         {
-          text: "χι και οι εθνικοι το αυ",
+          text: 'χι και οι εθνικοι το αυ'
         },
         {
-          text: "το ποιουσιν εσεσθε ουν",
+          text: 'το ποιουσιν εσεσθε ουν'
         },
         {
-          text: "υμεισ τελειοι ωσ ο πα",
+          text: 'υμεισ τελειοι ωσ ο πα'
         },
         {
-          text: "τηρ υμων ο ουρανιοσ",
+          text: 'τηρ υμων ο ουρανιοσ'
         },
         {
-          text: "τελειοσ εστιν",
+          text: 'τελειοσ εστιν'
         },
         {
-          text: "προσεχετε την δικαι",
+          text: 'προσεχετε την δικαι'
         },
         {
-          text: "οσυνην υμων μη ποι",
+          text: 'οσυνην υμων μη ποι'
         },
         {
-          text: "ειν εμπροσθεν των αν",
+          text: 'ειν εμπροσθεν των αν'
         },
         {
-          text: "θρωπων προσ το θεα",
+          text: 'θρωπων προσ το θεα'
         },
         {
-          text: "θηναι αυτοισ ει δε μη",
+          text: 'θηναι αυτοισ ει δε μη'
         },
         {
-          text: "γε μισθον ουκ εχετε",
+          text: 'γε μισθον ουκ εχετε'
         },
         {
-          text: "παρα τω πατρι υμων",
+          text: 'παρα τω πατρι υμων'
         },
         {
-          text: "τω εν τοισ ουρανοισ",
+          text: 'τω εν τοισ ουρανοισ'
         },
         {
-          text: "οταν ουν ποιησ ελεη",
+          text: 'οταν ουν ποιησ ελεη'
         },
         {
-          text: "μοσυνην μη σαλπισησ",
+          text: 'μοσυνην μη σαλπισησ'
         },
         {
-          text: "εμπροσθεν σου ωσπερ",
+          text: 'εμπροσθεν σου ωσπερ'
         },
         {
-          text: "οι υποκριται ποιουσιν",
+          text: 'οι υποκριται ποιουσιν'
         },
         {
-          text: "εν ταισ συναγωγαισ και",
+          text: 'εν ταισ συναγωγαισ και'
         },
         {
-          text: "εν ταισ ρυμαισ οπωσ",
+          text: 'εν ταισ ρυμαισ οπωσ'
         },
         {
-          text: "δοξασθωσιν υπο των",
+          text: 'δοξασθωσιν υπο των'
         },
         {
-          text: "ανθρωπων αμην λεγω",
+          text: 'ανθρωπων αμην λεγω'
         },
         {
-          text: "υμιν απεχουσιν τον μι",
+          text: 'υμιν απεχουσιν τον μι'
         },
         {
-          text: "σθον αυτων σου δε ποι",
+          text: 'σθον αυτων σου δε ποι'
         },
         {
-          text: "ουντοσ ελεημοσυνην",
+          text: 'ουντοσ ελεημοσυνην'
         },
         {
-          text: "μη γνωτω η αριστερα",
-        },
-      ],
-    },
-  },
+          text: 'μη γνωτω η αριστερα'
+        }
+      ]
+    }
+  }
 };
 
 export default manifests;
