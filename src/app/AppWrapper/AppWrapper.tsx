@@ -1,12 +1,12 @@
-import type { PropsWithChildren, ReactElement } from "react";
-import { useEffect, useState } from "react";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import type { PropsWithChildren, ReactElement } from 'react';
+import { useEffect, useState } from 'react';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
-import { ContactModal } from "../../components/ContactModal/ContactModal";
-import { SettingsMenu } from "../../components/SettingsMenu/SettingsMenu";
-import { useTheme } from "../../contexts/ThemeContext";
+import { ContactModal } from '../../components/ContactModal/ContactModal';
+import { SettingsMenu } from '../../components/SettingsMenu/SettingsMenu';
+import { useTheme } from '../../contexts/ThemeContext';
 
-import styles from "./AppWrapper.module.scss";
+import styles from './AppWrapper.module.scss';
 
 export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
   const [showModal, setShowModal] = useState(false);
@@ -15,22 +15,22 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
   useEffect(() => {
     const root = document.documentElement;
     if (settings.darkMode) {
-      root.setAttribute("data-theme", "dark");
+      root.setAttribute('data-theme', 'dark');
     } else {
-      root.removeAttribute("data-theme");
+      root.removeAttribute('data-theme');
     }
 
     if (settings.highContrast) {
-      root.setAttribute("data-high-contrast", "true");
+      root.setAttribute('data-high-contrast', 'true');
     } else {
-      root.removeAttribute("data-high-contrast");
+      root.removeAttribute('data-high-contrast');
     }
 
-    root.setAttribute("data-font-size", settings.fontSize);
+    root.setAttribute('data-font-size', settings.fontSize);
 
     // Update body styles
-    document.body.style.backgroundColor = "var(--background)";
-    document.body.style.color = "var(--text)";
+    document.body.style.backgroundColor = 'var(--background)';
+    document.body.style.color = 'var(--text)';
   }, [settings]);
 
   return (
@@ -40,18 +40,10 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
           Xeirographa
         </a>
         <div className={styles.NavButtons}>
-          <a
-            className={styles.NavLink}
-            href="/lessons/1"
-            data-replace="Lessons"
-          >
+          <a className={styles.NavLink} href="/lessons/1" data-replace="Lessons">
             <span>Lessons</span>
           </a>
-          <NavDropdown
-            title="Help"
-            id="collapsible-nav-dropdown"
-            className={styles.NavDropdown}
-          >
+          <NavDropdown title="Help" id="collapsible-nav-dropdown" className={styles.NavDropdown}>
             <div className={styles.DropdownItem}>
               <a href="/guide">Guide</a>
             </div>
@@ -83,7 +75,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
         </div>
         <div className={styles.VerticalDivider} />
         <div className={styles.CopyrightText}>
-          © 2025{" "}
+          © 2025{' '}
           <a
             className="PersonalSiteLink"
             href="https://www.jacobwpeterson.com"

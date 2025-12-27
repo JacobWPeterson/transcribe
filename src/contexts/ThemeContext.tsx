@@ -1,7 +1,7 @@
-import type { PropsWithChildren, ReactElement } from "react";
-import { createContext, useContext, useEffect, useState } from "react";
+import type { PropsWithChildren, ReactElement } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
-export type FontSize = "S" | "M" | "L";
+export type FontSize = 'S' | 'M' | 'L';
 
 export interface ThemeSettings {
   darkMode: boolean;
@@ -18,23 +18,19 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const STORAGE_KEY = "transcribe-theme-settings";
+const STORAGE_KEY = 'transcribe-theme-settings';
 
 const defaultSettings: ThemeSettings = {
   darkMode: false,
-  fontSize: "M",
-  highContrast: false,
+  fontSize: 'M',
+  highContrast: false
 };
 
-export const ThemeProvider = ({
-  children,
-}: PropsWithChildren): ReactElement => {
+export const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => {
   const [settings, setSettings] = useState<ThemeSettings>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      return stored
-        ? { ...defaultSettings, ...JSON.parse(stored) }
-        : defaultSettings;
+      return stored ? { ...defaultSettings, ...JSON.parse(stored) } : defaultSettings;
     } catch {
       return defaultSettings;
     }
@@ -49,21 +45,19 @@ export const ThemeProvider = ({
   }, [settings]);
 
   const toggleDarkMode = (): void => {
-    setSettings((prev) => ({ ...prev, darkMode: !prev.darkMode }));
+    setSettings(prev => ({ ...prev, darkMode: !prev.darkMode }));
   };
 
   const setFontSize = (fontSize: FontSize): void => {
-    setSettings((prev) => ({ ...prev, fontSize }));
+    setSettings(prev => ({ ...prev, fontSize }));
   };
 
   const toggleHighContrast = (): void => {
-    setSettings((prev) => ({ ...prev, highContrast: !prev.highContrast }));
+    setSettings(prev => ({ ...prev, highContrast: !prev.highContrast }));
   };
 
   return (
-    <ThemeContext.Provider
-      value={{ settings, toggleDarkMode, setFontSize, toggleHighContrast }}
-    >
+    <ThemeContext.Provider value={{ settings, toggleDarkMode, setFontSize, toggleHighContrast }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -72,7 +66,7 @@ export const ThemeProvider = ({
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
 };
