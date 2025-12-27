@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import type { PropsWithChildren, ReactElement } from 'react';
 import { useEffect } from 'react';
 import classNames from 'classnames';
@@ -40,20 +41,36 @@ export const Modal = ({
       <div
         className={styles.Modal}
         onClick={isCloseDisabled ? (): void => {} : handleClose}
-        aria-modal="true"
-        aria-hidden
+        onKeyDown={(e): void => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            if (!isCloseDisabled) {
+              handleClose();
+            }
+          }
+        }}
+        role="presentation"
+        aria-label="Modal backdrop"
       >
         <div
           className={classNames(styles.Content, classes)}
           onClick={e => e.stopPropagation()}
-          aria-hidden
+          onKeyDown={e => e.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={header ? 'modal-header' : undefined}
         >
           <div className={styles.Header}>
-            {header && <h2 className={styles.H2}>{header}</h2>}
+            {header && (
+              <h2 className={styles.H2} id="modal-header">
+                {header}
+              </h2>
+            )}
             <button
               onClick={handleClose}
               className={styles.CloseButton}
               disabled={isCloseDisabled}
+              aria-label="Close modal"
             />
           </div>
           {children}
