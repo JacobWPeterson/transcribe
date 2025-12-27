@@ -1,11 +1,11 @@
-import type { ReactElement } from "react";
-import classNames from "classnames";
+import type { ReactElement } from 'react';
+import classNames from 'classnames';
 
-import styles from "./Home.module.scss";
+import styles from './Home.module.scss';
 
 export const Home = (): ReactElement => {
   const handleGetStarted = (): void => {
-    window.location.href = "lessons/1";
+    window.location.href = 'lessons/1';
   };
 
   return (
@@ -29,9 +29,8 @@ export const Home = (): ReactElement => {
       </div>
       <div className={styles.FeaturesSection}>
         <p className={styles.FeaturesText}>
-          Xeirographa currently offers several different features for learners
-          to ease the transition from reading printed Greek texts to manuscripts
-          of any period.
+          Xeirographa currently offers several different features for learners to ease the
+          transition from reading printed Greek texts to manuscripts of any period.
         </p>
         <div className={styles.FeaturesBlock}>
           <h2 className={styles.H2}>Features</h2>
@@ -46,7 +45,10 @@ export const Home = (): ReactElement => {
               <span>help when new concepts are encountered</span>
             </li>
             <li className={styles.ListItem}>
-              <span>tips and clues to help resolve incorrect answers</span>
+              <span>clues to help resolve incorrect answers</span>
+            </li>
+            <li className={styles.ListItem}>
+              <span>downloadable lesson reports</span>
             </li>
             <li className={styles.ListItem}>
               <span>glossary of relevant terms</span>
@@ -55,24 +57,20 @@ export const Home = (): ReactElement => {
               <span>modern viewer with hi-res colour images</span>
             </li>
             <li className={styles.ListItem}>
-              <span>
-                codicological & bibliographic info for each manuscript
-              </span>
+              <span>bibliographic info for each manuscript</span>
             </li>
             <li className={styles.ListItem}>
-              <span>links to other relevant online resources</span>
+              <span>links to relevant online resources</span>
+            </li>
+            <li className={styles.ListItem}>
+              <span>accessibility-related settings</span>
             </li>
           </ul>
         </div>
       </div>
       <div className={styles.LowerSection}>
-        Go from reading printed texts to manuscripts of any period in a few
-        lessons
-        <button
-          className={styles.Button}
-          onClick={handleGetStarted}
-          type="button"
-        >
+        Go from reading printed texts to manuscripts of any period in a few lessons
+        <button className={styles.Button} onClick={handleGetStarted} type="button">
           Get started
         </button>
       </div>

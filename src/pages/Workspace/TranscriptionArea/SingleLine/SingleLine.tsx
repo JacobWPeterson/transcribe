@@ -1,16 +1,16 @@
-import type { ChangeEvent, FormEvent, ReactElement } from "react";
-import { useEffect, useRef, useState } from "react";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
-import pluralize from "pluralize";
-import classnames from "classnames";
+import type { ChangeEvent, FormEvent, ReactElement } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+import pluralize from 'pluralize';
+import classnames from 'classnames';
 
-import glosses from "../../../../files/glosses";
-import type { Line } from "../../../../files/manifests";
-import evaluateSubmission from "../validators";
+import glosses from '../../../../files/glosses';
+import type { Line } from '../../../../files/manifests';
+import evaluateSubmission from '../validators';
 
-import styles from "./SingleLine.module.scss";
-import { LessonStatus } from "./singleLine.enum";
+import styles from './SingleLine.module.scss';
+import { LessonStatus } from './singleLine.enum';
 
 interface SingleLineProps {
   line: Line;
@@ -35,19 +35,18 @@ export const SingleLine = ({
   updateLessonStatus,
   savedAnswer,
   savedStatus,
-  onSaveAnswer,
+  onSaveAnswer
 }: SingleLineProps): ReactElement => {
-  const [lineContent, setLineContent] = useState<string>(savedAnswer || "");
-  const [submissionStatus, setSubmissionStatus] =
-    useState<(boolean | string)[]>(null);
+  const [lineContent, setLineContent] = useState<string>(savedAnswer || '');
+  const [submissionStatus, setSubmissionStatus] = useState<(boolean | string)[]>(null);
   const [showHint, setShowHint] = useState<boolean>(false);
-  const [showAnswerEvaluation, setShowAnswerEvaluation] =
-    useState<boolean>(false);
+  const [showAnswerEvaluation, setShowAnswerEvaluation] = useState<boolean>(false);
   const guesses = useRef(0);
   const hasNonGreekChars = includesNonGreekChars(lineContent);
 
   useEffect(() => {
-    setLineContent(savedAnswer || "");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setLineContent(savedAnswer || '');
   }, [savedAnswer]);
 
   // Set submission status from saved status when available, or reset when no saved data
@@ -55,7 +54,8 @@ export const SingleLine = ({
     if (savedAnswer) {
       // Convert LessonStatus enum to submission status format
       const isCorrect = savedStatus === LessonStatus.CORRECT;
-      const message = isCorrect ? "correct" : "Answer is incorrect.";
+      const message = isCorrect ? 'correct' : 'Answer is incorrect.';
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSubmissionStatus([isCorrect, message]);
       setShowAnswerEvaluation(true);
     } else {
@@ -68,6 +68,7 @@ export const SingleLine = ({
   useEffect(() => {
     if (lineContent.length > 0 && submissionStatus?.[0]) {
       guesses.current = 0;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowHint(false);
       return;
     }
@@ -78,8 +79,7 @@ export const SingleLine = ({
     if (
       requireSpaces
         ? lineContent?.length !== line.text.length
-        : lineContent.replace(/\s/g, "").length !==
-          line.text.replace(/\s/g, "").length
+        : lineContent.replace(/\s/g, '').length !== line.text.replace(/\s/g, '').length
     ) {
       setShowHint(false);
       return;
@@ -99,11 +99,8 @@ export const SingleLine = ({
   useEffect(() => {
     // Only re-evaluate when requireSpaces changes
     if (prevRequireSpacesRef.current !== requireSpaces && savedAnswer) {
-      const submissionStatus = evaluateSubmission(
-        savedAnswer,
-        line.text,
-        requireSpaces,
-      );
+      const submissionStatus = evaluateSubmission(savedAnswer, line.text, requireSpaces);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSubmissionStatus(submissionStatus);
       updateLessonStatus(passedIndex, Number(submissionStatus[0]));
     }
@@ -124,11 +121,7 @@ export const SingleLine = ({
 
   const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
-    const submissionStatus = evaluateSubmission(
-      lineContent,
-      line.text,
-      requireSpaces,
-    );
+    const submissionStatus = evaluateSubmission(lineContent, line.text, requireSpaces);
     setSubmissionStatus(submissionStatus);
     updateLessonStatus(passedIndex, Number(submissionStatus[0])); // This Number cast works because of the enum order in singleLine.enum.ts
     // Save the answer to localStorage
@@ -144,7 +137,7 @@ export const SingleLine = ({
         placement="top"
         rootClose
         transition
-        trigger={["hover", "focus", "click"]}
+        trigger={['hover', 'focus', 'click']}
         overlay={
           <Popover id="popover-error">
             <Popover.Body>{submissionStatus[1]}</Popover.Body>
@@ -160,19 +153,17 @@ export const SingleLine = ({
     );
 
   const getHint = (guess: string, answer: string): string => {
-    const reformattedAnswer = requireSpaces
-      ? answer
-      : answer.replace(/\s/g, "");
+    const reformattedAnswer = requireSpaces ? answer : answer.replace(/\s/g, '');
     const reformattedGuess = requireSpaces
-      ? guess.replace(/ς|ϲ/gi, "σ").toLowerCase()
-      : guess.replace(/\s/g, "").replace(/ς|ϲ/gi, "σ").toLowerCase();
+      ? guess.replace(/ς|ϲ/gi, 'σ').toLowerCase()
+      : guess.replace(/\s/g, '').replace(/ς|ϲ/gi, 'σ').toLowerCase();
     const mismatches = [];
     for (let i = 0; i < reformattedGuess.length; i += 1) {
       if (reformattedGuess[i] !== reformattedAnswer[i]) {
         mismatches.push(`${reformattedGuess[i]}(${i + 1})`);
       }
     }
-    return `Incorrect ${pluralize("letter", mismatches.length)}: ${[...mismatches].join(", ")}.`;
+    return `Incorrect ${pluralize('letter', mismatches.length)}: ${[...mismatches].join(', ')}.`;
   };
 
   const hint = (): ReactElement => (
@@ -181,7 +172,7 @@ export const SingleLine = ({
       placement="top"
       rootClose
       transition
-      trigger={["hover", "focus", "click"]}
+      trigger={['hover', 'focus', 'click']}
       overlay={
         <Popover id="popover-hint">
           <Popover.Body>{getHint(lineContent, line.text)}</Popover.Body>
@@ -200,15 +191,14 @@ export const SingleLine = ({
       placement="auto"
       rootClose
       transition
-      trigger={["hover", "focus", "click"]}
+      trigger={['hover', 'focus', 'click']}
       overlay={
         <Popover id="popover-hint">
           <Popover.Body>
             {/* eslint-disable-next-line max-len */}
-            Titles can be plain or feature elaborate patterns. Titles often
-            feature ligatures and abbreviations and can be much more difficult
-            to read, so don&apos;t worry about them as much early on. Type them
-            as a single line.
+            Titles can be plain or feature elaborate patterns. Titles often feature ligatures and
+            abbreviations and can be much more difficult to read, so don&apos;t worry about them as
+            much early on. Type them as a single line.
           </Popover.Body>
         </Popover>
       }
@@ -222,23 +212,22 @@ export const SingleLine = ({
   return (
     <form
       className={classnames(styles.Form, {
-        [styles.HasHelpText]:
-          hasNonGreekChars || line.newConcept || line.caption,
+        [styles.HasHelpText]: hasNonGreekChars || line.newConcept || line.caption
       })}
       onSubmit={(e): void => handleSubmit(e)}
     >
       <div className={styles.Upper}>
         <label
           className={styles.Label}
-          htmlFor={line.isTitle ? "title" : `Line ${passedIndex}`}
-          style={{ display: "flex", alignItems: "center", marginTop: "3px" }}
+          htmlFor={line.isTitle ? 'title' : `Line ${passedIndex}`}
+          style={{ display: 'flex', alignItems: 'center', marginTop: '3px' }}
         >
           {line.isTitle ? titleHelp() : `L${passedIndex}`}
         </label>
         <div className={styles.InputWrapper}>
           <input
             className={styles.Input}
-            id={line.isTitle ? "title" : `Line ${passedIndex}`}
+            id={line.isTitle ? 'title' : `Line ${passedIndex}`}
             type="text"
             value={lineContent}
             onChange={handleChange}
@@ -246,11 +235,7 @@ export const SingleLine = ({
           />
         </div>
         <div className={styles.PostInputItemsContainer}>
-          <button
-            className={styles.Button}
-            disabled={!lineContent.trim()}
-            type="submit"
-          >
+          <button className={styles.Button} disabled={!lineContent.trim()} type="submit">
             Check
           </button>
           {showAnswerEvaluation && !showHint && renderAnswerEvaluation()}
@@ -261,7 +246,15 @@ export const SingleLine = ({
         <div className={styles.Lower}>
           {hasNonGreekChars && (
             <small className={classnames(styles.Small, styles.Error)}>
-              Non-Greek characters have been detected
+              Non-Greek characters have been detected.{' '}
+              <a
+                className={classnames('Link', 'RedLink')}
+                href={'/guide#greekKeyboard'}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Help
+              </a>
             </small>
           )}
           {!hasNonGreekChars && (line.newConcept || line.caption) && (

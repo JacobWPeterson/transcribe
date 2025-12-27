@@ -1,11 +1,11 @@
-import { useState, type ReactElement } from "react";
-import classNames from "classnames";
-import { send } from "@emailjs/browser";
-import { useForm } from "react-hook-form";
+import { useState, type ReactElement } from 'react';
+import classNames from 'classnames';
+import { send } from '@emailjs/browser';
+import { useForm } from 'react-hook-form';
 
-import { Modal } from "../Modal/Modal";
+import { Modal } from '../Modal/Modal';
 
-import styles from "./ContactModal.module.scss";
+import styles from './ContactModal.module.scss';
 
 interface ContactModalProps {
   show: boolean;
@@ -18,10 +18,7 @@ type ContactFormData = {
   message: string;
 };
 
-export const ContactModal = ({
-  show,
-  onHide,
-}: ContactModalProps): ReactElement => {
+export const ContactModal = ({ show, onHide }: ContactModalProps): ReactElement => {
   const [emailSent, setEmailSent] = useState<boolean>(false);
   const [isSending, setIsSending] = useState<boolean>(false);
   const [sendFailed, setSendFailed] = useState<boolean>(false);
@@ -30,14 +27,13 @@ export const ContactModal = ({
     handleSubmit,
     register,
     reset,
-    watch,
-  } = useForm<ContactFormData>({ mode: "onTouched" });
+    watch
+  } = useForm<ContactFormData>({ mode: 'onTouched' });
 
   const { name: nameInput, email: emailInput, message: messageInput } = watch();
 
   // Mid-strength solution comes from https://www.regular-expressions.info/email.html
-  const emailRegex =
-    /^[A-Z0-9._%+-]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+  const emailRegex = /^[A-Z0-9._%+-]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
 
   const handleCancel = (): void => {
     reset();
@@ -48,16 +44,16 @@ export const ContactModal = ({
   const sendEmail = (): void => {
     setIsSending(true);
     send(
-      "service_v5oeqac",
-      "template_r9mhd7m",
+      'service_v5oeqac',
+      'template_r9mhd7m',
       {
         from_name: nameInput,
         message: messageInput,
-        reply_to: emailInput,
+        reply_to: emailInput
       },
       {
-        publicKey: "bLp81eIkp1XLYMVPi",
-      },
+        publicKey: 'bLp81eIkp1XLYMVPi'
+      }
     )
       .then(() => {
         setEmailSent(true);
@@ -82,16 +78,14 @@ export const ContactModal = ({
       isCloseDisabled={isSending}
       header="Contact form"
       classes={classNames(styles.Modal, {
-        [styles.Sent]: emailSent,
+        [styles.Sent]: emailSent
       })}
     >
       <div className={styles.Body}>
         {emailSent ? (
           <div className={styles.EmailSent}>
             <h3 className={styles.H3}>Email successfully sent</h3>
-            <div className={styles.EmailSentSubTitle}>
-              Thanks for reaching out
-            </div>
+            <div className={styles.EmailSentSubTitle}>Thanks for reaching out</div>
           </div>
         ) : (
           <form onSubmit={handleSubmit(sendEmail)} className={styles.Form}>
@@ -103,10 +97,10 @@ export const ContactModal = ({
                   className={styles.TextInput}
                   type="text"
                   placeholder="e.g., Paul Maas"
-                  {...register("name", { required: true })}
-                  aria-invalid={errors.name ? "true" : "false"}
+                  {...register('name', { required: true })}
+                  aria-invalid={errors.name ? 'true' : 'false'}
                 />
-                {errors.name?.type === "required" && (
+                {errors.name?.type === 'required' && (
                   <p className={styles.ErrorHelp} role="alert">
                     Name is required
                   </p>
@@ -119,18 +113,18 @@ export const ContactModal = ({
                   className={styles.TextInput}
                   type="text"
                   placeholder="Enter your email address"
-                  {...register("email", {
+                  {...register('email', {
                     required: true,
-                    pattern: emailRegex,
+                    pattern: emailRegex
                   })}
-                  aria-invalid={errors.email ? "true" : "false"}
+                  aria-invalid={errors.email ? 'true' : 'false'}
                 />
-                {errors.email?.type === "required" && (
+                {errors.email?.type === 'required' && (
                   <p className={styles.ErrorHelp} role="alert">
                     Email is required
                   </p>
                 )}
-                {errors.email?.type === "pattern" && (
+                {errors.email?.type === 'pattern' && (
                   <p className={styles.ErrorHelp} role="alert">
                     Please enter a valid email
                   </p>
@@ -141,25 +135,25 @@ export const ContactModal = ({
               Message
               <textarea
                 className={styles.TextArea}
-                {...register("message", {
+                {...register('message', {
                   required: true,
-                  minLength: 5,
+                  minLength: 5
                 })}
                 maxLength={2000}
-                aria-invalid={errors.message ? "true" : "false"}
+                aria-invalid={errors.message ? 'true' : 'false'}
                 placeholder="Enter your message here"
               />
               <div
                 className={classNames(styles.TextAreaErrors, {
-                  [styles.HasErrors]: !!errors.message,
+                  [styles.HasErrors]: !!errors.message
                 })}
               >
-                {errors.message?.type === "required" && (
+                {errors.message?.type === 'required' && (
                   <p className={styles.ErrorHelp} role="alert">
                     Message is required
                   </p>
                 )}
-                {errors.message?.type === "minLength" && (
+                {errors.message?.type === 'minLength' && (
                   <p className={styles.ErrorHelp} role="alert">
                     Please include a longer message
                   </p>
@@ -174,17 +168,15 @@ export const ContactModal = ({
       </div>
       <div className={styles.Footer}>
         <button className={styles.CancelButton} onClick={handleCancel}>
-          {emailSent ? "Close" : "Cancel"}
+          {emailSent ? 'Close' : 'Cancel'}
         </button>
         {!emailSent && (
           <button
             className={styles.Button}
-            disabled={
-              isFormIncomplete || isSending || Object.keys(errors).length > 0
-            }
+            disabled={isFormIncomplete || isSending || Object.keys(errors).length > 0}
             onClick={sendEmail}
           >
-            {isSending ? "Sending" : "Send"}
+            {isSending ? 'Sending' : 'Send'}
           </button>
         )}
         {sendFailed && (

@@ -1,10 +1,10 @@
-import type { PropsWithChildren, ReactElement } from "react";
-import { useState, useLayoutEffect } from "react";
-import { createPortal } from "react-dom";
+import type { PropsWithChildren, ReactElement } from 'react';
+import { useState, useLayoutEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 const createWrapperAndAppendToBody = (wrapperId: string): HTMLDivElement => {
-  const wrapperElement = document.createElement("div");
-  wrapperElement.setAttribute("id", wrapperId);
+  const wrapperElement = document.createElement('div');
+  wrapperElement.setAttribute('id', wrapperId);
   document.body.appendChild(wrapperElement);
   return wrapperElement;
 };
@@ -15,7 +15,7 @@ interface PortalProps {
 
 export const Portal = ({
   children,
-  wrapperId = "portal-wrapper",
+  wrapperId = 'portal-wrapper'
 }: PropsWithChildren<PortalProps>): ReactElement => {
   const [wrapperElement, setWrapperElement] = useState<Element>(null);
 
@@ -26,6 +26,7 @@ export const Portal = ({
     if (!element) {
       element = createWrapperAndAppendToBody(wrapperId);
     }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setWrapperElement(element);
   }, [wrapperId]);
 

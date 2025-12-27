@@ -1,10 +1,10 @@
-@use "@styles/theme";
+@use '@styles/theme';
 
 @font-face {
-  font-family: "Brill-Roman";
+  font-family: Brill-Roman;
   src:
-    local("Brill-Roman"),
-    url("../../../../static/fonts/Brill-Roman.ttf") format("truetype");
+    local('Brill-Roman'),
+    url('../../../../static/fonts/Brill-Roman.ttf') format('truetype');
 }
 
 .Form {
@@ -34,10 +34,11 @@
       width: calc(
         100% - 25px - 88px - 20px
       ); // Label width - PostInputItemsContainer width - L-R margins
+
       margin: 0 10px;
 
       .Input {
-        font-family: "Brill-Roman";
+        font-family: Brill-Roman, sans-serif;
         font-size: 22px;
         line-height: normal;
         height: 30px;
@@ -68,7 +69,7 @@
         }
 
         &:disabled {
-          opacity: 30%;
+          opacity: 0.3;
         }
       }
     }

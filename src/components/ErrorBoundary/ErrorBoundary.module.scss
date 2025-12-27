@@ -1,4 +1,4 @@
-@use "@styles/theme";
+@use '@styles/theme';
 
 .ErrorBoundary {
   display: flex;
@@ -7,6 +7,7 @@
   height: 100dvh;
   width: 100dvw;
 }
+
 .ErrorContent {
   padding: 2rem;
   border-radius: 6px;
@@ -47,7 +48,7 @@
     color: theme.$text;
     overflow-x: auto;
     white-space: pre-wrap;
-    word-break: break-word;
+    word-break: normal;
   }
 }
 

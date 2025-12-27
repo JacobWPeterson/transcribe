@@ -1,4 +1,4 @@
-@use "@styles/theme";
+@use '@styles/theme';
 
 .Container {
   width: 80dvw;
@@ -143,13 +143,13 @@
         color: theme.$text;
         font-size: 48px;
         line-height: 48px;
-        font-family: "Yanone Kaffeesatz", sans-serif;
+        font-family: 'Yanone Kaffeesatz', sans-serif;
         letter-spacing: 0.05em;
       }
 
       &.IIIFFont {
         color: #006eb0;
-        font-family: "Playfair Display", sans-serif;
+        font-family: 'Playfair Display', sans-serif;
         width: 170px;
       }
     }

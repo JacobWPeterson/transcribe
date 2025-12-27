@@ -1,32 +1,23 @@
-import {
-  type ReactElement,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { jsPDF } from "jspdf";
-import classNames from "classnames";
-import { ArrowLeft, ArrowRight, Download } from "react-feather";
+import { type ReactElement, useCallback, useEffect, useRef, useState } from 'react';
+import { jsPDF } from 'jspdf';
+import classNames from 'classnames';
+import { ArrowLeft, ArrowRight, Download } from 'react-feather';
 
-import type { Line, Manifest, ManifestSets } from "../../../files/manifests";
-import { StatusReport } from "../../../components/StatusReport/StatusReport";
+import type { Line, Manifest, ManifestSets } from '../../../files/manifests';
+import { StatusReport } from '../../../components/StatusReport/StatusReport';
 import {
   LocalStorageErrorBoundary,
-  PDFErrorBoundary,
-} from "../../../components/ErrorBoundary/SpecializedErrorBoundaries";
-import {
-  loadLessonProgress,
-  saveLessonProgress,
-} from "../../../utils/localStorage";
+  PDFErrorBoundary
+} from '../../../components/ErrorBoundary/SpecializedErrorBoundaries';
+import { loadLessonProgress, saveLessonProgress } from '../../../utils/localStorage';
 
-import { SingleLine } from "./SingleLine/SingleLine";
-import styles from "./TranscriptionArea.module.scss";
-import { brillBase64 } from "./constants";
-import { LessonStatus } from "./SingleLine/singleLine.enum";
+import { SingleLine } from './SingleLine/SingleLine';
+import styles from './TranscriptionArea.module.scss';
+import { brillBase64 } from './constants';
+import { LessonStatus } from './SingleLine/singleLine.enum';
 
 interface TranscriptionAreaProps {
-  changeManuscript: (type: "next" | "previous") => void;
+  changeManuscript: (type: 'next' | 'previous') => void;
   lessonNumber: number;
   manifest: Manifest;
   numberOfLessons: number;
@@ -38,15 +29,14 @@ export const TranscriptionArea = ({
   lessonNumber,
   manifest,
   numberOfLessons,
-  set,
+  set
 }: TranscriptionAreaProps): ReactElement => {
   const [requireSpaces, setRequireSpaces] = useState(false);
   const transcriptionAreaRef = useRef<HTMLDivElement>(null);
   const inputContainerRef = useRef<HTMLDivElement>(null);
   const debounceTimeoutRef = useRef<NodeJS.Timeout>(null);
   const { lines, instruction } = manifest;
-  const [lessonsStatus, setLessonsStatus] =
-    useState<Record<number, LessonStatus>>(null);
+  const [lessonsStatus, setLessonsStatus] = useState<Record<number, LessonStatus>>(null);
 
   const [savedAnswers, setSavedAnswers] = useState<Record<number, string>>({});
 
@@ -61,12 +51,12 @@ export const TranscriptionArea = ({
           answers: savedAnswers,
           status: lessonsStatus,
           requireSpaces,
-          lastUpdated: Date.now(),
+          lastUpdated: Date.now()
         };
         try {
           saveLessonProgress(set, lessonNumber, progress);
         } catch (error) {
-          console.error("Error saving lesson progress:", error);
+          console.error('Error saving lesson progress:', error);
           // Could show a user notification here, but since we have error boundaries, the LocalStorageErrorBoundary will catch this
         }
       }
@@ -85,18 +75,18 @@ export const TranscriptionArea = ({
         // Initialize with default values if no saved progress
         const lessonsStatusObj = lines.reduce(
           (obj, _, index) => ({ ...obj, [index]: LessonStatus.INCOMPLETE }),
-          {},
+          {}
         );
         setLessonsStatus(lessonsStatusObj);
         setSavedAnswers({});
         setRequireSpaces(false);
       }
     } catch (error) {
-      console.error("Error loading lesson progress:", error);
+      console.error('Error loading lesson progress:', error);
       // Initialize with default values if loading failed
       const lessonsStatusObj = lines.reduce(
         (obj, _, index) => ({ ...obj, [index]: LessonStatus.INCOMPLETE }),
-        {},
+        {}
       );
       setLessonsStatus(lessonsStatusObj);
       setSavedAnswers({});
@@ -118,40 +108,33 @@ export const TranscriptionArea = ({
     };
   }, [debouncedSave]);
 
-  const handleClick = (type: "next" | "previous"): void => {
+  const handleClick = (type: 'next' | 'previous'): void => {
     changeManuscript(type);
   };
 
-  const handleUpdateLessonStatus = (
-    index: number,
-    status: LessonStatus,
-  ): void => {
-    setLessonsStatus(
-      (
-        prevStatus: Record<number, LessonStatus>,
-      ): Record<number, LessonStatus> => {
-        return { ...prevStatus, [index]: status };
-      },
-    );
+  const handleUpdateLessonStatus = (index: number, status: LessonStatus): void => {
+    setLessonsStatus((prevStatus: Record<number, LessonStatus>): Record<number, LessonStatus> => {
+      return { ...prevStatus, [index]: status };
+    });
   };
 
   const handleSaveAnswer = (index: number, answer: string): void => {
-    setSavedAnswers((prev) => ({ ...prev, [index]: answer }));
+    setSavedAnswers(prev => ({ ...prev, [index]: answer }));
   };
 
   const handleDownloadPDF = (): void => {
     try {
       const element = transcriptionAreaRef.current;
       if (!element) {
-        throw new Error("Transcription area element not found");
+        throw new Error('Transcription area element not found');
       }
 
-      element.style.setProperty("width", "790px");
+      element.style.setProperty('width', '790px');
 
-      const pdf = new jsPDF({ format: "a4" });
-      pdf.addFileToVFS("Brill-Roman.ttf", brillBase64);
-      pdf.addFont("Brill-Roman.ttf", "Brill-Roman", "normal");
-      pdf.setFont("Brill-Roman");
+      const pdf = new jsPDF({ format: 'a4' });
+      pdf.addFileToVFS('Brill-Roman.ttf', brillBase64);
+      pdf.addFont('Brill-Roman.ttf', 'Brill-Roman', 'normal');
+      pdf.setFont('Brill-Roman');
       pdf.setProperties({ title: `Lesson ${lessonNumber} Report` });
 
       pdf
@@ -160,25 +143,21 @@ export const TranscriptionArea = ({
           html2canvas: {
             scale: 0.25,
             ignoreElements: ({ id }) =>
-              id === "prevButton" ||
-              id === "downloadButton" ||
-              id === "nextButton",
-          },
+              id === 'prevButton' || id === 'downloadButton' || id === 'nextButton'
+          }
         })
         .then(() => {
-          pdf.output("pdfobjectnewwindow");
+          pdf.output('pdfobjectnewwindow');
         })
-        .catch((error) => {
-          console.error("PDF generation error:", error);
-          throw new Error(
-            `Failed to generate PDF: ${error.message || "Unknown error"}`,
-          );
+        .catch(error => {
+          console.error('PDF generation error:', error);
+          throw new Error(`Failed to generate PDF: ${error.message || 'Unknown error'}`);
         })
         .finally(() => {
-          element.style.removeProperty("width");
+          element.style.removeProperty('width');
         });
     } catch (error) {
-      console.error("PDF download error:", error);
+      console.error('PDF download error:', error);
       throw error; // Let the error boundary handle it
     }
   };
@@ -237,7 +216,7 @@ export const TranscriptionArea = ({
               <button
                 aria-label="Previous"
                 className={styles.Button}
-                onClick={() => handleClick("previous")}
+                onClick={() => handleClick('previous')}
                 id="prevButton"
               >
                 <ArrowLeft size={18} />
@@ -259,7 +238,7 @@ export const TranscriptionArea = ({
               <button
                 aria-label="Next"
                 className={styles.Button}
-                onClick={() => handleClick("next")}
+                onClick={() => handleClick('next')}
                 id="nextButton"
               >
                 <ArrowRight size={18} />
