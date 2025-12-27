@@ -1,8 +1,8 @@
-import { type ReactElement, useEffect } from "react";
-import { viewer } from "mirador";
-import { miradorImageToolsPlugin } from "mirador-image-tools";
+import { type ReactElement, useEffect } from 'react';
+import { viewer } from 'mirador';
+import { miradorImageToolsPlugin } from 'mirador-image-tools';
 
-import config from "./config";
+import config from './config';
 
 interface MiradorProps {
   manifest: string;
@@ -17,13 +17,13 @@ export const Mirador = ({
   index,
   setPageNumber,
   specialIndexHandlingStart,
-  specialIndexHandlingEnd,
+  specialIndexHandlingEnd
 }: MiradorProps): ReactElement => {
   useEffect(() => {
     config.windows[0] = {
       manifestId: manifest,
       canvasIndex: index,
-      view: "single",
+      view: 'single'
     };
 
     const miradorInstance = viewer(config, miradorImageToolsPlugin);
@@ -38,24 +38,18 @@ export const Mirador = ({
             canvasIndex
               ?.slice(
                 canvasIndex.lastIndexOf(
-                  specialIndexHandlingStart ? specialIndexHandlingStart : "/",
+                  specialIndexHandlingStart ? specialIndexHandlingStart : '/'
                 ),
                 specialIndexHandlingEnd
                   ? canvasIndex?.lastIndexOf(specialIndexHandlingEnd)
-                  : undefined,
+                  : undefined
               )
-              .replace(/[^\d.-]/g, ""),
-          ),
+              .replace(/[^\d.-]/g, '')
+          )
         );
       }
     });
-  }, [
-    manifest,
-    index,
-    setPageNumber,
-    specialIndexHandlingStart,
-    specialIndexHandlingEnd,
-  ]);
+  }, [manifest, index, setPageNumber, specialIndexHandlingStart, specialIndexHandlingEnd]);
 
   return <div id={config.id} />;
 };
