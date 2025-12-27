@@ -2,60 +2,124 @@
 
 # Copilot / AI Agent Instructions — transcribe
 
-Purpose: Help an AI agent be immediately productive in this codebase by explaining the architecture, developer workflows, patterns, and exact file examples to change.
+**Xeirographa**: A guided learning platform for reading Greek manuscripts using IIIF manifests and interactive transcription exercises.
 
-- Big picture
-  - Single-page React app built with Vite + TypeScript. Entry: `src/app/App.tsx`.
-  - Routes (client router) defined in `src/app/Routes.tsx` — pages include `Home`, `Workspace`, `Help/*`, and `About`.
-  - The core interactive feature is the `Workspace` page which composes two major parts:
-    - `Mirador` (IIIF viewer) in `src/pages/Workspace/Mirador/*` — renders manuscript canvases.
-    - `TranscriptionArea` in `src/pages/Workspace/TranscriptionArea/*` — UI for entering and validating transcriptions.
-  - Manifest-driven lessons: lesson data lives in `src/files/manifests.ts`. Add/modify lessons by editing that file (see examples below).
+Purpose: Help AI agents be immediately productive by explaining architecture, workflows, patterns, and integration points.
 
-- Key integration points & patterns
-  - Mirador config: `src/pages/Workspace/Mirador/config.ts` — windows are injected at runtime by `Mirador/index.tsx`.
-  - Mirador -> app communication: `Mirador` subscribes to the Mirador store and extracts `canvasId` to compute current page number (see `specialIndexHandlingStart` / `specialIndexHandlingEnd` fields in `manifests.ts`). If you change how canvas ids look, update the parsing logic in `Mirador/index.tsx`.
-  - Transcription validation is centralized in `src/pages/Workspace/TranscriptionArea/validators.ts`. This function normalizes input (removes spaces, normalizes characters like final nu) and returns either `[true, 'correct']` or `[false, <message>]`.
-  - Lesson content format: entries in `manifests.ts` follow the `Manifest` type. Each lesson has `manifestId`, `canvasIndex`, optional `specialIndexHandling*`, and `lines: {text, caption?, newConcept?, isTitle?}[]`.
+## Architecture
 
-- Project-specific conventions
-  - CSS Modules: styles use `.module.scss` files colocated with components (e.g., `src/components/Alert/Alert.module.scss`).
-  - Tests live next to implementation files with `.test.tsx` suffix (e.g., `src/pages/Home/Home.test.tsx`). Use Vitest for running tests.
-  - Small enums and consts are placed alongside components (e.g., `components/Badge/badge.enum.ts`).
-  - Use `react-hook-form` for forms in transcription components (look at `TranscriptionArea` files for examples).
+- **Tech Stack**: Single-page React app (v19) + Vite + TypeScript. UI via Bootstrap + CSS Modules (SCSS). Testing via Vitest.
+- **Entry Point**: `src/app/App.tsx` → renders `AppWrapper` (navbar, settings) → `Routes` (React Router).
+- **Pages**: `Home`, `Workspace` (core), `Help/{Guide,Glossary,Resources}`, `About`, `E404`. Routes in `src/app/Routes.tsx`.
+- **Core Feature**: `Workspace` page composes two major components:
+  - **Mirador** (`src/pages/Workspace/Mirador/`) — IIIF manuscript viewer (uses Mirador 4.0 library + image-tools plugin).
+  - **TranscriptionArea** (`src/pages/Workspace/TranscriptionArea/`) — Input forms, validation, progress tracking via localStorage.
+- **Manifest-Driven Model**: All lesson content (manifests, canvases, lines to transcribe) defined in `src/files/manifests.ts`. The `Workspace` page reads manifests dynamically by lesson ID and lesson set (CORE, UoEDiv).
+- **Theme System**: `ThemeContext` provides dark mode, high contrast, and font size settings; persisted to localStorage; applied via CSS custom properties to root element.
 
-- Developer workflows (exact commands)
-  - Install dependencies: `npm install`
-  - Local dev (runs Vite server + tsc watch): `npm run start:dev` (this uses `npm-run-all` to run `vite` and `tsc --noEmit --watch` in parallel)
-  - Build production bundle: `npm run build`
-  - Preview production build: `npm run preview`
-  - Run tests: `npm run test` (update snapshots: `npm run test-u`)
-  - Lint & format: `npm run lint` and fixes with `npm run lint-fix` (these orchestrate `prettier`, `eslint`, and `stylelint` via `npm-run-all`).
+## Data Flow & Integration Points
 
-- Files to inspect when making changes
-  - App bootstrap: `src/app/App.tsx` and `index.html` (root div id is `app`).
-  - Routes: `src/app/Routes.tsx` — add new pages or route params here.
-  - Workspace: `src/pages/Workspace/Workspace.tsx` — main orchestration between Mirador and TranscriptionArea.
-  - Mirador: `src/pages/Workspace/Mirador/*` — change viewer behavior and canvas parsing here.
-  - Lesson data: `src/files/manifests.ts` — add lessons, adjust `canvasIndexToPageNumberAdj`, or provide `specialIndexHandlingStart/End` to parse different manifest id formats.
-  - Validation: `src/pages/Workspace/TranscriptionArea/validators.ts` — update rules for answer matching and user feedback.
+- **Manifest Loading**: `Workspace.tsx` reads `manifests[set][id]` (set = "lessons" | "UoEDiv", id = lesson number). Manifest object defines IIIF URL, canvas index, and array of transcription lines with metadata.
+- **Mirador ↔ App Communication**:
+  - `Mirador/index.tsx` initializes Mirador viewer with manifest + canvas index, subscribes to store.
+  - On canvas change, extracts `canvasId`, parses page number using `specialIndexHandlingStart`/`specialIndexHandlingEnd` (optional string slices for non-standard ID formats).
+  - Calls `setPageNumber()` callback to sync `Workspace` state; triggers alert if user navigates to wrong page.
+- **Transcription Validation**: `src/pages/Workspace/TranscriptionArea/validators.ts` → `evaluateSubmission(guess, answer, requireSpaces)` returns `[boolean, string]` (correct status + feedback message).
+  - Normalizes input: removes spaces (unless `requireSpaces=true`), converts final-sigma (ς/ϲ) to σ, lowercases.
+  - Returns short/long messages for length mismatches; "correct" or "Answer is incorrect" for exact-length mismatches.
+- **Progress Tracking**: `TranscriptionArea.tsx` reads/writes to localStorage via `loadLessonProgress()` / `saveLessonProgress()` (file: `src/utils/localStorage.ts`). Stores per-lesson answers and completion status.
 
-- Helpful examples and tips
-  - To add a lesson: copy an object in `src/files/manifests.ts`, set `manifestId` to the IIIF manifest URL, set the visible `canvasIndex` and provide `lines` (array of `{text, caption?, newConcept?, isTitle?}`).
-  - If canvas id extraction fails for a new manifest, add `specialIndexHandlingStart` and/or `specialIndexHandlingEnd` to the manifest entry and Mirador will use them to slice the canvasId string before extracting digits.
-  - When changing UI styles, prefer updating the component's `.module.scss` file to avoid global side effects.
+## Project Conventions
 
-  - Unit tests use Vitest; component tests reference DOM via `@testing-library/*` packages. Look for `vitestSetup.ts` for any global test setup.
-  - Mirador runs in the browser; to debug viewer state, open the devtools and inspect `miradorInstance.store.getState()` in `Mirador/index.tsx` (the code already subscribes and extracts `canvasId`).
+- **CSS Modules**: Every component has a colocated `.module.scss` file (e.g., `Alert.tsx` + `Alert.module.scss`). Import as `import styles from "./Alert.module.scss"` and apply classes via `styles.ClassName`. Global vars via `@use "@styles/theme"` (sass mixins/variables).
+- **Testing**: `.test.tsx` files colocated next to components. Use `@testing-library/react` + `jsdom`. Tests import component and call `render()`, then query DOM with `screen.getBy*()`. Setup in `vitestSetup.ts` (auto-cleanup after each test).
+- **State Management**: React hooks (`useState`, `useEffect`, `useCallback`, `useContext`). No Redux/external store except Mirador's internal store (accessed via `miradorInstance.store.getState()`).
+- **Forms**: `react-hook-form` used in `TranscriptionArea` for input handling (see `SingleLine.tsx` for example pattern).
+- **Type Definitions**: Types in component files (e.g., `interface TranscriptionAreaProps`) or dedicated enum files (e.g., `singleLine.enum.ts` for `LessonStatus`).
+- **Comments**: Prefer self-documenting code; use comments for non-obvious logic, especially around Mirador canvas ID parsing.
 
-Automated test guidance
+## Developer Workflows & Commands
 
-- Running tests (single run): `npm run test` (runs `vitest run`).
-- Update snapshots: `npm run test-u` (alias for `vitest run -u` via package script).
-- Interactive / watch mode: use `npx vitest` or `npx vitest -w` for a watch/re-run workflow (the `test` script uses `vitest run` and is not a watch command).
-- Run a single test file: `npx vitest run src/pages/Workspace/TranscriptionArea/TranscriptionArea.test.tsx`.
-- Test file conventions: tests live next to implementation and use the `.test.tsx` suffix (e.g., `src/pages/Home/Home.test.tsx`).
-- Global test setup: `vitestSetup.ts` is used by the test environment — inspect it for DOM globals or mock setup.
-- Libraries: tests use `@testing-library/react`, `@testing-library/dom`, and `@testing-library/jest-dom` with `jsdom` as the runtime.
-- CI note: the repository has a GitHub Actions workflow (see `README.md` badge). The CI runs tests in headless mode; reproduce locally with `npm run test`.
-  If anything in these instructions is unclear or you want additional examples (e.g., a sample new lesson object or step-by-step for adding a route), tell me which section to expand and I will iterate.
+| Task             | Command                          | Notes                                                        |
+| ---------------- | -------------------------------- | ------------------------------------------------------------ |
+| Install          | `npm install`                    | Required before dev.                                         |
+| Dev Server       | `npm run start:dev`              | Vite + tsc watch in parallel. Port 3000. Hot reload enabled. |
+| Build            | `npm run build`                  | Outputs to `dist/`.                                          |
+| Preview          | `npm run preview`                | Test production build locally.                               |
+| Tests            | `npm run test`                   | Vitest (single run, headless).                               |
+| Tests (watch)    | `npx vitest -w`                  | Interactive rerun on file change.                            |
+| Snapshots        | `npm run test-u`                 | Update snapshots.                                            |
+| Lint             | `npm run lint`                   | Prettier + ESLint + Stylelint (check mode).                  |
+| Lint Fix         | `npm run lint-fix`               | Auto-fix formatting + linting issues.                        |
+| Single Test File | `npx vitest run src/...test.tsx` | Run one file.                                                |
+
+## Key Files by Task
+
+| Change Type                         | Files                                                                                                   |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **Add a lesson**                    | `src/files/manifests.ts` (add entry to `CORE` or `UoEDiv` set)                                          |
+| **Change transcription rules**      | `src/pages/Workspace/TranscriptionArea/validators.ts`                                                   |
+| **Fix canvas parsing**              | `src/pages/Workspace/Mirador/index.tsx` (ID extraction logic) + `manifests.ts` (special handling flags) |
+| **Add a page/route**                | `src/app/Routes.tsx` + new page in `src/pages/*/`                                                       |
+| **App-level UI (navbar, settings)** | `src/app/AppWrapper/AppWrapper.tsx`                                                                     |
+| **Theme/styling**                   | `src/styles/` (global vars), component `.module.scss` files                                             |
+| **Error handling**                  | `src/components/ErrorBoundary/` (specialized + generic boundaries)                                      |
+| **localStorage**                    | `src/utils/localStorage.ts`                                                                             |
+| **Email contact form**              | `src/components/ContactModal/ContactModal.tsx` (uses @emailjs/browser)                                  |
+
+## Examples & Tips
+
+**Add a lesson**:
+
+```typescript
+// src/files/manifests.ts
+[ManifestSets.CORE]: {
+  N: {
+    manifestId: "https://...", // IIIF manifest URL
+    canvasIndex: 123,          // Starting canvas index
+    canvasIndexToPageNumberAdj: 0, // Adjust displayed page number
+    lines: [
+      { text: "αβγ", isTitle: true },
+      { text: "δεζ", caption: "Abbreviation example" },
+      { text: "ηθι", newConcept: "Ligature" },
+    ],
+  },
+}
+```
+
+**Fix canvas ID parsing**:
+
+- If `Mirador/index.tsx` fails to extract page numbers for a manifest, add to the manifest entry:
+  ```typescript
+  specialIndexHandlingStart: "/canvas/", // Start slice after this string
+  specialIndexHandlingEnd: "/anno",      // End slice before this string
+  ```
+- Update the slice logic in `Mirador/index.tsx` if needed for complex IDs.
+
+**Debug Mirador**:
+
+- Open DevTools, navigate to `Mirador/index.tsx` line with `miradorInstance.store.subscribe()`.
+- Log `miradorInstance.store.getState()` to inspect canvas ID and window state.
+
+**Style changes**:
+
+- Prefer component `.module.scss` for scoped styles; avoid global CSS to prevent unintended side effects.
+- Use CSS custom properties (defined in `src/styles/theme.scss`) for dark mode / high-contrast support.
+
+## Testing Guidance
+
+- **Libraries**: Vitest + `@testing-library/react` + `@testing-library/jest-dom` + `jsdom` environment.
+- **Setup**: `vitestSetup.ts` runs before tests (auto-cleanup via `afterEach(cleanup())`).
+- **Patterns**: Use `render(<Component />)`, then `screen.getBy*()` (query by role, label, text). Example: `screen.getByRole("button", { name: "Submit" })`.
+- **Snapshots**: Rarely used; prefer explicit assertions. Update with `npm run test-u`.
+- **CI**: GitHub Actions runs `npm run test` on push/PR (headless). Reproduce locally before submitting.
+
+## External Dependencies & APIs
+
+- **Mirador 4.0**: IIIF viewer. Config in `src/pages/Workspace/Mirador/config.ts`. Plugins: `mirador-image-tools`.
+- **React Router v7**: Client-side routing. Routes in `src/app/Routes.tsx`.
+- **React Hook Form**: Form state in `TranscriptionArea` + `SingleLine`.
+- **react-bootstrap**: Pre-styled components (navbar, modals, etc.).
+- **EmailJS**: Contact form (`ContactModal`) sends emails without backend.
+- **jsPDF**: PDF export of lesson answers.
+- **Pluralize**: Utility for word pluralization in messages.
