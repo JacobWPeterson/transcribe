@@ -6,6 +6,8 @@ import manifests from '../../files/manifests';
 import { E404 } from '../E404/E404';
 import { Alert } from '../../components/Alert/Alert';
 import { ExternalContentErrorBoundary } from '../../components/ErrorBoundary/ExternalContentErrorBoundary';
+import { OnboardingModal } from '../../components/OnboardingModal/OnboardingModal';
+import { hasSeenOnboarding } from '../../utils/localStorage';
 
 import { TranscriptionArea } from './TranscriptionArea/TranscriptionArea';
 import { Mirador } from './Mirador/index';
@@ -18,6 +20,7 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
   const currentManifest = manifestSet[id];
   const [pageNumber, setPageNumber] = useState<number>();
   const [showWrongPageAlert, setShowWrongPageAlert] = useState<boolean>(false);
+  const [showOnboarding, setShowOnboarding] = useState<boolean>(!hasSeenOnboarding());
 
   const canvasIndex = currentManifest?.canvasIndex;
   const indexAdjustment = currentManifest?.canvasIndexToPageNumberAdj || 0;
@@ -54,6 +57,7 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
 
   return (
     <div className={styles.WorkspacePageWrapper}>
+      <OnboardingModal isOpen={showOnboarding} onClose={() => setShowOnboarding(false)} />
       <div className={styles.InvalidDevice}>
         <img src="/images/cog.svg" alt="Rotate device to landscape" className={styles.Image} />
         <h2>Sorry, lessons are only supported on larger screens.</h2>
