@@ -39,7 +39,7 @@
   --font-size-largest: 20px;
 }
 
-[data-font-size="S"] {
+[data-font-size='S'] {
   --font-size-smallest: 10px;
   --font-size-smaller: 10px;
   --font-size-default: 12px;
@@ -47,7 +47,7 @@
   --font-size-largest: 16px;
 }
 
-[data-font-size="L"] {
+[data-font-size='L'] {
   --font-size-smallest: 16px;
   --font-size-smaller: 18px;
   --font-size-default: 20px;
@@ -55,7 +55,7 @@
   --font-size-largest: 24px;
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   --primary01: #b8cc88;
   --primary02: #9eb863;
   --primary03: #7a8a4b;
@@ -84,7 +84,7 @@
   --help-text: #ccc;
 }
 
-[data-high-contrast="true"] {
+[data-high-contrast='true'] {
   --primary01: #06f;
   --primary02: #06f;
   --primary03: #06f;
