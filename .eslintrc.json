@@ -104,7 +104,6 @@
       },
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
-        "tsconfigRootpir": "./",
         "project": "./tsconfig.json"
       }
     },

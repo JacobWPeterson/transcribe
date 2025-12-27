@@ -6,8 +6,15 @@
   align-items: center;
   background: transparent;
   border: none;
+  border-radius: 2px;
   outline: none;
 
+  &:focus {
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: 2px;
+  }
+
+  &:focus,
   &:hover {
     > svg {
       transform: rotate(180deg);
@@ -21,13 +28,12 @@
   background-color: theme.$grey00;
   border: 1px solid theme.$grey03;
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
 
   .DropdownItem {
     padding: 8px;
 
     .ControlButton {
-      color: theme.$primary03;
       padding: 0;
       display: flex;
       align-items: center;
@@ -36,7 +42,6 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      font-size: theme.$fontSizeDefault;
       width: 100%;
       text-align: left;
 
@@ -70,6 +75,7 @@
       cursor: pointer;
       color: theme.$primary03;
       font-size: theme.$fontSizeDefault;
+      font-weight: 500;
       position: relative;
       padding: 4px 0;
 
@@ -209,11 +215,8 @@
 
 .ModalOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  background-color: rgb(0 0 0 / 50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -227,16 +230,16 @@
   padding: 24px;
   max-width: 400px;
   width: 90%;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 20%);
 
   h3 {
-    margin: 0 0 16px 0;
+    margin: 0 0 16px;
     color: theme.$primary03;
     font-size: theme.$fontSizeLarger;
   }
 
   p {
-    margin: 0 0 12px 0;
+    margin: 0 0 12px;
     color: theme.$text;
     line-height: 1.5;
   }

@@ -11,7 +11,7 @@ describe("Home", () => {
     expect(screen.getByText("Greek manuscripts")).toBeInTheDocument();
 
     expect(screen.getByText("Features")).toBeInTheDocument();
-    expect(screen.getAllByRole("listitem")).toHaveLength(8);
+    expect(screen.getAllByRole("listitem")).toHaveLength(10);
 
     expect(screen.getByRole("button", { name: "Get started" })).toBeEnabled();
   });

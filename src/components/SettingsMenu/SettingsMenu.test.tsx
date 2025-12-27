@@ -11,7 +11,7 @@ const renderWithThemeProvider = (): RenderResult => {
   return render(
     <ThemeProvider>
       <SettingsMenu />
-    </ThemeProvider>
+    </ThemeProvider>,
   );
 };
 
@@ -41,7 +41,7 @@ describe("SettingsMenu", () => {
     expect(screen.getByText("Font size:")).toBeInTheDocument();
     expect(screen.getByLabelText("Enable high contrast")).toBeInTheDocument();
     expect(
-      screen.getByLabelText("Reset all saved answers")
+      screen.getByLabelText("Reset all saved answers"),
     ).toBeInTheDocument();
   });
 
@@ -133,11 +133,11 @@ describe("SettingsMenu", () => {
 
     expect(screen.getByText("Reset all answers")).toBeInTheDocument();
     expect(
-      screen.getByText(/This will permanently delete all your saved answers/)
+      screen.getByText(/This will permanently delete all your saved answers/),
     ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Cancel" })).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: "Yes, reset everything" })
+      screen.getByRole("button", { name: "Yes, reset everything" }),
     ).toBeInTheDocument();
   });
 
@@ -177,10 +177,10 @@ describe("SettingsMenu", () => {
 
     // Before confirming, data should still exist
     expect(localStorage.getItem("transcribe-progress-lessons-1")).toBe(
-      "test data 1"
+      "test data 1",
     );
     expect(localStorage.getItem("transcribe-progress-UoEDiv-2")).toBe(
-      "test data 2"
+      "test data 2",
     );
 
     const confirmButton = screen.getByRole("button", {
@@ -244,7 +244,7 @@ describe("SettingsMenu", () => {
 
     expect(darkModeCheckbox).toHaveAttribute(
       "aria-label",
-      "Switch to dark mode"
+      "Switch to dark mode",
     );
 
     await user.click(darkModeCheckbox);
@@ -252,7 +252,7 @@ describe("SettingsMenu", () => {
     // After clicking, the aria-label should change
     expect(darkModeCheckbox).toHaveAttribute(
       "aria-label",
-      "Switch to light mode"
+      "Switch to light mode",
     );
   });
 
@@ -267,7 +267,7 @@ describe("SettingsMenu", () => {
 
     expect(highContrastCheckbox).toHaveAttribute(
       "aria-label",
-      "Enable high contrast"
+      "Enable high contrast",
     );
 
     await user.click(highContrastCheckbox);
@@ -275,7 +275,7 @@ describe("SettingsMenu", () => {
     // After clicking, the aria-label should change
     expect(highContrastCheckbox).toHaveAttribute(
       "aria-label",
-      "Disable high contrast"
+      "Disable high contrast",
     );
   });
 });
