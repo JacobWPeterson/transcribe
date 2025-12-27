@@ -45,6 +45,12 @@
         outline: 2px solid theme.$primary03;
         outline-offset: 2px;
       }
+
+      &:disabled {
+        color: theme.$grey02;
+        outline: none;
+        pointer-events: none;
+      }
     }
   }
 
