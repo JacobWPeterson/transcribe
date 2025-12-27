@@ -219,12 +219,12 @@ export const TranscriptionArea = ({
               return (
                 <SingleLine
                   key={`${lessonNumber}-line.${index + 1 - titleAdjustments}`}
-                  passedIndex={index}
+                  passedIndex={index + 1 - titleAdjustments}
                   line={line}
                   requireSpaces={requireSpaces}
                   updateLessonStatus={handleUpdateLessonStatus}
-                  savedAnswer={savedAnswers[index]}
-                  savedStatus={lessonsStatus?.[index]}
+                  savedAnswer={savedAnswers[index + 1 - titleAdjustments]}
+                  savedStatus={lessonsStatus?.[index + 1 - titleAdjustments]}
                   onSaveAnswer={handleSaveAnswer}
                 />
               );
