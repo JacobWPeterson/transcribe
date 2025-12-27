@@ -38,7 +38,7 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
   }
 
   const handleManifestChange = (
-    type: "next" | "previous"
+    type: "next" | "previous",
   ): Promise<void> | void => {
     switch (type) {
       case "next":
@@ -94,6 +94,7 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
           lessonNumber={Number(id)}
           manifest={currentManifest}
           numberOfLessons={numberOfLessons}
+          set={set}
         />
       </div>
     </div>
