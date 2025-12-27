@@ -21,7 +21,7 @@ const CustomToggle = forwardRef<HTMLButtonElement, CustomToggleProps>(
     >
       <Settings size={18} stroke={"var(--primary03)"} />
     </button>
-  ),
+  )
 );
 
 CustomToggle.displayName = "CustomToggle";
@@ -65,6 +65,8 @@ export const SettingsMenu = (): ReactElement => {
                   ? "Switch to light mode"
                   : "Switch to dark mode"
               }
+              aria-disabled={settings.highContrast}
+              disabled={settings.highContrast}
             >
               {settings.darkMode ? <Sun size={16} /> : <Moon size={16} />}
               <span>{settings.darkMode ? "Light mode" : "Dark mode"}</span>
