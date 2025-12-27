@@ -120,22 +120,24 @@
         background-color: theme.$grey00;
         border: 1px solid theme.$grey03;
         border-radius: 4px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
       }
 
       > a {
         &:hover,
         &:focus {
-          outline: none;
           cursor: pointer;
           color: theme.$primary04;
         }
 
         &:focus {
-          text-decoration: underline;
+          outline: 5px auto -webkit-focus-ring-color;
+          outline-offset: 2px;
         }
 
         &:hover {
+          outline: none;
+          text-decoration: underline;
           transition: 500ms ease;
         }
       }
