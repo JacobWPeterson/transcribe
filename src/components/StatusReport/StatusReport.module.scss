@@ -1,4 +1,4 @@
-@use "@styles/theme";
+@use '@styles/theme';
 
 .StatusReport {
   margin: 12px 0;
@@ -68,15 +68,15 @@
   height: 8px;
   border-radius: 50%;
 
-  &[data-status="correct"] {
+  &[data-status='correct'] {
     background: theme.$primary03;
   }
 
-  &[data-status="incorrect"] {
+  &[data-status='incorrect'] {
     background: theme.$error;
   }
 
-  &[data-status="incomplete"] {
+  &[data-status='incomplete'] {
     background: theme.$grey04;
   }
 }

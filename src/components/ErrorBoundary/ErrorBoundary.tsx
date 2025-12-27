@@ -1,6 +1,6 @@
-import { Component, type ErrorInfo, type ReactNode, useState } from "react";
+import { Component, type ErrorInfo, type ReactNode, useState } from 'react';
 
-import styles from "./ErrorBoundary.module.scss";
+import styles from './ErrorBoundary.module.scss';
 
 interface Props {
   children: ReactNode;
@@ -24,7 +24,7 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    console.error("ErrorBoundary caught an error:", error, errorInfo);
+    console.error('ErrorBoundary caught an error:', error, errorInfo);
     this.props.onError?.(error, errorInfo);
   }
 
@@ -38,10 +38,8 @@ export class ErrorBoundary extends Component<Props, State> {
         <div className={styles.ErrorBoundary}>
           <div className={styles.ErrorContent}>
             <h3>Something went wrong</h3>
-            <p>
-              We encountered an unexpected error. Please try refreshing the page
-            </p>
-            {process.env.NODE_ENV === "development" && this.state.error && (
+            <p>We encountered an unexpected error. Please try refreshing the page</p>
+            {process.env.NODE_ENV === 'development' && this.state.error && (
               <details className={styles.ErrorDetails}>
                 <summary>Error Details (Development)</summary>
                 <pre>{this.state.error.toString()}</pre>
@@ -49,9 +47,7 @@ export class ErrorBoundary extends Component<Props, State> {
             )}
             <button
               className={styles.RetryButton}
-              onClick={() =>
-                this.setState({ hasError: false, error: undefined })
-              }
+              onClick={() => this.setState({ hasError: false, error: undefined })}
             >
               Try again
             </button>
