@@ -38,14 +38,14 @@ export const Mirador = ({
             canvasIndex
               ?.slice(
                 canvasIndex.lastIndexOf(
-                  specialIndexHandlingStart ? specialIndexHandlingStart : "/"
+                  specialIndexHandlingStart ? specialIndexHandlingStart : "/",
                 ),
                 specialIndexHandlingEnd
                   ? canvasIndex?.lastIndexOf(specialIndexHandlingEnd)
-                  : undefined
+                  : undefined,
               )
-              .replace(/[^\d.-]/g, "")
-          )
+              .replace(/[^\d.-]/g, ""),
+          ),
         );
       }
     });

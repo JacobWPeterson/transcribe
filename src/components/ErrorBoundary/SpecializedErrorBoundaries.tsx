@@ -47,7 +47,7 @@ export const LocalStorageErrorBoundary = ({
       <div
         className={classNames(
           styles.SpecialisedErrorBoundary,
-          styles.LocalStorage
+          styles.LocalStorage,
         )}
       >
         <h4>Storage Error</h4>

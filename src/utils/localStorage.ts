@@ -1,3 +1,4 @@
+import type { ManifestSets } from "../files/manifests";
 import type { LessonStatus } from "../pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum";
 
 export interface LessonProgress {
@@ -10,14 +11,23 @@ export interface LessonProgress {
 const STORAGE_PREFIX = "transcribe-progress-";
 
 /**
+ * Generate a storage key that includes both the manifest set and lesson ID
+ * This ensures lessons in different manifest sets don't collide
+ */
+const generateStorageKey = (set: ManifestSets, lessonId: number): string => {
+  return `${STORAGE_PREFIX}${set}-${lessonId}`;
+};
+
+/**
  * Save lesson progress to localStorage
  */
 export const saveLessonProgress = (
+  set: ManifestSets,
   lessonId: number,
-  progress: LessonProgress
+  progress: LessonProgress,
 ): void => {
   try {
-    const key = `${STORAGE_PREFIX}${lessonId}`;
+    const key = generateStorageKey(set, lessonId);
     const serialized = JSON.stringify(progress);
     localStorage.setItem(key, serialized);
   } catch (error) {
@@ -27,7 +37,7 @@ export const saveLessonProgress = (
 
     // Re-throw with more context for error boundaries
     throw new Error(
-      `Failed to save lesson progress for lesson ${lessonId}: ${errorMessage}`
+      `Failed to save lesson progress for ${set} lesson ${lessonId}: ${errorMessage}`,
     );
   }
 };
@@ -35,9 +45,12 @@ export const saveLessonProgress = (
 /**
  * Load lesson progress from localStorage
  */
-export const loadLessonProgress = (lessonId: number): LessonProgress | null => {
+export const loadLessonProgress = (
+  set: ManifestSets,
+  lessonId: number,
+): LessonProgress | null => {
   try {
-    const key = `${STORAGE_PREFIX}${lessonId}`;
+    const key = generateStorageKey(set, lessonId);
     const stored = localStorage.getItem(key);
     if (!stored) {
       return null;
@@ -50,7 +63,7 @@ export const loadLessonProgress = (lessonId: number): LessonProgress | null => {
 
     // Re-throw with more context for error boundaries
     throw new Error(
-      `Failed to load lesson progress for lesson ${lessonId}: ${errorMessage}`
+      `Failed to load lesson progress for ${set} lesson ${lessonId}: ${errorMessage}`,
     );
   }
 };
@@ -58,9 +71,12 @@ export const loadLessonProgress = (lessonId: number): LessonProgress | null => {
 /**
  * Clear lesson progress from localStorage
  */
-export const clearLessonProgress = (lessonId: number): void => {
+export const clearLessonProgress = (
+  set: ManifestSets,
+  lessonId: number,
+): void => {
   try {
-    const key = `${STORAGE_PREFIX}${lessonId}`;
+    const key = generateStorageKey(set, lessonId);
     localStorage.removeItem(key);
   } catch (error) {
     const errorMessage =
@@ -69,27 +85,30 @@ export const clearLessonProgress = (lessonId: number): void => {
 
     // Re-throw with more context for error boundaries
     throw new Error(
-      `Failed to clear lesson progress for lesson ${lessonId}: ${errorMessage}`
+      `Failed to clear lesson progress for ${set} lesson ${lessonId}: ${errorMessage}`,
     );
   }
 };
 
 /**
- * Get all stored lesson IDs
+ * Get all stored lesson IDs for a specific manifest set
  */
-export const getStoredLessonIds = (): number[] => {
+export const getStoredLessonIds = (set: ManifestSets): number[] => {
   try {
     const keys = Object.keys(localStorage);
+    const setPrefix = `${STORAGE_PREFIX}${set}-`;
     return keys
-      .filter((key) => key.startsWith(STORAGE_PREFIX))
-      .map((key) => parseInt(key.replace(STORAGE_PREFIX, ""), 10))
+      .filter((key) => key.startsWith(setPrefix))
+      .map((key) => parseInt(key.replace(setPrefix, ""), 10))
       .filter((id) => !isNaN(id));
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : "Unknown error";
-    console.warn("Failed to get stored lesson IDs:", errorMessage);
+    console.warn(`Failed to get stored lesson IDs for ${set}:`, errorMessage);
 
     // Re-throw with more context for error boundaries
-    throw new Error(`Failed to get stored lesson IDs: ${errorMessage}`);
+    throw new Error(
+      `Failed to get stored lesson IDs for ${set}: ${errorMessage}`,
+    );
   }
 };

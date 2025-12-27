@@ -9,7 +9,7 @@ import { jsPDF } from "jspdf";
 import classNames from "classnames";
 import { ArrowLeft, ArrowRight, Download } from "react-feather";
 
-import type { Line, Manifest } from "../../../files/manifests";
+import type { Line, Manifest, ManifestSets } from "../../../files/manifests";
 import { StatusReport } from "../../../components/StatusReport/StatusReport";
 import {
   LocalStorageErrorBoundary,
@@ -30,6 +30,7 @@ interface TranscriptionAreaProps {
   lessonNumber: number;
   manifest: Manifest;
   numberOfLessons: number;
+  set: ManifestSets;
 }
 
 export const TranscriptionArea = ({
@@ -37,6 +38,7 @@ export const TranscriptionArea = ({
   lessonNumber,
   manifest,
   numberOfLessons,
+  set,
 }: TranscriptionAreaProps): ReactElement => {
   const [requireSpaces, setRequireSpaces] = useState(false);
   const transcriptionAreaRef = useRef<HTMLDivElement>(null);
@@ -62,19 +64,19 @@ export const TranscriptionArea = ({
           lastUpdated: Date.now(),
         };
         try {
-          saveLessonProgress(lessonNumber, progress);
+          saveLessonProgress(set, lessonNumber, progress);
         } catch (error) {
           console.error("Error saving lesson progress:", error);
           // Could show a user notification here, but since we have error boundaries, the LocalStorageErrorBoundary will catch this
         }
       }
     }, 500);
-  }, [lessonNumber, lessonsStatus, savedAnswers, requireSpaces]);
+  }, [set, lessonNumber, lessonsStatus, savedAnswers, requireSpaces]);
 
   useEffect(() => {
     // Load saved progress for this lesson
     try {
-      const savedProgress = loadLessonProgress(lessonNumber);
+      const savedProgress = loadLessonProgress(set, lessonNumber);
       if (savedProgress && Object.entries(savedProgress.answers).length) {
         setLessonsStatus(savedProgress.status);
         setSavedAnswers(savedProgress.answers);
@@ -83,7 +85,7 @@ export const TranscriptionArea = ({
         // Initialize with default values if no saved progress
         const lessonsStatusObj = lines.reduce(
           (obj, _, index) => ({ ...obj, [index]: LessonStatus.INCOMPLETE }),
-          {}
+          {},
         );
         setLessonsStatus(lessonsStatusObj);
         setSavedAnswers({});
@@ -94,7 +96,7 @@ export const TranscriptionArea = ({
       // Initialize with default values if loading failed
       const lessonsStatusObj = lines.reduce(
         (obj, _, index) => ({ ...obj, [index]: LessonStatus.INCOMPLETE }),
-        {}
+        {},
       );
       setLessonsStatus(lessonsStatusObj);
       setSavedAnswers({});
@@ -103,7 +105,7 @@ export const TranscriptionArea = ({
     if (inputContainerRef.current) {
       inputContainerRef.current.scrollTop = 0;
     }
-  }, [lessonNumber, lines]);
+  }, [set, lessonNumber, lines]);
 
   // Save progress with debouncing whenever it changes
   useEffect(() => {
@@ -122,14 +124,14 @@ export const TranscriptionArea = ({
 
   const handleUpdateLessonStatus = (
     index: number,
-    status: LessonStatus
+    status: LessonStatus,
   ): void => {
     setLessonsStatus(
       (
-        prevStatus: Record<number, LessonStatus>
+        prevStatus: Record<number, LessonStatus>,
       ): Record<number, LessonStatus> => {
         return { ...prevStatus, [index]: status };
-      }
+      },
     );
   };
 
@@ -169,7 +171,7 @@ export const TranscriptionArea = ({
         .catch((error) => {
           console.error("PDF generation error:", error);
           throw new Error(
-            `Failed to generate PDF: ${error.message || "Unknown error"}`
+            `Failed to generate PDF: ${error.message || "Unknown error"}`,
           );
         })
         .finally(() => {

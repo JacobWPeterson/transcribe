@@ -21,7 +21,7 @@ const CustomToggle = forwardRef<HTMLButtonElement, CustomToggleProps>(
     >
       <Settings size={18} stroke={"var(--primary03)"} />
     </button>
-  )
+  ),
 );
 
 CustomToggle.displayName = "CustomToggle";
