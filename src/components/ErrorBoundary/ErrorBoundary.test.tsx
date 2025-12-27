@@ -25,7 +25,7 @@ describe("ErrorBoundary", () => {
     render(
       <ErrorBoundary>
         <SafeComponent />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
 
     expect(screen.getByText("Safe content")).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe("ErrorBoundary", () => {
     render(
       <ErrorBoundary>
         <ErrorComponent />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
 
     expect(screen.getByText("Something went wrong")).toBeInTheDocument();
@@ -46,7 +46,7 @@ describe("ErrorBoundary", () => {
     render(
       <ErrorBoundary fallback={<div>Custom error message</div>}>
         <ErrorComponent />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
 
     expect(screen.getByText("Custom error message")).toBeInTheDocument();
@@ -59,7 +59,7 @@ describe("ErrorBoundary", () => {
     render(
       <ErrorBoundary>
         <ErrorComponent />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
 
     expect(screen.getByText("Something went wrong")).toBeInTheDocument();
@@ -80,7 +80,7 @@ describe("ErrorBoundary", () => {
     render(
       <ErrorBoundary>
         <ErrorComponent />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
 
     expect(screen.getByText("Error Details (Development)")).toBeInTheDocument();
@@ -95,12 +95,12 @@ describe("ErrorBoundary", () => {
     render(
       <ErrorBoundary onError={onErrorMock}>
         <ErrorComponent />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
 
     expect(onErrorMock).toHaveBeenCalledWith(
       expect.any(Error),
-      expect.any(Object)
+      expect.any(Object),
     );
   });
 });

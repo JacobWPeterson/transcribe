@@ -102,7 +102,7 @@ export const SingleLine = ({
       const submissionStatus = evaluateSubmission(
         savedAnswer,
         line.text,
-        requireSpaces
+        requireSpaces,
       );
       setSubmissionStatus(submissionStatus);
       updateLessonStatus(passedIndex, Number(submissionStatus[0]));
@@ -127,7 +127,7 @@ export const SingleLine = ({
     const submissionStatus = evaluateSubmission(
       lineContent,
       line.text,
-      requireSpaces
+      requireSpaces,
     );
     setSubmissionStatus(submissionStatus);
     updateLessonStatus(passedIndex, Number(submissionStatus[0])); // This Number cast works because of the enum order in singleLine.enum.ts

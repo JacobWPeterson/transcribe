@@ -29,7 +29,7 @@ export const getCssVariable = (variableName: string, fallback = ""): string => {
  */
 export const getCssVariableAsNumber = (
   variableName: string,
-  fallback = 0
+  fallback = 0,
 ): number => {
   const value = getCssVariable(variableName);
   if (!value) {
@@ -49,7 +49,7 @@ export const getCssVariableAsNumber = (
  */
 export const hasDataAttribute = (
   attribute: string,
-  value?: string
+  value?: string,
 ): boolean => {
   if (typeof document === "undefined") {
     return false;

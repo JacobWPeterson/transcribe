@@ -19,7 +19,7 @@ export const ExternalContentErrorBoundary = ({
       <div
         className={classNames(
           styles.SpecialisedErrorBoundary,
-          styles.ExternalContent
+          styles.ExternalContent,
         )}
       >
         <h4>

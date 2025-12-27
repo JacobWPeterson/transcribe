@@ -20,5 +20,5 @@ root.render(
         <Routes />
       </AppWrapper>
     </ThemeProvider>
-  </ErrorBoundary>
+  </ErrorBoundary>,
 );
