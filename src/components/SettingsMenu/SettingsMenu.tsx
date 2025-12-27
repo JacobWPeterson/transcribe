@@ -28,7 +28,7 @@ const CustomToggle = forwardRef<HTMLButtonElement, CustomToggleProps>(
         />
       </button>
     );
-  }
+  },
 );
 
 CustomToggle.displayName = "CustomToggle";
