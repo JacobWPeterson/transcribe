@@ -1,6 +1,7 @@
 import { forwardRef, type ReactElement, type Ref, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { Moon, Settings, Sun, Trash2, Type, Zap } from "react-feather";
+import classNames from "classnames";
 
 import { useTheme, type FontSize } from "../../contexts/ThemeContext";
 
@@ -12,16 +13,22 @@ interface CustomToggleProps {
 }
 
 const CustomToggle = forwardRef<HTMLButtonElement, CustomToggleProps>(
-  ({ onClick }, ref: Ref<HTMLButtonElement>) => (
-    <button
-      ref={ref}
-      onClick={onClick}
-      className={styles.CustomToggleButton}
-      aria-label="Theme controls"
-    >
-      <Settings size={18} stroke={"var(--primary03)"} />
-    </button>
-  )
+  ({ onClick }, ref: Ref<HTMLButtonElement>) => {
+    const { settings } = useTheme();
+    return (
+      <button
+        ref={ref}
+        onClick={onClick}
+        className={styles.CustomToggleButton}
+        aria-label="Theme controls"
+      >
+        <Settings
+          size={settings.fontSize === "L" ? 22 : 18}
+          stroke={"var(--primary03)"}
+        />
+      </button>
+    );
+  }
 );
 
 CustomToggle.displayName = "CustomToggle";
@@ -57,25 +64,36 @@ export const SettingsMenu = (): ReactElement => {
         <Dropdown.Toggle as={CustomToggle} />
         <Dropdown.Menu className={styles.DropdownMenu}>
           <div className={styles.DropdownItem}>
-            <button
-              className={styles.ControlButton}
-              onClick={toggleDarkMode}
-              aria-label={
-                settings.darkMode
-                  ? "Switch to light mode"
-                  : "Switch to dark mode"
-              }
-              aria-disabled={settings.highContrast}
-              disabled={settings.highContrast}
-            >
-              {settings.darkMode ? <Sun size={16} /> : <Moon size={16} />}
-              <span>{settings.darkMode ? "Light mode" : "Dark mode"}</span>
-            </button>
+            <label className={styles.ToggleControl}>
+              {settings.darkMode ? (
+                <Sun size={settings.fontSize === "L" ? 20 : 16} />
+              ) : (
+                <Moon size={settings.fontSize === "L" ? 20 : 16} />
+              )}
+              <span>Dark mode</span>
+              <input
+                type="checkbox"
+                checked={settings.darkMode}
+                onChange={toggleDarkMode}
+                disabled={settings.highContrast}
+                aria-label={
+                  settings.darkMode
+                    ? "Switch to light mode"
+                    : "Switch to dark mode"
+                }
+              />
+              <span
+                className={classNames(styles.ToggleSlider, {
+                  [styles.Small]: settings.fontSize === "S",
+                  [styles.Large]: settings.fontSize === "L",
+                })}
+              />
+            </label>
           </div>
           <div className={styles.Divider} />
           <div className={styles.DropdownItem}>
             <div className={styles.FontSizeControls}>
-              <Type size={16} />
+              <Type size={settings.fontSize === "L" ? 20 : 16} />
               <span>Font size:</span>
               <div className={styles.FontSizeButtons}>
                 {(["S", "M", "L"] as FontSize[]).map((size) => (
@@ -85,7 +103,7 @@ export const SettingsMenu = (): ReactElement => {
                     onClick={() => setFontSize(size)}
                     aria-label={`Set font size to ${size}`}
                   >
-                    {size.charAt(0).toUpperCase() + size.slice(1)}
+                    {size}
                   </button>
                 ))}
               </div>
@@ -93,29 +111,35 @@ export const SettingsMenu = (): ReactElement => {
           </div>
           <div className={styles.Divider} />
           <div className={styles.DropdownItem}>
-            <button
-              className={styles.ControlButton}
-              onClick={toggleHighContrast}
-              aria-label={
-                settings.highContrast
-                  ? "Disable high contrast"
-                  : "Enable high contrast"
-              }
-            >
-              <Zap size={16} />
-              <span>
-                {settings.highContrast ? "Normal contrast" : "High contrast"}
-              </span>
-            </button>
+            <label className={styles.ToggleControl}>
+              <Zap size={settings.fontSize === "L" ? 20 : 16} />
+              <span>High contrast</span>
+              <input
+                type="checkbox"
+                checked={settings.highContrast}
+                onChange={toggleHighContrast}
+                aria-label={
+                  settings.highContrast
+                    ? "Disable high contrast"
+                    : "Enable high contrast"
+                }
+              />
+              <span
+                className={classNames(styles.ToggleSlider, {
+                  [styles.Small]: settings.fontSize === "S",
+                  [styles.Large]: settings.fontSize === "L",
+                })}
+              />
+            </label>
           </div>
           <div className={styles.Divider} />
           <div className={styles.DropdownItem}>
             <button
-              className={styles.ControlButton}
+              className={classNames(styles.ControlButton, styles.Reset)}
               onClick={() => setShowResetModal(true)}
               aria-label="Reset all saved answers"
             >
-              <Trash2 size={16} />
+              <Trash2 size={settings.fontSize === "L" ? 20 : 16} />
               <span>Reset answers</span>
             </button>
           </div>

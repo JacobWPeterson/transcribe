@@ -51,6 +51,109 @@
         outline: none;
         pointer-events: none;
       }
+
+      &.Reset {
+        color: theme.$error;
+
+        &:focus,
+        &:hover {
+          outline: 2px solid theme.$error;
+        }
+      }
+    }
+
+    .ToggleControl {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      cursor: pointer;
+      color: theme.$primary03;
+      font-size: theme.$fontSizeDefault;
+      position: relative;
+      padding: 4px 0;
+
+      input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+
+        &:focus + .ToggleSlider {
+          outline: 2px solid theme.$primary03;
+          outline-offset: 2px;
+        }
+
+        &:checked + .ToggleSlider {
+          background-color: theme.$primary03;
+
+          &::before {
+            transform: translateX(20px);
+          }
+        }
+
+        &:disabled + .ToggleSlider {
+          background-color: theme.$grey02;
+          cursor: not-allowed;
+          opacity: 0.5;
+        }
+      }
+
+      span:first-of-type {
+        flex: 1;
+      }
+
+      .ToggleSlider {
+        position: relative;
+        width: 44px;
+        height: 24px;
+        background-color: theme.$grey02;
+        border-radius: 24px;
+        transition: background-color 0.2s ease;
+        margin-left: auto;
+
+        &::before {
+          content: "";
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          left: 2px;
+          top: 2px;
+          background-color: theme.$grey00;
+          border-radius: 50%;
+          transition: transform 0.2s ease;
+        }
+
+        &.Small {
+          width: 38px;
+          height: 18px;
+          border-radius: 18px;
+
+          &::before {
+            width: 14px;
+            height: 14px;
+          }
+        }
+
+        &.Large {
+          width: 48px;
+          height: 28px;
+          border-radius: 28px;
+
+          &::before {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+
+      &:hover .ToggleSlider {
+        background-color: theme.$grey03;
+      }
+
+      &:hover input:checked + .ToggleSlider {
+        background-color: theme.$primary04;
+      }
     }
   }
 
