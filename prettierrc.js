@@ -5,5 +5,5 @@ export default {
   tabWidth: 4,
   semi: true,
   singleQuote: true,
-  arrowaParens: "avoid",
+  arrowParens: "avoid",
 };

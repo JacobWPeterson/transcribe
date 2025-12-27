@@ -47,6 +47,7 @@ export const SingleLine = ({
   const hasNonGreekChars = includesNonGreekChars(lineContent);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLineContent(savedAnswer || "");
   }, [savedAnswer]);
 
@@ -56,6 +57,7 @@ export const SingleLine = ({
       // Convert LessonStatus enum to submission status format
       const isCorrect = savedStatus === LessonStatus.CORRECT;
       const message = isCorrect ? "correct" : "Answer is incorrect.";
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSubmissionStatus([isCorrect, message]);
       setShowAnswerEvaluation(true);
     } else {
@@ -68,6 +70,7 @@ export const SingleLine = ({
   useEffect(() => {
     if (lineContent.length > 0 && submissionStatus?.[0]) {
       guesses.current = 0;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowHint(false);
       return;
     }
@@ -102,8 +105,9 @@ export const SingleLine = ({
       const submissionStatus = evaluateSubmission(
         savedAnswer,
         line.text,
-        requireSpaces,
+        requireSpaces
       );
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSubmissionStatus(submissionStatus);
       updateLessonStatus(passedIndex, Number(submissionStatus[0]));
     }
@@ -127,7 +131,7 @@ export const SingleLine = ({
     const submissionStatus = evaluateSubmission(
       lineContent,
       line.text,
-      requireSpaces,
+      requireSpaces
     );
     setSubmissionStatus(submissionStatus);
     updateLessonStatus(passedIndex, Number(submissionStatus[0])); // This Number cast works because of the enum order in singleLine.enum.ts
@@ -261,7 +265,15 @@ export const SingleLine = ({
         <div className={styles.Lower}>
           {hasNonGreekChars && (
             <small className={classnames(styles.Small, styles.Error)}>
-              Non-Greek characters have been detected
+              Non-Greek characters have been detected.{" "}
+              <a
+                className={classnames("Link", "RedLink")}
+                href={"/guide#greekKeyboard"}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Help
+              </a>
             </small>
           )}
           {!hasNonGreekChars && (line.newConcept || line.caption) && (

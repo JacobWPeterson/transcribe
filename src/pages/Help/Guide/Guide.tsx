@@ -112,6 +112,32 @@ export const Guide = (): ReactElement => (
           </tr>
         </tbody>
       </table>
+      <h2 className={styles.H2} id="greekKeyboard">
+        Adding a Greek Keyboard
+      </h2>
+      <p className={styles.GuideText}>
+        Xeirographa requires using unicode Greek characters. There may be
+        variations between operating systems and specific computers, but you can
+        find guides for adding Greek keyboards at the following links.{" "}
+        <a
+          className="Link"
+          href="https://support.apple.com/en-gb/guide/mac-help/mchlp1406/mac"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Mac
+        </a>{" "}
+        |{" "}
+        <a
+          className="Link"
+          href="https://support.microsoft.com/en-gb/windows/manage-the-input-and-display-language-settings-in-windows-12a10cb4-8626-9b77-0ccb-5013e0c7c7a2#:~:text=Select%20the%20Start%20%3E%20Settings%20%3E%20Time,keyboard%20you%20want%20to%20add."
+          target="_blank"
+          rel="noreferrer"
+        >
+          Windows
+        </a>
+      </p>
+
       <h2 className={styles.H2}>How-to</h2>
       <p className={styles.GuideText}>
         The lesson page features two main areas: the image viewer and the
@@ -149,24 +175,7 @@ export const Guide = (): ReactElement => (
         type your answer into the relevant line{" "}
         <b>omitting any accents or punctuation</b>, then click the
         &quot;Check&quot; button, and you should then see one of the symbols
-        listed above. How to add languages to your computer:{" "}
-        <a
-          className="Link"
-          href="https://support.apple.com/en-gb/guide/mac-help/mchlp1406/mac"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Mac
-        </a>{" "}
-        |{" "}
-        <a
-          className="Link"
-          href="https://support.microsoft.com/en-gb/windows/manage-the-input-and-display-language-settings-in-windows-12a10cb4-8626-9b77-0ccb-5013e0c7c7a2#:~:text=Select%20the%20Start%20%3E%20Settings%20%3E%20Time,keyboard%20you%20want%20to%20add."
-          target="_blank"
-          rel="noreferrer"
-        >
-          Windows
-        </a>
+        listed above.
       </p>
       <p className={styles.GuideText}>
         Most Greek manuscripts do not have spaces, or at least do not use them
