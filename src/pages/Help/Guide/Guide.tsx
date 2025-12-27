@@ -91,8 +91,8 @@ export const Guide = (): ReactElement => (
             <td className={styles.TextCell}>
               <p className={styles.LegendText}>
                 After three incorrect attempts of the correct length, this icon appears.{' '}
-                <b>Hovering</b> over the icon reveals which letter(s) is incorrect, giving the
-                letter you have entered and its position on the line.
+                <b>Hovering</b> over the icon reveals which letters are incorrect, giving the letter
+                you have entered and its position on the line.
               </p>
             </td>
           </tr>

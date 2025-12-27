@@ -100,3 +100,30 @@ export const getStoredLessonIds = (set: ManifestSets): number[] => {
     throw new Error(`Failed to get stored lesson IDs for ${set}: ${errorMessage}`);
   }
 };
+
+const ONBOARDING_KEY = 'transcribe-onboarding-seen';
+
+/**
+ * Check if user has seen the onboarding flow
+ */
+export const hasSeenOnboarding = (): boolean => {
+  try {
+    return localStorage.getItem(ONBOARDING_KEY) === 'true';
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.warn('Failed to check onboarding status:', errorMessage);
+    return false; // Default to showing onboarding if localStorage fails
+  }
+};
+
+/**
+ * Mark onboarding as seen by the user
+ */
+export const markOnboardingAsSeen = (): void => {
+  try {
+    localStorage.setItem(ONBOARDING_KEY, 'true');
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.warn('Failed to mark onboarding as seen:', errorMessage);
+  }
+};
