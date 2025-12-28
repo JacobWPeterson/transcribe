@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import type { Line } from 'src/files/manifests';
 import userEvent from '@testing-library/user-event';
 
@@ -583,7 +584,9 @@ describe('SingeLine', () => {
         />
       );
 
-      expect(mockUpdateLessonStatus).not.toHaveBeenCalled();
+      // Now expects initial evaluation on load for INCOMPLETE status
+      expect(mockUpdateLessonStatus).toHaveBeenCalledWith(1, LessonStatus.CORRECT);
+      mockUpdateLessonStatus.mockClear();
 
       // Change requireSpaces to true - should re-evaluate the savedAnswer and mark as incorrect
       rerender(
@@ -599,6 +602,51 @@ describe('SingeLine', () => {
 
       // Should have re-evaluated the savedAnswer and called updateLessonStatus with INCORRECT
       expect(mockUpdateLessonStatus).toHaveBeenCalledWith(1, LessonStatus.INCORRECT);
+    });
+
+    it('does not re-evaluate edited lines when toggling requireSpaces', async () => {
+      const mockUpdateLessonStatus = vi.fn();
+      const { rerender } = render(
+        <SingleLine
+          line={mockNewConceptLine}
+          passedIndex={1}
+          requireSpaces={false}
+          savedAnswer="αδελφοσ"
+          savedStatus={LessonStatus.CORRECT}
+          updateLessonStatus={mockUpdateLessonStatus}
+        />
+      );
+
+      const user = userEvent.setup();
+
+      // Initially shows submitted state
+      expect(screen.getByRole('img', { name: 'correct' })).toBeInTheDocument();
+
+      // User edits without resubmitting, marking the line incomplete
+      const lineInput = screen.getByRole('textbox', { name: 'L1' });
+      await user.type(lineInput, 'x');
+      expect(screen.queryByRole('img', { name: 'correct' })).not.toBeInTheDocument();
+      expect(screen.queryByRole('img', { name: 'incorrect' })).not.toBeInTheDocument();
+      expect(mockUpdateLessonStatus).toHaveBeenCalledWith(1, LessonStatus.INCOMPLETE);
+
+      mockUpdateLessonStatus.mockClear();
+
+      // Toggle requireSpaces; edited (unsubmitted) lines should stay out of the status calc
+      // After editing, savedStatus would be INCOMPLETE in the real app
+      rerender(
+        <SingleLine
+          line={mockNewConceptLine}
+          passedIndex={1}
+          requireSpaces={true}
+          savedAnswer="αδελφοσ"
+          savedStatus={LessonStatus.INCOMPLETE}
+          updateLessonStatus={mockUpdateLessonStatus}
+        />
+      );
+
+      expect(mockUpdateLessonStatus).not.toHaveBeenCalled();
+      expect(screen.queryByRole('img', { name: 'correct' })).not.toBeInTheDocument();
+      expect(screen.queryByRole('img', { name: 'incorrect' })).not.toBeInTheDocument();
     });
   });
 });
