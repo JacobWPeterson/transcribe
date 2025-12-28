@@ -1,5 +1,5 @@
 import { type ReactElement, useState } from 'react';
-import { Download } from 'react-feather';
+import { Download, Menu, MinusCircle, PlayCircle, PlusCircle, Sliders } from 'react-feather';
 
 import { Modal } from '../Modal/Modal';
 import { markOnboardingAsSeen } from '../../utils/localStorage';
@@ -42,15 +42,23 @@ const slides: Slide[] = [
           manuscript image.
         </p>
         <ul>
-          <li>Use the zoom tools to examine the text closely</li>
           <li>
-            The arrows allow you to explore other pages. Don&rsquo;t worry, the viewer will alert
-            you if you&rsquo;re on the wrong page
+            Use the zoom tools (
+            <PlusCircle size={18} /> and <MinusCircle size={18} />) to examine the text closely
           </li>
-          <li>Use button in the top right lets you adjust image settings</li>
           <li>
-            To learn more about the manuscript, click the icon to the left of its name in the top
-            banner
+            The arrows (
+            <PlayCircle size={18} className={styles.LeftIcon} /> and <PlayCircle size={18} />) allow
+            you to explore other pages. Don&rsquo;t worry, the viewer will alert you if you&rsquo;re
+            on the wrong page
+          </li>
+          <li>
+            Use the <Sliders size={18} className={styles.SlidersIcon} /> button in the top right of
+            the viewer to adjust image settings
+          </li>
+          <li>
+            To learn more about the manuscript, click the <Menu size={18} /> icon to the left of its
+            name in the top banner
           </li>
         </ul>
         <p>Take your time examining the manuscript before transcribing!</p>
