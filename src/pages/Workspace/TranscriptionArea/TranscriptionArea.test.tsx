@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import manifests, { ManifestSets } from '../../../files/manifests';
 
+import { LessonStatus } from './SingleLine/singleLine.enum';
 import { TranscriptionArea } from './TranscriptionArea';
 
 const mockChangeManuscript = vi.fn();
@@ -220,5 +221,102 @@ describe('TranscriptionArea', () => {
     await user.click(requireSpacesCheckbox);
     expect(screen.getByRole('img', { name: 'correct' })).toBeInTheDocument();
     expect(screen.queryByRole('img', { name: 'incorrect' })).not.toBeInTheDocument();
+  });
+
+  it('hydrates saved progress and shows correct indicators and StatusReport on first render', () => {
+    const set = ManifestSets.CORE;
+    const lessonNumber = 1;
+    const lesson = manifests[set][lessonNumber];
+    const nonTitleLines = lesson.lines.filter(l => !l.isTitle);
+    const total = nonTitleLines.length;
+
+    const status: Record<number, LessonStatus> = {};
+    for (let i = 1; i <= total; i += 1) {
+      status[i] = LessonStatus.INCOMPLETE;
+    }
+    status[1] = LessonStatus.CORRECT;
+
+    const answers: Record<number, string> = {
+      1: nonTitleLines[0].text
+    };
+
+    localStorage.setItem(
+      `transcribe-progress-${set}-${lessonNumber}`,
+      JSON.stringify({
+        answers,
+        status,
+        requireSpaces: false,
+        lastUpdated: Date.now()
+      })
+    );
+
+    render(
+      <TranscriptionArea
+        changeManuscript={mockChangeManuscript}
+        numberOfLessons={Object.keys(manifests[set]).length}
+        lessonNumber={lessonNumber}
+        manifest={lesson}
+        set={set}
+      />
+    );
+
+    // First render should immediately show the saved correct state
+    expect(screen.getAllByRole('img', { name: 'correct' })).toHaveLength(1);
+
+    // StatusReport reflects 1 correct (we don't assert totals to avoid coupling)
+    expect(screen.getByText(/Correct:\s*1/)).toBeInTheDocument();
+  });
+
+  it('hydrates with requireSpaces=true and mixed saved statuses', () => {
+    const set = ManifestSets.CORE;
+    const lessonNumber = 3;
+    const lesson = manifests[set][lessonNumber];
+    const nonTitleLines = lesson.lines.filter(l => !l.isTitle);
+    const total = nonTitleLines.length;
+
+    const status: Record<number, LessonStatus> = {};
+    for (let i = 1; i <= total; i += 1) {
+      status[i] = LessonStatus.INCOMPLETE;
+    }
+    status[1] = LessonStatus.CORRECT;
+    status[2] = LessonStatus.INCORRECT;
+
+    const answers: Record<number, string> = {
+      1: nonTitleLines[0].text,
+      2: 'wrong answer' // saved answer is actually wrong
+    };
+
+    localStorage.setItem(
+      `transcribe-progress-${set}-${lessonNumber}`,
+      JSON.stringify({
+        answers,
+        status,
+        requireSpaces: true,
+        lastUpdated: Date.now()
+      })
+    );
+
+    render(
+      <TranscriptionArea
+        changeManuscript={mockChangeManuscript}
+        numberOfLessons={Object.keys(manifests[set]).length}
+        lessonNumber={lessonNumber}
+        manifest={lesson}
+        set={set}
+      />
+    );
+
+    // Saved indicators appear immediately
+    expect(screen.getAllByRole('img', { name: 'correct' })).toHaveLength(1);
+    expect(screen.getAllByRole('img', { name: 'incorrect' })).toHaveLength(1);
+
+    // StatusReport reflects mixed state (1 correct, 1 incorrect)
+    expect(screen.getByText(/Correct:\s*1/)).toBeInTheDocument();
+    expect(screen.getByText(/Incorrect:\s*1/)).toBeInTheDocument();
+
+    const expectedIncomplete = total - 2;
+    expect(
+      screen.getByText(new RegExp(`Incomplete:\\s*${expectedIncomplete}`))
+    ).toBeInTheDocument();
   });
 });
