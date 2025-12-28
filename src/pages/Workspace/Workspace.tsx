@@ -1,5 +1,5 @@
 import { type ReactElement, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import type { ManifestSets } from '../../files/manifests';
 import manifests from '../../files/manifests';
@@ -16,11 +16,16 @@ import styles from './Workspace.module.scss';
 export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
   const { id = 1 } = useParams();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const manifestSet = manifests[set];
   const currentManifest = manifestSet[id];
   const [pageNumber, setPageNumber] = useState<number>();
   const [showWrongPageAlert, setShowWrongPageAlert] = useState<boolean>(false);
-  const [showOnboarding, setShowOnboarding] = useState<boolean>(!hasSeenOnboarding());
+
+  const tutorialParam = searchParams.get('tutorial');
+  const skipMarkAsSeen = tutorialParam === 'true';
+  const shouldShowOnboarding = skipMarkAsSeen || !hasSeenOnboarding();
+  const [showOnboarding, setShowOnboarding] = useState<boolean>(shouldShowOnboarding);
 
   const canvasIndex = currentManifest?.canvasIndex;
   const indexAdjustment = currentManifest?.canvasIndexToPageNumberAdj || 0;
@@ -55,9 +60,21 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
     }
   };
 
+  const handleOnboardingClose = (): void => {
+    setShowOnboarding(false);
+    if (skipMarkAsSeen) {
+      searchParams.delete('tutorial');
+      setSearchParams(searchParams);
+    }
+  };
+
   return (
     <div className={styles.WorkspacePageWrapper}>
-      <OnboardingModal isOpen={showOnboarding} onClose={() => setShowOnboarding(false)} />
+      <OnboardingModal
+        isOpen={showOnboarding}
+        onClose={handleOnboardingClose}
+        skipMarkAsSeen={skipMarkAsSeen}
+      />
       <div className={styles.InvalidDevice}>
         <img src="/images/cog.svg" alt="Rotate device to landscape" className={styles.Image} />
         <h2>Sorry, lessons are only supported on larger screens.</h2>
