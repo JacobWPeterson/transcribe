@@ -632,13 +632,14 @@ describe('SingeLine', () => {
       mockUpdateLessonStatus.mockClear();
 
       // Toggle requireSpaces; edited (unsubmitted) lines should stay out of the status calc
+      // After editing, savedStatus would be INCOMPLETE in the real app
       rerender(
         <SingleLine
           line={mockNewConceptLine}
           passedIndex={1}
           requireSpaces={true}
           savedAnswer="αδελφοσ"
-          savedStatus={LessonStatus.CORRECT}
+          savedStatus={LessonStatus.INCOMPLETE}
           updateLessonStatus={mockUpdateLessonStatus}
         />
       );

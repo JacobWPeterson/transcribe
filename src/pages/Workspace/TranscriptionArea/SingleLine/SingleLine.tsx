@@ -42,25 +42,28 @@ export const SingleLine = ({
   const [showHint, setShowHint] = useState<boolean>(false);
   const [showAnswerEvaluation, setShowAnswerEvaluation] = useState<boolean>(false);
   const guesses = useRef(0);
+  const lineContentRef = useRef<string>(savedAnswer || '');
   const hasNonGreekChars = includesNonGreekChars(lineContent);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setLineContent(savedAnswer || '');
+    lineContentRef.current = savedAnswer || '';
   }, [savedAnswer]);
 
   // Set submission status from saved status when available, or reset when no saved data
   useEffect(() => {
     if (savedAnswer) {
       // Check if line has been edited by comparing current content with saved answer
-      const lineHasBeenEdited = lineContent !== savedAnswer;
+      const lineHasBeenEdited = lineContentRef.current !== savedAnswer;
 
       if (lineHasBeenEdited) {
         // Line has been edited but not resubmitted - don't show evaluation
         setSubmissionStatus(null);
         setShowAnswerEvaluation(false);
       } else if (savedStatus === LessonStatus.INCOMPLETE) {
-        // INCOMPLETE status with unedited content - always re-evaluate the saved answer
+        // INCOMPLETE status with unedited content - re-evaluate the saved answer
+        // using current requireSpaces setting
         const evaluationResult = evaluateSubmission(savedAnswer, line.text, requireSpaces);
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setSubmissionStatus(evaluationResult);
@@ -80,15 +83,9 @@ export const SingleLine = ({
       setSubmissionStatus(null);
       setShowAnswerEvaluation(false);
     }
-  }, [
-    savedAnswer,
-    savedStatus,
-    line.text,
-    requireSpaces,
-    passedIndex,
-    updateLessonStatus,
-    lineContent
-  ]);
+    // Only depend on savedAnswer/savedStatus changes, not requireSpaces or lineContent
+    // INCOMPLETE lines evaluate once on initial load; requireSpaces changes are handled separately below for CORRECT/INCORRECT
+  }, [savedAnswer, savedStatus, line.text, passedIndex, updateLessonStatus]);
 
   useEffect(() => {
     if (lineContent.length > 0 && submissionStatus?.[0]) {
@@ -117,11 +114,26 @@ export const SingleLine = ({
     if (!showHint && guesses.current >= 3) {
       setShowHint(true);
     }
-  }, [submissionStatus, line.text, requireSpaces]);
+  }, [submissionStatus, line.text]);
 
   const prevRequireSpacesRef = useRef(requireSpaces);
 
+  // Reset guesses when requireSpaces changes
   useEffect(() => {
+    if (prevRequireSpacesRef.current !== requireSpaces) {
+      guesses.current = 0;
+      setShowHint(false);
+    }
+  }, [requireSpaces]);
+
+  useEffect(() => {
+    // Skip re-evaluation entirely if line has been edited
+    const lineHasBeenEdited = lineContentRef.current !== savedAnswer;
+    if (lineHasBeenEdited) {
+      prevRequireSpacesRef.current = requireSpaces;
+      return;
+    }
+
     // Only re-evaluate when requireSpaces changes for lines that are currently submitted
     if (prevRequireSpacesRef.current !== requireSpaces && savedAnswer && showAnswerEvaluation) {
       const submissionStatus = evaluateSubmission(savedAnswer, line.text, requireSpaces);
@@ -130,14 +142,7 @@ export const SingleLine = ({
       updateLessonStatus(passedIndex, Number(submissionStatus[0]));
     }
     prevRequireSpacesRef.current = requireSpaces;
-  }, [
-    requireSpaces,
-    savedAnswer,
-    line.text,
-    passedIndex,
-    showAnswerEvaluation,
-    updateLessonStatus
-  ]);
+  }, [requireSpaces, savedAnswer, line.text, passedIndex, updateLessonStatus]);
 
   const clearMessages = (): void => {
     setShowHint(false);
@@ -146,7 +151,9 @@ export const SingleLine = ({
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event.persist();
-    setLineContent(event.target.value);
+    const newValue = event.target.value;
+    setLineContent(newValue);
+    lineContentRef.current = newValue;
     updateLessonStatus(passedIndex, LessonStatus.INCOMPLETE);
     clearMessages();
   };
