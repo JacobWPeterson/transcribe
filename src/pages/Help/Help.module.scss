@@ -31,6 +31,36 @@
   text-align: center;
 }
 
+.HeaderWithButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 12px;
+
+  .OnboardingButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: theme.$primary03;
+    color: theme.$grey00;
+    padding: 6px 12px;
+    font-size: theme.$fontSizeDefault;
+    font-weight: 500;
+    border-radius: 6px;
+    min-width: 90px;
+    border: none;
+    cursor: pointer;
+
+    &:focus,
+    &:hover {
+      background-color: theme.$primary04;
+      outline: 2px solid theme.$primary04;
+      outline-offset: 2px;
+    }
+  }
+}
+
 .H2 {
   font-size: 24px;
   font-weight: 600;
