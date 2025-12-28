@@ -162,6 +162,21 @@ describe('OnboardingModal', () => {
 
       expect(localStorageUtils.markOnboardingAsSeen).toHaveBeenCalled();
     });
+
+    it('should not mark onboarding as seen when skipMarkAsSeen is true', async () => {
+      const user = userEvent.setup();
+      const onCloseMock = vi.fn();
+      render(<OnboardingModal isOpen={true} onClose={onCloseMock} skipMarkAsSeen={true} />);
+
+      const lastSlideDot = screen.getByRole('button', { name: 'Go to slide 6' });
+      await user.click(lastSlideDot);
+
+      const getStartedButton = screen.getByRole('button', { name: 'Get started' });
+      await user.click(getStartedButton);
+
+      expect(localStorageUtils.markOnboardingAsSeen).not.toHaveBeenCalled();
+      expect(onCloseMock).toHaveBeenCalled();
+    });
   });
 
   describe('slide content', () => {

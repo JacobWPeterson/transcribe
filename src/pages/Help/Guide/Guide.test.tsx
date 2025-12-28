@@ -1,12 +1,18 @@
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 
 import { Guide } from './Guide';
 
 describe('Guide', () => {
   it('should render correctly', () => {
-    render(<Guide />);
+    render(
+      <BrowserRouter>
+        <Guide />
+      </BrowserRouter>
+    );
 
     expect(screen.getByText('Guide')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'View getting started guide' })).toBeInTheDocument();
 
     expect(screen.getByText('Symbols')).toBeInTheDocument();
 
