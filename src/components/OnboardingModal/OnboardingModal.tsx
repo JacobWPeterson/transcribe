@@ -1,5 +1,13 @@
 import { type ReactElement, useState } from 'react';
-import { Download, Menu, MinusCircle, PlayCircle, PlusCircle, Sliders } from 'react-feather';
+import {
+  Download,
+  Menu,
+  MinusCircle,
+  PlayCircle,
+  PlusCircle,
+  Settings,
+  Sliders
+} from 'react-feather';
 
 import { Modal } from '../Modal/Modal';
 import { markOnboardingAsSeen } from '../../utils/localStorage';
@@ -29,6 +37,12 @@ const slides: Slide[] = [
         <p>
           Each lesson presents you with manuscript images and lines to transcribe. Let&rsquo;s walk
           through how it works!
+        </p>
+        <p>
+          If you have accessibility needs, you can adjust font size and/or contrast with the{' '}
+          <Settings size={18} /> icon in the top right corner of the page. If you need to return to
+          this onboarding guide, you can access it under Help &gt; Guide with the &quot;Getting
+          started guide&quot; button.
         </p>
       </>
     )

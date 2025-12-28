@@ -1,4 +1,4 @@
-import { type ReactElement, useCallback, useEffect, useRef, useState } from 'react';
+import { type ReactElement, useEffect, useRef, useState } from 'react';
 import { jsPDF } from 'jspdf';
 import classNames from 'classnames';
 import { ArrowLeft, ArrowRight, Download } from 'react-feather';
@@ -31,82 +31,147 @@ export const TranscriptionArea = ({
   numberOfLessons,
   set
 }: TranscriptionAreaProps): ReactElement => {
-  const [requireSpaces, setRequireSpaces] = useState(false);
+  const { lines, instruction } = manifest;
+
+  // Initialize from localStorage to avoid a false first toggle
+  const [requireSpaces, setRequireSpaces] = useState<boolean>(() => {
+    try {
+      const saved = loadLessonProgress(set, lessonNumber);
+      return saved?.requireSpaces ?? false;
+    } catch {
+      return false;
+    }
+  });
   const transcriptionAreaRef = useRef<HTMLDivElement>(null);
   const inputContainerRef = useRef<HTMLDivElement>(null);
   const debounceTimeoutRef = useRef<NodeJS.Timeout>(null);
-  const { lines, instruction } = manifest;
-  const [lessonsStatus, setLessonsStatus] = useState<Record<number, LessonStatus>>(null);
+  const lessonsStatusRef = useRef<Record<number, LessonStatus> | null>(null);
+  const savedAnswersRef = useRef<Record<number, string>>({});
+  const requireSpacesRef = useRef<boolean>(false);
+  const setRef = useRef<ManifestSets>(set);
+  const lessonNumberRef = useRef<number>(lessonNumber);
+  const [lessonsStatus, setLessonsStatus] = useState<Record<number, LessonStatus>>(() => {
+    try {
+      const saved = loadLessonProgress(set, lessonNumber);
+      if (saved && Object.entries(saved.answers).length) {
+        return saved.status;
+      }
+    } catch {
+      /* empty */
+    }
+    const defaults: Record<number, LessonStatus> = {};
+    for (let i = 0; i < lines.length; i += 1) {
+      defaults[i] = LessonStatus.INCOMPLETE;
+    }
+    return defaults;
+  });
 
-  const [savedAnswers, setSavedAnswers] = useState<Record<number, string>>({});
+  const [savedAnswers, setSavedAnswers] = useState<Record<number, string>>(() => {
+    try {
+      const saved = loadLessonProgress(set, lessonNumber);
+      if (saved && Object.entries(saved.answers).length) {
+        return saved.answers;
+      }
+    } catch {
+      /* empty */
+    }
+    return {};
+  });
 
   // Debounced save function
-  const debouncedSave = useCallback(() => {
+  const scheduleSave = (): void => {
     if (debounceTimeoutRef.current) {
       clearTimeout(debounceTimeoutRef.current);
     }
     debounceTimeoutRef.current = setTimeout(() => {
-      if (lessonsStatus) {
+      const status = lessonsStatusRef.current;
+      if (status) {
         const progress = {
-          answers: savedAnswers,
-          status: lessonsStatus,
-          requireSpaces,
+          answers: savedAnswersRef.current,
+          status,
+          requireSpaces: requireSpacesRef.current,
           lastUpdated: Date.now()
         };
         try {
-          saveLessonProgress(set, lessonNumber, progress);
+          saveLessonProgress(setRef.current, lessonNumberRef.current, progress);
         } catch (error) {
           console.error('Error saving lesson progress:', error);
-          // Could show a user notification here, but since we have error boundaries, the LocalStorageErrorBoundary will catch this
         }
       }
     }, 500);
-  }, [set, lessonNumber, lessonsStatus, savedAnswers, requireSpaces]);
+  };
 
   useEffect(() => {
-    // Load saved progress for this lesson
+    // Keep refs in sync with latest props
+    setRef.current = set;
+    lessonNumberRef.current = lessonNumber;
+  }, [set, lessonNumber]);
+
+  useEffect(() => {
+    // Load saved progress when lesson or set changes
     try {
       const savedProgress = loadLessonProgress(set, lessonNumber);
       if (savedProgress && Object.entries(savedProgress.answers).length) {
         setLessonsStatus(savedProgress.status);
         setSavedAnswers(savedProgress.answers);
         setRequireSpaces(savedProgress.requireSpaces);
+        lessonsStatusRef.current = savedProgress.status;
+        savedAnswersRef.current = savedProgress.answers;
+        requireSpacesRef.current = savedProgress.requireSpaces;
       } else {
         // Initialize with default values if no saved progress
-        const lessonsStatusObj = lines.reduce(
-          (obj, _, index) => ({ ...obj, [index]: LessonStatus.INCOMPLETE }),
-          {}
-        );
+        const lessonsStatusObj: Record<number, LessonStatus> = {};
+        for (let i = 0; i < lines.length; i += 1) {
+          lessonsStatusObj[i] = LessonStatus.INCOMPLETE;
+        }
         setLessonsStatus(lessonsStatusObj);
         setSavedAnswers({});
         setRequireSpaces(false);
+        lessonsStatusRef.current = lessonsStatusObj;
+        savedAnswersRef.current = {};
+        requireSpacesRef.current = false;
       }
     } catch (error) {
       console.error('Error loading lesson progress:', error);
       // Initialize with default values if loading failed
-      const lessonsStatusObj = lines.reduce(
-        (obj, _, index) => ({ ...obj, [index]: LessonStatus.INCOMPLETE }),
-        {}
-      );
+      const lessonsStatusObj: Record<number, LessonStatus> = {};
+      for (let i = 0; i < lines.length; i += 1) {
+        lessonsStatusObj[i] = LessonStatus.INCOMPLETE;
+      }
       setLessonsStatus(lessonsStatusObj);
       setSavedAnswers({});
       setRequireSpaces(false);
+      lessonsStatusRef.current = lessonsStatusObj;
+      savedAnswersRef.current = {};
+      requireSpacesRef.current = false;
     }
     if (inputContainerRef.current) {
       inputContainerRef.current.scrollTop = 0;
     }
   }, [set, lessonNumber, lines]);
 
+  // Keep refs updated when state changes
+  useEffect(() => {
+    lessonsStatusRef.current = lessonsStatus;
+  }, [lessonsStatus]);
+
+  useEffect(() => {
+    savedAnswersRef.current = savedAnswers;
+  }, [savedAnswers]);
+
+  useEffect(() => {
+    requireSpacesRef.current = requireSpaces;
+  }, [requireSpaces]);
+
   // Save progress with debouncing whenever it changes
   useEffect(() => {
-    debouncedSave();
-    // Cleanup timeout on unmount or dependency change
+    scheduleSave();
     return (): void => {
       if (debounceTimeoutRef.current) {
         clearTimeout(debounceTimeoutRef.current);
       }
     };
-  }, [debouncedSave]);
+  }, [lessonsStatus, savedAnswers, requireSpaces]);
 
   const handleClick = (type: 'next' | 'previous'): void => {
     changeManuscript(type);
