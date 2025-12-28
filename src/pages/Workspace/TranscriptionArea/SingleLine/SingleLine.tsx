@@ -52,18 +52,43 @@ export const SingleLine = ({
   // Set submission status from saved status when available, or reset when no saved data
   useEffect(() => {
     if (savedAnswer) {
-      // Convert LessonStatus enum to submission status format
-      const isCorrect = savedStatus === LessonStatus.CORRECT;
-      const message = isCorrect ? 'correct' : 'Answer is incorrect.';
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setSubmissionStatus([isCorrect, message]);
-      setShowAnswerEvaluation(true);
+      // Check if line has been edited by comparing current content with saved answer
+      const lineHasBeenEdited = lineContent !== savedAnswer;
+
+      if (lineHasBeenEdited) {
+        // Line has been edited but not resubmitted - don't show evaluation
+        setSubmissionStatus(null);
+        setShowAnswerEvaluation(false);
+      } else if (savedStatus === LessonStatus.INCOMPLETE) {
+        // INCOMPLETE status with unedited content - always re-evaluate the saved answer
+        const evaluationResult = evaluateSubmission(savedAnswer, line.text, requireSpaces);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setSubmissionStatus(evaluationResult);
+        setShowAnswerEvaluation(true);
+        // Update the parent with the evaluated status
+        updateLessonStatus(passedIndex, Number(evaluationResult[0]));
+      } else {
+        // Convert LessonStatus enum to submission status format for CORRECT/INCORRECT
+        const isCorrect = savedStatus === LessonStatus.CORRECT;
+        const message = isCorrect ? 'correct' : 'Answer is incorrect.';
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setSubmissionStatus([isCorrect, message]);
+        setShowAnswerEvaluation(true);
+      }
     } else {
       // Reset status when no saved data is available for this line
       setSubmissionStatus(null);
       setShowAnswerEvaluation(false);
     }
-  }, [savedAnswer]);
+  }, [
+    savedAnswer,
+    savedStatus,
+    line.text,
+    requireSpaces,
+    passedIndex,
+    updateLessonStatus,
+    lineContent
+  ]);
 
   useEffect(() => {
     if (lineContent.length > 0 && submissionStatus?.[0]) {
@@ -97,15 +122,22 @@ export const SingleLine = ({
   const prevRequireSpacesRef = useRef(requireSpaces);
 
   useEffect(() => {
-    // Only re-evaluate when requireSpaces changes
-    if (prevRequireSpacesRef.current !== requireSpaces && savedAnswer) {
+    // Only re-evaluate when requireSpaces changes for lines that are currently submitted
+    if (prevRequireSpacesRef.current !== requireSpaces && savedAnswer && showAnswerEvaluation) {
       const submissionStatus = evaluateSubmission(savedAnswer, line.text, requireSpaces);
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSubmissionStatus(submissionStatus);
       updateLessonStatus(passedIndex, Number(submissionStatus[0]));
     }
     prevRequireSpacesRef.current = requireSpaces;
-  }, [requireSpaces, savedAnswer, line.text, passedIndex]);
+  }, [
+    requireSpaces,
+    savedAnswer,
+    line.text,
+    passedIndex,
+    showAnswerEvaluation,
+    updateLessonStatus
+  ]);
 
   const clearMessages = (): void => {
     setShowHint(false);
