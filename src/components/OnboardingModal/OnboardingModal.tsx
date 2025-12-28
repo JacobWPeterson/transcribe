@@ -9,6 +9,7 @@ import styles from './OnboardingModal.module.scss';
 interface OnboardingModalProps {
   isOpen: boolean;
   onClose: () => void;
+  skipMarkAsSeen?: boolean;
 }
 
 interface Slide {
@@ -170,7 +171,11 @@ const slides: Slide[] = [
   }
 ];
 
-export const OnboardingModal = ({ isOpen, onClose }: OnboardingModalProps): ReactElement => {
+export const OnboardingModal = ({
+  isOpen,
+  onClose,
+  skipMarkAsSeen = false
+}: OnboardingModalProps): ReactElement => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const handleNext = (): void => {
@@ -186,7 +191,9 @@ export const OnboardingModal = ({ isOpen, onClose }: OnboardingModalProps): Reac
   };
 
   const handleFinish = (): void => {
-    markOnboardingAsSeen();
+    if (!skipMarkAsSeen) {
+      markOnboardingAsSeen();
+    }
     onClose();
   };
 
