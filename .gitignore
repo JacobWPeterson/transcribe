@@ -1,11 +1,34 @@
+# Dependencies
 node_modules
-.env
-*.pem
 node_modules*
 vendors-node_modules*
 package-lock.json
 
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Secrets and keys
+*.pem
+*.key
+*.crt
+*.der
+*.p12
+*.pfx
+*.jks
+secrets/
+.aws/
+.ssh/
+
+# IDE caches
 .eslintcache
 .stylelintcache
 
+# Build output
 dist
+build/
+
+# OS files
+.DS_Store
+Thumbs.db

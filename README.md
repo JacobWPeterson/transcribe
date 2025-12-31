@@ -1,6 +1,6 @@
 # Xeirographa
 
-[![Node.js CI](https://github.com/JacobWPeterson/transcribe/actions/workflows/node.js.yml/badge.svg)](https://github.com/JacobWPeterson/transcribe/actions/workflows/node.js.yml)
+[![Node CI](https://github.com/JacobWPeterson/transcribe/actions/workflows/node.js.yml/badge.svg)](https://github.com/JacobWPeterson/transcribe/actions/workflows/node.js.yml)
 
 A guided learning platform for reading Greek manuscripts using IIIF manifests and interactive transcription exercises.
 
