@@ -1,6 +1,10 @@
 # Xeirographa
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Node CI](https://github.com/JacobWPeterson/transcribe/actions/workflows/node.js.yml/badge.svg)](https://github.com/JacobWPeterson/transcribe/actions/workflows/node.js.yml)
+[![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-7-blue?logo=vite)](https://vitejs.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org)
 
 A guided learning platform for reading Greek manuscripts using IIIF manifests and interactive transcription exercises.
 
