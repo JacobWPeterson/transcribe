@@ -1,5 +1,5 @@
 import { type ReactElement, useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router';
 
 import type { ManifestSets } from '../../files/manifests';
 import manifests from '../../files/manifests';
