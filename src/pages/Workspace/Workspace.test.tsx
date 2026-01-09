@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import { createElement, useEffect } from 'react';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import { MemoryRouter, Routes, Route } from 'react-router';
 
 import type { Manifest } from '../../files/manifests';
 import manifests, { ManifestSets } from '../../files/manifests';
