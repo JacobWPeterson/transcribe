@@ -73,7 +73,10 @@ export const SingleLine = ({
       } else {
         // Convert LessonStatus enum to submission status format for CORRECT/INCORRECT
         const isCorrect = savedStatus === LessonStatus.CORRECT;
-        const message = isCorrect ? 'correct' : 'Answer is incorrect.';
+
+        const message = isCorrect
+          ? 'correct'
+          : evaluateSubmission(savedAnswer, line.text, requireSpaces)[1];
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setSubmissionStatus([isCorrect, message]);
         setShowAnswerEvaluation(true);
@@ -161,6 +164,7 @@ export const SingleLine = ({
   const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
     const submissionStatus = evaluateSubmission(lineContent, line.text, requireSpaces);
+
     setSubmissionStatus(submissionStatus);
     updateLessonStatus(passedIndex, Number(submissionStatus[0])); // This Number cast works because of the enum order in singleLine.enum.ts
     // Save the answer to localStorage
