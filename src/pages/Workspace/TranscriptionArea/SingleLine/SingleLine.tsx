@@ -103,7 +103,7 @@ export const SingleLine = ({
      */
     if (
       requireSpaces
-        ? lineContent?.length !== line.text.length
+        ? lineContent?.trim().length !== line.text.length
         : lineContent.replace(/\s/g, '').length !== line.text.replace(/\s/g, '').length
     ) {
       setShowHint(false);

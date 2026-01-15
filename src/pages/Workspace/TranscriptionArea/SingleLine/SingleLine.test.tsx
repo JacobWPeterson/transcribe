@@ -104,7 +104,7 @@ describe('SingeLine', () => {
     expect(screen.getByRole('link', { name: 'Help' })).toBeInTheDocument();
   });
 
-  it('showσ a check when user has submitted a correct answer', async () => {
+  it('shows a check when user has submitted a correct answer', async () => {
     // Answer is αδελφοσ
     render(<SingleLine line={mockNewConceptLine} passedIndex={1} updateLessonStatus={() => {}} />);
 
@@ -377,7 +377,7 @@ describe('SingeLine', () => {
       expect(screen.getByRole('img', { name: 'correct' })).toBeInTheDocument();
     });
 
-    it('marks the asnwer as correct when answer is correctly spaced adn when requireSpaces is true', async () => {
+    it('marks the answer as correct when answer is correctly spaced and when requireSpaces is true', async () => {
       render(
         <SingleLine
           line={{ ...mockNewConceptLine, text: 'αδελφοσ μου' }}
@@ -470,6 +470,54 @@ describe('SingeLine', () => {
 
       expect(screen.queryByRole('img', { name: 'correct' })).not.toBeInTheDocument();
       expect(screen.getByRole('img', { name: 'incorrect' })).toBeInTheDocument();
+    });
+
+    it('does not consider trailing spaces when requireSpaces is true and answer is incorrect', async () => {
+      render(
+        <SingleLine
+          line={{ ...mockNewConceptLine, text: 'αδελφοσ μου' }}
+          passedIndex={1}
+          requireSpaces
+          updateLessonStatus={() => {}}
+        />
+      );
+
+      const user = userEvent.setup();
+      const lineInput = screen.getByRole('textbox', { name: 'L1' });
+      expect(lineInput).toBeInTheDocument();
+      const checkButton = screen.getByRole('button', { name: 'Check' });
+
+      await user.type(lineInput, 'αδελφοσ μο ');
+
+      expect(checkButton).toBeEnabled();
+      await user.click(checkButton);
+
+      expect(screen.queryByRole('img', { name: 'correct' })).not.toBeInTheDocument();
+      expect(screen.getByRole('img', { name: 'incorrect' })).toBeInTheDocument();
+    });
+
+    it('does not consider trailing spaces when requireSpaces is true and answer is correct', async () => {
+      render(
+        <SingleLine
+          line={{ ...mockNewConceptLine, text: 'αδελφοσ μου' }}
+          passedIndex={1}
+          requireSpaces
+          updateLessonStatus={() => {}}
+        />
+      );
+
+      const user = userEvent.setup();
+      const lineInput = screen.getByRole('textbox', { name: 'L1' });
+      expect(lineInput).toBeInTheDocument();
+      const checkButton = screen.getByRole('button', { name: 'Check' });
+
+      await user.type(lineInput, 'αδελφοσ μου ');
+
+      expect(checkButton).toBeEnabled();
+      await user.click(checkButton);
+
+      expect(screen.queryByRole('img', { name: 'incorrect' })).not.toBeInTheDocument();
+      expect(screen.getByRole('img', { name: 'correct' })).toBeInTheDocument();
     });
   });
 
