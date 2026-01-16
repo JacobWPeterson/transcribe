@@ -108,7 +108,9 @@ const manifests: ManifestSet = {
         },
         {
           text: 'ελεγεν γαρ ιωβ μηποτε οι υιοι μου εν τη διανοια αυτων κακα ενενοησαν προσ θν',
-          newConcept: 'Nomina sacra'
+          newConcept: 'Nomina sacra',
+          caption:
+            'Write out all nomina sacra and abbreviations as they appear in the manuscript. As a general guide, if the text has an overline, then transcribe it as is.'
         },
         {
           text: 'ουτωσ ουν εποιει ιωβ πασασ τασ ημερασ'
@@ -315,7 +317,9 @@ const manifests: ManifestSet = {
       lines: [
         {
           text: 'α περι των μαγων',
-          newConcept: 'Numbers'
+          newConcept: 'Numbers',
+          caption:
+            'Like nomina sacra and abbreviations, transcribe numbers as they appear in the manuscript.'
         },
         {
           text: 'β περι των αναιρεθεντων παιδιων'
@@ -327,14 +331,16 @@ const manifests: ManifestSet = {
         {
           text: 'δ περι διδασκαλιασ του σρσ',
           newConcept: 'Ligature',
-          caption: 'Note the ligature here contains parts of two words.'
+          caption:
+            'Note the ligature here contains parts of two words. Unlike nomina sacra, abbreviations, and numbers, ligatures should always be transcribed for what they represent. This one is more obviously two letters, but in later lessons you may see single strokes representing three or more letters.'
         },
         {
           text: 'ε περι των μακαρισμων'
         },
         {
           text: 'ϛ περι του λεπρου',
-          newConcept: 'Stigma'
+          newConcept: 'Stigma',
+          caption: 'As a number, transcribe as the single letter.'
         },
         {
           text: 'ζ περι του εκατονταρχου'
