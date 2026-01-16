@@ -65,8 +65,8 @@ const glosses: Glosses = {
     long: 'When part of a manuscript, often on papyrus, has been damaged and the missing text is supplied by the editor based on a combination of the expected text and available spacing. Reconstructions are enclosed in brackets in formal transcriptions.'
   },
   Stigma: {
-    short: 'A Greek ligature (ϛ) for στ not to be confused with final sigma (ς)',
-    long: 'A Greek ligature (ϛ) for στ not to be confused with final sigma (ς). In the Middle Ages, the ligature was conflated with the long-disused digamma (Ϝ, written cursively as ϛ) and therefore came to be used as 6 in the Greek numeral system (see "Numbers" above).'
+    short: 'A Greek number-ligature (ϛ) for στ not to be confused with final sigma (ς)',
+    long: 'A Greek number-ligature (ϛ) for στ not to be confused with final sigma (ς). In the Middle Ages, the ligature was conflated with the long-disused digamma (Ϝ, written cursively as ϛ) and therefore came to be used as 6 in the Greek numeral system (see "Numbers" above).'
   },
   Uncial: {
     short: 'An alternative term for majuscule script.'
