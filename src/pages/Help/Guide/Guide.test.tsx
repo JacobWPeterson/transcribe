@@ -14,11 +14,19 @@ describe('Guide', () => {
     expect(screen.getByText('Guide')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'View getting started guide' })).toBeInTheDocument();
 
-    expect(screen.getByText('Symbols')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'Symbols' })).toBeInTheDocument();
 
-    expect(screen.getByText('How-to')).toBeInTheDocument();
-    expect(screen.getByText('Image viewer')).toBeInTheDocument();
-    expect(screen.getByText('Transcription workspace')).toBeInTheDocument();
-    expect(screen.getByText('Found an issue?')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'How-to' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: 'Image viewer' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { level: 3, name: 'Transcription workspace' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        level: 3,
+        name: 'Entering abbreviations, contractions, numbers, and ligatures'
+      })
+    ).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: 'Found an issue?' })).toBeInTheDocument();
   });
 });

@@ -201,6 +201,19 @@ export const Guide = (): ReactElement => {
           button at the bottom of the page to move on to the next, harder manuscript with more new
           concepts.
         </p>
+        <h3 className={styles.H3}>Entering abbreviations, contractions, numbers, and ligatures</h3>
+        <p className={styles.GuideText}>
+          Abbreviations, contractions, numbers, and ligatures are ubiquitous in Greek manuscripts.
+          See the{' '}
+          <a className="Link" href="/glossary">
+            Glossary
+          </a>{' '}
+          for more information about each of these concepts. In the lessons, abbreviations,
+          contractions, and numbers should be typed as they appear (without any overlining strokes).
+          Ligatures should be transcribed as the letters represented by the ligature. A single
+          ligature stroke may represent numerous letters and all of them should be included in your
+          answer.
+        </p>
         <h3 className={styles.H3}>Found an issue?</h3>
         <p className={styles.GuideText}>
           Please use the contact form linked in the footer below to report any errors or bugs you
