@@ -1,4 +1,5 @@
-import { forwardRef, type ReactElement, type Ref, useState } from 'react';
+import type { ReactElement, Ref } from 'react';
+import { MouseEvent, ReactNode, forwardRef, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Moon, Settings, Sun, Trash2, Type, Zap } from 'react-feather';
 import classNames from 'classnames';
@@ -8,8 +9,8 @@ import { useTheme, type FontSize } from '../../contexts/ThemeContext';
 import styles from './SettingsMenu.module.scss';
 
 interface CustomToggleProps {
-  children?: React.ReactNode;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  children?: ReactNode;
+  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const CustomToggle = forwardRef<HTMLButtonElement, CustomToggleProps>(

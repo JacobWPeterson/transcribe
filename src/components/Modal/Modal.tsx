@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import type { PropsWithChildren, ReactElement } from 'react';
 import { useEffect } from 'react';
 import classNames from 'classnames';
