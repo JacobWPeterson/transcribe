@@ -46,7 +46,6 @@ export const SingleLine = ({
   const hasNonGreekChars = includesNonGreekChars(lineContent);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLineContent(savedAnswer || '');
     lineContentRef.current = savedAnswer || '';
   }, [savedAnswer]);
@@ -65,7 +64,7 @@ export const SingleLine = ({
         // INCOMPLETE status with unedited content - re-evaluate the saved answer
         // using current requireSpaces setting
         const evaluationResult = evaluateSubmission(savedAnswer, line.text, requireSpaces);
-        // eslint-disable-next-line react-hooks/set-state-in-effect
+
         setSubmissionStatus(evaluationResult);
         setShowAnswerEvaluation(true);
         // Update the parent with the evaluated status
@@ -77,7 +76,7 @@ export const SingleLine = ({
         const message = isCorrect
           ? 'correct'
           : evaluateSubmission(savedAnswer, line.text, requireSpaces)[1];
-        // eslint-disable-next-line react-hooks/set-state-in-effect
+
         setSubmissionStatus([isCorrect, message]);
         setShowAnswerEvaluation(true);
       }
@@ -93,7 +92,7 @@ export const SingleLine = ({
   useEffect(() => {
     if (lineContent.length > 0 && submissionStatus?.[0]) {
       guesses.current = 0;
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+
       setShowHint(false);
       return;
     }
@@ -140,7 +139,7 @@ export const SingleLine = ({
     // Only re-evaluate when requireSpaces changes for lines that are currently submitted
     if (prevRequireSpacesRef.current !== requireSpaces && savedAnswer && showAnswerEvaluation) {
       const submissionStatus = evaluateSubmission(savedAnswer, line.text, requireSpaces);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+
       setSubmissionStatus(submissionStatus);
       updateLessonStatus(passedIndex, Number(submissionStatus[0]));
     }
@@ -238,7 +237,7 @@ export const SingleLine = ({
       overlay={
         <Popover id="popover-hint">
           <Popover.Body>
-            {/* eslint-disable-next-line max-len */}
+            {}
             Titles can be plain or feature elaborate patterns. Titles often feature ligatures and
             abbreviations and can be much more difficult to read, so don&apos;t worry about them as
             much early on. Type them as a single line.
