@@ -33,7 +33,6 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
 
   useEffect(() => {
     if (pageNumber && pageNumber !== canvasIndex + indexAdjustment) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowWrongPageAlert(true);
       return;
     }
@@ -41,7 +40,6 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
   }, [pageNumber]);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setShowWrongPageAlert(false);
   }, [id]);
 

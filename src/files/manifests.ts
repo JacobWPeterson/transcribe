@@ -240,10 +240,10 @@ const manifests: ManifestSet = {
         "Welcome to an intralinear Greek-Latin diglot. Don't worry, you only need to transcribe the Greek. You should feel comfortable transitioning to the semi-majuscule letter forms, so this will mostly be an exercise in attention to detail and ignoring extraneous material. Skip the initial κατα.",
       lines: [
         {
-          text: 'και το δανιον αφηκεν αυτο εξελθων δε ο δουλοσ εκεινοσ'
+          text: 'και το δανιον αφηκεν αυτω εξελθων δε ο δουλοσ εκεινοσ'
         },
         {
-          text: 'ευρεν ινα των συνδουλων αυτου οσ ωφειλεν αυτω εκατον'
+          text: 'ευρεν ενα των συνδουλων αυτου οσ ωφειλεν αυτω εκατον'
         },
         {
           text: 'δηναρια και κρατησασ αυτον επνιγεν λεγων αποδοσ μοι'
@@ -252,7 +252,7 @@ const manifests: ManifestSet = {
           text: 'ει τι οφειλεισ πεσων ουν ο συνδουλοσ αυτου εισ τουσ'
         },
         {
-          text: 'πασασ αυτου παρεκαλει αυτον λεγων μακροθυμησον'
+          text: 'ποδασ αυτου παρεκαλει αυτον λεγων μακροθυμησον'
         },
         {
           text: 'επε μοι και αποδωσω σοι ο δε ουκ ηθελεν αλλ απελ'
