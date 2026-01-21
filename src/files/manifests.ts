@@ -132,7 +132,7 @@ const manifests: ManifestSet = {
       canvasIndex: 1,
       specialIndexHandlingStart: 'pages/',
       instruction:
-        'A papyrus manuscript by a trained scribe in a slightly irregular majuscule script. This lesson ends when the papyrus becomes damaged. Ignore the page number (πνγ) at the top of the leaf. No new concepts here, just new letter forms different to the uniform block capitals of the prior manuscript.',
+        'A papyrus manuscript by a trained scribe in a slightly irregular majuscule script. This lesson ends when the papyrus becomes damaged. Ignore the page number (πνγ) at the top of the leaf. No new concepts here, just new letter forms different from the uniform block capitals of the prior manuscript.',
       lines: [
         {
           text: 'και ιδου οφθαλμοι ωσει οφθαλ'
