@@ -10,7 +10,7 @@ export type Glosses = {
 const glosses: Glosses = {
   Abbreviation: {
     short: 'Abbreviations were used for word endings and common or repeated words and some names',
-    long: 'Abbreviations were used for word endings common or repeated words and some names. Abbreviation could be done by writing only the first letter or first few letters of a word, or by omitting word endings. One example is "και compendium" (ϗ) where a kappa with a trailing flourish stands for και. When the shortening is done by omitting the middle letters it is called a contraction (see below).'
+    long: 'Abbreviations were used for word endings, common or repeated words, and some names. Abbreviation could be done by writing only the first letter or first few letters of a word, or by omitting word endings. One example is "και compendium" (ϗ) where a kappa with a trailing flourish stands for και. When the shortening is done by omitting the middle letters it is called a contraction (see below).'
   },
   Compendium: {
     short: '(pl. compendia) Another word for abbreviation.'
@@ -38,7 +38,7 @@ const glosses: Glosses = {
   },
   Majuscule: {
     short: 'A writing style characterised by unconnected block letters of a consistent height',
-    long: 'The style of writing used in most Greek literary manuscripts (e.g., the Bible, histories, biographies, etc.) until the ninth century, when it was largely replaced by minuscule. It continued to be used for ornamental capitals, headings, and in liturgical manuscripts from the tenth to twelfth centuries with some examples from the fourteeth century. The letters are unconnected and of the same height (this characteristic is called "bilinearity"). It is not a technically correct definition, but you might associate majuscule script with the use of capital letter forms.'
+    long: 'The style of writing used in most Greek literary manuscripts (e.g., the Bible, histories, biographies, etc.) until the ninth century, when it was largely replaced by minuscule. It continued to be used for ornamental capitals, headings, and in liturgical manuscripts from the tenth to twelfth centuries with some examples from the fourteenth century. The letters are unconnected and of the same height (this characteristic is called "bilinearity"). It is not a technically correct definition, but you might associate majuscule script with the use of capital letter forms.'
   },
   Miniscule: {
     short:
