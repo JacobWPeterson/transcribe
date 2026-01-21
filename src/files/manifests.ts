@@ -132,7 +132,7 @@ const manifests: ManifestSet = {
       canvasIndex: 1,
       specialIndexHandlingStart: 'pages/',
       instruction:
-        'A papyrus manuscript by a trained scribe in a slightly irregular majuscule script. This lesson ends when the papyrus becomes damaged. Ignore the page number (πνγ) at the top of the leaf. No new concepts here, just new letter forms different the uniform block capitals of the prior manuscript.',
+        'A papyrus manuscript by a trained scribe in a slightly irregular majuscule script. This lesson ends when the papyrus becomes damaged. Ignore the page number (πνγ) at the top of the leaf. No new concepts here, just new letter forms different to the uniform block capitals of the prior manuscript.',
       lines: [
         {
           text: 'και ιδου οφθαλμοι ωσει οφθαλ'
@@ -313,7 +313,7 @@ const manifests: ManifestSet = {
       manifestId: 'https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00058840/manifest',
       canvasIndex: 51,
       instruction:
-        "This lesson features a relatively easy to read decorative semi-uncial text but introduces ligatures, abbreviations, and numbers, so be sure to consult the 'Online resources' under the Help tab for resources to help intrepret these. This is a page of kephalaia (ancient chapter divisions) where each line contains a Greek number and then a short title for that section. Many lines begin with an abbreviation for περι (the stacked πε).",
+        "This lesson features a relatively easy to read decorative semi-uncial text but introduces ligatures, abbreviations, and numbers, so be sure to consult the 'Online resources' under the Help tab for resources to help interpret these. This is a page of kephalaia (ancient chapter divisions) where each line contains a Greek number and then a short title for that section. Many lines begin with an abbreviation for περι (the stacked πε).",
       lines: [
         {
           text: 'α περι των μαγων',

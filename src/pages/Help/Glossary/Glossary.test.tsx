@@ -11,7 +11,7 @@ describe('Glossary', () => {
     expect(screen.getByRole('heading', { level: 2, name: 'Abbreviation' })).toBeInTheDocument();
     expect(
       screen.getByText(
-        'Abbreviations were used for word endings common or repeated words and some names. Abbreviation could be done by writing only the first letter or first few letters of a word, or by omitting word endings. One example is "και compendium" (ϗ) where a kappa with a trailing flourish stands for και. When the shortening is done by omitting the middle letters it is called a contraction (see below).'
+        'Abbreviations were used for word endings, common or repeated words, and some names. Abbreviation could be done by writing only the first letter or first few letters of a word, or by omitting word endings. One example is "και compendium" (ϗ) where a kappa with a trailing flourish stands for και. When the shortening is done by omitting the middle letters it is called a contraction (see below).'
       )
     ).toBeInTheDocument();
 
