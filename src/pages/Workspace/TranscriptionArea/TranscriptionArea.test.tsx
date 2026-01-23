@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import manifests, { ManifestSets } from '../../../files/manifests';
@@ -317,6 +317,58 @@ describe('TranscriptionArea', () => {
     const expectedIncomplete = total - 2;
     expect(
       screen.getByText(new RegExp(`Incomplete:\\s*${expectedIncomplete}`))
+    ).toBeInTheDocument();
+  });
+
+  it('correctly initializes lessonsStatusObj starting at key 1 for lesson without title (no key 0)', async () => {
+    const set = ManifestSets.CORE;
+    const lessonNumber = 2; // Lesson 2 has no title line
+    const lesson = manifests[set][lessonNumber];
+
+    // Ensure localStorage is empty for this lesson
+    expect(localStorage.getItem(`transcribe-progress-${set}-${lessonNumber}`)).toBeNull();
+
+    render(
+      <TranscriptionArea
+        changeManuscript={mockChangeManuscript}
+        numberOfLessons={Object.keys(manifests[set]).length}
+        lessonNumber={lessonNumber}
+        manifest={lesson}
+        set={set}
+      />
+    );
+
+    // Verify no zero index status exists on the new localStorage object
+    await waitFor(() => {
+      expect(localStorage.getItem(`transcribe-progress-${set}-${lessonNumber}`)).not.toBeNull();
+    });
+    const storedProgress = localStorage.getItem(`transcribe-progress-${set}-${lessonNumber}`);
+    expect(storedProgress).not.toBeNull();
+    const parsedLocalStatus = JSON.parse(storedProgress as string).status;
+    expect(parsedLocalStatus[0]).toBeUndefined();
+    expect(parsedLocalStatus[1]).toBeDefined();
+
+    // Verify no title textbox exists
+    expect(screen.queryByRole('textbox', { name: 'title' })).not.toBeInTheDocument();
+
+    // Verify no L0 textbox exists (keys should start at 1)
+    expect(screen.queryByRole('textbox', { name: 'L0' })).not.toBeInTheDocument();
+
+    // Verify L1 textbox exists
+    expect(screen.getByRole('textbox', { name: 'L1' })).toBeInTheDocument();
+
+    // Count rendered textboxes - should match the number of lines
+    const renderedInputs = screen.getAllByRole('textbox');
+    expect(renderedInputs).toHaveLength(lesson.lines.length);
+
+    // Verify StatusReport shows correct totals matching the number of lines
+    // All lines should be incomplete initially
+    const totalLinesRegex = new RegExp(`0 / ${lesson.lines.length} lines correct`);
+    expect(screen.getByText(totalLinesRegex)).toBeInTheDocument();
+    expect(screen.getByText(/Correct:\s*0/)).toBeInTheDocument();
+    expect(screen.getByText(/Incorrect:\s*0/)).toBeInTheDocument();
+    expect(
+      screen.getByText(new RegExp(`Incomplete:\\s*${lesson.lines.length}`))
     ).toBeInTheDocument();
   });
 });
