@@ -59,11 +59,13 @@ export const TranscriptionArea = ({
     } catch {
       /* empty */
     }
-    const defaults: Record<number, LessonStatus> = {};
-    for (let i = 0; i < lines.length; i += 1) {
-      defaults[i] = LessonStatus.INCOMPLETE;
+    // Initialize with default values if no saved progress
+    const lessonsStatusObj: Record<number, LessonStatus> = {};
+    const firstLineIndex = lines[0].isTitle ? 0 : 1;
+    for (let i = firstLineIndex; i < lines.length + firstLineIndex; i += 1) {
+      lessonsStatusObj[i] = LessonStatus.INCOMPLETE;
     }
-    return defaults;
+    return lessonsStatusObj;
   });
 
   const [savedAnswers, setSavedAnswers] = useState<Record<number, string>>(() => {
@@ -121,9 +123,11 @@ export const TranscriptionArea = ({
       } else {
         // Initialize with default values if no saved progress
         const lessonsStatusObj: Record<number, LessonStatus> = {};
-        for (let i = 0; i < lines.length; i += 1) {
+        const firstLineIndex = lines[0].isTitle ? 0 : 1;
+        for (let i = firstLineIndex; i < lines.length + firstLineIndex; i += 1) {
           lessonsStatusObj[i] = LessonStatus.INCOMPLETE;
         }
+
         setLessonsStatus(lessonsStatusObj);
         setSavedAnswers({});
         setRequireSpaces(false);
@@ -135,7 +139,8 @@ export const TranscriptionArea = ({
       console.error('Error loading lesson progress:', error);
       // Initialize with default values if loading failed
       const lessonsStatusObj: Record<number, LessonStatus> = {};
-      for (let i = 0; i < lines.length; i += 1) {
+      const firstLineIndex = lines[0].isTitle ? 0 : 1;
+      for (let i = firstLineIndex; i < lines.length + firstLineIndex; i += 1) {
         lessonsStatusObj[i] = LessonStatus.INCOMPLETE;
       }
       setLessonsStatus(lessonsStatusObj);
