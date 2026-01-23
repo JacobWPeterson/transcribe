@@ -486,7 +486,7 @@ const manifests: ManifestSet = {
           text: 'μενων συν αυτω η ουν'
         },
         {
-          text: 'μαρια λαβουσα λιτ'
+          text: 'μαρια λαβουσα λι'
         }
       ]
     },
