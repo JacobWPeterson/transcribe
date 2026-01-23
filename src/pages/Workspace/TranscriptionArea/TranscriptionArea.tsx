@@ -24,6 +24,19 @@ interface TranscriptionAreaProps {
   set: ManifestSets;
 }
 
+/**
+ * Build the default lesson status object with correct indexing.
+ * If the first line is a title, keys start at 0; otherwise, keys start at 1.
+ */
+const buildDefaultLessonStatus = (lines: Line[]): Record<number, LessonStatus> => {
+  const lessonsStatusObj: Record<number, LessonStatus> = {};
+  const firstLineIndex = lines[0].isTitle ? 0 : 1;
+  for (let i = firstLineIndex; i < lines.length + firstLineIndex; i += 1) {
+    lessonsStatusObj[i] = LessonStatus.INCOMPLETE;
+  }
+  return lessonsStatusObj;
+};
+
 export const TranscriptionArea = ({
   changeManuscript,
   lessonNumber,
@@ -59,13 +72,7 @@ export const TranscriptionArea = ({
     } catch {
       /* empty */
     }
-    // Initialize with default values if no saved progress
-    const lessonsStatusObj: Record<number, LessonStatus> = {};
-    const firstLineIndex = lines[0].isTitle ? 0 : 1;
-    for (let i = firstLineIndex; i < lines.length + firstLineIndex; i += 1) {
-      lessonsStatusObj[i] = LessonStatus.INCOMPLETE;
-    }
-    return lessonsStatusObj;
+    return buildDefaultLessonStatus(lines);
   });
 
   const [savedAnswers, setSavedAnswers] = useState<Record<number, string>>(() => {
@@ -122,11 +129,7 @@ export const TranscriptionArea = ({
         requireSpacesRef.current = savedProgress.requireSpaces;
       } else {
         // Initialize with default values if no saved progress
-        const lessonsStatusObj: Record<number, LessonStatus> = {};
-        const firstLineIndex = lines[0].isTitle ? 0 : 1;
-        for (let i = firstLineIndex; i < lines.length + firstLineIndex; i += 1) {
-          lessonsStatusObj[i] = LessonStatus.INCOMPLETE;
-        }
+        const lessonsStatusObj = buildDefaultLessonStatus(lines);
 
         setLessonsStatus(lessonsStatusObj);
         setSavedAnswers({});
@@ -138,11 +141,7 @@ export const TranscriptionArea = ({
     } catch (error) {
       console.error('Error loading lesson progress:', error);
       // Initialize with default values if loading failed
-      const lessonsStatusObj: Record<number, LessonStatus> = {};
-      const firstLineIndex = lines[0].isTitle ? 0 : 1;
-      for (let i = firstLineIndex; i < lines.length + firstLineIndex; i += 1) {
-        lessonsStatusObj[i] = LessonStatus.INCOMPLETE;
-      }
+      const lessonsStatusObj = buildDefaultLessonStatus(lines);
       setLessonsStatus(lessonsStatusObj);
       setSavedAnswers({});
       setRequireSpaces(false);
