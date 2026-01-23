@@ -412,7 +412,9 @@ const manifests: ManifestSet = {
             "There's a correction on this line after the tau. It looks as if the scribe skipped a letter, starting writing the next word for two letters, then made the correction. Transcribe these two letters as α ο."
         },
         {
-          text: 'τα πιστα ιδου μαρτυριαν εν ε'
+          text: 'τα πιστα ιδου μαρτυριαν εν ε',
+          caption:
+            'After the last alpha on this line, damage to the papyrus has caused a gap in the next letter (in other words, after the last alpha there are only four letters).'
         },
         {
           text: 'θνεσιν αυτον δεδωκα αρχον',
