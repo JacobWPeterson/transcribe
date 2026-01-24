@@ -533,7 +533,7 @@ const manifests: ManifestSet = {
         {
           text: 'πεμπτη η και κε',
           caption:
-            'It appears this line originally read "πεντοτε και κε." Try to work out what it has been corrected to. Hint: The first τ and what remains of the next letter now form one letter.'
+            'It appears this line originally started "πεντοτε." Try to work out what it has been corrected to. Hint: The first τ and what remains of the next letter now form one letter.'
         },
         {
           text: 'νικολαοσ γεγονεν εισ απο'
