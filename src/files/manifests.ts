@@ -531,9 +531,9 @@ const manifests: ManifestSet = {
           text: 'κατα νικολαιτων'
         },
         {
-          text: 'πεμπτη η και κε',
+          text: 'πεμπτη ηκαι κε',
           caption:
-            'It appears this line originally read "πεντοτε και κε." Try to work out what it has been corrected to. Hint: The first τ and what remains of the next letter now form one letter.'
+            'It appears this line originally started "πεντοτε." Try to work out what it has been corrected to. Hint: The first τ and what remains of the next letter now form one letter.'
         },
         {
           text: 'νικολαοσ γεγονεν εισ απο'
@@ -586,7 +586,9 @@ const manifests: ManifestSet = {
           text: 'ορθρου μι αναστασ επορευομην'
         },
         {
-          text: 'εγω συν τοισ δυο αδελφοισ εξωθεν'
+          text: 'εγω συν τοισ δυο αδελφοισ εξωθεν',
+          caption:
+            'The slightly fainter ink at the end of this line is a ligature for the two letters εν. Consider searching "εν" in the CRBMI Minuscule Ligature/Abbreviation Tool to see the many ways these letters are written together.'
         },
         {
           text: 'τοισ πολεωσ εδεσων ευλογημενησ'
@@ -598,13 +600,13 @@ const manifests: ManifestSet = {
           text: 'ουνον ωσ εσοπρον καθορων λαμπον'
         },
         {
-          text: 'τα συν τοισ αστρισ μετα δοξησ επι γησ και'
+          text: 'τα συν τοισ αστρισ μεταδοξησ επι γησ και'
         },
         {
           text: 'θαυμασασ ελεγον αν αρα ταυτα ουτοσ λα'
         },
         {
-          text: 'μποσιν μετα δοξησ δικαιοι και αγιοι ποι'
+          text: 'μποσιν μεταδοξησ δικαιοι και αγιοι ποι'
         },
         {
           text: 'ησαντεσ το θελημα του θυ του αγιου εν'
@@ -616,7 +618,7 @@ const manifests: ManifestSet = {
           text: 'μαιλον λαμψουσιν φωτι ανεκλαλητω'
         },
         {
-          text: 'τησ δοξησ του σρσ παραχριμα δε μνη'
+          text: 'τησ δοξησ του σρσ παρα χριμα δε μνη'
         },
         {
           text: 'σθησ τησ φοβερασ εκεινησ ελευσεωσ'
