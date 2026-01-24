@@ -640,7 +640,9 @@ const manifests: ManifestSet = {
           text: 'το φωσ εν τη σκοτια φαινει και η'
         },
         {
-          text: 'σκοτια αυτο ου κατελαβεν εγενετο'
+          text: 'σκοτια αυτο ου κατελαβεν εγενετο',
+          caption:
+            'If your attempted answer is too long, you may have mistaken the start of a ligature with a sigma. Look around on the page for other examples of this ligature that will help make sense of it.'
         },
         {
           text: 'ανοσ απεσταλμενοσ παρα θυ ο'
