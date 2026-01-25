@@ -728,7 +728,7 @@ const manifests: ManifestSet = {
       manifestId: 'https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00069327/manifest',
       canvasIndex: 65,
       instruction:
-        'Ignore the text in red. These indicate changes in character in the play; see if you can figure out the abbreviations.',
+        'Ignore the text in red. These indicate changes in character in the play. However, still see if you can figure out the abbreviations and thus the speaker.',
       lines: [
         {
           text: 'ω ζευ βασιλευ τησ λεπτοτητοσ των φρενων'
