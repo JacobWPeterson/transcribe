@@ -5,6 +5,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { ContactModal } from '../../components/ContactModal/ContactModal';
 import { SettingsMenu } from '../../components/SettingsMenu/SettingsMenu';
 import { useTheme } from '../../contexts/ThemeContext';
+import { ManifestSets } from '../../files/manifests';
+import { determineLessonToResume, getStoredLessonIds } from '../../utils/localStorage';
 
 import styles from './AppWrapper.module.scss';
 
@@ -33,6 +35,8 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
     document.body.style.color = 'var(--text)';
   }, [settings]);
 
+  const savedLessonIds = getStoredLessonIds(ManifestSets.CORE);
+
   return (
     <div className={styles.AppWrapper}>
       <div className={styles.Navbar}>
@@ -40,12 +44,23 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
           Xeirographa
         </a>
         <div className={styles.NavButtons}>
-          <a className={styles.NavLink} href="/lessons/1" data-replace="Lessons">
-            <span>Lessons</span>
-          </a>
-          {/* <a className={styles.NavLink} href="/dashboard" data-replace="Dashboard">
-            <span>Dashboard</span>
-          </a> */}
+          <NavDropdown title="Lessons" id="collapsible-nav-dropdown" className={styles.NavDropdown}>
+            <div className={styles.DropdownItem}>
+              <a href="/lessons/1">Get started</a>
+            </div>
+            {savedLessonIds.length > 0 && (
+              <>
+                <div className={styles.Divider} />
+                <div className={styles.DropdownItem}>
+                  <a href={`/lessons/${determineLessonToResume()}`}>Resume</a>
+                </div>
+              </>
+            )}
+            <div className={styles.Divider} />
+            <div className={styles.DropdownItem}>
+              <a href="/dashboard">Dashboard</a>
+            </div>
+          </NavDropdown>
           <NavDropdown title="Help" id="collapsible-nav-dropdown" className={styles.NavDropdown}>
             <div className={styles.DropdownItem}>
               <a href="/guide">Guide</a>
