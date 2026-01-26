@@ -1,5 +1,5 @@
-import type { ManifestSets } from '../files/manifests';
-import type { LessonStatus } from '../pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum';
+import manifests, { ManifestSets } from '../files/manifests';
+import { LessonStatus } from '../pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum';
 
 export interface LessonProgress {
   answers: Record<number, string>; // line index -> submitted answer
@@ -99,6 +99,29 @@ export const getStoredLessonIds = (set: ManifestSets): number[] => {
     // Re-throw with more context for error boundaries
     throw new Error(`Failed to get stored lesson IDs for ${set}: ${errorMessage}`);
   }
+};
+
+export const determineLessonToResume = (): number => {
+  const storedIds = getStoredLessonIds(ManifestSets.CORE);
+
+  // No stored progress: default to the first available lesson (lowest numeric id)
+  if (!storedIds.length) {
+    const coreLessonIds = Object.keys(manifests[ManifestSets.CORE]).map(id => Number(id));
+    return Math.min(...coreLessonIds);
+  }
+
+  const progressList = storedIds
+    .map(id => {
+      const progress = loadLessonProgress(ManifestSets.CORE, id);
+      const statusValues = progress?.status ? Object.values(progress.status) : [];
+      const isComplete =
+        statusValues.length > 0 && statusValues.every(status => status === LessonStatus.CORRECT);
+      return { id, lastUpdated: progress?.lastUpdated ?? 0, isComplete };
+    })
+    .sort((a, b) => b.lastUpdated - a.lastUpdated);
+
+  const latestIncomplete = progressList.find(item => !item.isComplete);
+  return (latestIncomplete ?? progressList[0]).id;
 };
 
 const ONBOARDING_KEY = 'transcribe-onboarding-seen';
