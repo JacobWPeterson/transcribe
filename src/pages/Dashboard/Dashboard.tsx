@@ -1,4 +1,5 @@
 import { type ReactElement, useMemo } from 'react';
+import { Link } from 'react-router';
 
 import type { Manifest } from '../../files/manifests';
 import manifests, { ManifestSets } from '../../files/manifests';
@@ -98,7 +99,9 @@ export const Dashboard = (): ReactElement => {
           <h2 className={styles.SectionTitle}>Lessons</h2>
           {data.lessons.map(lesson => (
             <div className={styles.LessonCard} key={lesson.lessonId}>
-              <p className={styles.LessonTitle}>Lesson {lesson.lessonId}</p>
+              <Link to={`/lessons/${lesson.lessonId}`} className={styles.LessonTitle}>
+                Lesson {lesson.lessonId}
+              </Link>
               <div className={styles.ProgressText}>
                 {lesson.correct} / {lesson.total} lines correct ({Math.round(lesson.percent)}%)
               </div>
