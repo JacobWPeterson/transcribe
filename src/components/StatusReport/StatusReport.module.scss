@@ -18,7 +18,7 @@
 .ProgressBar {
   width: 100%;
   height: 8px;
-  background: theme.$grey02;
+  background: theme.$grey03;
   border-radius: 4px;
   overflow: hidden;
   margin-bottom: 8px;
@@ -77,6 +77,6 @@
   }
 
   &[data-status='incomplete'] {
-    background: theme.$grey04;
+    background: theme.$grey03;
   }
 }

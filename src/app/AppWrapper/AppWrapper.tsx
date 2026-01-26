@@ -43,6 +43,9 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
           <a className={styles.NavLink} href="/lessons/1" data-replace="Lessons">
             <span>Lessons</span>
           </a>
+          {/* <a className={styles.NavLink} href="/dashboard" data-replace="Dashboard">
+            <span>Dashboard</span>
+          </a> */}
           <NavDropdown title="Help" id="collapsible-nav-dropdown" className={styles.NavDropdown}>
             <div className={styles.DropdownItem}>
               <a href="/guide">Guide</a>
