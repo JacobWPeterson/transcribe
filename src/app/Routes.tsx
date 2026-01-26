@@ -10,6 +10,7 @@ import { Resources } from '../pages/Help/Resources/Resources';
 import { About } from '../pages/About/About';
 import { E404 } from '../pages/E404/E404';
 import onlineResources from '../files/onlineResources';
+import { Dashboard } from '../pages/Dashboard/Dashboard';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
         path="online-resources"
         element={<Resources resources={onlineResources} title="Online resources" />}
       />
+      <Route path="dashboard" element={<Dashboard />} />
       <Route path="about" element={<About />} />
       <Route path="*" element={<E404 />} />
     </Route>
