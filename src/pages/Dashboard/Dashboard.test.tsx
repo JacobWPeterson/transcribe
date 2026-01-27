@@ -3,6 +3,7 @@ import type { RenderResult } from '@testing-library/react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
 
+import { ThemeProvider } from '../../contexts/ThemeContext';
 import { LessonStatus } from '../Workspace/TranscriptionArea/SingleLine/singleLine.enum';
 import type { LessonProgress } from '../../utils/localStorage';
 import { loadLessonProgress } from '../../utils/localStorage';
@@ -36,7 +37,11 @@ vi.mock('../../files/manifests', () => ({
 }));
 
 const renderWithRouter = (component: React.ReactElement): RenderResult => {
-  return render(<BrowserRouter>{component}</BrowserRouter>);
+  return render(
+    <BrowserRouter>
+      <ThemeProvider>{component}</ThemeProvider>
+    </BrowserRouter>
+  );
 };
 
 const buildProgress = (status: LessonProgress['status']): LessonProgress => ({

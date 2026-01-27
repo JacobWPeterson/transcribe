@@ -1,6 +1,7 @@
 import { type ReactElement, useMemo } from 'react';
 import { Link } from 'react-router';
 
+import { useTheme } from '../../contexts/ThemeContext';
 import type { Manifest } from '../../files/manifests';
 import manifests, { ManifestSets } from '../../files/manifests';
 import { loadLessonProgress } from '../../utils/localStorage';
@@ -18,11 +19,14 @@ interface LessonProgressSummary {
   percent: number;
   correctPercent: number;
   incorrectPercent: number;
+  requiredSpaces: boolean;
 }
 
 const computeLessonSummary = (lessonId: string, manifest: Manifest): LessonProgressSummary => {
   const saved = loadLessonProgress(ManifestSets.CORE, Number(lessonId));
+
   const statusMap = saved?.status ?? buildDefaultLessonStatus(manifest.lines);
+  const requiredSpaces = saved?.requireSpaces || false;
   const total = Object.keys(statusMap).length;
   const values = Object.values(statusMap);
   const correct = values.filter(v => v === LessonStatus.CORRECT).length;
@@ -40,11 +44,13 @@ const computeLessonSummary = (lessonId: string, manifest: Manifest): LessonProgr
     incomplete,
     percent,
     correctPercent,
-    incorrectPercent
+    incorrectPercent,
+    requiredSpaces
   };
 };
 
 export const Dashboard = (): ReactElement => {
+  const { settings } = useTheme();
   const data = useMemo(() => {
     const lessons = Object.keys(manifests[ManifestSets.CORE]).map(id =>
       computeLessonSummary(id, manifests[ManifestSets.CORE][id])
@@ -99,9 +105,21 @@ export const Dashboard = (): ReactElement => {
           <h2 className={styles.SectionTitle}>Lessons</h2>
           {data.lessons.map(lesson => (
             <div className={styles.LessonCard} key={lesson.lessonId}>
-              <Link to={`/lessons/${lesson.lessonId}`} className={styles.LessonTitle}>
-                Lesson {lesson.lessonId}
-              </Link>
+              <div className={styles.LessonHeader}>
+                <Link to={`/lessons/${lesson.lessonId}`} className={styles.LessonTitle}>
+                  Lesson {lesson.lessonId}
+                </Link>
+                {lesson.requiredSpaces && (
+                  <div className={styles.RequiredSpaces}>
+                    <img
+                      height={settings.fontSize === 'L' ? 18 : 14}
+                      src="/icons/check-circle.png"
+                      alt="correct"
+                    />{' '}
+                    Required spaces
+                  </div>
+                )}
+              </div>
               <div className={styles.ProgressText}>
                 {lesson.correct} / {lesson.total} lines correct ({Math.round(lesson.percent)}%)
               </div>

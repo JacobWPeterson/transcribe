@@ -69,20 +69,23 @@
         background: theme.$grey00;
         box-shadow: 0 2px 6px rgb(0 0 0 / 4%);
 
-        .LessonTitle {
-          font-weight: 600;
-          color: theme.$primary03;
-          margin: 0;
-        }
-
         .LessonHeader {
           display: flex;
           justify-content: space-between;
-          align-items: baseline;
+          align-items: center;
           gap: 8px;
 
-          .Percent {
+          .LessonTitle {
             font-weight: 600;
+            color: theme.$primary03;
+            margin: 0;
+          }
+
+          .RequiredSpaces {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: theme.$fontSizeSmaller;
           }
         }
 
