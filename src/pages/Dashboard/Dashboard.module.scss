@@ -5,148 +5,182 @@
   display: flex;
   height: calc(100% - variables.$headerHeight - variables.$footerHeight);
   overflow-y: auto;
+}
 
-  .Contents {
-    display: flex;
-    flex-direction: column;
-    padding: 12px 24px;
-    max-width: 1100px;
-    margin: 0 auto;
-    gap: 12px;
+.Contents {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  gap: 12px;
+}
 
-    .Title {
-      font-size: 2rem;
-      margin: 0;
-      color: theme.$secondary03;
-    }
+.HeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
 
-    .Summary {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
+.Title {
+  font-size: 2rem;
+  margin: 0;
+  color: theme.$secondary03;
 
-      .SummaryCard {
-        font-size: theme.$fontSizeLarger;
-        background: theme.$grey00;
-        border: variables.$defaultBorderStyle;
-        border-radius: 8px;
-        padding: 12px;
-        min-width: 180px;
-        box-shadow: 0 2px 6px rgb(0 0 0 / 5%);
-
-        @media (width <= 500px) {
-          min-width: calc(50% - 6px);
-        }
-
-        &[data-status='correct'] {
-          > strong {
-            color: theme.$primary03;
-          }
-        }
-
-        &[data-status='incorrect'] {
-          > strong {
-            color: theme.$error;
-          }
-        }
-      }
-    }
-
-    .Section {
-      flex-grow: 1;
-
-      .SectionTitle {
-        font-size: theme.$fontSizeLargest;
-        margin-bottom: 10px;
-      }
-
-      .LessonCard {
-        border: variables.$defaultBorderStyle;
-        border-radius: 10px;
-        padding: 12px 14px;
-        margin-bottom: 12px;
-        background: theme.$grey00;
-        box-shadow: 0 2px 6px rgb(0 0 0 / 4%);
-
-        .LessonHeader {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 8px;
-
-          .LessonTitle {
-            font-weight: 600;
-            color: theme.$primary03;
-            margin: 0;
-          }
-
-          .RequiredSpaces {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: theme.$fontSizeSmaller;
-          }
-        }
-
-        .BarTrack {
-          position: relative;
-          height: 12px;
-          background: theme.$grey03;
-          border-radius: 999px;
-          overflow: hidden;
-          margin: 10px 0;
-
-          .BarFillCorrect,
-          .BarFillIncorrect {
-            position: absolute;
-            top: 0;
-            height: 100%;
-            transition: width 0.3s ease;
-          }
-
-          .BarFillCorrect {
-            left: 0;
-            background: theme.$primary03;
-          }
-
-          .BarFillIncorrect {
-            background: theme.$error;
-          }
-        }
-      }
-
-      .StatusIndicators {
-        display: flex;
-        justify-content: space-around;
-        gap: 16px;
-      }
-
-      .StatusItem {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-size: theme.$fontSizeSmallest;
-        color: theme.$helpText;
-      }
-
-      .StatusDot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-
-        &[data-status='correct'] {
-          background: theme.$primary03;
-        }
-
-        &[data-status='incorrect'] {
-          background: theme.$error;
-        }
-
-        &[data-status='incomplete'] {
-          background: theme.$grey03;
-        }
-      }
-    }
+  @media (width <= 500px) {
+    font-size: 1.5rem;
   }
+}
+
+.DownloadButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  background: theme.$primary03;
+  color: theme.$grey00;
+  border: none;
+  border-radius: 6px;
+  font-size: theme.$fontSizeSmaller;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+}
+
+.DownloadButton:hover,
+.DownloadButton:focus {
+  background: theme.$primary04;
+}
+
+.DownloadIcon {
+  flex-shrink: 0;
+}
+
+.Summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.SummaryCard {
+  font-size: theme.$fontSizeLarger;
+  background: theme.$grey00;
+  border: variables.$defaultBorderStyle;
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 180px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 5%);
+}
+
+@media (width <= 500px) {
+  .SummaryCard {
+    min-width: calc(50% - 6px);
+  }
+}
+
+.SummaryCard[data-status='correct'] > strong {
+  color: theme.$primary03;
+}
+
+.SummaryCard[data-status='incorrect'] > strong {
+  color: theme.$error;
+}
+
+.Section {
+  flex-grow: 1;
+}
+
+.SectionTitle {
+  font-size: theme.$fontSizeLargest;
+  margin-bottom: 10px;
+}
+
+.LessonCard {
+  border: variables.$defaultBorderStyle;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  background: theme.$grey00;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 4%);
+}
+
+.LessonHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.LessonTitle {
+  font-weight: 600;
+  color: theme.$primary03;
+  margin: 0;
+}
+
+.RequiredSpaces {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: theme.$fontSizeSmaller;
+}
+
+.BarTrack {
+  position: relative;
+  height: 12px;
+  background: theme.$grey03;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.BarFillCorrect,
+.BarFillIncorrect {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.BarFillCorrect {
+  left: 0;
+  background: theme.$primary03;
+}
+
+.BarFillIncorrect {
+  background: theme.$error;
+}
+
+.StatusIndicators {
+  display: flex;
+  justify-content: space-around;
+  gap: 16px;
+}
+
+.StatusItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: theme.$fontSizeSmallest;
+  color: theme.$helpText;
+}
+
+.StatusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.StatusDot[data-status='correct'] {
+  background: theme.$primary03;
+}
+
+.StatusDot[data-status='incorrect'] {
+  background: theme.$error;
+}
+
+.StatusDot[data-status='incomplete'] {
+  background: theme.$grey03;
 }

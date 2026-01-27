@@ -1,5 +1,7 @@
-import { type ReactElement, useMemo } from 'react';
+import { type ReactElement, useMemo, useRef } from 'react';
 import { Link } from 'react-router';
+import { Download } from 'react-feather';
+import { jsPDF } from 'jspdf';
 
 import { useTheme } from '../../contexts/ThemeContext';
 import type { Manifest } from '../../files/manifests';
@@ -7,6 +9,7 @@ import manifests, { ManifestSets } from '../../files/manifests';
 import { loadLessonProgress } from '../../utils/localStorage';
 import { LessonStatus } from '../Workspace/TranscriptionArea/SingleLine/singleLine.enum';
 import { buildDefaultLessonStatus } from '../../utils/lessonStatus';
+import { PDFErrorBoundary } from '../../components/ErrorBoundary/SpecializedErrorBoundaries';
 
 import styles from './Dashboard.module.scss';
 
@@ -51,6 +54,39 @@ const computeLessonSummary = (lessonId: string, manifest: Manifest): LessonProgr
 
 export const Dashboard = (): ReactElement => {
   const { settings } = useTheme();
+  const dashboardRef = useRef<HTMLDivElement>(null);
+
+  const handleDownloadPDF = (): void => {
+    try {
+      const element = dashboardRef.current;
+      if (!element) {
+        throw new Error('Dashboard element not found');
+      }
+
+      const pdf = new jsPDF({ format: 'a4' });
+      pdf.setProperties({ title: 'Progress Dashboard Report' });
+
+      pdf
+        .html(element, {
+          margin: [10, 7, 10, 7],
+          html2canvas: {
+            scale: 0.25,
+            ignoreElements: ({ id }) => id === 'downloadButton'
+          }
+        })
+        .then(() => {
+          pdf.output('pdfobjectnewwindow');
+        })
+        .catch(error => {
+          console.error('PDF generation error:', error);
+          throw new Error(`Failed to generate PDF: ${error.message || 'Unknown error'}`);
+        });
+    } catch (error) {
+      console.error('PDF download error:', error);
+      throw error;
+    }
+  };
+
   const data = useMemo(() => {
     const lessons = Object.keys(manifests[ManifestSets.CORE]).map(id =>
       computeLessonSummary(id, manifests[ManifestSets.CORE][id])
@@ -80,8 +116,23 @@ export const Dashboard = (): ReactElement => {
 
   return (
     <div className={styles.Wrapper}>
-      <div className={styles.Contents}>
-        <h1 className={styles.Title}>Progress Dashboard</h1>
+      <div className={styles.Contents} ref={dashboardRef}>
+        <div className={styles.HeaderRow}>
+          <h1 className={styles.Title}>Progress Dashboard</h1>
+          <PDFErrorBoundary>
+            <button
+              className={styles.DownloadButton}
+              onClick={handleDownloadPDF}
+              id="downloadButton"
+            >
+              Report
+              <Download
+                className={styles.DownloadIcon}
+                size={settings.fontSize === 'L' ? 20 : 16}
+              />
+            </button>
+          </PDFErrorBoundary>
+        </div>
         <div className={styles.Summary}>
           <div className={styles.SummaryCard} data-status="correct">
             <div>Correct</div>
