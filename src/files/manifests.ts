@@ -640,7 +640,9 @@ const manifests: ManifestSet = {
           text: 'το φωσ εν τη σκοτια φαινει και η'
         },
         {
-          text: 'σκοτια αυτο ου κατελαβεν εγενετο'
+          text: 'σκοτια αυτο ου κατελαβεν εγενετο',
+          caption:
+            'If your attempted answer is too long, you may have mistaken the start of a ligature with a sigma. Look around on the page for other examples of this ligature that will help make sense of it.'
         },
         {
           text: 'ανοσ απεσταλμενοσ παρα θυ ο'
@@ -726,7 +728,7 @@ const manifests: ManifestSet = {
       manifestId: 'https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00069327/manifest',
       canvasIndex: 65,
       instruction:
-        'Ignore the text in red. These indicate changes in character in the play; see if you can figure out the abbreviations.',
+        'Ignore the text in red. These indicate changes in character in the play. However, still see if you can figure out the abbreviations and thus the speaker.',
       lines: [
         {
           text: 'ω ζευ βασιλευ τησ λεπτοτητοσ των φρενων'

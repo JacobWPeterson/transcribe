@@ -10,11 +10,12 @@ import {
   PDFErrorBoundary
 } from '../../../components/ErrorBoundary/SpecializedErrorBoundaries';
 import { loadLessonProgress, saveLessonProgress } from '../../../utils/localStorage';
+import { buildDefaultLessonStatus } from '../../../utils/lessonStatus';
 
 import { SingleLine } from './SingleLine/SingleLine';
 import styles from './TranscriptionArea.module.scss';
 import { brillBase64 } from './constants';
-import { LessonStatus } from './SingleLine/singleLine.enum';
+import type { LessonStatus } from './SingleLine/singleLine.enum';
 
 interface TranscriptionAreaProps {
   changeManuscript: (type: 'next' | 'previous') => void;
@@ -23,19 +24,6 @@ interface TranscriptionAreaProps {
   numberOfLessons: number;
   set: ManifestSets;
 }
-
-/**
- * Build the default lesson status object with correct indexing.
- * If the first line is a title, keys start at 0; otherwise, keys start at 1.
- */
-const buildDefaultLessonStatus = (lines: Line[]): Record<number, LessonStatus> => {
-  const lessonsStatusObj: Record<number, LessonStatus> = {};
-  const firstLineIndex = lines[0].isTitle ? 0 : 1;
-  for (let i = firstLineIndex; i < lines.length + firstLineIndex; i += 1) {
-    lessonsStatusObj[i] = LessonStatus.INCOMPLETE;
-  }
-  return lessonsStatusObj;
-};
 
 export const TranscriptionArea = ({
   changeManuscript,
@@ -313,7 +301,14 @@ export const TranscriptionArea = ({
                 <ArrowRight size={18} />
               </button>
             ) : (
-              <div className={styles.DummyButton} />
+              <a
+                aria-label="results dashboard"
+                className={styles.Button}
+                href="/dashboard"
+                id="dashboardButton"
+              >
+                Dashboard
+              </a>
             )}
           </div>
         </div>
