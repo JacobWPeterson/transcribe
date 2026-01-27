@@ -56,48 +56,36 @@ describe('Dashboard', () => {
     vi.clearAllMocks();
   });
 
-  describe('rendering', () => {
-    it('should render the dashboard title', () => {
-      vi.mocked(loadLessonProgress).mockReturnValue(null);
-      renderWithRouter(<Dashboard />);
+  it('should render correctly', () => {
+    vi.mocked(loadLessonProgress).mockReturnValue(null);
+    renderWithRouter(<Dashboard />);
 
-      expect(
-        screen.getByRole('heading', { name: 'Progress Dashboard', level: 1 })
-      ).toBeInTheDocument();
-    });
+    // Header section
+    expect(
+      screen.getByRole('heading', { name: 'Progress Dashboard', level: 1 })
+    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Report' })).toBeInTheDocument();
 
-    it('should render summary cards', () => {
-      vi.mocked(loadLessonProgress).mockReturnValue(null);
-      renderWithRouter(<Dashboard />);
+    // Summary cards
+    expect(screen.getByText('Correct')).toBeInTheDocument();
+    expect(screen.getByText('Incorrect')).toBeInTheDocument();
+    expect(screen.getByText('Incomplete')).toBeInTheDocument();
+    expect(screen.getByText('Overall')).toBeInTheDocument();
 
-      expect(screen.getByText('Correct')).toBeInTheDocument();
-      expect(screen.getByText('Incorrect')).toBeInTheDocument();
-      expect(screen.getByText('Incomplete')).toBeInTheDocument();
-      expect(screen.getByText('Overall')).toBeInTheDocument();
-    });
+    // Lessons header
+    expect(screen.getByRole('heading', { name: 'Lessons', level: 2 })).toBeInTheDocument();
 
-    it('should render lessons section', () => {
-      vi.mocked(loadLessonProgress).mockReturnValue(null);
-      renderWithRouter(<Dashboard />);
+    // Lesson cards
+    const lesson1Link = screen.getByRole('link', { name: 'Lesson 1' });
+    const lesson2Link = screen.getByRole('link', { name: 'Lesson 2' });
 
-      expect(screen.getByRole('heading', { name: 'Lessons', level: 2 })).toBeInTheDocument();
-    });
-
-    it('should render lesson cards with links', () => {
-      vi.mocked(loadLessonProgress).mockReturnValue(null);
-      renderWithRouter(<Dashboard />);
-
-      const lesson1Link = screen.getByRole('link', { name: 'Lesson 1' });
-      const lesson2Link = screen.getByRole('link', { name: 'Lesson 2' });
-
-      expect(lesson1Link).toBeInTheDocument();
-      expect(lesson1Link).toHaveAttribute('href', '/lessons/1');
-      expect(lesson2Link).toBeInTheDocument();
-      expect(lesson2Link).toHaveAttribute('href', '/lessons/2');
-    });
+    expect(lesson1Link).toBeInTheDocument();
+    expect(lesson1Link).toHaveAttribute('href', '/lessons/1');
+    expect(lesson2Link).toBeInTheDocument();
+    expect(lesson2Link).toHaveAttribute('href', '/lessons/2');
   });
 
-  describe('progress calculation', () => {
+  describe('Progress calculations', () => {
     it('should show all incomplete when no progress saved', () => {
       vi.mocked(loadLessonProgress).mockReturnValue(null);
       renderWithRouter(<Dashboard />);
@@ -227,7 +215,7 @@ describe('Dashboard', () => {
     });
   });
 
-  describe('status indicators', () => {
+  describe('Status indicators', () => {
     it('should display status breakdown for each lesson', () => {
       vi.mocked(loadLessonProgress).mockImplementation((_, lessonId) => {
         if (lessonId === 1) {
@@ -253,7 +241,7 @@ describe('Dashboard', () => {
     });
   });
 
-  describe('summary totals', () => {
+  describe('Summary totals', () => {
     it('should calculate and display correct summary totals', () => {
       vi.mocked(loadLessonProgress).mockImplementation((_, lessonId) => {
         if (lessonId === 1) {
@@ -286,7 +274,7 @@ describe('Dashboard', () => {
     });
   });
 
-  describe('progress bars', () => {
+  describe('Progress bars', () => {
     it('should render progress bar for each lesson', () => {
       vi.mocked(loadLessonProgress).mockReturnValue(null);
       renderWithRouter(<Dashboard />);
