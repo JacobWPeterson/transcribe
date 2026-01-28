@@ -1,5 +1,7 @@
 import { type ReactElement, useEffect, useRef } from 'react';
 
+import { useTheme } from '../../contexts/ThemeContext';
+
 import styles from './Confetti.module.scss';
 
 interface ConfettiProps {
@@ -22,12 +24,18 @@ interface ConfettiPiece {
 const COLORS = ['#4CAF50', '#2196F3', '#FFC107', '#E91E63', '#9C27B0', '#FF5722'];
 
 export const Confetti = ({ show, onClose }: ConfettiProps): ReactElement | null => {
+  const { settings } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number | undefined>(undefined);
   const piecesRef = useRef<ConfettiPiece[]>([]);
 
   useEffect(() => {
     if (!show) {
+      return;
+    }
+
+    // Skip animation if reduced motion is enabled
+    if (settings.reducedMotion) {
       return;
     }
 
@@ -117,7 +125,7 @@ export const Confetti = ({ show, onClose }: ConfettiProps): ReactElement | null 
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [show]);
+  }, [show, settings.reducedMotion]);
 
   if (!show) {
     return null;
