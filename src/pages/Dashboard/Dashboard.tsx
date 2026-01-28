@@ -1,4 +1,4 @@
-import { type ReactElement, useMemo, useRef } from 'react';
+import { type ReactElement, useMemo, useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { Download } from 'react-feather';
 import { jsPDF } from 'jspdf';
@@ -6,10 +6,11 @@ import { jsPDF } from 'jspdf';
 import { useTheme } from '../../contexts/ThemeContext';
 import type { Manifest } from '../../files/manifests';
 import manifests, { ManifestSets } from '../../files/manifests';
-import { loadLessonProgress } from '../../utils/localStorage';
+import { CELEBRATION_SHOWN_KEY, loadLessonProgress } from '../../utils/localStorage';
 import { LessonStatus } from '../Workspace/TranscriptionArea/SingleLine/singleLine.enum';
 import { buildDefaultLessonStatus } from '../../utils/lessonStatus';
 import { PDFErrorBoundary } from '../../components/ErrorBoundary/SpecializedErrorBoundaries';
+import { Confetti } from '../../components/Confetti/Confetti';
 
 import styles from './Dashboard.module.scss';
 
@@ -55,6 +56,16 @@ const computeLessonSummary = (lessonId: string, manifest: Manifest): LessonProgr
 export const Dashboard = (): ReactElement => {
   const { settings } = useTheme();
   const dashboardRef = useRef<HTMLDivElement>(null);
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  // Check localStorage on mount to see if celebration was already shown
+  const [hasShownConfetti] = useState(() => {
+    try {
+      return localStorage.getItem(CELEBRATION_SHOWN_KEY) === 'true';
+    } catch {
+      return false;
+    }
+  });
 
   const handleDownloadPDF = (): void => {
     try {
@@ -114,97 +125,113 @@ export const Dashboard = (): ReactElement => {
     };
   }, []);
 
+  // Trigger confetti celebration when 100% is reached
+  useEffect((): void => {
+    if (data.totals.percent === 100 && data.totals.total > 0 && !hasShownConfetti) {
+      setShowConfetti(true);
+      // Save to localStorage so celebration only shows once
+      try {
+        localStorage.setItem(CELEBRATION_SHOWN_KEY, 'true');
+      } catch (error) {
+        console.warn('Failed to save celebration shown status:', error);
+      }
+    }
+  }, [data.totals.percent, data.totals.total, hasShownConfetti]);
+
   return (
-    <div className={styles.Wrapper}>
-      <div className={styles.Contents} ref={dashboardRef}>
-        <div className={styles.HeaderRow}>
-          <h1 className={styles.Title}>Progress Dashboard</h1>
-          <PDFErrorBoundary>
-            <button
-              className={styles.DownloadButton}
-              onClick={handleDownloadPDF}
-              id="downloadButton"
-            >
-              Report
-              <Download
-                className={styles.DownloadIcon}
-                size={settings.fontSize === 'L' ? 20 : 16}
-              />
-            </button>
-          </PDFErrorBoundary>
-        </div>
-        <div className={styles.Summary}>
-          <div className={styles.SummaryCard} data-status="correct">
-            <div>Correct</div>
-            <strong>{data.totals.correct}</strong>
-          </div>
-          <div className={styles.SummaryCard} data-status="incorrect">
-            <div>Incorrect</div>
-            <strong>{data.totals.incorrect}</strong>
-          </div>
-          <div className={styles.SummaryCard}>
-            <div>Incomplete</div>
-            <strong>{data.totals.incomplete}</strong>
-          </div>
-          <div className={styles.SummaryCard}>
-            <div>Overall</div>
-            <strong>{`${data.totals.percent}%`}</strong>
-            <span>{` (${data.totals.correct} / ${data.totals.total})`}</span>
-          </div>
-        </div>
-        <section className={styles.Section}>
-          <h2 className={styles.SectionTitle}>Lessons</h2>
-          {data.lessons.map(lesson => (
-            <div className={styles.LessonCard} key={lesson.lessonId}>
-              <div className={styles.LessonHeader}>
-                <Link to={`/lessons/${lesson.lessonId}`} className={styles.LessonTitle}>
-                  Lesson {lesson.lessonId}
-                </Link>
-                {lesson.requiredSpaces && (
-                  <div className={styles.RequiredSpaces}>
-                    <img
-                      height={settings.fontSize === 'L' ? 18 : 14}
-                      src="/icons/check-circle.png"
-                      alt="correct"
-                    />{' '}
-                    Required spaces
-                  </div>
-                )}
-              </div>
-              <div className={styles.ProgressText}>
-                {lesson.correct} / {lesson.total} lines correct ({Math.round(lesson.percent)}%)
-              </div>
-              <div className={styles.BarTrack} aria-hidden="true">
-                <div
-                  className={styles.BarFillCorrect}
-                  style={{ width: `${lesson.correctPercent}%` }}
+    <>
+      <Confetti show={showConfetti} onClose={() => setShowConfetti(false)} />
+      <div className={styles.Wrapper}>
+        <div className={styles.Contents} ref={dashboardRef}>
+          <div className={styles.HeaderRow}>
+            <h1 className={styles.Title}>Progress Dashboard</h1>
+            <PDFErrorBoundary>
+              <button
+                className={styles.DownloadButton}
+                onClick={handleDownloadPDF}
+                id="downloadButton"
+              >
+                Report
+                <Download
+                  className={styles.DownloadIcon}
+                  size={settings.fontSize === 'L' ? 20 : 16}
                 />
-                <div
-                  className={styles.BarFillIncorrect}
-                  style={{
-                    width: `${lesson.incorrectPercent}%`,
-                    left: `${lesson.correctPercent}%`
-                  }}
-                />
-              </div>
-              <div className={styles.StatusIndicators}>
-                <div className={styles.StatusItem}>
-                  <div className={styles.StatusDot} data-status="correct" />
-                  <span>Correct: {lesson.correct}</span>
-                </div>
-                <div className={styles.StatusItem}>
-                  <div className={styles.StatusDot} data-status="incorrect" />
-                  <span>Incorrect: {lesson.incorrect}</span>
-                </div>
-                <div className={styles.StatusItem}>
-                  <div className={styles.StatusDot} data-status="incomplete" />
-                  <span>Incomplete: {lesson.incomplete}</span>
-                </div>
-              </div>
+              </button>
+            </PDFErrorBoundary>
+          </div>
+          <div className={styles.Summary}>
+            <div className={styles.SummaryCard} data-status="correct">
+              <div>Correct</div>
+              <strong>{data.totals.correct}</strong>
             </div>
-          ))}
-        </section>
+            <div className={styles.SummaryCard} data-status="incorrect">
+              <div>Incorrect</div>
+              <strong>{data.totals.incorrect}</strong>
+            </div>
+            <div className={styles.SummaryCard}>
+              <div>Incomplete</div>
+              <strong>{data.totals.incomplete}</strong>
+            </div>
+            <div className={styles.SummaryCard}>
+              <div>Overall</div>
+              <strong>{`${data.totals.percent}%`}</strong>
+              <span>{` (${data.totals.correct} / ${data.totals.total})`}</span>
+            </div>
+          </div>
+          <section className={styles.Section}>
+            <h2 className={styles.SectionTitle}>Lessons</h2>
+            {data.lessons.map(lesson => (
+              <div className={styles.LessonCard} key={lesson.lessonId}>
+                <div className={styles.LessonHeader}>
+                  <Link to={`/lessons/${lesson.lessonId}`} className={styles.LessonTitle}>
+                    Lesson {lesson.lessonId}
+                  </Link>
+                  {lesson.requiredSpaces && (
+                    <div className={styles.RequiredSpaces}>
+                      <img
+                        height={settings.fontSize === 'L' ? 18 : 14}
+                        src="/icons/check-circle.png"
+                        alt="correct"
+                      />{' '}
+                      Required spaces
+                    </div>
+                  )}
+                </div>
+                <div className={styles.ProgressText}>
+                  {lesson.correct} / {lesson.total} lines correct ({Math.round(lesson.percent)}%)
+                </div>
+                <div className={styles.BarTrack} aria-hidden="true">
+                  <div
+                    className={styles.BarFillCorrect}
+                    style={{ width: `${lesson.correctPercent}%` }}
+                  />
+                  <div
+                    className={styles.BarFillIncorrect}
+                    style={{
+                      width: `${lesson.incorrectPercent}%`,
+                      left: `${lesson.correctPercent}%`
+                    }}
+                  />
+                </div>
+                <div className={styles.StatusIndicators}>
+                  <div className={styles.StatusItem}>
+                    <div className={styles.StatusDot} data-status="correct" />
+                    <span>Correct: {lesson.correct}</span>
+                  </div>
+                  <div className={styles.StatusItem}>
+                    <div className={styles.StatusDot} data-status="incorrect" />
+                    <span>Incorrect: {lesson.incorrect}</span>
+                  </div>
+                  <div className={styles.StatusItem}>
+                    <div className={styles.StatusDot} data-status="incomplete" />
+                    <span>Incomplete: {lesson.incomplete}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </section>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
