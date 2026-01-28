@@ -33,7 +33,8 @@ const CustomToggle = forwardRef<HTMLButtonElement, CustomToggleProps>(
 CustomToggle.displayName = 'CustomToggle';
 
 export const SettingsMenu = (): ReactElement => {
-  const { settings, toggleDarkMode, setFontSize, toggleHighContrast, toggleReducedMotion } = useTheme();
+  const { settings, toggleDarkMode, setFontSize, toggleHighContrast, toggleReducedMotion } =
+    useTheme();
   const [showResetModal, setShowResetModal] = useState(false);
 
   const handleResetAnswers = (): void => {
