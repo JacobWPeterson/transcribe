@@ -1,7 +1,7 @@
 import type { ReactElement, Ref, MouseEvent, ReactNode } from 'react';
 import { forwardRef, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { Moon, Settings, Sun, Trash2, Type, Zap } from 'react-feather';
+import { Moon, Settings, Sun, Trash2, Type, Zap, Minimize2 } from 'react-feather';
 import classNames from 'classnames';
 
 import { CELEBRATION_SHOWN_KEY } from '../../utils/localStorage';
@@ -33,7 +33,7 @@ const CustomToggle = forwardRef<HTMLButtonElement, CustomToggleProps>(
 CustomToggle.displayName = 'CustomToggle';
 
 export const SettingsMenu = (): ReactElement => {
-  const { settings, toggleDarkMode, setFontSize, toggleHighContrast } = useTheme();
+  const { settings, toggleDarkMode, setFontSize, toggleHighContrast, toggleReducedMotion } = useTheme();
   const [showResetModal, setShowResetModal] = useState(false);
 
   const handleResetAnswers = (): void => {
@@ -119,6 +119,28 @@ export const SettingsMenu = (): ReactElement => {
                 onChange={toggleHighContrast}
                 aria-label={
                   settings.highContrast ? 'Disable high contrast' : 'Enable high contrast'
+                }
+              />
+              <span
+                className={classNames(styles.ToggleSlider, {
+                  [styles.Small]: settings.fontSize === 'S',
+                  [styles.Large]: settings.fontSize === 'L'
+                })}
+              />
+            </label>
+          </div>
+          <div className={styles.Divider} />
+          <div className={styles.DropdownItem}>
+            <label className={styles.ToggleControl}>
+              <Minimize2 size={settings.fontSize === 'L' ? 20 : 16} />
+              <span>Reduce motion</span>
+              <input
+                className={styles.Checkbox}
+                type="checkbox"
+                checked={settings.reducedMotion}
+                onChange={toggleReducedMotion}
+                aria-label={
+                  settings.reducedMotion ? 'Disable reduced motion' : 'Enable reduced motion'
                 }
               />
               <span
