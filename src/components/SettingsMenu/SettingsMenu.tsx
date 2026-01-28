@@ -4,6 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { Moon, Settings, Sun, Trash2, Type, Zap } from 'react-feather';
 import classNames from 'classnames';
 
+import { CELEBRATION_SHOWN_KEY } from '../../utils/localStorage';
 import { useTheme, type FontSize } from '../../contexts/ThemeContext';
 
 import styles from './SettingsMenu.module.scss';
@@ -49,6 +50,9 @@ export const SettingsMenu = (): ReactElement => {
 
     // Remove all collected keys
     keysToRemove.forEach(key => localStorage.removeItem(key));
+
+    // Reset the celebration shown flag so user can see it again after resetting
+    localStorage.removeItem(CELEBRATION_SHOWN_KEY);
 
     setShowResetModal(false);
     // Reload the page to reset the UI state
