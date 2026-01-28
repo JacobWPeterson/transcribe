@@ -23,6 +23,14 @@
   @media (width < 1024px) {
     font-size: theme.$fontSizeSmaller;
   }
+
+  .LeftIcon {
+    transform: rotate(180deg);
+  }
+
+  .SlidersIcon {
+    transform: rotate(-90deg);
+  }
 }
 
 .H1 {

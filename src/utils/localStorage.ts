@@ -9,6 +9,7 @@ export interface LessonProgress {
 }
 
 const STORAGE_PREFIX = 'transcribe-progress-';
+export const CELEBRATION_SHOWN_KEY = 'transcribe-celebration-shown';
 
 /**
  * Generate a storage key that includes both the manifest set and lesson ID

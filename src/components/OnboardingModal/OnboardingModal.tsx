@@ -185,7 +185,9 @@ const slides: Slide[] = [
           <strong>
             Report <Download size={16} />
           </strong>{' '}
-          below the final line of any lesson to download a PDF showing your work on that lesson
+          below the final line of any lesson to download a PDF showing your work on that lesson.
+          Alternatively, the Dashboard (see Lessons &gt; Dashboard) allows you to create a single
+          PDF of all your progress.
         </p>
         <p className={styles.Encouragement}>Happy transcribing!</p>
       </>

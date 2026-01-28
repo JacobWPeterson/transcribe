@@ -65,6 +65,7 @@ export const getCurrentThemeState = (): ThemeSettings => {
   return {
     darkMode: hasDataAttribute('theme', 'dark'),
     highContrast: hasDataAttribute('high-contrast', 'true'),
+    reducedMotion: hasDataAttribute('reduced-motion', 'true'),
     fontSize: document.documentElement.getAttribute('data-font-size') || ('M' as FontSize)
   } as ThemeSettings;
 };

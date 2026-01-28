@@ -28,6 +28,12 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
       root.removeAttribute('data-high-contrast');
     }
 
+    if (settings.reducedMotion) {
+      root.setAttribute('data-reduced-motion', 'true');
+    } else {
+      root.removeAttribute('data-reduced-motion');
+    }
+
     root.setAttribute('data-font-size', settings.fontSize);
 
     // Update body styles

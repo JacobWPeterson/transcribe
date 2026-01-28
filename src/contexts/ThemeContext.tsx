@@ -7,6 +7,7 @@ export interface ThemeSettings {
   darkMode: boolean;
   fontSize: FontSize;
   highContrast: boolean;
+  reducedMotion: boolean;
 }
 
 interface ThemeContextType {
@@ -14,25 +15,44 @@ interface ThemeContextType {
   toggleDarkMode: () => void;
   setFontSize: (size: FontSize) => void;
   toggleHighContrast: () => void;
+  toggleReducedMotion: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 const STORAGE_KEY = 'transcribe-theme-settings';
 
+const getSystemReducedMotion = (): boolean => {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+};
+
 const defaultSettings: ThemeSettings = {
   darkMode: false,
   fontSize: 'M',
-  highContrast: false
+  highContrast: false,
+  reducedMotion: false // Will be overridden by system preference or localStorage
 };
 
 export const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => {
   const [settings, setSettings] = useState<ThemeSettings>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      return stored ? { ...defaultSettings, ...JSON.parse(stored) } : defaultSettings;
+      if (stored) {
+        return { ...defaultSettings, ...JSON.parse(stored) };
+      }
+      // No stored settings, use defaults with system preference for reducedMotion
+      return {
+        ...defaultSettings,
+        reducedMotion: getSystemReducedMotion()
+      };
     } catch {
-      return defaultSettings;
+      return {
+        ...defaultSettings,
+        reducedMotion: getSystemReducedMotion()
+      };
     }
   });
 
@@ -56,8 +76,14 @@ export const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => 
     setSettings(prev => ({ ...prev, highContrast: !prev.highContrast }));
   };
 
+  const toggleReducedMotion = (): void => {
+    setSettings(prev => ({ ...prev, reducedMotion: !prev.reducedMotion }));
+  };
+
   return (
-    <ThemeContext.Provider value={{ settings, toggleDarkMode, setFontSize, toggleHighContrast }}>
+    <ThemeContext.Provider
+      value={{ settings, toggleDarkMode, setFontSize, toggleHighContrast, toggleReducedMotion }}
+    >
       {children}
     </ThemeContext.Provider>
   );
