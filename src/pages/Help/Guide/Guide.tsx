@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { useNavigate } from 'react-router';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
-import { BookOpen } from 'react-feather';
+import { BookOpen, Menu, MinusCircle, PlayCircle, PlusCircle, Sliders } from 'react-feather';
 
 import styles from '../Help.module.scss';
 
@@ -158,22 +158,24 @@ export const Guide = (): ReactElement => {
         <h3 className={styles.H3}>Image viewer</h3>
         <p className={styles.GuideText}>
           The image viewer loads with the image of the page for that lesson. Basic controls for
-          zooming in (+) and out (-) on the image are located at the bottom. You can also click the
-          image or use swipe actions to zoom in and out. There you will also find left (◀) and right
-          (▶) arrow buttons that will take you to different pages of the manuscript, which can be
-          useful for getting a better idea of that particular scribe&apos;s letter formations. If
-          you navigate away from the target image, a message will pop up to remind you which image
-          the lesson covers so you can navigate back.
+          zooming in (<PlusCircle size={18} />) and out (<MinusCircle size={18} />) on the image are
+          located at the bottom. You can also click the image or use swipe actions to zoom in and
+          out. There you will also find left (<PlayCircle size={18} className={styles.LeftIcon} />)
+          and right (<PlayCircle size={18} />) arrow buttons that will take you to different pages
+          of the manuscript, which can be useful for getting a better idea of that particular
+          scribe&apos;s letter formations. If you navigate away from the target image, a message
+          will pop up to remind you which image the lesson covers so you can navigate back.
         </p>
         <p className={styles.GuideText}>
-          At the top right is a circular button. Clicking this opens a menu of options for altering
-          the appearance of the image, such as adjusting the brightness or contrast. <br />
+          The <Sliders size={18} className={styles.SlidersIcon} /> button in the top right opens a
+          menu of options for altering the appearance of the image, such as adjusting the brightness
+          or contrast. <br />
         </p>
         <p className={styles.GuideText}>
-          In the top left next to the name of the manuscript is another button you can click to
-          learn all about the manuscript. Each one has different information, but you can often
-          learn about contents, current and historical owners, location, scripts, and find a
-          bibliography of resources about that manuscript.
+          To learn more about the manuscript, click the <Menu size={18} /> icon to the left of its
+          name in the top banner. Each one has different information, but you can often learn about
+          contents, current and historical owners, location, scripts, and find a bibliography of
+          resources about that manuscript.
         </p>
         <h3 className={styles.H3}>Transcription workspace</h3>
         <p className={styles.GuideText}>
