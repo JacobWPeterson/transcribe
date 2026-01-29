@@ -124,6 +124,8 @@
       }
 
       > a {
+        display: flex;
+        align-items: center;
         &:hover,
         &:focus {
           cursor: pointer;
@@ -150,6 +152,29 @@
         padding: 8px;
         cursor: pointer;
 
+        .UserEmail {
+          font-size: theme.$fontSizeSmaller;
+          color: theme.$text;
+          padding: 4px 8px;
+          display: block;
+        }
+
+        .SignOutButton {
+          background: none;
+          border: none;
+          color: theme.$primary03;
+          cursor: pointer;
+          padding: 4px 8px;
+          font-size: theme.$fontSizeDefault;
+          text-align: left;
+          width: 100%;
+
+          &:hover {
+            color: theme.$primary04;
+            text-decoration: underline;
+          }
+        }
+
         > a {
           display: flex;
           color: theme.$primary03;
@@ -163,6 +188,26 @@
             outline-offset: 2px;
           }
         }
+      }
+    }
+
+    .AuthButton {
+      border: 1px solid theme.$primary03;
+      background-color: theme.$primary03;
+      color: theme.$grey00;
+      border-radius: 4px;
+      height: 30px;
+      margin: auto;
+      cursor: pointer;
+      font-size: theme.$fontSizeDefault;
+      font-weight: 400;
+      transition:
+        background-color 0.2s,
+        color 0.2s;
+
+      &:hover {
+        background-color: theme.$primary04;
+        border-color: theme.$primary04;
       }
     }
   }

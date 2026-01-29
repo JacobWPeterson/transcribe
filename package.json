@@ -33,6 +33,7 @@
   "homepage": "https://github.com/JacobWPeterson/transcribe#readme",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@supabase/supabase-js": "^2.93.2",
     "@testing-library/user-event": "^14.6.1",
     "bootstrap": "^5.3.8",
     "jspdf": "^4.1.0",
