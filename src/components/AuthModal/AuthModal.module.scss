@@ -7,14 +7,6 @@
   margin: 0 auto;
 }
 
-.Title {
-  font-size: theme.$fontSizeLargest;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: theme.$tertiary;
-}
-
 .Error {
   background-color: var(--error-bg, #fee);
   color: theme.$error;
@@ -22,7 +14,7 @@
   border-radius: 0.375rem;
   margin-bottom: 1rem;
   font-size: theme.$fontSizeSmaller;
-  border: 1px solid var(--error-border, #fcc);
+  border: 1px solid theme.$error;
 }
 
 .Message {
@@ -48,18 +40,16 @@
 }
 
 .Label {
-  font-size: theme.$fontSizeSmaller;
   font-weight: 500;
-  color: var(--text-primary);
+  color: theme.$primary03;
 }
 
 .Input {
   padding: 0.625rem 0.875rem;
-  border: 1px solid var(--border-color, #ccc);
+  border: variables.$defaultBorderStyle;
   border-radius: 0.375rem;
   font-size: theme.$fontSizeDefault;
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
+  background-color: theme.$grey00;
   transition:
     border-color 0.2s,
     box-shadow 0.2s;
@@ -125,9 +115,9 @@
 }
 
 .GuestMode {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-color, #e0e0e0);
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: variables.$defaultBorderStyle;
   text-align: center;
 }
 

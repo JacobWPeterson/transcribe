@@ -5,6 +5,7 @@ import { AuthModal } from '@components/AuthModal/AuthModal';
 import { useAuth } from '@contexts/AuthContext';
 import { migrateLocalProgressToSupabase } from '@utils/storageSync';
 import { User } from 'react-feather';
+import { AuthMode } from '@components/AuthModal/authModal.enum';
 
 import { ContactModal } from '../../components/ContactModal/ContactModal';
 import { SettingsMenu } from '../../components/SettingsMenu/SettingsMenu';
@@ -17,7 +18,7 @@ import styles from './AppWrapper.module.scss';
 export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
   const [showModal, setShowModal] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
+  const [authMode, setAuthMode] = useState<AuthMode>(AuthMode.SIGNIN);
   const { settings } = useTheme();
   const { user, signOut } = useAuth();
 
@@ -74,7 +75,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
     window.location.reload();
   };
 
-  const openAuthModal = (mode: 'signin' | 'signup'): void => {
+  const openAuthModal = (mode: AuthMode): void => {
     setAuthMode(mode);
     setShowAuthModal(true);
   };
@@ -137,7 +138,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
             </NavDropdown>
           ) : (
             <>
-              <button className={styles.AuthButton} onClick={() => openAuthModal('signin')}>
+              <button className={styles.AuthButton} onClick={() => openAuthModal(AuthMode.SIGNIN)}>
                 Sign in
               </button>
             </>

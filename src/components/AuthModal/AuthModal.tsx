@@ -4,19 +4,20 @@ import { useAuth } from '@contexts/AuthContext';
 import { Modal } from '@components/Modal/Modal';
 
 import styles from './AuthModal.module.scss';
+import { AuthMode } from './authModal.enum';
 
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
-  defaultMode?: 'signin' | 'signup';
+  defaultMode?: AuthMode;
 }
 
 export const AuthModal = ({
   isOpen,
   onClose,
-  defaultMode = 'signin'
+  defaultMode = AuthMode.SIGNIN
 }: AuthModalProps): ReactElement => {
-  const [mode, setMode] = useState<'signin' | 'signup' | 'reset'>(defaultMode);
+  const [mode, setMode] = useState<AuthMode>(defaultMode);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -77,7 +78,7 @@ export const AuthModal = ({
     }
   };
 
-  const switchMode = (newMode: 'signin' | 'signup' | 'reset'): void => {
+  const switchMode = (newMode: AuthMode): void => {
     setMode(newMode);
     setError('');
     setMessage('');
@@ -85,18 +86,24 @@ export const AuthModal = ({
     setConfirmPassword('');
   };
 
-  return (
-    <Modal isOpen={isOpen} handleClose={onClose} header="" isCloseDisabled={loading}>
-      <div className={styles.AuthModal}>
-        <h2 className={styles.Title}>
-          {mode === 'signin' && 'Sign In'}
-          {mode === 'signup' && 'Create Account'}
-          {mode === 'reset' && 'Reset Password'}
-        </h2>
+  const getHeader = (): string => {
+    switch (mode) {
+      case AuthMode.SIGNIN:
+        return 'Sign in';
+      case AuthMode.SIGNUP:
+        return 'Create account';
+      case AuthMode.RESET:
+        return 'Reset password';
+      default:
+        return '';
+    }
+  };
 
+  return (
+    <Modal isOpen={isOpen} handleClose={onClose} header={getHeader()} isCloseDisabled={loading}>
+      <div className={styles.AuthModal}>
         {error && <div className={styles.Error}>{error}</div>}
         {message && <div className={styles.Message}>{message}</div>}
-
         <form onSubmit={handleSubmit} className={styles.Form}>
           <div className={styles.FormGroup}>
             <label htmlFor="email" className={styles.Label}>
@@ -113,7 +120,6 @@ export const AuthModal = ({
               autoComplete="email"
             />
           </div>
-
           {mode !== 'reset' && (
             <div className={styles.FormGroup}>
               <label htmlFor="password" className={styles.Label}>
@@ -131,7 +137,6 @@ export const AuthModal = ({
               />
             </div>
           )}
-
           {mode === 'signup' && (
             <div className={styles.FormGroup}>
               <label htmlFor="confirmPassword" className={styles.Label}>
@@ -149,7 +154,6 @@ export const AuthModal = ({
               />
             </div>
           )}
-
           <button type="submit" disabled={loading} className={styles.SubmitButton}>
             {loading
               ? 'Loading...'
@@ -160,33 +164,48 @@ export const AuthModal = ({
                   : 'Send reset email'}
           </button>
         </form>
-
         <div className={styles.Links}>
           {mode === 'signin' && (
             <>
-              <button type="button" onClick={() => switchMode('reset')} className={styles.Link}>
+              <button
+                type="button"
+                onClick={() => switchMode(AuthMode.RESET)}
+                className={styles.Link}
+              >
                 Forgot password?
               </button>
-              <button type="button" onClick={() => switchMode('signup')} className={styles.Link}>
+              <button
+                type="button"
+                onClick={() => switchMode(AuthMode.SIGNUP)}
+                className={styles.Link}
+              >
                 Don't have an account? Sign up
               </button>
             </>
           )}
           {mode === 'signup' && (
-            <button type="button" onClick={() => switchMode('signin')} className={styles.Link}>
+            <button
+              type="button"
+              onClick={() => switchMode(AuthMode.SIGNIN)}
+              className={styles.Link}
+            >
               Already have an account? Sign in
             </button>
           )}
           {mode === 'reset' && (
-            <button type="button" onClick={() => switchMode('signin')} className={styles.Link}>
+            <button
+              type="button"
+              onClick={() => switchMode(AuthMode.SIGNIN)}
+              className={styles.Link}
+            >
               Back to sign in
             </button>
           )}
         </div>
-
         <div className={styles.GuestMode}>
           <p className={styles.GuestText}>
-            Continue without an account? Your progress will be saved locally only.
+            Continue as guest? Your progress will be saved to this device and this browser only.
+            Create an account to save your progress across devices.
           </p>
           <button type="button" onClick={onClose} className={styles.GuestButton}>
             Continue as guest
