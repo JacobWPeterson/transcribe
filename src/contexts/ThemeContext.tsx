@@ -1,5 +1,8 @@
 import type { PropsWithChildren, ReactElement } from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { saveUserSettingsSync, loadUserSettingsSync } from '@utils/storageSync';
+
+import { useAuth } from './AuthContext';
 
 export type FontSize = 'S' | 'M' | 'L';
 
@@ -37,6 +40,7 @@ const defaultSettings: ThemeSettings = {
 };
 
 export const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => {
+  const { user, loading: authLoading } = useAuth();
   const [settings, setSettings] = useState<ThemeSettings>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
@@ -56,13 +60,28 @@ export const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => 
     }
   });
 
+  // Load settings from Supabase when user is authenticated
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-    } catch {
-      // Ignore localStorage errors
+    if (!authLoading && user) {
+      loadUserSettingsSync(user).then(syncedSettings => {
+        if (syncedSettings) {
+          setSettings({
+            darkMode: syncedSettings.darkMode,
+            fontSize: syncedSettings.fontSize,
+            highContrast: syncedSettings.highContrast,
+            reducedMotion: syncedSettings.reducedMotion
+          });
+        }
+      });
     }
-  }, [settings]);
+  }, [user, authLoading]);
+
+  // Save settings to both localStorage and Supabase
+  useEffect(() => {
+    saveUserSettingsSync(user, settings).catch(error => {
+      console.warn('Failed to save settings:', error);
+    });
+  }, [settings, user]);
 
   const toggleDarkMode = (): void => {
     setSettings(prev => ({ ...prev, darkMode: !prev.darkMode }));
