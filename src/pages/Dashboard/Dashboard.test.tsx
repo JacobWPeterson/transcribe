@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { RenderResult } from '@testing-library/react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
+import { AuthProvider } from '@contexts/AuthContext';
 
 import { ThemeProvider } from '../../contexts/ThemeContext';
 import { LessonStatus } from '../Workspace/TranscriptionArea/SingleLine/singleLine.enum';
@@ -39,7 +40,9 @@ vi.mock('../../files/manifests', () => ({
 const renderWithRouter = (component: React.ReactElement): RenderResult => {
   return render(
     <BrowserRouter>
-      <ThemeProvider>{component}</ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider>{component}</ThemeProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 };

@@ -1,6 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { ReactNode } from 'react';
+import type { RenderResult } from '@testing-library/react';
 import { render, screen } from '@testing-library/react';
+import { AuthProvider } from '@contexts/AuthContext';
 
 import { AppWrapper } from './AppWrapper';
 
@@ -48,6 +50,14 @@ vi.mock('../../utils/localStorage', () => ({
   determineLessonToResume: (): void => determineLessonToResume()
 }));
 
+const renderWithProviders = (): RenderResult => {
+  return render(
+    <AuthProvider>
+      <AppWrapper>child</AppWrapper>
+    </AuthProvider>
+  );
+};
+
 describe('determineLessonToResume', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -80,7 +90,7 @@ describe('AppWrapper resume link', () => {
   it('hides resume link when no progress exists', () => {
     getStoredLessonIds.mockReturnValue([]);
 
-    render(<AppWrapper>child</AppWrapper>);
+    renderWithProviders();
 
     expect(screen.queryByText('Resume')).not.toBeInTheDocument();
   });
@@ -89,7 +99,7 @@ describe('AppWrapper resume link', () => {
     getStoredLessonIds.mockReturnValue([2]);
     determineLessonToResume.mockReturnValue(2);
 
-    render(<AppWrapper>child</AppWrapper>);
+    renderWithProviders();
 
     const resumeLink = screen.getByRole('link', { name: 'Resume' });
     expect(resumeLink).toHaveAttribute('href', '/lessons/2');
