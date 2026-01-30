@@ -23,7 +23,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const STORAGE_KEY = 'transcribe-theme-settings';
+export const THEME_STORAGE_KEY = 'transcribe-theme-settings';
 
 const getSystemReducedMotion = (): boolean => {
   if (typeof window === 'undefined') {
@@ -43,7 +43,7 @@ export const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => 
   const { user, loading: authLoading } = useAuth();
   const [settings, setSettings] = useState<ThemeSettings>(() => {
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
+      const stored = localStorage.getItem(THEME_STORAGE_KEY);
       if (stored) {
         return { ...defaultSettings, ...JSON.parse(stored) };
       }
