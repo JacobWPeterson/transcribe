@@ -2,6 +2,9 @@ import '@testing-library/jest-dom/vitest';
 import { cleanup } from '@testing-library/react';
 import { afterEach, vi } from 'vitest';
 
+// Mock Supabase before any tests run
+import './src/tests/setup/supabaseMock.ts';
+
 // Mock matchMedia for all tests
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
