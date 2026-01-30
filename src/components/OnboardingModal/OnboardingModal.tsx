@@ -8,9 +8,10 @@ import {
   Settings,
   Sliders
 } from 'react-feather';
+import { useAuth } from '@contexts/AuthContext';
+import { markOnboardingAsSeenSync } from '@utils/storageSync';
 
 import { Modal } from '../Modal/Modal';
-import { markOnboardingAsSeen } from '../../utils/localStorage';
 
 import styles from './OnboardingModal.module.scss';
 
@@ -201,6 +202,7 @@ export const OnboardingModal = ({
   skipMarkAsSeen = false
 }: OnboardingModalProps): ReactElement => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { user } = useAuth();
 
   const handleNext = (): void => {
     if (currentSlide < slides.length - 1) {
@@ -216,7 +218,7 @@ export const OnboardingModal = ({
 
   const handleFinish = (): void => {
     if (!skipMarkAsSeen) {
-      markOnboardingAsSeen();
+      void markOnboardingAsSeenSync(user);
     }
     onClose();
   };

@@ -1,12 +1,13 @@
-import { type ReactElement, useMemo, useRef, useState, useEffect } from 'react';
+import { type ReactElement, useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { Download } from 'react-feather';
 import { jsPDF } from 'jspdf';
 
 import { useTheme } from '../../contexts/ThemeContext';
+import { useAuth } from '../../contexts/AuthContext';
 import type { Manifest } from '../../files/manifests';
 import manifests, { ManifestSets } from '../../files/manifests';
-import { CELEBRATION_SHOWN_KEY, loadLessonProgress } from '../../utils/localStorage';
+import { CELEBRATION_SHOWN_KEY, loadLessonProgressSync } from '../../utils/storageSync';
 import { LessonStatus } from '../Workspace/TranscriptionArea/SingleLine/singleLine.enum';
 import { buildDefaultLessonStatus } from '../../utils/lessonStatus';
 import { PDFErrorBoundary } from '../../components/ErrorBoundary/SpecializedErrorBoundaries';
@@ -26,8 +27,12 @@ interface LessonProgressSummary {
   requiredSpaces: boolean;
 }
 
-const computeLessonSummary = (lessonId: string, manifest: Manifest): LessonProgressSummary => {
-  const saved = loadLessonProgress(ManifestSets.CORE, Number(lessonId));
+const computeLessonSummary = async (
+  user: ReturnType<typeof useAuth>['user'],
+  lessonId: string,
+  manifest: Manifest
+): Promise<LessonProgressSummary> => {
+  const saved = await loadLessonProgressSync(user, ManifestSets.CORE, Number(lessonId));
 
   const statusMap = saved?.status ?? buildDefaultLessonStatus(manifest.lines);
   const requiredSpaces = saved?.requireSpaces || false;
@@ -55,8 +60,19 @@ const computeLessonSummary = (lessonId: string, manifest: Manifest): LessonProgr
 
 export const Dashboard = (): ReactElement => {
   const { settings } = useTheme();
+  const { user } = useAuth();
   const dashboardRef = useRef<HTMLDivElement>(null);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [data, setData] = useState<{
+    lessons: LessonProgressSummary[];
+    totals: {
+      total: number;
+      correct: number;
+      incorrect: number;
+      incomplete: number;
+      percent: number;
+    };
+  } | null>(null);
 
   // Check localStorage on mount to see if celebration was already shown
   const [hasShownConfetti] = useState(() => {
@@ -98,36 +114,43 @@ export const Dashboard = (): ReactElement => {
     }
   };
 
-  const data = useMemo(() => {
-    const lessons = Object.keys(manifests[ManifestSets.CORE]).map(id =>
-      computeLessonSummary(id, manifests[ManifestSets.CORE][id])
-    );
+  // Load lesson data asynchronously
+  useEffect(() => {
+    const loadData = async (): Promise<void> => {
+      const lessonIds = Object.keys(manifests[ManifestSets.CORE]);
+      // eslint-disable-next-line compat/compat
+      const lessons = await Promise.all(
+        lessonIds.map(id => computeLessonSummary(user, id, manifests[ManifestSets.CORE][id]))
+      );
 
-    const totals = lessons.reduce(
-      (acc, cur) => {
-        acc.total += cur.total;
-        acc.correct += cur.correct;
-        acc.incorrect += cur.incorrect;
-        acc.incomplete += cur.incomplete;
-        return acc;
-      },
-      { total: 0, correct: 0, incorrect: 0, incomplete: 0 }
-    );
+      const totals = lessons.reduce(
+        (acc, cur) => {
+          acc.total += cur.total;
+          acc.correct += cur.correct;
+          acc.incorrect += cur.incorrect;
+          acc.incomplete += cur.incomplete;
+          return acc;
+        },
+        { total: 0, correct: 0, incorrect: 0, incomplete: 0 }
+      );
 
-    const overallPercent = totals.total ? Math.round((totals.correct / totals.total) * 100) : 0;
+      const overallPercent = totals.total ? Math.round((totals.correct / totals.total) * 100) : 0;
 
-    return {
-      lessons,
-      totals: {
-        ...totals,
-        percent: overallPercent
-      }
+      setData({
+        lessons,
+        totals: {
+          ...totals,
+          percent: overallPercent
+        }
+      });
     };
-  }, []);
+
+    loadData();
+  }, [user]);
 
   // Trigger confetti celebration when 100% is reached
   useEffect((): void => {
-    if (data.totals.percent === 100 && data.totals.total > 0 && !hasShownConfetti) {
+    if (data?.totals.percent === 100 && data.totals.total > 0 && !hasShownConfetti) {
       setShowConfetti(true);
       // Save to localStorage so celebration only shows once
       try {
@@ -136,7 +159,18 @@ export const Dashboard = (): ReactElement => {
         console.warn('Failed to save celebration shown status:', error);
       }
     }
-  }, [data.totals.percent, data.totals.total, hasShownConfetti]);
+  }, [data, hasShownConfetti]);
+
+  if (!data) {
+    return (
+      <div className={styles.Wrapper}>
+        <div className={styles.Contents}>
+          <h1 className={styles.Title}>Progress Dashboard</h1>
+          <p>Loading progress data...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

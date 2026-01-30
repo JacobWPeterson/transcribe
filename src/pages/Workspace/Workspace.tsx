@@ -7,7 +7,8 @@ import { E404 } from '../E404/E404';
 import { Alert } from '../../components/Alert/Alert';
 import { ExternalContentErrorBoundary } from '../../components/ErrorBoundary/ExternalContentErrorBoundary';
 import { OnboardingModal } from '../../components/OnboardingModal/OnboardingModal';
-import { hasSeenOnboarding } from '../../utils/localStorage';
+import { useAuth } from '../../contexts/AuthContext';
+import { hasSeenOnboardingSync } from '../../utils/storageSync';
 
 import { TranscriptionArea } from './TranscriptionArea/TranscriptionArea';
 import { Mirador } from './Mirador/index';
@@ -21,11 +22,11 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
   const currentManifest = manifestSet[id];
   const [pageNumber, setPageNumber] = useState<number>();
   const [showWrongPageAlert, setShowWrongPageAlert] = useState<boolean>(false);
+  const { user } = useAuth();
 
   const tutorialParam = searchParams.get('tutorial');
   const skipMarkAsSeen = tutorialParam === 'true';
-  const shouldShowOnboarding = skipMarkAsSeen || !hasSeenOnboarding();
-  const [showOnboarding, setShowOnboarding] = useState<boolean>(shouldShowOnboarding);
+  const [showOnboarding, setShowOnboarding] = useState<boolean>(false);
 
   const canvasIndex = currentManifest?.canvasIndex;
   const indexAdjustment = currentManifest?.canvasIndexToPageNumberAdj || 0;
@@ -38,6 +39,23 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
     }
     setShowWrongPageAlert(false);
   }, [pageNumber]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadOnboardingStatus = async (): Promise<void> => {
+      const hasSeen = await hasSeenOnboardingSync(user);
+      if (isMounted) {
+        setShowOnboarding(skipMarkAsSeen || !hasSeen);
+      }
+    };
+
+    loadOnboardingStatus();
+
+    return (): void => {
+      isMounted = false;
+    };
+  }, [user, skipMarkAsSeen]);
 
   useEffect(() => {
     setShowWrongPageAlert(false);

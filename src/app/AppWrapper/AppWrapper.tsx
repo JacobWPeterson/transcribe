@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AuthModal } from '@components/AuthModal/AuthModal';
 import { useAuth } from '@contexts/AuthContext';
-import { migrateLocalProgressToSupabase } from '@utils/storageSync';
+import {
+  migrateLocalProgressToSupabase,
+  determineLessonToResumeSync,
+  getStoredLessonIdsSync
+} from '@utils/storageSync';
 import { User } from 'react-feather';
 import { AuthMode } from '@components/AuthModal/authModal.enum';
 
@@ -11,7 +15,6 @@ import { ContactModal } from '../../components/ContactModal/ContactModal';
 import { SettingsMenu } from '../../components/SettingsMenu/SettingsMenu';
 import { useTheme } from '../../contexts/ThemeContext';
 import { ManifestSets } from '../../files/manifests';
-import { determineLessonToResume, getStoredLessonIds } from '../../utils/localStorage';
 
 import styles from './AppWrapper.module.scss';
 
@@ -19,6 +22,8 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
   const [showModal, setShowModal] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState<AuthMode>(AuthMode.SIGNIN);
+  const [savedLessonIds, setSavedLessonIds] = useState<number[]>([]);
+  const [resumeLessonId, setResumeLessonId] = useState<number | null>(null);
   const { settings } = useTheme();
   const { user, signOut } = useAuth();
 
@@ -38,6 +43,21 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
           });
       }
     }
+  }, [user]);
+
+  // Load saved lesson IDs and determine lesson to resume
+  useEffect(() => {
+    const loadLessonData = async (): Promise<void> => {
+      const ids = await getStoredLessonIdsSync(user, ManifestSets.CORE);
+      setSavedLessonIds(ids);
+
+      if (ids.length > 0) {
+        const lessonId = await determineLessonToResumeSync(user);
+        setResumeLessonId(lessonId);
+      }
+    };
+
+    loadLessonData();
   }, [user]);
 
   useEffect(() => {
@@ -67,15 +87,13 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
     document.body.style.color = 'var(--text)';
   }, [settings]);
 
-  const savedLessonIds = getStoredLessonIds(ManifestSets.CORE);
-
   const handleSignOut = async (): Promise<void> => {
     await signOut();
     // Optionally reload to clear state
     window.location.reload();
   };
 
-  const openAuthModal = (mode: AuthMode): void => {
+  const openAuthModal: (mode: AuthMode) => void = mode => {
     setAuthMode(mode);
     setShowAuthModal(true);
   };
@@ -91,11 +109,11 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
             <div className={styles.DropdownItem}>
               <a href="/lessons/1">Get started</a>
             </div>
-            {savedLessonIds.length > 0 && (
+            {savedLessonIds.length > 0 && resumeLessonId !== null && (
               <>
                 <div className={styles.Divider} />
                 <div className={styles.DropdownItem}>
-                  <a href={`/lessons/${determineLessonToResume()}`}>Resume</a>
+                  <a href={`/lessons/${resumeLessonId}`}>Resume</a>
                 </div>
               </>
             )}
@@ -125,6 +143,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
               title={<User size={settings.fontSize === 'L' ? 22 : 18} />}
               id="account-dropdown"
               className={styles.NavDropdown}
+              aria-label="User account"
             >
               <div className={styles.DropdownItem}>
                 <span className={styles.UserEmail}>{user.email}</span>
@@ -137,11 +156,9 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
               </div>
             </NavDropdown>
           ) : (
-            <>
-              <button className={styles.AuthButton} onClick={() => openAuthModal(AuthMode.SIGNIN)}>
-                Sign in
-              </button>
-            </>
+            <button className={styles.AuthButton} onClick={() => openAuthModal(AuthMode.SIGNIN)}>
+              Sign in
+            </button>
           )}
           <SettingsMenu />
         </div>

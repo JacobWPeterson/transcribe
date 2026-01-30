@@ -2,11 +2,17 @@ import type { ReactElement } from 'react';
 import { createElement, useEffect } from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router';
+import { AuthProvider } from '@contexts/AuthContext';
 
 import type { Manifest } from '../../files/manifests';
 import manifests, { ManifestSets } from '../../files/manifests';
 
 import { Workspace } from './Workspace';
+
+vi.mock('../../utils/storageSync', () => ({
+  // eslint-disable-next-line compat/compat
+  hasSeenOnboardingSync: vi.fn(() => Promise.resolve(true))
+}));
 
 let pageNumToSet: number | undefined = undefined;
 
@@ -53,11 +59,13 @@ describe('Workspace', () => {
 
   it('renders Mirador and TranscriptionArea for a valid lesson and no wrong-page alert by default', () => {
     render(
-      <MemoryRouter initialEntries={['/lessons/1']}>
-        <Routes>
-          <Route path="/lessons/:id" element={<Workspace set={ManifestSets.CORE} />} />
-        </Routes>
-      </MemoryRouter>
+      <AuthProvider>
+        <MemoryRouter initialEntries={['/lessons/1']}>
+          <Routes>
+            <Route path="/lessons/:id" element={<Workspace set={ManifestSets.CORE} />} />
+          </Routes>
+        </MemoryRouter>
+      </AuthProvider>
     );
 
     expect(screen.getByTestId('mirador')).toBeInTheDocument();
@@ -71,11 +79,13 @@ describe('Workspace', () => {
     pageNumToSet = 1;
 
     render(
-      <MemoryRouter initialEntries={['/lessons/1']}>
-        <Routes>
-          <Route path="/lessons/:id" element={<Workspace set={ManifestSets.CORE} />} />
-        </Routes>
-      </MemoryRouter>
+      <AuthProvider>
+        <MemoryRouter initialEntries={['/lessons/1']}>
+          <Routes>
+            <Route path="/lessons/:id" element={<Workspace set={ManifestSets.CORE} />} />
+          </Routes>
+        </MemoryRouter>
+      </AuthProvider>
     );
 
     // Alert should appear mentioning the target canvas index
@@ -88,11 +98,13 @@ describe('Workspace', () => {
 
   it('renders E404 when lesson id is not present in manifests', () => {
     render(
-      <MemoryRouter initialEntries={['/lessons/9999']}>
-        <Routes>
-          <Route path="/lessons/:id" element={<Workspace set={ManifestSets.CORE} />} />
-        </Routes>
-      </MemoryRouter>
+      <AuthProvider>
+        <MemoryRouter initialEntries={['/lessons/9999']}>
+          <Routes>
+            <Route path="/lessons/:id" element={<Workspace set={ManifestSets.CORE} />} />
+          </Routes>
+        </MemoryRouter>
+      </AuthProvider>
     );
 
     expect(screen.getByText(/Οοπς, παγε νοτ φουνδ!/i)).toBeInTheDocument();
