@@ -3,7 +3,7 @@ import { supabase } from '@config/supabase';
 import type { User } from '@supabase/supabase-js';
 import type { ManifestSets } from '@files/manifests';
 import type { LessonStatus } from '@pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum';
-import type { ThemeSettings } from '@contexts/ThemeContext';
+import { THEME_STORAGE_KEY, type ThemeSettings } from '@contexts/ThemeContext';
 
 import type { LessonProgress } from './localStorage';
 
@@ -237,7 +237,7 @@ export const migrateLocalProgressToSupabase = async (user: User): Promise<void> 
     }
 
     // Migrate settings
-    const settingsKey = 'transcribe-settings';
+    const settingsKey = THEME_STORAGE_KEY;
     const settings = localStorage.getItem(settingsKey);
     if (settings) {
       try {
@@ -312,7 +312,7 @@ export const loadUserSettingsSync = async (
   }
 
   // Fall back to localStorage
-  const settingsKey = 'transcribe-settings';
+  const settingsKey = THEME_STORAGE_KEY;
   const settings = localStorage.getItem(settingsKey);
   if (settings) {
     return JSON.parse(settings) as {
@@ -336,7 +336,7 @@ export const saveUserSettingsSync = async (
   settings: SupabaseUserSettings
 ): Promise<void> => {
   // Save to localStorage
-  const settingsKey = 'transcribe-settings';
+  const settingsKey = THEME_STORAGE_KEY;
   try {
     localStorage.setItem(settingsKey, JSON.stringify(settings));
   } catch (error) {
