@@ -1,11 +1,20 @@
 /* eslint-disable no-console */
 import { supabase } from '@config/supabase';
 import type { User } from '@supabase/supabase-js';
-import type { ManifestSets } from '@files/manifests';
-import type { LessonStatus } from '@pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum';
+import manifests, { ManifestSets } from '@files/manifests';
+import { LessonStatus } from '@pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum';
 import { THEME_STORAGE_KEY, type ThemeSettings } from '@contexts/ThemeContext';
 
-import type { LessonProgress } from './localStorage';
+const STORAGE_PREFIX = 'transcribe-progress-';
+export const CELEBRATION_SHOWN_KEY = 'transcribe-celebration-shown';
+export const ONBOARDING_SEEN_KEY = 'transcribe-onboarding-seen';
+
+export interface LessonProgress {
+  answers: Record<number, string>; // line index -> submitted answer
+  status: Record<number, LessonStatus>; // line index -> status
+  requireSpaces: boolean;
+  lastUpdated: number; // timestamp
+}
 
 interface SupabaseLessonProgress {
   answers: Record<number, string>;
@@ -34,7 +43,7 @@ export const saveLessonProgressSync = async (
   progress: LessonProgress
 ): Promise<void> => {
   // Always save to localStorage for immediate access
-  const key = `transcribe-progress-${set}-${lessonId}`;
+  const key = `${STORAGE_PREFIX}${set}-${lessonId}`;
   try {
     localStorage.setItem(key, JSON.stringify(progress));
   } catch (error) {
@@ -102,7 +111,7 @@ export const loadLessonProgressSync = async (
   }
 
   // Fall back to localStorage
-  const key = `transcribe-progress-${set}-${lessonId}`;
+  const key = `${STORAGE_PREFIX}${set}-${lessonId}`;
   try {
     const stored = localStorage.getItem(key);
     if (stored) {
@@ -124,7 +133,7 @@ export const clearLessonProgressSync = async (
   lessonId: number
 ): Promise<void> => {
   // Clear from localStorage
-  const key = `transcribe-progress-${set}-${lessonId}`;
+  const key = `${STORAGE_PREFIX}${set}-${lessonId}`;
   try {
     localStorage.removeItem(key);
   } catch (error) {
@@ -175,7 +184,7 @@ export const getStoredLessonIdsSync = async (
   // Fall back to localStorage
   try {
     const keys = Object.keys(localStorage);
-    const setPrefix = `transcribe-progress-${set}-`;
+    const setPrefix = `${STORAGE_PREFIX}${set}-`;
     return keys
       .filter(key => key.startsWith(setPrefix))
       .map(key => parseInt(key.replace(setPrefix, ''), 10))
@@ -194,7 +203,7 @@ export const migrateLocalProgressToSupabase = async (user: User): Promise<void> 
 
   try {
     const keys = Object.keys(localStorage);
-    const progressKeys = keys.filter(key => key.startsWith('transcribe-progress-'));
+    const progressKeys = keys.filter(key => key.startsWith(STORAGE_PREFIX));
 
     for (const key of progressKeys) {
       try {
@@ -206,7 +215,7 @@ export const migrateLocalProgressToSupabase = async (user: User): Promise<void> 
         const progress: LessonProgress = JSON.parse(stored);
 
         // Extract set and lessonId from key (format: transcribe-progress-{set}-{id})
-        const parts = key.replace('transcribe-progress-', '').split('-');
+        const parts = key.replace(STORAGE_PREFIX, '').split('-');
         if (parts.length < 2) {
           continue;
         }
@@ -248,8 +257,8 @@ export const migrateLocalProgressToSupabase = async (user: User): Promise<void> 
           font_size: parsed.fontSize ?? 'M',
           high_contrast: parsed.highContrast ?? false,
           reduced_motion: parsed.reducedMotion ?? false,
-          onboarding_seen: localStorage.getItem('transcribe-onboarding-seen') === 'true',
-          celebration_shown: localStorage.getItem('transcribe-celebration-shown') === 'true'
+          onboarding_seen: localStorage.getItem(ONBOARDING_SEEN_KEY) === 'true',
+          celebration_shown: localStorage.getItem(CELEBRATION_SHOWN_KEY) === 'true'
         } as never);
         console.log('Migrated user settings');
       } catch (error) {
@@ -262,6 +271,39 @@ export const migrateLocalProgressToSupabase = async (user: User): Promise<void> 
     console.error('Migration failed:', error);
     throw error;
   }
+};
+
+/**
+ * Determine which lesson to resume based on stored progress
+ * Returns the most recently updated incomplete lesson, or the first lesson if no progress exists
+ */
+export const determineLessonToResumeSync = async (user: User | null): Promise<number> => {
+  const storedIds = await getStoredLessonIdsSync(user, ManifestSets.CORE);
+
+  // No stored progress: default to the first available lesson (lowest numeric id)
+  if (!storedIds.length) {
+    const coreLessonIds = Object.keys(manifests[ManifestSets.CORE]).map(id => Number(id));
+    return Math.min(...coreLessonIds);
+  }
+
+  // Load progress for all stored lessons
+  // eslint-disable-next-line compat/compat
+  const progressList = await Promise.all(
+    storedIds.map(async id => {
+      const progress = await loadLessonProgressSync(user, ManifestSets.CORE, id);
+      const statusValues = progress?.status ? Object.values(progress.status) : [];
+      const isComplete =
+        statusValues.length > 0 && statusValues.every(status => status === LessonStatus.CORRECT);
+      return { id, lastUpdated: progress?.lastUpdated ?? 0, isComplete };
+    })
+  );
+
+  // Sort by most recently updated first
+  progressList.sort((a, b) => b.lastUpdated - a.lastUpdated);
+
+  // Return the most recent incomplete lesson, or the most recent lesson if all complete
+  const latestIncomplete = progressList.find(item => !item.isComplete);
+  return (latestIncomplete ?? progressList[0]).id;
 };
 
 /**
@@ -355,6 +397,59 @@ export const saveUserSettingsSync = async (
       } as never);
     } catch (error) {
       console.warn('Failed to save settings to Supabase:', error);
+    }
+  }
+};
+
+/**
+ * Check if user has seen the onboarding flow (Supabase if authenticated, otherwise localStorage)
+ */
+export const hasSeenOnboardingSync = async (user: User | null): Promise<boolean> => {
+  if (user) {
+    try {
+      const { data, error } = await supabase
+        .from('user_settings')
+        .select('onboarding_seen')
+        .eq('user_id', user.id)
+        .single();
+
+      const row = data as { onboarding_seen: boolean | null } | null;
+      if (!error && row && typeof row.onboarding_seen === 'boolean') {
+        return row.onboarding_seen;
+      }
+    } catch (error) {
+      console.warn('Failed to check onboarding status from Supabase:', error);
+    }
+  }
+
+  try {
+    return localStorage.getItem(ONBOARDING_SEEN_KEY) === 'true';
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.warn('Failed to check onboarding status:', errorMessage);
+    return false;
+  }
+};
+
+/**
+ * Mark onboarding as seen (Supabase if authenticated, otherwise localStorage)
+ */
+export const markOnboardingAsSeenSync = async (user: User | null): Promise<void> => {
+  try {
+    localStorage.setItem(ONBOARDING_SEEN_KEY, 'true');
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.warn('Failed to mark onboarding as seen:', errorMessage);
+  }
+
+  if (user) {
+    try {
+      await supabase.from('user_settings').upsert({
+        user_id: user.id,
+        onboarding_seen: true
+      } as never);
+    } catch (error) {
+      console.warn('Failed to mark onboarding as seen in Supabase:', error);
     }
   }
 };
