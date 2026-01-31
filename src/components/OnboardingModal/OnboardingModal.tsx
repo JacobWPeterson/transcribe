@@ -172,7 +172,10 @@ const slides: Slide[] = [
     title: 'Ready to begin!',
     content: (
       <>
-        <p>You&rsquo;re all set to start your first lesson!</p>
+        <p>
+          You&rsquo;re all set to start your first lesson! Create an account to save your progress
+          more securely and to be able to access it from any device.
+        </p>
         <p>
           Remember, learning to read manuscripts takes practice. Don&rsquo;t worry if it seems
           challenging at first &ndash; that&rsquo;s completely normal.
