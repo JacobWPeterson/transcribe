@@ -1,18 +1,64 @@
 import type { PropsWithChildren, ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { AuthModal } from '@components/AuthModal/AuthModal';
+import { useAuth } from '@contexts/AuthContext';
+import {
+  migrateLocalProgressToSupabase,
+  determineLessonToResumeSync,
+  getStoredLessonIdsSync
+} from '@utils/storageSync';
+import { User } from 'react-feather';
+import { AuthMode } from '@components/AuthModal/authModal.enum';
 
 import { ContactModal } from '../../components/ContactModal/ContactModal';
 import { SettingsMenu } from '../../components/SettingsMenu/SettingsMenu';
 import { useTheme } from '../../contexts/ThemeContext';
 import { ManifestSets } from '../../files/manifests';
-import { determineLessonToResume, getStoredLessonIds } from '../../utils/localStorage';
 
 import styles from './AppWrapper.module.scss';
 
 export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
   const [showModal, setShowModal] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState<AuthMode>(AuthMode.SIGNIN);
+  const [savedLessonIds, setSavedLessonIds] = useState<number[]>([]);
+  const [resumeLessonId, setResumeLessonId] = useState<number | null>(null);
   const { settings } = useTheme();
+  const { user, signOut } = useAuth();
+
+  // Migrate localStorage data to Supabase when user first signs in
+  useEffect(() => {
+    if (user) {
+      const migrationKey = `transcribe-migration-${user.id}`;
+      const hasMigrated = localStorage.getItem(migrationKey);
+
+      if (!hasMigrated) {
+        migrateLocalProgressToSupabase(user)
+          .then(() => {
+            localStorage.setItem(migrationKey, 'true');
+          })
+          .catch(error => {
+            console.error('Migration failed:', error);
+          });
+      }
+    }
+  }, [user]);
+
+  // Load saved lesson IDs and determine lesson to resume
+  useEffect(() => {
+    const loadLessonData = async (): Promise<void> => {
+      const ids = await getStoredLessonIdsSync(user, ManifestSets.CORE);
+      setSavedLessonIds(ids);
+
+      if (ids.length > 0) {
+        const lessonId = await determineLessonToResumeSync(user);
+        setResumeLessonId(lessonId);
+      }
+    };
+
+    loadLessonData();
+  }, [user]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -41,7 +87,16 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
     document.body.style.color = 'var(--text)';
   }, [settings]);
 
-  const savedLessonIds = getStoredLessonIds(ManifestSets.CORE);
+  const handleSignOut = async (): Promise<void> => {
+    await signOut();
+    // Optionally reload to clear state
+    window.location.reload();
+  };
+
+  const openAuthModal: (mode: AuthMode) => void = mode => {
+    setAuthMode(mode);
+    setShowAuthModal(true);
+  };
 
   return (
     <div className={styles.AppWrapper}>
@@ -54,11 +109,11 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
             <div className={styles.DropdownItem}>
               <a href="/lessons/1">Get started</a>
             </div>
-            {savedLessonIds.length > 0 && (
+            {savedLessonIds.length > 0 && resumeLessonId !== null && (
               <>
                 <div className={styles.Divider} />
                 <div className={styles.DropdownItem}>
-                  <a href={`/lessons/${determineLessonToResume()}`}>Resume</a>
+                  <a href={`/lessons/${resumeLessonId}`}>Resume</a>
                 </div>
               </>
             )}
@@ -83,6 +138,28 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
           <a className={styles.NavLink} href="/about" data-replace="About">
             <span>About</span>
           </a>
+          {user ? (
+            <NavDropdown
+              title={<User size={settings.fontSize === 'L' ? 22 : 18} />}
+              id="account-dropdown"
+              className={styles.NavDropdown}
+              aria-label="User account"
+            >
+              <div className={styles.DropdownItem}>
+                <span className={styles.UserEmail}>{user.email}</span>
+              </div>
+              <div className={styles.Divider} />
+              <div className={styles.DropdownItem}>
+                <button onClick={handleSignOut} className={styles.SignOutButton}>
+                  Sign out
+                </button>
+              </div>
+            </NavDropdown>
+          ) : (
+            <button className={styles.AuthButton} onClick={() => openAuthModal(AuthMode.SIGNIN)}>
+              Sign in
+            </button>
+          )}
           <SettingsMenu />
         </div>
       </div>
@@ -111,6 +188,11 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
         </div>
       </footer>
       <ContactModal onHide={() => setShowModal(false)} show={showModal} />
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        defaultMode={authMode}
+      />
     </div>
   );
 };

@@ -1,12 +1,19 @@
+import type { RenderResult } from '@testing-library/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import manifests, { ManifestSets } from '../../../files/manifests';
+import { AuthProvider } from '../../../contexts/AuthContext';
 
 import { LessonStatus } from './SingleLine/singleLine.enum';
 import { TranscriptionArea } from './TranscriptionArea';
 
 const mockChangeManuscript = vi.fn();
+
+// Helper to render with AuthProvider
+const renderWithAuth = (component: React.ReactElement): RenderResult => {
+  return render(<AuthProvider>{component}</AuthProvider>);
+};
 
 describe('TranscriptionArea', () => {
   beforeEach(() => {
@@ -18,7 +25,7 @@ describe('TranscriptionArea', () => {
     vi.clearAllMocks();
   });
   it('should render correctly for first lesson', async () => {
-    render(
+    renderWithAuth(
       <TranscriptionArea
         changeManuscript={mockChangeManuscript}
         numberOfLessons={3}
@@ -62,7 +69,7 @@ describe('TranscriptionArea', () => {
   });
 
   it('should render correctly for middle lesson', async () => {
-    render(
+    renderWithAuth(
       <TranscriptionArea
         changeManuscript={mockChangeManuscript}
         numberOfLessons={3}
@@ -108,7 +115,7 @@ describe('TranscriptionArea', () => {
   });
 
   it('should render correctly for last lesson', async () => {
-    render(
+    renderWithAuth(
       <TranscriptionArea
         changeManuscript={mockChangeManuscript}
         numberOfLessons={3}
@@ -152,7 +159,7 @@ describe('TranscriptionArea', () => {
   });
 
   it('correctly revalidates a line when user changes from requireSpaces false to true', async () => {
-    render(
+    renderWithAuth(
       <TranscriptionArea
         changeManuscript={mockChangeManuscript}
         numberOfLessons={3}
@@ -186,7 +193,7 @@ describe('TranscriptionArea', () => {
   });
 
   it('correctly revalidates a line when user changes from requireSpaces true to false', async () => {
-    render(
+    renderWithAuth(
       <TranscriptionArea
         changeManuscript={mockChangeManuscript}
         numberOfLessons={3}
@@ -223,7 +230,7 @@ describe('TranscriptionArea', () => {
     expect(screen.queryByRole('img', { name: 'incorrect' })).not.toBeInTheDocument();
   });
 
-  it('hydrates saved progress and shows correct indicators and StatusReport on first render', () => {
+  it('hydrates saved progress and shows correct indicators and StatusReport on first render', async () => {
     const set = ManifestSets.CORE;
     const lessonNumber = 1;
     const lesson = manifests[set][lessonNumber];
@@ -250,7 +257,7 @@ describe('TranscriptionArea', () => {
       })
     );
 
-    render(
+    renderWithAuth(
       <TranscriptionArea
         changeManuscript={mockChangeManuscript}
         numberOfLessons={Object.keys(manifests[set]).length}
@@ -260,14 +267,16 @@ describe('TranscriptionArea', () => {
       />
     );
 
-    // First render should immediately show the saved correct state
-    expect(screen.getAllByRole('img', { name: 'correct' })).toHaveLength(1);
+    // Wait for async hydration from loadLessonProgressSync
+    await waitFor(() => {
+      expect(screen.getAllByRole('img', { name: 'correct' })).toHaveLength(1);
+    });
 
     // StatusReport reflects 1 correct (we don't assert totals to avoid coupling)
     expect(screen.getByText(/Correct:\s*1/)).toBeInTheDocument();
   });
 
-  it('hydrates with requireSpaces=true and mixed saved statuses', () => {
+  it('hydrates with requireSpaces=true and mixed saved statuses', async () => {
     const set = ManifestSets.CORE;
     const lessonNumber = 3;
     const lesson = manifests[set][lessonNumber];
@@ -296,7 +305,7 @@ describe('TranscriptionArea', () => {
       })
     );
 
-    render(
+    renderWithAuth(
       <TranscriptionArea
         changeManuscript={mockChangeManuscript}
         numberOfLessons={Object.keys(manifests[set]).length}
@@ -306,9 +315,11 @@ describe('TranscriptionArea', () => {
       />
     );
 
-    // Saved indicators appear immediately
-    expect(screen.getAllByRole('img', { name: 'correct' })).toHaveLength(1);
-    expect(screen.getAllByRole('img', { name: 'incorrect' })).toHaveLength(1);
+    // Wait for async hydration from loadLessonProgressSync
+    await waitFor(() => {
+      expect(screen.getAllByRole('img', { name: 'correct' })).toHaveLength(1);
+      expect(screen.getAllByRole('img', { name: 'incorrect' })).toHaveLength(1);
+    });
 
     // StatusReport reflects mixed state (1 correct, 1 incorrect)
     expect(screen.getByText(/Correct:\s*1/)).toBeInTheDocument();
@@ -328,7 +339,7 @@ describe('TranscriptionArea', () => {
     // Ensure localStorage is empty for this lesson
     expect(localStorage.getItem(`transcribe-progress-${set}-${lessonNumber}`)).toBeNull();
 
-    render(
+    renderWithAuth(
       <TranscriptionArea
         changeManuscript={mockChangeManuscript}
         numberOfLessons={Object.keys(manifests[set]).length}

@@ -3,8 +3,8 @@ import { forwardRef, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Moon, Settings, Sun, Trash2, Type, Zap, Minimize2 } from 'react-feather';
 import classNames from 'classnames';
+import { CELEBRATION_SHOWN_KEY } from '@utils/storageSync';
 
-import { CELEBRATION_SHOWN_KEY } from '../../utils/localStorage';
 import { useTheme, type FontSize } from '../../contexts/ThemeContext';
 
 import styles from './SettingsMenu.module.scss';

@@ -8,9 +8,10 @@ import {
   Settings,
   Sliders
 } from 'react-feather';
+import { useAuth } from '@contexts/AuthContext';
+import { markOnboardingAsSeenSync } from '@utils/storageSync';
 
 import { Modal } from '../Modal/Modal';
-import { markOnboardingAsSeen } from '../../utils/localStorage';
 
 import styles from './OnboardingModal.module.scss';
 
@@ -171,7 +172,10 @@ const slides: Slide[] = [
     title: 'Ready to begin!',
     content: (
       <>
-        <p>You&rsquo;re all set to start your first lesson!</p>
+        <p>
+          You&rsquo;re all set to start your first lesson! Create an account to save your progress
+          more securely and to be able to access it from any device.
+        </p>
         <p>
           Remember, learning to read manuscripts takes practice. Don&rsquo;t worry if it seems
           challenging at first &ndash; that&rsquo;s completely normal.
@@ -201,6 +205,7 @@ export const OnboardingModal = ({
   skipMarkAsSeen = false
 }: OnboardingModalProps): ReactElement => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { user } = useAuth();
 
   const handleNext = (): void => {
     if (currentSlide < slides.length - 1) {
@@ -216,7 +221,7 @@ export const OnboardingModal = ({
 
   const handleFinish = (): void => {
     if (!skipMarkAsSeen) {
-      markOnboardingAsSeen();
+      void markOnboardingAsSeenSync(user);
     }
     onClose();
   };
