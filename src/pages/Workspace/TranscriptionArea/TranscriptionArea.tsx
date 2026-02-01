@@ -9,7 +9,11 @@ import {
   LocalStorageErrorBoundary,
   PDFErrorBoundary
 } from '../../../components/ErrorBoundary/SpecializedErrorBoundaries';
-import { saveLessonProgressSync, loadLessonProgressSync } from '../../../utils/storageSync';
+import {
+  saveLessonProgressSync,
+  loadLessonProgressSync,
+  STORAGE_PREFIX
+} from '../../../utils/storageSync';
 import { buildDefaultLessonStatus } from '../../../utils/lessonStatus';
 import { useAuth } from '../../../contexts/AuthContext';
 
@@ -46,6 +50,10 @@ export const TranscriptionArea = ({
   const requireSpacesRef = useRef<boolean>(false);
   const setRef = useRef<ManifestSets>(set);
   const lessonNumberRef = useRef<number>(lessonNumber);
+  const userRef = useRef<typeof user>(user);
+  const [isLoadingProgress, setIsLoadingProgress] = useState<boolean>(false);
+  const isLoadingProgressRef = useRef<boolean>(false);
+  const skipNextSaveRef = useRef<boolean>(false);
   const [lessonsStatus, setLessonsStatus] = useState<Record<number, LessonStatus>>(() =>
     buildDefaultLessonStatus(lines)
   );
@@ -58,6 +66,9 @@ export const TranscriptionArea = ({
       clearTimeout(debounceTimeoutRef.current);
     }
     debounceTimeoutRef.current = setTimeout(() => {
+      if (isLoadingProgressRef.current || skipNextSaveRef.current) {
+        return;
+      }
       const status = lessonsStatusRef.current;
       if (status) {
         const progress = {
@@ -67,13 +78,18 @@ export const TranscriptionArea = ({
           lastUpdated: Date.now()
         };
         try {
-          saveLessonProgressSync(user, setRef.current, lessonNumberRef.current, progress);
+          saveLessonProgressSync(
+            userRef.current,
+            setRef.current,
+            lessonNumberRef.current,
+            progress
+          );
         } catch (error) {
           console.error('Error saving lesson progress:', error);
         }
       }
     }, 500);
-  }, [user]);
+  }, []);
 
   useEffect(() => {
     // Keep refs in sync with latest props
@@ -82,8 +98,21 @@ export const TranscriptionArea = ({
   }, [set, lessonNumber]);
 
   useEffect(() => {
+    userRef.current = user;
+  }, [user]);
+
+  useEffect(() => {
+    isLoadingProgressRef.current = isLoadingProgress;
+  }, [isLoadingProgress]);
+
+  useEffect(() => {
     // Load saved progress when lesson or set changes
     const loadProgress = async (): Promise<void> => {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+      skipNextSaveRef.current = true;
+      setIsLoadingProgress(true);
       try {
         const savedProgress = await loadLessonProgressSync(user, set, lessonNumber);
         if (savedProgress && Object.entries(savedProgress.answers).length) {
@@ -93,6 +122,13 @@ export const TranscriptionArea = ({
           lessonsStatusRef.current = savedProgress.status;
           savedAnswersRef.current = savedProgress.answers;
           requireSpacesRef.current = savedProgress.requireSpaces;
+          try {
+            const key = `${STORAGE_PREFIX}${set}-${lessonNumber}`;
+            localStorage.setItem(key, JSON.stringify(savedProgress));
+          } catch (error) {
+            console.warn('Failed to update localStorage progress:', error);
+          }
+          skipNextSaveRef.current = true;
         } else {
           // Initialize with default values if no saved progress
           const lessonsStatusObj = buildDefaultLessonStatus(lines);
@@ -103,6 +139,21 @@ export const TranscriptionArea = ({
           lessonsStatusRef.current = lessonsStatusObj;
           savedAnswersRef.current = {};
           requireSpacesRef.current = false;
+          try {
+            const key = `${STORAGE_PREFIX}${set}-${lessonNumber}`;
+            localStorage.setItem(
+              key,
+              JSON.stringify({
+                answers: {},
+                status: lessonsStatusObj,
+                requireSpaces: false,
+                lastUpdated: Date.now()
+              })
+            );
+          } catch (error) {
+            console.warn('Failed to save default progress to localStorage:', error);
+          }
+          skipNextSaveRef.current = true;
         }
       } catch (error) {
         console.error('Error loading lesson progress:', error);
@@ -114,10 +165,26 @@ export const TranscriptionArea = ({
         lessonsStatusRef.current = lessonsStatusObj;
         savedAnswersRef.current = {};
         requireSpacesRef.current = false;
+        try {
+          const key = `${STORAGE_PREFIX}${set}-${lessonNumber}`;
+          localStorage.setItem(
+            key,
+            JSON.stringify({
+              answers: {},
+              status: lessonsStatusObj,
+              requireSpaces: false,
+              lastUpdated: Date.now()
+            })
+          );
+        } catch (error) {
+          console.warn('Failed to save default progress to localStorage after error:', error);
+        }
+        skipNextSaveRef.current = true;
       }
       if (inputContainerRef.current) {
         inputContainerRef.current.scrollTop = 0;
       }
+      setIsLoadingProgress(false);
     };
 
     loadProgress();
@@ -132,6 +199,11 @@ export const TranscriptionArea = ({
     }
 
     const loadProgress = async (): Promise<void> => {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+      skipNextSaveRef.current = true;
+      setIsLoadingProgress(true);
       try {
         const savedProgress = await loadLessonProgressSync(
           user,
@@ -145,13 +217,23 @@ export const TranscriptionArea = ({
           lessonsStatusRef.current = savedProgress.status;
           savedAnswersRef.current = savedProgress.answers;
           requireSpacesRef.current = savedProgress.requireSpaces;
+          try {
+            const key = `${STORAGE_PREFIX}${setRef.current}-${lessonNumberRef.current}`;
+            localStorage.setItem(key, JSON.stringify(savedProgress));
+          } catch (error) {
+            console.warn('Failed to update localStorage progress on user change:', error);
+          }
+          skipNextSaveRef.current = true;
         }
       } catch (error) {
         console.error('Error loading lesson progress on user change:', error);
+      } finally {
+        setIsLoadingProgress(false);
       }
     };
 
     loadProgress();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id]);
 
   // Keep refs updated when state changes
@@ -169,13 +251,23 @@ export const TranscriptionArea = ({
 
   // Save progress with debouncing whenever it changes
   useEffect(() => {
+    // Skip saving if we're currently loading from Supabase
+    if (isLoadingProgress) {
+      return;
+    }
+
+    if (skipNextSaveRef.current) {
+      skipNextSaveRef.current = false;
+      return;
+    }
+
     scheduleSave();
     return (): void => {
       if (debounceTimeoutRef.current) {
         clearTimeout(debounceTimeoutRef.current);
       }
     };
-  }, [lessonsStatus, savedAnswers, requireSpaces, scheduleSave]);
+  }, [lessonsStatus, savedAnswers, requireSpaces, scheduleSave, isLoadingProgress]);
 
   const handleClick = (type: 'next' | 'previous'): void => {
     changeManuscript(type);
