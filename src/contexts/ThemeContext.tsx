@@ -41,6 +41,7 @@ const defaultSettings: ThemeSettings = {
 
 export const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => {
   const { user, loading: authLoading } = useAuth();
+  const [isLoadingFromSupabase, setIsLoadingFromSupabase] = useState(false);
   const [settings, setSettings] = useState<ThemeSettings>(() => {
     try {
       const stored = localStorage.getItem(THEME_STORAGE_KEY);
@@ -63,25 +64,36 @@ export const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => 
   // Load settings from Supabase when user is authenticated
   useEffect(() => {
     if (!authLoading && user) {
-      loadUserSettingsSync(user).then(syncedSettings => {
-        if (syncedSettings) {
-          setSettings({
-            darkMode: syncedSettings.darkMode,
-            fontSize: syncedSettings.fontSize,
-            highContrast: syncedSettings.highContrast,
-            reducedMotion: syncedSettings.reducedMotion
-          });
-        }
-      });
+      setIsLoadingFromSupabase(true);
+      loadUserSettingsSync(user)
+        .then(syncedSettings => {
+          if (syncedSettings) {
+            setSettings({
+              darkMode: syncedSettings.darkMode,
+              fontSize: syncedSettings.fontSize,
+              highContrast: syncedSettings.highContrast,
+              reducedMotion: syncedSettings.reducedMotion
+            });
+          }
+        })
+        .finally(() => {
+          setIsLoadingFromSupabase(false);
+        });
     }
   }, [user, authLoading]);
 
   // Save settings to both localStorage and Supabase
   useEffect(() => {
+    // Skip saving if we're currently loading from Supabase
+    if (isLoadingFromSupabase) {
+      return;
+    }
+
     saveUserSettingsSync(user, settings).catch(error => {
       console.warn('Failed to save settings:', error);
     });
-  }, [settings, user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settings, user?.id]);
 
   const toggleDarkMode = (): void => {
     setSettings(prev => ({ ...prev, darkMode: !prev.darkMode }));
