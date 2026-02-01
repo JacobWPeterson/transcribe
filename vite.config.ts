@@ -38,7 +38,8 @@ export default defineConfig(({ mode }) => {
         '@components': path.resolve(__dirname, 'src/components'),
         '@utils': path.resolve(__dirname, 'src/utils'),
         '@files': path.resolve(__dirname, 'src/files'),
-        '@pages': path.resolve(__dirname, 'src/pages')
+        '@pages': path.resolve(__dirname, 'src/pages'),
+        '@hooks': path.resolve(__dirname, 'src/hooks')
       }
     },
     server: { hmr: true, port: 3000, open: true },

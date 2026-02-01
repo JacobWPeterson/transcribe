@@ -3,11 +3,11 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { ReactNode } from 'react';
 import type { RenderResult } from '@testing-library/react';
 import { render, screen, waitFor } from '@testing-library/react';
-import { AuthProvider } from '@contexts/AuthContext';
+import { AuthProvider } from '@contexts/AuthProvider';
 
 import { AppWrapper } from './AppWrapper';
 
-vi.mock('../../contexts/ThemeContext', () => ({
+vi.mock('@hooks/useTheme', () => ({
   useTheme: (): { settings: { darkMode: boolean; highContrast: boolean; fontSize: string } } => ({
     settings: { darkMode: false, highContrast: false, fontSize: 'medium' }
   })

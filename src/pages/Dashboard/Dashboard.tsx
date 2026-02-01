@@ -1,17 +1,16 @@
-import { type ReactElement, useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router';
+import { type ReactElement, useEffect, useRef, useState } from 'react';
 import { Download } from 'react-feather';
 import { jsPDF } from 'jspdf';
-
-import { useTheme } from '../../contexts/ThemeContext';
-import { useAuth } from '../../contexts/AuthContext';
-import type { Manifest } from '../../files/manifests';
-import manifests, { ManifestSets } from '../../files/manifests';
-import { CELEBRATION_SHOWN_KEY, loadLessonProgressSync } from '../../utils/storageSync';
-import { LessonStatus } from '../Workspace/TranscriptionArea/SingleLine/singleLine.enum';
-import { buildDefaultLessonStatus } from '../../utils/lessonStatus';
-import { PDFErrorBoundary } from '../../components/ErrorBoundary/SpecializedErrorBoundaries';
-import { Confetti } from '../../components/Confetti/Confetti';
+import { Link } from 'react-router';
+import { Confetti } from '@components/Confetti/Confetti';
+import { PDFErrorBoundary } from '@components/ErrorBoundary/SpecializedErrorBoundaries';
+import type { Manifest } from '@files/manifests';
+import manifests, { ManifestSets } from '@files/manifests';
+import { useAuth } from '@hooks/useAuth';
+import { useTheme } from '@hooks/useTheme';
+import { buildDefaultLessonStatus } from '@utils/lessonStatus';
+import { CELEBRATION_SHOWN_KEY, loadLessonProgressSync } from '@utils/storageSync';
+import { LessonStatus } from '@pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum';
 
 import styles from './Dashboard.module.scss';
 

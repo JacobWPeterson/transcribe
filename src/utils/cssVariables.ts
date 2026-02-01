@@ -1,6 +1,6 @@
 // Utility functions to work with CSS variables in TypeScript
 
-import type { ThemeSettings, FontSize } from 'src/contexts/ThemeContext';
+import type { ThemeSettings, FontSize } from '@contexts/ThemeContext';
 
 /**
  * Get the value of a CSS custom property (variable) from the root element

@@ -4,8 +4,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { Moon, Settings, Sun, Trash2, Type, Zap, Minimize2 } from 'react-feather';
 import classNames from 'classnames';
 import { CELEBRATION_SHOWN_KEY } from '@utils/storageSync';
-
-import { useTheme, type FontSize } from '../../contexts/ThemeContext';
+import { useTheme } from '@hooks/useTheme';
+import type { FontSize } from '@contexts/ThemeContext';
 
 import styles from './SettingsMenu.module.scss';
 

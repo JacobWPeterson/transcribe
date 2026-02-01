@@ -1,29 +1,9 @@
 import type { PropsWithChildren, ReactElement } from 'react';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { saveUserSettingsSync, loadUserSettingsSync } from '@utils/storageSync';
+import { useAuth } from '@hooks/useAuth';
 
-import { useAuth } from './AuthContext';
-
-export type FontSize = 'S' | 'M' | 'L';
-
-export interface ThemeSettings {
-  darkMode: boolean;
-  fontSize: FontSize;
-  highContrast: boolean;
-  reducedMotion: boolean;
-}
-
-interface ThemeContextType {
-  settings: ThemeSettings;
-  toggleDarkMode: () => void;
-  setFontSize: (size: FontSize) => void;
-  toggleHighContrast: () => void;
-  toggleReducedMotion: () => void;
-}
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-export const THEME_STORAGE_KEY = 'transcribe-theme-settings';
+import { ThemeContext, THEME_STORAGE_KEY, type ThemeSettings, type FontSize } from './ThemeContext';
 
 const getSystemReducedMotion = (): boolean => {
   if (typeof window === 'undefined') {
@@ -118,12 +98,4 @@ export const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => 
       {children}
     </ThemeContext.Provider>
   );
-};
-
-export const useTheme = (): ThemeContextType => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
 };

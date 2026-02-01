@@ -3,10 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/index.scss';
 
 import { createRoot } from 'react-dom/client';
-import { AuthProvider } from '@contexts/AuthContext';
+import { AuthProvider } from '@contexts/AuthProvider';
 
 import { ErrorBoundary } from '../components/ErrorBoundary/ErrorBoundary';
-import { ThemeProvider } from '../contexts/ThemeContext';
+import { ThemeProvider } from '../contexts/ThemeProvider';
 
 import { Routes } from './Routes';
 import { AppWrapper } from './AppWrapper/AppWrapper';

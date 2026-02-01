@@ -1,14 +1,13 @@
 import { type ReactElement, useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router';
-
-import type { ManifestSets } from '../../files/manifests';
-import manifests from '../../files/manifests';
-import { E404 } from '../E404/E404';
-import { Alert } from '../../components/Alert/Alert';
-import { ExternalContentErrorBoundary } from '../../components/ErrorBoundary/ExternalContentErrorBoundary';
-import { OnboardingModal } from '../../components/OnboardingModal/OnboardingModal';
-import { useAuth } from '../../contexts/AuthContext';
-import { hasSeenOnboardingSync } from '../../utils/storageSync';
+import { Alert } from '@components/Alert/Alert';
+import { ExternalContentErrorBoundary } from '@components/ErrorBoundary/ExternalContentErrorBoundary';
+import { OnboardingModal } from '@components/OnboardingModal/OnboardingModal';
+import type { ManifestSets } from '@files/manifests';
+import manifests from '@files/manifests';
+import { useAuth } from '@hooks/useAuth';
+import { hasSeenOnboardingSync } from '@utils/storageSync';
+import { E404 } from '@pages/E404/E404';
 
 import { TranscriptionArea } from './TranscriptionArea/TranscriptionArea';
 import { Mirador } from './Mirador/index';

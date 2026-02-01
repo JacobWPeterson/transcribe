@@ -3,9 +3,9 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { RenderResult } from '@testing-library/react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
-import { AuthProvider } from '@contexts/AuthContext';
+import { AuthProvider } from '@contexts/AuthProvider';
 
-import { ThemeProvider } from '../../contexts/ThemeContext';
+import { ThemeProvider } from '../../contexts/ThemeProvider';
 import { LessonStatus } from '../Workspace/TranscriptionArea/SingleLine/singleLine.enum';
 import type { LessonProgress } from '../../utils/storageSync';
 import { loadLessonProgressSync } from '../../utils/storageSync';

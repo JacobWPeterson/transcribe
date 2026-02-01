@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { useState } from 'react';
-import { useAuth } from '@contexts/AuthContext';
+import { useAuth } from '@hooks/useAuth';
 import { Modal } from '@components/Modal/Modal';
 
 import styles from './AuthModal.module.scss';

@@ -1,21 +1,16 @@
 import { type ReactElement, useCallback, useEffect, useRef, useState } from 'react';
-import { jsPDF } from 'jspdf';
 import classNames from 'classnames';
+import { jsPDF } from 'jspdf';
 import { ArrowLeft, ArrowRight, Download } from 'react-feather';
-
-import type { Line, Manifest, ManifestSets } from '../../../files/manifests';
-import { StatusReport } from '../../../components/StatusReport/StatusReport';
 import {
   LocalStorageErrorBoundary,
   PDFErrorBoundary
-} from '../../../components/ErrorBoundary/SpecializedErrorBoundaries';
-import {
-  saveLessonProgressSync,
-  loadLessonProgressSync,
-  STORAGE_PREFIX
-} from '../../../utils/storageSync';
-import { buildDefaultLessonStatus } from '../../../utils/lessonStatus';
-import { useAuth } from '../../../contexts/AuthContext';
+} from '@components/ErrorBoundary/SpecializedErrorBoundaries';
+import { StatusReport } from '@components/StatusReport/StatusReport';
+import type { Line, Manifest, ManifestSets } from '@files/manifests';
+import { useAuth } from '@hooks/useAuth';
+import { buildDefaultLessonStatus } from '@utils/lessonStatus';
+import { loadLessonProgressSync, saveLessonProgressSync, STORAGE_PREFIX } from '@utils/storageSync';
 
 import { SingleLine } from './SingleLine/SingleLine';
 import styles from './TranscriptionArea.module.scss';

@@ -8,7 +8,7 @@ import {
   Settings,
   Sliders
 } from 'react-feather';
-import { useAuth } from '@contexts/AuthContext';
+import { useAuth } from '@hooks/useAuth';
 import { markOnboardingAsSeenSync } from '@utils/storageSync';
 
 import { Modal } from '../Modal/Modal';

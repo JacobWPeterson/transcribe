@@ -1,20 +1,19 @@
 import type { PropsWithChildren, ReactElement } from 'react';
 import { useEffect, useState } from 'react';
+import { User } from 'react-feather';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AuthModal } from '@components/AuthModal/AuthModal';
-import { useAuth } from '@contexts/AuthContext';
+import { AuthMode } from '@components/AuthModal/authModal.enum';
+import { ContactModal } from '@components/ContactModal/ContactModal';
+import { SettingsMenu } from '@components/SettingsMenu/SettingsMenu';
+import { useAuth } from '@hooks/useAuth';
+import { useTheme } from '@hooks/useTheme';
+import { ManifestSets } from '@files/manifests';
 import {
   migrateLocalProgressToSupabase,
   determineLessonToResumeSync,
   getStoredLessonIdsSync
 } from '@utils/storageSync';
-import { User } from 'react-feather';
-import { AuthMode } from '@components/AuthModal/authModal.enum';
-
-import { ContactModal } from '../../components/ContactModal/ContactModal';
-import { SettingsMenu } from '../../components/SettingsMenu/SettingsMenu';
-import { useTheme } from '../../contexts/ThemeContext';
-import { ManifestSets } from '../../files/manifests';
 
 import styles from './AppWrapper.module.scss';
 

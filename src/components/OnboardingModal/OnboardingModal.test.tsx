@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render as rtlRender, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { AuthProvider } from '@contexts/AuthContext';
+import { AuthProvider } from '@contexts/AuthProvider';
 
 import * as storageSyncUtils from '../../utils/storageSync';
 

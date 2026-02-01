@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import manifests, { ManifestSets } from '../../../files/manifests';
-import { AuthProvider } from '../../../contexts/AuthContext';
+import { AuthProvider } from '../../../contexts/AuthProvider';
 
 import { LessonStatus } from './SingleLine/singleLine.enum';
 import { TranscriptionArea } from './TranscriptionArea';
