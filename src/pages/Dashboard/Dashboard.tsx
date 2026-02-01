@@ -146,7 +146,8 @@ export const Dashboard = (): ReactElement => {
     };
 
     loadData();
-  }, [user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id]);
 
   // Trigger confetti celebration when 100% is reached
   useEffect((): void => {

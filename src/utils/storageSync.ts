@@ -4,8 +4,9 @@ import type { User } from '@supabase/supabase-js';
 import manifests, { ManifestSets } from '@files/manifests';
 import { LessonStatus } from '@pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum';
 import { THEME_STORAGE_KEY, type ThemeSettings } from '@contexts/ThemeContext';
+import { loadLessonProgress } from '@utils/localStorage';
 
-const STORAGE_PREFIX = 'transcribe-progress-';
+export const STORAGE_PREFIX = 'transcribe-progress-';
 export const CELEBRATION_SHOWN_KEY = 'transcribe-celebration-shown';
 export const ONBOARDING_SEEN_KEY = 'transcribe-onboarding-seen';
 
@@ -277,8 +278,11 @@ export const migrateLocalProgressToSupabase = async (user: User): Promise<void> 
  * Determine which lesson to resume based on stored progress
  * Returns the most recently updated incomplete lesson, or the first lesson if no progress exists
  */
-export const determineLessonToResumeSync = async (user: User | null): Promise<number> => {
-  const storedIds = await getStoredLessonIdsSync(user, ManifestSets.CORE);
+export const determineLessonToResumeSync = async (
+  user: User | null,
+  storedIdsOverride?: number[]
+): Promise<number> => {
+  const storedIds = storedIdsOverride ?? (await getStoredLessonIdsSync(user, ManifestSets.CORE));
 
   // No stored progress: default to the first available lesson (lowest numeric id)
   if (!storedIds.length) {
@@ -286,17 +290,56 @@ export const determineLessonToResumeSync = async (user: User | null): Promise<nu
     return Math.min(...coreLessonIds);
   }
 
-  // Load progress for all stored lessons
-  // eslint-disable-next-line compat/compat
-  const progressList = await Promise.all(
-    storedIds.map(async id => {
-      const progress = await loadLessonProgressSync(user, ManifestSets.CORE, id);
+  // Load progress metadata for all stored lessons
+  let progressList: { id: number; lastUpdated: number; isComplete: boolean }[] = [];
+
+  if (user) {
+    try {
+      const { data, error } = await supabase
+        .from('lesson_progress')
+        .select('lesson_id,last_updated,status')
+        .eq('user_id', user.id)
+        .eq('lesson_set', ManifestSets.CORE);
+
+      if (!error && data) {
+        progressList = data
+          .map(
+            (item: {
+              lesson_id: string;
+              last_updated: string;
+              status: Record<number, LessonStatus>;
+            }) => {
+              const statusValues = item.status ? Object.values(item.status) : [];
+              const isComplete =
+                statusValues.length > 0 &&
+                statusValues.every(status => status === LessonStatus.CORRECT);
+              return {
+                id: parseInt(item.lesson_id, 10),
+                lastUpdated: new Date(item.last_updated).getTime(),
+                isComplete
+              };
+            }
+          )
+          .filter(item => storedIds.includes(item.id));
+      }
+    } catch (error) {
+      console.warn(
+        'Failed to load resume metadata from Supabase, falling back to localStorage:',
+        error
+      );
+    }
+  }
+
+  if (!progressList.length) {
+    // Fall back to localStorage reads if no Supabase data or guest user
+    progressList = storedIds.map(id => {
+      const progress = loadLessonProgress(ManifestSets.CORE, id);
       const statusValues = progress?.status ? Object.values(progress.status) : [];
       const isComplete =
         statusValues.length > 0 && statusValues.every(status => status === LessonStatus.CORRECT);
       return { id, lastUpdated: progress?.lastUpdated ?? 0, isComplete };
-    })
-  );
+    });
+  }
 
   // Sort by most recently updated first
   progressList.sort((a, b) => b.lastUpdated - a.lastUpdated);

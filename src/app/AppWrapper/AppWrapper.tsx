@@ -52,13 +52,15 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
       setSavedLessonIds(ids);
 
       if (ids.length > 0) {
-        const lessonId = await determineLessonToResumeSync(user);
+        const lessonId = await determineLessonToResumeSync(user, ids);
         setResumeLessonId(lessonId);
+      } else {
+        setResumeLessonId(null);
       }
     };
 
     loadLessonData();
-  }, [user]);
+  }, [user?.id]);
 
   useEffect(() => {
     const root = document.documentElement;

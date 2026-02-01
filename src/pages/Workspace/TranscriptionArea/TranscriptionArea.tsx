@@ -121,7 +121,38 @@ export const TranscriptionArea = ({
     };
 
     loadProgress();
-  }, [set, lessonNumber, lines, user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [set, lessonNumber, lines]);
+
+  // Effect to handle user sign in/out: reload if user ID changes
+  useEffect(() => {
+    const userId = user?.id;
+    if (!userId) {
+      return; // Skip if no user
+    }
+
+    const loadProgress = async (): Promise<void> => {
+      try {
+        const savedProgress = await loadLessonProgressSync(
+          user,
+          setRef.current,
+          lessonNumberRef.current
+        );
+        if (savedProgress && Object.entries(savedProgress.answers).length) {
+          setLessonsStatus(savedProgress.status);
+          setSavedAnswers(savedProgress.answers);
+          setRequireSpaces(savedProgress.requireSpaces);
+          lessonsStatusRef.current = savedProgress.status;
+          savedAnswersRef.current = savedProgress.answers;
+          requireSpacesRef.current = savedProgress.requireSpaces;
+        }
+      } catch (error) {
+        console.error('Error loading lesson progress on user change:', error);
+      }
+    };
+
+    loadProgress();
+  }, [user?.id]);
 
   // Keep refs updated when state changes
   useEffect(() => {
