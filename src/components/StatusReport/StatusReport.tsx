@@ -1,6 +1,5 @@
 import { type ReactElement } from 'react';
-
-import { LessonStatus } from '../../pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum';
+import { LessonStatus } from '@pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum';
 
 import styles from './StatusReport.module.scss';
 

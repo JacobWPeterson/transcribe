@@ -3,13 +3,12 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render as rtlRender, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AuthProvider } from '@contexts/AuthProvider';
-
-import * as storageSyncUtils from '../../utils/storageSync';
+import * as storageSyncUtils from '@utils/storageSync';
 
 import { OnboardingModal } from './OnboardingModal';
 
 // Mock the storage sync utilities
-vi.mock('../../utils/storageSync', () => ({
+vi.mock('@utils/storageSync', () => ({
   // eslint-disable-next-line compat/compat
   markOnboardingAsSeenSync: vi.fn(() => Promise.resolve())
 }));

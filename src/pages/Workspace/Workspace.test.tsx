@@ -3,13 +3,12 @@ import { createElement, useEffect } from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router';
 import { AuthProvider } from '@contexts/AuthProvider';
-
-import type { Manifest } from '../../files/manifests';
-import manifests, { ManifestSets } from '../../files/manifests';
+import type { Manifest } from '@files/manifests';
+import manifests, { ManifestSets } from '@files/manifests';
 
 import { Workspace } from './Workspace';
 
-vi.mock('../../utils/storageSync', () => ({
+vi.mock('@utils/storageSync', () => ({
   // eslint-disable-next-line compat/compat
   hasSeenOnboardingSync: vi.fn(() => Promise.resolve(true))
 }));

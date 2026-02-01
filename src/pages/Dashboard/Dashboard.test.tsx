@@ -4,16 +4,15 @@ import type { RenderResult } from '@testing-library/react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
 import { AuthProvider } from '@contexts/AuthProvider';
-
-import { ThemeProvider } from '../../contexts/ThemeProvider';
-import { LessonStatus } from '../Workspace/TranscriptionArea/SingleLine/singleLine.enum';
-import type { LessonProgress } from '../../utils/storageSync';
-import { loadLessonProgressSync } from '../../utils/storageSync';
+import { ThemeProvider } from '@contexts/ThemeProvider';
+import { LessonStatus } from '@pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum';
+import type { LessonProgress } from '@utils/storageSync';
+import { loadLessonProgressSync } from '@utils/storageSync';
 
 import { Dashboard } from './Dashboard';
 
 // Mock the storage sync utilities
-vi.mock('../../utils/storageSync', () => ({
+vi.mock('@utils/storageSync', () => ({
   loadLessonProgressSync: vi.fn(),
   saveLessonProgressSync: vi.fn(() => Promise.resolve()),
   saveUserSettingsSync: vi.fn(() => Promise.resolve()),
@@ -21,7 +20,7 @@ vi.mock('../../utils/storageSync', () => ({
 }));
 
 // Mock manifests to control test data
-vi.mock('../../files/manifests', () => ({
+vi.mock('@files/manifests', () => ({
   default: {
     lessons: {
       '1': {

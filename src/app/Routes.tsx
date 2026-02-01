@@ -1,16 +1,15 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router';
 import type { ReactElement } from 'react';
-
-import { ManifestSets } from '../files/manifests';
-import { Home } from '../pages/Home/Home';
-import { Workspace } from '../pages/Workspace/Workspace';
-import { Glossary } from '../pages/Help/Glossary/Glossary';
-import { Guide } from '../pages/Help/Guide/Guide';
-import { Resources } from '../pages/Help/Resources/Resources';
-import { About } from '../pages/About/About';
-import { E404 } from '../pages/E404/E404';
-import onlineResources from '../files/onlineResources';
-import { Dashboard } from '../pages/Dashboard/Dashboard';
+import { ManifestSets } from '@files/manifests';
+import { Home } from '@pages/Home/Home';
+import { Workspace } from '@pages/Workspace/Workspace';
+import { Glossary } from '@pages/Help/Glossary/Glossary';
+import { Guide } from '@pages/Help/Guide/Guide';
+import { Resources } from '@pages/Help/Resources/Resources';
+import { About } from '@pages/About/About';
+import { E404 } from '@pages/E404/E404';
+import onlineResources from '@files/onlineResources';
+import { Dashboard } from '@pages/Dashboard/Dashboard';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

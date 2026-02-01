@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
-
-import type { ResourceCategories } from '../../../files/onlineResources';
+import type { ResourceCategories } from '@files/onlineResources';
 
 import { Resources } from './Resources';
 

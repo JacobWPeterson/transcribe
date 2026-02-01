@@ -2,8 +2,7 @@ import type { RenderResult } from '@testing-library/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AuthProvider } from '@contexts/AuthProvider';
-
-import { ThemeProvider } from '../../contexts/ThemeProvider';
+import { ThemeProvider } from '@contexts/ThemeProvider';
 
 import { SettingsMenu } from './SettingsMenu';
 
