@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS public.lesson_progress (
   answers JSONB DEFAULT '{}'::jsonb,
   status JSONB DEFAULT '{}'::jsonb,
   require_spaces BOOLEAN DEFAULT false,
-  last_updated TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
   created_at TIMESTAMPTZ DEFAULT NOW(),
   UNIQUE(user_id, lesson_set, lesson_id)
 );

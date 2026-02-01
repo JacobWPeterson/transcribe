@@ -21,7 +21,7 @@ interface SupabaseLessonProgress {
   answers: Record<number, string>;
   status: Record<number, LessonStatus>;
   require_spaces: boolean;
-  last_updated: string;
+  updated_at: string;
 }
 
 interface SupabaseUserSettings extends ThemeSettings {
@@ -62,7 +62,7 @@ export const saveLessonProgressSync = async (
           answers: progress.answers,
           status: progress.status,
           require_spaces: progress.requireSpaces,
-          last_updated: new Date(progress.lastUpdated).toISOString()
+          updated_at: new Date(progress.lastUpdated).toISOString()
         } as never,
         {
           onConflict: 'user_id,lesson_set,lesson_id'
@@ -103,7 +103,7 @@ export const loadLessonProgressSync = async (
           answers: typedData.answers,
           status: typedData.status,
           requireSpaces: typedData.require_spaces,
-          lastUpdated: new Date(typedData.last_updated).getTime()
+          lastUpdated: new Date(typedData.updated_at).getTime()
         };
       }
     } catch (error) {
@@ -233,7 +233,7 @@ export const migrateLocalProgressToSupabase = async (user: User): Promise<void> 
             answers: progress.answers,
             status: progress.status,
             require_spaces: progress.requireSpaces,
-            last_updated: new Date(progress.lastUpdated).toISOString()
+            updated_at: new Date(progress.lastUpdated).toISOString()
           } as never,
           {
             onConflict: 'user_id,lesson_set,lesson_id'
@@ -297,7 +297,7 @@ export const determineLessonToResumeSync = async (
     try {
       const { data, error } = await supabase
         .from('lesson_progress')
-        .select('lesson_id,last_updated,status')
+        .select('lesson_id,updated_at,status')
         .eq('user_id', user.id)
         .eq('lesson_set', ManifestSets.CORE);
 
@@ -306,7 +306,7 @@ export const determineLessonToResumeSync = async (
           .map(
             (item: {
               lesson_id: string;
-              last_updated: string;
+              updated_at: string;
               status: Record<number, LessonStatus>;
             }) => {
               const statusValues = item.status ? Object.values(item.status) : [];
@@ -315,7 +315,7 @@ export const determineLessonToResumeSync = async (
                 statusValues.every(status => status === LessonStatus.CORRECT);
               return {
                 id: parseInt(item.lesson_id, 10),
-                lastUpdated: new Date(item.last_updated).getTime(),
+                lastUpdated: new Date(item.updated_at).getTime(),
                 isComplete
               };
             }
