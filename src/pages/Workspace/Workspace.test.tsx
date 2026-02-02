@@ -10,7 +10,9 @@ import { Workspace } from './Workspace';
 
 vi.mock('@utils/storageSync', () => ({
   // eslint-disable-next-line compat/compat
-  hasSeenOnboardingSync: vi.fn(() => Promise.resolve(true))
+  hasSeenOnboardingSync: vi.fn(() => Promise.resolve(true)),
+  // eslint-disable-next-line compat/compat
+  hasSeenAccountRequirementSync: vi.fn(() => Promise.resolve(true))
 }));
 
 let pageNumToSet: number | undefined = undefined;

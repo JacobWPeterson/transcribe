@@ -9,6 +9,7 @@ import { loadLessonProgress } from '@utils/localStorage';
 export const STORAGE_PREFIX = 'transcribe-progress-';
 export const CELEBRATION_SHOWN_KEY = 'transcribe-celebration-shown';
 export const ONBOARDING_SEEN_KEY = 'transcribe-onboarding-seen';
+export const ACCOUNT_REQUIREMENT_SEEN_KEY = 'transcribe-account-requirement-notification-seen';
 
 export interface LessonProgress {
   answers: Record<number, string>; // line index -> submitted answer
@@ -494,5 +495,30 @@ export const markOnboardingAsSeenSync = async (user: User | null): Promise<void>
     } catch (error) {
       console.warn('Failed to mark onboarding as seen in Supabase:', error);
     }
+  }
+};
+
+/**
+ * Check if user has seen the account requirement notification (current session only)
+ */
+export const hasSeenAccountRequirementSync = async (): Promise<boolean> => {
+  try {
+    return sessionStorage.getItem(ACCOUNT_REQUIREMENT_SEEN_KEY) === 'true';
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.warn('Failed to check account requirement status:', errorMessage);
+    return false;
+  }
+};
+
+/**
+ * Mark account requirement notification as seen (sessionStorage only - per session)
+ */
+export const markAccountRequirementAsSeenSync = async (): Promise<void> => {
+  try {
+    sessionStorage.setItem(ACCOUNT_REQUIREMENT_SEEN_KEY, 'true');
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.warn('Failed to mark account requirement as seen:', errorMessage);
   }
 };

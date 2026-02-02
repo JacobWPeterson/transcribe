@@ -158,7 +158,8 @@ const slides: Slide[] = [
             more easily recognise new combinations in the future
           </li>
           <li>
-            <strong>Progress is saved:</strong> Your answers are automatically saved as you work
+            <strong>Saving progress:</strong> Create an account to save your progress beyond your
+            current session and to be able to access it from any device.
           </li>
           <li>
             <strong>Use the glossary:</strong> Check the Help section for explanations of
@@ -172,10 +173,7 @@ const slides: Slide[] = [
     title: 'Ready to begin!',
     content: (
       <>
-        <p>
-          You&rsquo;re all set to start your first lesson! Create an account to save your progress
-          more securely and to be able to access it from any device.
-        </p>
+        <p>You&rsquo;re all set to start your first lesson!</p>
         <p>
           Remember, learning to read manuscripts takes practice. Don&rsquo;t worry if it seems
           challenging at first &ndash; that&rsquo;s completely normal.
@@ -185,7 +183,7 @@ const slides: Slide[] = [
           the <strong>Help</strong> tab in the navigation menu.
         </p>
         <p>
-          If you&apos;re using this for a class, click{' '}
+          If you&apos;re using this for a class, create an account, then click{' '}
           <strong>
             Report <Download size={16} />
           </strong>{' '}

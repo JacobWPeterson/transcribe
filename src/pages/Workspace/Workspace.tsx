@@ -3,10 +3,15 @@ import { useNavigate, useParams, useSearchParams } from 'react-router';
 import { Alert } from '@components/Alert/Alert';
 import { ExternalContentErrorBoundary } from '@components/ErrorBoundary/ExternalContentErrorBoundary';
 import { OnboardingModal } from '@components/OnboardingModal/OnboardingModal';
+import { AccountRequirementModal } from '@components/AccountRequirementModal/AccountRequirementModal';
 import type { ManifestSets } from '@files/manifests';
 import manifests from '@files/manifests';
 import { useAuth } from '@hooks/useAuth';
-import { hasSeenOnboardingSync } from '@utils/storageSync';
+import {
+  hasSeenOnboardingSync,
+  hasSeenAccountRequirementSync,
+  markAccountRequirementAsSeenSync
+} from '@utils/storageSync';
 import { E404 } from '@pages/E404/E404';
 
 import { TranscriptionArea } from './TranscriptionArea/TranscriptionArea';
@@ -26,6 +31,7 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
   const tutorialParam = searchParams.get('tutorial');
   const skipMarkAsSeen = tutorialParam === 'true';
   const [showOnboarding, setShowOnboarding] = useState<boolean>(false);
+  const [showAccountRequirement, setShowAccountRequirement] = useState<boolean>(false);
 
   const canvasIndex = currentManifest?.canvasIndex;
   const indexAdjustment = currentManifest?.canvasIndexToPageNumberAdj || 0;
@@ -57,6 +63,23 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
   }, [user, skipMarkAsSeen]);
 
   useEffect(() => {
+    let isMounted = true;
+
+    const loadAccountRequirementStatus = async (): Promise<void> => {
+      const hasSeen = await hasSeenAccountRequirementSync();
+      if (isMounted) {
+        setShowAccountRequirement(!hasSeen);
+      }
+    };
+
+    loadAccountRequirementStatus();
+
+    return (): void => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
     setShowWrongPageAlert(false);
   }, [id]);
 
@@ -83,12 +106,21 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
     }
   };
 
+  const handleAccountRequirementClose = async (): Promise<void> => {
+    setShowAccountRequirement(false);
+    await markAccountRequirementAsSeenSync();
+  };
+
   return (
     <div className={styles.WorkspacePageWrapper}>
       <OnboardingModal
         isOpen={showOnboarding}
         onClose={handleOnboardingClose}
         skipMarkAsSeen={skipMarkAsSeen}
+      />
+      <AccountRequirementModal
+        isOpen={showAccountRequirement}
+        onClose={handleAccountRequirementClose}
       />
       <div className={styles.InvalidDevice}>
         <img src="/images/cog.svg" alt="Rotate device to landscape" className={styles.Image} />
