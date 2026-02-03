@@ -8,6 +8,8 @@ import { Guide } from '@pages/Help/Guide/Guide';
 import { Resources } from '@pages/Help/Resources/Resources';
 import { About } from '@pages/About/About';
 import { E404 } from '@pages/E404/E404';
+import { Confirm } from '@pages/Auth/Confirm';
+import { UpdatePassword } from '@pages/Auth/UpdatePassword';
 import onlineResources from '@files/onlineResources';
 import { Dashboard } from '@pages/Dashboard/Dashboard';
 
@@ -19,6 +21,8 @@ const router = createBrowserRouter(
       <Route path="UoEDiv" element={<Workspace set={ManifestSets.UoEDiv} />} />
       <Route path="UoEDiv/:id" element={<Workspace set={ManifestSets.UoEDiv} />} />
       <Route path="lessons/:id" element={<Workspace set={ManifestSets.CORE} />} />
+      <Route path="auth/confirm" element={<Confirm />} />
+      <Route path="auth/update-password" element={<UpdatePassword />} />
       <Route path="glossary" element={<Glossary />} />
       <Route path="guide" element={<Guide />} />
       <Route

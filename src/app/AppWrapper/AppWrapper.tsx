@@ -24,7 +24,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
   const [savedLessonIds, setSavedLessonIds] = useState<number[]>([]);
   const [resumeLessonId, setResumeLessonId] = useState<number | null>(null);
   const { settings } = useTheme();
-  const { user, signOut } = useAuth();
+  const { user, signOut, loading: authLoading } = useAuth();
 
   // Migrate localStorage data to Supabase when user first signs in
   useEffect(() => {
@@ -139,7 +139,10 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
           <a className={styles.NavLink} href="/about" data-replace="About">
             <span>About</span>
           </a>
-          {user ? (
+          {authLoading ? (
+            // Show placeholder while loading to prevent icon from disappearing
+            <div className={styles.PlaceholderIcon} aria-label="Loading user account" />
+          ) : user ? (
             <NavDropdown
               title={<User size={settings.fontSize === 'L' ? 22 : 18} />}
               id="account-dropdown"

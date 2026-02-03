@@ -211,6 +211,15 @@
         border-color: theme.$primary04;
       }
     }
+
+    .PlaceholderIcon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: theme.$primary03;
+      opacity: 0.3;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
   }
 
   .Footer {
@@ -255,5 +264,16 @@
 
   &:hover {
     transition: 500ms ease;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.6;
   }
 }
