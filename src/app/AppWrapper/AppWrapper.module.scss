@@ -156,8 +156,8 @@
         .UserEmail {
           font-size: theme.$fontSizeSmaller;
           color: theme.$text;
-          padding: 4px 8px;
           display: block;
+          cursor: default;
         }
 
         .SignOutButton {
@@ -165,14 +165,16 @@
           border: none;
           color: theme.$primary03;
           cursor: pointer;
-          padding: 4px 8px;
-          font-size: theme.$fontSizeDefault;
           text-align: left;
           width: 100%;
+          padding: 0;
 
+          &:focus,
           &:hover {
-            color: theme.$primary04;
-            text-decoration: underline;
+            border-radius: 1px;
+
+            outline: 2px solid theme.$primary03;
+            outline-offset: 2px;
           }
         }
 

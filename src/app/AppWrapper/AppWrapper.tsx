@@ -154,6 +154,10 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
               </div>
               <div className={styles.Divider} />
               <div className={styles.DropdownItem}>
+                <a href="/account">Account settings</a>
+              </div>
+              <div className={styles.Divider} />
+              <div className={styles.DropdownItem}>
                 <button onClick={handleSignOut} className={styles.SignOutButton}>
                   Sign out
                 </button>
