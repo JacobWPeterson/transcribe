@@ -14,9 +14,11 @@ Available at [xeirographa.com](https://www.xeirographa.com)
 
 - **Interactive Manuscript Viewer**: IIIF-powered viewer (Mirador 4.0) for high-resolution manuscript images
 - **Guided Transcription Lessons**: Step-by-step exercises with instant feedback
-- **Progress Tracking**: Automatic saving of lesson progress to browser storage
+- **User Accounts & Cloud Sync**: Optional sign-up to sync progress across devices (uses Supabase)
+- **Progress Tracking**: Automatic saving of lesson progress (local or cloud)
 - **Accessibility**: Dark mode, high contrast, and adjustable font sizes
 - **Printable Reports**: Download a report for each lesson showing progress
+- **Guest Mode**: Use without an account; all data stored locally
 
 ## Tech Stack
 
@@ -38,6 +40,17 @@ Available at [xeirographa.com](https://www.xeirographa.com)
 ```bash
 npm install
 ```
+
+### Optional: Set Up User Authentication
+
+To enable user accounts and cloud sync:
+
+1. Follow the detailed setup guide: [SUPABASE_SETUP.md](SUPABASE_SETUP.md)
+2. Create a Supabase project
+3. Run the database schema
+4. Add environment variables to `.env`
+
+**Note**: The app works without this setup! Users can continue as guests with local-only storage.
 
 ### Development
 

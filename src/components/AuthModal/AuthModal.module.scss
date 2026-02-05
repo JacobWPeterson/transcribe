@@ -1,0 +1,145 @@
+@use '@styles/theme';
+@use '@styles/variables';
+
+.AuthModal {
+  padding: 1rem;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.Error {
+  background-color: var(--error-bg, #fee);
+  color: theme.$error;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  font-size: theme.$fontSizeSmaller;
+  border: 1px solid theme.$error;
+}
+
+.Message {
+  background-color: var(--success-bg, #efe);
+  color: var(--success-text, #060);
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  font-size: theme.$fontSizeSmaller;
+  border: 1px solid var(--success-border, #cfc);
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.FormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.Label {
+  font-weight: 500;
+  color: theme.$primary03;
+}
+
+.Input {
+  padding: 0.625rem 0.875rem;
+  border: variables.$defaultBorderStyle;
+  border-radius: 0.375rem;
+  font-size: theme.$fontSizeDefault;
+  background-color: theme.$grey00;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: theme.$primary02;
+    box-shadow: 0 0 0 3px rgb(0 123 255 / 10%);
+  }
+
+  &::placeholder {
+    color: theme.$helpText;
+    opacity: 0.6;
+  }
+}
+
+.SubmitButton {
+  padding: 0.75rem 1.5rem;
+  background-color: theme.$primary03;
+  color: theme.$grey00;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: theme.$fontSizeDefault;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+  margin-top: 0.5rem;
+
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
+    background-color: theme.$primary04;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.Links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  align-items: center;
+}
+
+.Link {
+  background: none;
+  border: none;
+  color: theme.$primary03;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: theme.$fontSizeSmaller;
+  padding: 0;
+
+  &:hover,
+  &:focus {
+    color: theme.$primary04;
+  }
+}
+
+.GuestMode {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: variables.$defaultBorderStyle;
+  text-align: center;
+}
+
+.GuestText {
+  font-size: theme.$fontSizeSmaller;
+  margin-bottom: 0.75rem;
+}
+
+.GuestButton {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  color: theme.$primary03;
+  border: variables.$defaultBorderStyle;
+  border-radius: 0.375rem;
+  font-size: theme.$fontSizeSmaller;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+
+  &:hover,
+  &:focus {
+    border-color: theme.$primary03;
+  }
+}

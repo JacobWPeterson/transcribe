@@ -1,0 +1,131 @@
+@use '@styles/theme';
+
+.Container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+  padding: 2rem;
+  background-color: theme.$grey01;
+}
+
+.Card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background-color: theme.$grey00;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+}
+
+h1 {
+  font-size: theme.$fontSizeLarger;
+  font-weight: 600;
+  color: theme.$primary03;
+  margin: 0 0 0.5rem;
+}
+
+.Description {
+  font-size: theme.$fontSizeDefault;
+  color: theme.$text;
+  margin: 0 0 1.5rem;
+  line-height: 1.6;
+}
+
+.FormGroup {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    font-weight: 500;
+    color: theme.$primary03;
+    margin-bottom: 0.5rem;
+    font-size: theme.$fontSizeDefault;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: theme.$fontSizeDefault;
+    color: theme.$primary03;
+    background-color: theme.$grey00;
+    border: 1px solid theme.$primary03;
+    border-radius: 4px;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgb(0 0 0 / 10%);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    &::placeholder {
+      color: theme.$helpText;
+    }
+  }
+}
+
+.Button {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: theme.$fontSizeDefault;
+  font-weight: 600;
+  color: theme.$grey00;
+  background-color: theme.$primary03;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
+    background-color: theme.$primary04;
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.Error {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--error-bg, #fee);
+  color: theme.$error;
+  border: 1px solid theme.$error;
+  border-radius: 4px;
+  font-size: theme.$fontSizeDefault;
+}
+
+.ErrorMessage {
+  font-size: theme.$fontSizeDefault;
+  color: theme.$text;
+  margin: 0 0 1.5rem;
+  line-height: 1.6;
+}
+
+.Success {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--success-bg, #efe);
+  color: var(--success-text, #060);
+  border: 1px solid var(--success-text, #060);
+  border-radius: 4px;
+  font-size: theme.$fontSizeDefault;
+}

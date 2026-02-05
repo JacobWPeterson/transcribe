@@ -1,5 +1,5 @@
-import type { Line } from '../files/manifests';
-import { LessonStatus } from '../pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum';
+import type { Line } from '@files/manifests';
+import { LessonStatus } from '@pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum';
 
 /**
  * Build the default lesson status object with correct indexing.

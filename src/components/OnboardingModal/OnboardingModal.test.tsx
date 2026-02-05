@@ -1,15 +1,21 @@
+import type { ReactElement } from 'react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render as rtlRender, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
-import * as localStorageUtils from '../../utils/localStorage';
+import { AuthProvider } from '@contexts/AuthProvider';
+import * as storageSyncUtils from '@utils/storageSync';
 
 import { OnboardingModal } from './OnboardingModal';
 
-// Mock the localStorage utilities
-vi.mock('../../utils/localStorage', () => ({
-  markOnboardingAsSeen: vi.fn()
+// Mock the storage sync utilities
+vi.mock('@utils/storageSync', () => ({
+  // eslint-disable-next-line compat/compat
+  markOnboardingAsSeenSync: vi.fn(() => Promise.resolve())
 }));
+
+const render = (component: ReactElement): ReturnType<typeof rtlRender> => {
+  return rtlRender(<AuthProvider>{component}</AuthProvider>);
+};
 
 describe('OnboardingModal', () => {
   beforeEach(() => {
@@ -149,7 +155,7 @@ describe('OnboardingModal', () => {
       const getStartedButton = screen.getByRole('button', { name: 'Get started' });
       await user.click(getStartedButton);
 
-      expect(localStorageUtils.markOnboardingAsSeen).toHaveBeenCalled();
+      expect(storageSyncUtils.markOnboardingAsSeenSync).toHaveBeenCalled();
     });
 
     it('should mark onboarding as seen when close button is clicked', async () => {
@@ -160,7 +166,7 @@ describe('OnboardingModal', () => {
       const closeButton = screen.getByRole('button', { name: /close/i });
       await user.click(closeButton);
 
-      expect(localStorageUtils.markOnboardingAsSeen).toHaveBeenCalled();
+      expect(storageSyncUtils.markOnboardingAsSeenSync).toHaveBeenCalled();
     });
 
     it('should not mark onboarding as seen when skipMarkAsSeen is true', async () => {
@@ -174,7 +180,7 @@ describe('OnboardingModal', () => {
       const getStartedButton = screen.getByRole('button', { name: 'Get started' });
       await user.click(getStartedButton);
 
-      expect(localStorageUtils.markOnboardingAsSeen).not.toHaveBeenCalled();
+      expect(storageSyncUtils.markOnboardingAsSeenSync).not.toHaveBeenCalled();
       expect(onCloseMock).toHaveBeenCalled();
     });
   });

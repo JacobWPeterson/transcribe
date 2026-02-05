@@ -39,6 +39,18 @@
       @media (width <= 600px) {
         font-size: theme.$fontSizeLargest;
       }
+
+      @media (width <= 450px) {
+        display: none;
+      }
+    }
+
+    .BrandIcon {
+      color: theme.$primary03;
+
+      @media (width > 450px) {
+        display: none;
+      }
     }
 
     .NavButtons {
@@ -124,6 +136,9 @@
       }
 
       > a {
+        display: flex;
+        align-items: center;
+
         &:hover,
         &:focus {
           cursor: pointer;
@@ -150,6 +165,43 @@
         padding: 8px;
         cursor: pointer;
 
+        .UserEmail {
+          font-size: theme.$fontSizeSmaller;
+          color: theme.$text;
+          display: block;
+          cursor: default;
+        }
+
+        .SignOutButton {
+          background: none;
+          border: none;
+          color: theme.$primary03;
+          cursor: pointer;
+          text-align: left;
+          width: 100%;
+          padding: 0;
+
+          &:focus,
+          &:hover {
+            border-radius: 1px;
+            outline: 2px solid theme.$primary03;
+            outline-offset: 2px;
+          }
+        }
+
+        .DisabledLink {
+          color: theme.$grey04;
+          cursor: not-allowed;
+          display: block;
+        }
+
+        .DisabledNote {
+          font-size: theme.$fontSizeSmallest;
+          color: theme.$grey04;
+          font-style: italic;
+          display: block;
+        }
+
         > a {
           display: flex;
           color: theme.$primary03;
@@ -164,6 +216,35 @@
           }
         }
       }
+    }
+
+    .AuthButton {
+      border: 1px solid theme.$primary03;
+      background-color: theme.$primary03;
+      color: theme.$grey00;
+      border-radius: 4px;
+      height: 30px;
+      margin: auto;
+      cursor: pointer;
+      font-size: theme.$fontSizeDefault;
+      font-weight: 400;
+      transition:
+        background-color 0.2s,
+        color 0.2s;
+
+      &:hover {
+        background-color: theme.$primary04;
+        border-color: theme.$primary04;
+      }
+    }
+
+    .PlaceholderIcon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: theme.$primary03;
+      opacity: 0.3;
+      animation: pulse 1.5s ease-in-out infinite;
     }
   }
 
@@ -209,5 +290,16 @@
 
   &:hover {
     transition: 500ms ease;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.6;
   }
 }

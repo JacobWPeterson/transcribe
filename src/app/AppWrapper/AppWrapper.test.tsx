@@ -1,10 +1,13 @@
+/* eslint-disable compat/compat */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { ReactNode } from 'react';
-import { render, screen } from '@testing-library/react';
+import type { RenderResult } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import { AuthProvider } from '@contexts/AuthProvider';
 
 import { AppWrapper } from './AppWrapper';
 
-vi.mock('../../contexts/ThemeContext', () => ({
+vi.mock('@hooks/useTheme', () => ({
   useTheme: (): { settings: { darkMode: boolean; highContrast: boolean; fontSize: string } } => ({
     settings: { darkMode: false, highContrast: false, fontSize: 'medium' }
   })
@@ -42,11 +45,20 @@ const getStoredLessonIds = vi.fn();
 const loadLessonProgress = vi.fn();
 const determineLessonToResume = vi.fn();
 
-vi.mock('../../utils/localStorage', () => ({
-  getStoredLessonIds: (): void => getStoredLessonIds(),
-  loadLessonProgress: (...args: unknown[]): void => loadLessonProgress(...args),
-  determineLessonToResume: (): void => determineLessonToResume()
+vi.mock('../../utils/storageSync', () => ({
+  getStoredLessonIdsSync: (): Promise<number[]> => Promise.resolve(getStoredLessonIds()),
+  loadLessonProgressSync: (): Promise<unknown> => Promise.resolve(loadLessonProgress()),
+  determineLessonToResumeSync: (): Promise<number | null> =>
+    Promise.resolve(determineLessonToResume())
 }));
+
+const renderWithProviders = (): RenderResult => {
+  return render(
+    <AuthProvider>
+      <AppWrapper>child</AppWrapper>
+    </AuthProvider>
+  );
+};
 
 describe('determineLessonToResume', () => {
   beforeEach(() => {
@@ -80,17 +92,20 @@ describe('AppWrapper resume link', () => {
   it('hides resume link when no progress exists', () => {
     getStoredLessonIds.mockReturnValue([]);
 
-    render(<AppWrapper>child</AppWrapper>);
+    renderWithProviders();
 
     expect(screen.queryByText('Resume')).not.toBeInTheDocument();
   });
 
-  it('shows resume link pointing to the determined lesson', () => {
+  it('shows resume link pointing to the determined lesson', async () => {
     getStoredLessonIds.mockReturnValue([2]);
     determineLessonToResume.mockReturnValue(2);
 
-    render(<AppWrapper>child</AppWrapper>);
+    renderWithProviders();
 
+    await waitFor(() => {
+      expect(screen.queryByText('Resume')).toBeInTheDocument();
+    });
     const resumeLink = screen.getByRole('link', { name: 'Resume' });
     expect(resumeLink).toHaveAttribute('href', '/lessons/2');
   });

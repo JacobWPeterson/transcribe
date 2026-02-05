@@ -1,6 +1,5 @@
 import { type ReactElement, useEffect, useRef } from 'react';
-
-import { useTheme } from '../../contexts/ThemeContext';
+import { useTheme } from '@hooks/useTheme';
 
 import styles from './Confetti.module.scss';
 
