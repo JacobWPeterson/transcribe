@@ -178,6 +178,19 @@
           }
         }
 
+        .DisabledLink {
+          color: theme.$grey04;
+          cursor: not-allowed;
+          display: block;
+        }
+
+        .DisabledNote {
+          font-size: theme.$fontSizeSmallest;
+          color: theme.$grey04;
+          font-style: italic;
+          display: block;
+        }
+
         > a {
           display: flex;
           color: theme.$primary03;

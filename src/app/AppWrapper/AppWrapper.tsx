@@ -119,9 +119,16 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
               </>
             )}
             <div className={styles.Divider} />
-            <div className={styles.DropdownItem}>
-              <a href="/dashboard">Dashboard</a>
-            </div>
+            {user ? (
+              <div className={styles.DropdownItem}>
+                <a href="/dashboard">Dashboard</a>
+              </div>
+            ) : (
+              <div className={styles.DropdownItem} title="Account required">
+                <span className={styles.DisabledLink}>Dashboard</span>
+                <span className={styles.DisabledNote}>Account required</span>
+              </div>
+            )}
           </NavDropdown>
           <NavDropdown title="Help" id="collapsible-nav-dropdown" className={styles.NavDropdown}>
             <div className={styles.DropdownItem}>

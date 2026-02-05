@@ -11,6 +11,27 @@ import { loadLessonProgressSync } from '@utils/storageSync';
 
 import { Dashboard } from './Dashboard';
 
+// Mock Supabase auth to return a user
+vi.mock('@config/supabase', () => ({
+  supabase: {
+    auth: {
+      getSession: vi.fn().mockResolvedValue({
+        data: {
+          session: {
+            user: { id: 'test-user', email: 'test@example.com' }
+          }
+        }
+      }),
+      onAuthStateChange: vi.fn(callback => {
+        callback(null, {
+          user: { id: 'test-user', email: 'test@example.com' }
+        });
+        return { data: { subscription: { unsubscribe: vi.fn() } } };
+      })
+    }
+  }
+}));
+
 // Mock the storage sync utilities
 vi.mock('@utils/storageSync', () => ({
   loadLessonProgressSync: vi.fn(),
@@ -67,7 +88,7 @@ describe('Dashboard', () => {
     renderWithRouter(<Dashboard />);
 
     // Wait for async data loading
-    await screen.findByRole('heading', { name: 'Progress Dashboard', level: 1 });
+    await screen.findByRole('heading', { name: 'Progress dashboard', level: 1 });
     expect(screen.getByRole('button', { name: 'Report' })).toBeInTheDocument();
 
     // Summary cards
@@ -306,7 +327,7 @@ describe('Dashboard', () => {
       renderWithRouter(<Dashboard />);
 
       // Wait for data to load first
-      await screen.findByRole('heading', { name: 'Progress Dashboard', level: 1 });
+      await screen.findByRole('heading', { name: 'Progress dashboard', level: 1 });
 
       // Check that progress bars are rendered (using aria-hidden attribute)
       const progressBars = document.querySelectorAll('[aria-hidden="true"]');

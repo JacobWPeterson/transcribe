@@ -1,7 +1,7 @@
 import { type ReactElement, useEffect, useRef, useState } from 'react';
 import { Download } from 'react-feather';
 import { jsPDF } from 'jspdf';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { Confetti } from '@components/Confetti/Confetti';
 import { PDFErrorBoundary } from '@components/ErrorBoundary/SpecializedErrorBoundaries';
 import type { Manifest } from '@files/manifests';
@@ -58,8 +58,9 @@ const computeLessonSummary = async (
 };
 
 export const Dashboard = (): ReactElement => {
+  const navigate = useNavigate();
   const { settings } = useTheme();
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const dashboardRef = useRef<HTMLDivElement>(null);
   const [showConfetti, setShowConfetti] = useState(false);
   const [data, setData] = useState<{
@@ -81,6 +82,13 @@ export const Dashboard = (): ReactElement => {
       return false;
     }
   });
+
+  // Redirect if not authenticated
+  useEffect(() => {
+    if (!authLoading && !user) {
+      navigate('/');
+    }
+  }, [authLoading, user, navigate]);
 
   const handleDownloadPDF = (): void => {
     try {
@@ -165,11 +173,15 @@ export const Dashboard = (): ReactElement => {
     return (
       <div className={styles.Wrapper}>
         <div className={styles.Contents}>
-          <h1 className={styles.Title}>Progress Dashboard</h1>
+          <h1 className={styles.Title}>Progress dashboard</h1>
           <p>Loading progress data...</p>
         </div>
       </div>
     );
+  }
+
+  if (!user || authLoading) {
+    return <></>;
   }
 
   return (
@@ -178,7 +190,7 @@ export const Dashboard = (): ReactElement => {
       <div className={styles.Wrapper}>
         <div className={styles.Contents} ref={dashboardRef}>
           <div className={styles.HeaderRow}>
-            <h1 className={styles.Title}>Progress Dashboard</h1>
+            <h1 className={styles.Title}>Progress dashboard</h1>
             <PDFErrorBoundary>
               <button
                 className={styles.DownloadButton}

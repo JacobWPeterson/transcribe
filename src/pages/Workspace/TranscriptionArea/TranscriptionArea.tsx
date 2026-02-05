@@ -400,14 +400,20 @@ export const TranscriptionArea = ({
                 <ArrowRight size={18} />
               </button>
             ) : (
-              <a
-                aria-label="results dashboard"
-                className={styles.Button}
-                href="/dashboard"
-                id="dashboardButton"
-              >
-                Dashboard
-              </a>
+              <>
+                {user ? (
+                  <a
+                    aria-label="results dashboard"
+                    className={styles.Button}
+                    href="/dashboard"
+                    id="dashboardButton"
+                  >
+                    Dashboard
+                  </a>
+                ) : (
+                  <div className={styles.DummyButton} />
+                )}
+              </>
             )}
           </div>
         </div>
