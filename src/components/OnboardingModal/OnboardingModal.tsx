@@ -230,9 +230,8 @@ export const OnboardingModal = ({
   return (
     <Modal
       isOpen={isOpen}
-      handleClose={handleFinish}
+      onClose={handleFinish}
       header="Getting started"
-      isCloseDisabled={false}
       classes={styles.OnboardingModal}
     >
       <div className={styles.Content}>

@@ -100,7 +100,7 @@ export const AuthModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} handleClose={onClose} header={getHeader()} isCloseDisabled={loading}>
+    <Modal isOpen={isOpen} onClose={onClose} header={getHeader()} isCloseDisabled={loading}>
       <div className={styles.AuthModal}>
         {error && <div className={styles.Error}>{error}</div>}
         {message && <div className={styles.Message}>{message}</div>}

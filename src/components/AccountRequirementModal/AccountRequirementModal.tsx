@@ -15,9 +15,8 @@ export const AccountRequirementModal = ({
 }: AccountRequirementModalProps): ReactElement => {
   return (
     <Modal
-      handleClose={onClose}
+      onClose={onClose}
       header={'Notice'}
-      isCloseDisabled={false}
       isOpen={isOpen}
       classes={styles.AccountRequirementModal}
     >
