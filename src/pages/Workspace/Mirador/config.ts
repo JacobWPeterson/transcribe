@@ -1,4 +1,4 @@
-import { getThemeColor } from '../../../utils/cssVariables';
+import { getThemeColor } from '@utils/cssVariables';
 
 const primaryColor = getThemeColor('primary03');
 const secondaryColor = getThemeColor('secondary03');

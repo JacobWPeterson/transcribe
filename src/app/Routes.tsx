@@ -1,16 +1,18 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router';
 import type { ReactElement } from 'react';
-
-import { ManifestSets } from '../files/manifests';
-import { Home } from '../pages/Home/Home';
-import { Workspace } from '../pages/Workspace/Workspace';
-import { Glossary } from '../pages/Help/Glossary/Glossary';
-import { Guide } from '../pages/Help/Guide/Guide';
-import { Resources } from '../pages/Help/Resources/Resources';
-import { About } from '../pages/About/About';
-import { E404 } from '../pages/E404/E404';
-import onlineResources from '../files/onlineResources';
-import { Dashboard } from '../pages/Dashboard/Dashboard';
+import { ManifestSets } from '@files/manifests';
+import { Home } from '@pages/Home/Home';
+import { Workspace } from '@pages/Workspace/Workspace';
+import { Glossary } from '@pages/Help/Glossary/Glossary';
+import { Guide } from '@pages/Help/Guide/Guide';
+import { Resources } from '@pages/Help/Resources/Resources';
+import { About } from '@pages/About/About';
+import { E404 } from '@pages/E404/E404';
+import { Confirm } from '@pages/Auth/Confirm';
+import { UpdatePassword } from '@pages/Auth/UpdatePassword';
+import { Account } from '@pages/Account/Account';
+import onlineResources from '@files/onlineResources';
+import { Dashboard } from '@pages/Dashboard/Dashboard';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +22,9 @@ const router = createBrowserRouter(
       <Route path="UoEDiv" element={<Workspace set={ManifestSets.UoEDiv} />} />
       <Route path="UoEDiv/:id" element={<Workspace set={ManifestSets.UoEDiv} />} />
       <Route path="lessons/:id" element={<Workspace set={ManifestSets.CORE} />} />
+      <Route path="auth/confirm" element={<Confirm />} />
+      <Route path="auth/update-password" element={<UpdatePassword />} />
+      <Route path="account" element={<Account />} />
       <Route path="glossary" element={<Glossary />} />
       <Route path="guide" element={<Guide />} />
       <Route

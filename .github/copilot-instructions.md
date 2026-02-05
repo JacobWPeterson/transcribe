@@ -31,7 +31,7 @@ Purpose: Help AI agents be immediately productive by explaining architecture, wo
 
 ## Project Conventions
 
-- **CSS Modules**: Every component has a colocated `.module.scss` file (e.g., `Alert.tsx` + `Alert.module.scss`). Import as `import styles from "./Alert.module.scss"` and apply classes via `styles.ClassName`. Global vars via `@use "@styles/theme"` (sass mixins/variables).
+- **CSS Modules**: Every component has a colocated `.module.scss` file (e.g., `Alert.tsx` + `Alert.module.scss`). Import as `import styles from "./Alert.module.scss"` and apply classes via `styles.ClassName`. Global vars via `@use "@styles/theme"` (sass mixins/variables). Prefer CSS custom properties for theming. Prefer defined measurements for font sizes from `src/styles/theme.scss`. Prefer color variables from `theme.scss` (avoid hardcoded colors). Prefer defined padding/margin variables from over relative units like rem or em.
 - **Testing**: `.test.tsx` files colocated next to components. Use `@testing-library/react` + `jsdom`. Tests import component and call `render()`, then query DOM with `screen.getBy*()`. Setup in `vitestSetup.ts` (auto-cleanup after each test).
 - **State Management**: React hooks (`useState`, `useEffect`, `useCallback`, `useContext`). No Redux/external store except Mirador's internal store (accessed via `miradorInstance.store.getState()`).
 - **Forms**: `react-hook-form` used in `TranscriptionArea` for input handling (see `SingleLine.tsx` for example pattern).

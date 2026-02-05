@@ -4,9 +4,9 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import pluralize from 'pluralize';
 import classnames from 'classnames';
+import glosses from '@files/glosses';
+import type { Line } from '@files/manifests';
 
-import glosses from '../../../../files/glosses';
-import type { Line } from '../../../../files/manifests';
 import evaluateSubmission from '../validators';
 
 import styles from './SingleLine.module.scss';
