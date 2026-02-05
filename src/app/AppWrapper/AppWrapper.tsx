@@ -1,6 +1,6 @@
 import type { PropsWithChildren, ReactElement } from 'react';
 import { useEffect, useState } from 'react';
-import { User } from 'react-feather';
+import { Home, User } from 'react-feather';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AuthModal } from '@components/AuthModal/AuthModal';
 import { AuthMode } from '@components/AuthModal/authModal.enum';
@@ -104,6 +104,9 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
       <div className={styles.Navbar}>
         <a className={styles.Brand} href="/">
           Xeirographa
+        </a>
+        <a className={styles.BrandIcon} aria-label="home" href="/">
+          <Home size={settings.fontSize === 'L' ? 22 : 18} />
         </a>
         <div className={styles.NavButtons}>
           <NavDropdown title="Lessons" id="collapsible-nav-dropdown" className={styles.NavDropdown}>

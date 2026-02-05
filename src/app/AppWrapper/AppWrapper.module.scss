@@ -39,6 +39,18 @@
       @media (width <= 600px) {
         font-size: theme.$fontSizeLargest;
       }
+
+      @media (width <= 450px) {
+        display: none;
+      }
+    }
+
+    .BrandIcon {
+      color: theme.$primary03;
+
+      @media (width > 450px) {
+        display: none;
+      }
     }
 
     .NavButtons {
@@ -172,7 +184,6 @@
           &:focus,
           &:hover {
             border-radius: 1px;
-
             outline: 2px solid theme.$primary03;
             outline-offset: 2px;
           }
