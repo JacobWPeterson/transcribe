@@ -3,11 +3,17 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import manifests, { ManifestSets } from '@files/manifests';
 import { AuthProvider } from '@contexts/AuthProvider';
+import * as useAuthModule from '@hooks/useAuth';
+import type { User, AuthError } from '@supabase/supabase-js';
 
-import { LessonStatus } from './SingleLine/singleLine.enum';
 import { TranscriptionArea } from './TranscriptionArea';
+import { LessonStatus } from './SingleLine/singleLine.enum';
 
 const mockChangeManuscript = vi.fn();
+
+vi.mock('@hooks/useAuth', () => ({
+  useAuth: vi.fn()
+}));
 
 // Helper to render with AuthProvider
 const renderWithAuth = (component: React.ReactElement): RenderResult => {
@@ -18,6 +24,29 @@ describe('TranscriptionArea', () => {
   beforeEach(() => {
     // Clear localStorage before each test to ensure clean state
     localStorage.clear();
+    vi.spyOn(useAuthModule, 'useAuth').mockReturnValue({
+      user: null,
+      session: undefined,
+      loading: false,
+      signUp: function (
+        _email: string,
+        _password: string
+      ): Promise<{ user: User | null; error: AuthError | null }> {
+        throw new Error('Function not implemented.');
+      },
+      signIn: function (
+        _email: string,
+        _password: string
+      ): Promise<{ user: User | null; error: AuthError | null }> {
+        throw new Error('Function not implemented.');
+      },
+      signOut: function (): Promise<{ error: AuthError | null }> {
+        throw new Error('Function not implemented.');
+      },
+      resetPassword: function (_email: string): Promise<{ error: AuthError | null }> {
+        throw new Error('Function not implemented.');
+      }
+    });
   });
 
   afterEach(() => {
@@ -65,6 +94,89 @@ describe('TranscriptionArea', () => {
     expect(screen.getByRole('button', { name: 'Next' })).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Next' }));
     expect(mockChangeManuscript).toHaveBeenCalledWith('next');
+  });
+
+  it('does not show the download button for guests', () => {
+    vi.spyOn(useAuthModule, 'useAuth').mockReturnValue({
+      user: null,
+      session: undefined,
+      loading: false,
+      signUp: function (
+        _email: string,
+        _password: string
+      ): Promise<{ user: User | null; error: AuthError | null }> {
+        throw new Error('Function not implemented.');
+      },
+      signIn: function (
+        _email: string,
+        _password: string
+      ): Promise<{ user: User | null; error: AuthError | null }> {
+        throw new Error('Function not implemented.');
+      },
+      signOut: function (): Promise<{ error: AuthError | null }> {
+        throw new Error('Function not implemented.');
+      },
+      resetPassword: function (_email: string): Promise<{ error: AuthError | null }> {
+        throw new Error('Function not implemented.');
+      }
+    });
+
+    renderWithAuth(
+      <TranscriptionArea
+        changeManuscript={mockChangeManuscript}
+        numberOfLessons={3}
+        lessonNumber={1}
+        manifest={manifests[ManifestSets.CORE][1]}
+        set={ManifestSets.CORE}
+      />
+    );
+
+    expect(screen.queryByRole('button', { name: 'Report' })).not.toBeInTheDocument();
+  });
+
+  it('shows the download button for authenticated users', () => {
+    vi.spyOn(useAuthModule, 'useAuth').mockReturnValue({
+      user: {
+        id: 'user-1',
+        email: 'test@example.com',
+        app_metadata: undefined,
+        user_metadata: undefined,
+        aud: '',
+        created_at: ''
+      },
+      session: undefined,
+      loading: false,
+      signUp: function (
+        _email: string,
+        _password: string
+      ): Promise<{ user: User | null; error: AuthError | null }> {
+        throw new Error('Function not implemented.');
+      },
+      signIn: function (
+        _email: string,
+        _password: string
+      ): Promise<{ user: User | null; error: AuthError | null }> {
+        throw new Error('Function not implemented.');
+      },
+      signOut: function (): Promise<{ error: AuthError | null }> {
+        throw new Error('Function not implemented.');
+      },
+      resetPassword: function (_email: string): Promise<{ error: AuthError | null }> {
+        throw new Error('Function not implemented.');
+      }
+    });
+
+    renderWithAuth(
+      <TranscriptionArea
+        changeManuscript={mockChangeManuscript}
+        numberOfLessons={3}
+        lessonNumber={1}
+        manifest={manifests[ManifestSets.CORE][1]}
+        set={ManifestSets.CORE}
+      />
+    );
+
+    expect(screen.getByRole('button', { name: 'Report' })).toBeInTheDocument();
   });
 
   it('should render correctly for middle lesson', async () => {

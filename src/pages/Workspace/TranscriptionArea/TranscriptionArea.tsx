@@ -380,16 +380,18 @@ export const TranscriptionArea = ({
             ) : (
               <div className={styles.DummyButton} />
             )}
-            <PDFErrorBoundary>
-              <button
-                className={classNames(styles.Button, styles.Download)}
-                onClick={handleDownloadPDF}
-                id="downloadButton"
-              >
-                Report
-                <Download className={styles.DownloadIcon} size={14} />
-              </button>
-            </PDFErrorBoundary>
+            {user && (
+              <PDFErrorBoundary>
+                <button
+                  className={classNames(styles.Button, styles.Download)}
+                  onClick={handleDownloadPDF}
+                  id="downloadButton"
+                >
+                  Report
+                  <Download className={styles.DownloadIcon} size={14} />
+                </button>
+              </PDFErrorBoundary>
+            )}
             {lessonNumber < numberOfLessons ? (
               <button
                 aria-label="Next"
