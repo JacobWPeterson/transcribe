@@ -1,5 +1,5 @@
-import { type ReactElement, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { type ReactElement, useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router';
 import { useAuth } from '@hooks/useAuth';
 import { supabase } from '@config/supabase';
 import { Modal } from '@components/Modal/Modal';
@@ -9,12 +9,21 @@ import styles from './Account.module.scss';
 
 export const Account = (): ReactElement => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { user, loading, resetPassword } = useAuth();
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [isResettingPassword, setIsResettingPassword] = useState(false);
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [deletionConfirmed, setDeletionConfirmed] = useState(false);
+
+  // Check for deletion confirmation in URL params
+  useEffect(() => {
+    if (searchParams.get('deletion') === 'confirmed') {
+      setDeletionConfirmed(true);
+    }
+  }, [searchParams]);
 
   if (loading) {
     return (
@@ -25,6 +34,28 @@ export const Account = (): ReactElement => {
   }
 
   if (!user) {
+    if (deletionConfirmed) {
+      return (
+        <div className={styles.Container}>
+          <div className={styles.Card}>
+            <h1>Account deleted</h1>
+            <div className={classNames(styles.Alert, styles.AlertSuccess)}>
+              <p>
+                You have been signed out and your account and all associated data have been
+                permanently deleted.
+              </p>
+            </div>
+            <button
+              className={classNames(styles.Button, styles.PrimaryButton)}
+              onClick={() => navigate('/')}
+            >
+              Return to home
+            </button>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className={styles.Container}>
         <div className={styles.Card}>
@@ -71,24 +102,26 @@ export const Account = (): ReactElement => {
     setIsDeletingAccount(true);
 
     try {
-      // Sign out the user
-      const { error: signOutError } = await supabase.auth.signOut();
+      // Call the delete_user() PostgreSQL function
+      // This function uses SECURITY DEFINER to safely delete the authenticated user
+      const { error: deleteError } = await supabase.rpc('delete_user');
+
+      if (deleteError) {
+        throw deleteError;
+      }
+
+      // Sign out the user after successful deletion
+      const { error: signOutError } = await supabase.auth.signOut({ scope: 'global' });
       if (signOutError) {
         throw signOutError;
       }
 
-      // Note: Deleting user account requires admin API, which can't be called from client.
-      // The user should request account deletion through support or admin dashboard.
-      // For now, we'll sign them out and show a message.
-      setSuccess('Account deletion request submitted. You have been signed out.');
-
-      setTimeout(() => {
-        navigate('/');
-      }, 2000);
+      // Redirect to confirmation view
+      navigate('/account?deletion=confirmed', { replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unexpected error occurred');
-    } finally {
       setIsDeletingAccount(false);
+    } finally {
       setShowDeleteConfirmation(false);
     }
   };
@@ -131,7 +164,7 @@ export const Account = (): ReactElement => {
         <div className={styles.Section}>
           <div className={classNames(styles.Alert, styles.AlertError)}>
             <strong>Warning:</strong> Deleting your account is permanent and cannot be undone. All
-            your data will be deleted.
+            your data will be deleted immediately.
           </div>
           <button
             className={classNames(styles.Button, styles.DangerButton)}
