@@ -85,3 +85,21 @@ CREATE TRIGGER update_lesson_progress_updated_at
   BEFORE UPDATE ON public.lesson_progress
   FOR EACH ROW
   EXECUTE FUNCTION update_updated_at_column();
+
+-- Function to delete user data + auth user record
+CREATE OR REPLACE FUNCTION delete_user()
+RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+DECLARE
+  _uid uuid;
+BEGIN
+  _uid := auth.uid();
+
+  DELETE FROM public.lesson_progress WHERE user_id = _uid;
+  DELETE FROM public.user_settings WHERE user_id = _uid;
+  DELETE FROM auth.users WHERE id = _uid;
+END;
+$$;

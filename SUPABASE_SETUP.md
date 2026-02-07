@@ -74,7 +74,40 @@ For production, keep email confirmation enabled and configure:
 - SMTP settings under **Authentication** → **Email Templates**
 - Customize email templates as needed
 
-### 5. Test the Setup
+### 5. Account Deletion
+
+The app includes a self-service account deletion flow. This requires a Postgres function
+that deletes user-owned rows and the auth user record.
+
+1. In your Supabase project dashboard, go to **SQL Editor**
+2. Click "New Query"
+3. Run the function below (or re-run `supabase-schema.sql`):
+
+```sql
+CREATE OR REPLACE FUNCTION delete_user()
+RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+DECLARE
+   _uid uuid;
+BEGIN
+   _uid := auth.uid();
+
+   DELETE FROM public.lesson_progress WHERE user_id = _uid;
+   DELETE FROM public.user_settings WHERE user_id = _uid;
+   DELETE FROM auth.users WHERE id = _uid;
+END;
+$$;
+```
+
+4. Confirm the function exists in **Database → Functions**
+
+**Client behavior:** the app calls `supabase.rpc('delete_user')`, then signs out globally and
+redirects to a confirmation screen.
+
+### 6. Test the Setup
 
 1. Start the development server:
 
@@ -164,11 +197,20 @@ lesson_id TEXT
 answers JSONB (line_number → user_input)
 status JSONB (line_number → CORRECT|INCORRECT|INCOMPLETE)
 require_spaces BOOLEAN
-last_updated TIMESTAMPTZ
+updated_at TIMESTAMPTZ
 created_at TIMESTAMPTZ
 
 UNIQUE(user_id, lesson_set, lesson_id)
 ```
+
+### `delete_user()`
+
+```sql
+delete_user() RETURNS void
+```
+
+Deletes the authenticated user's rows from `lesson_progress` and `user_settings`, then
+removes the user from `auth.users`.
 
 ## Row Level Security (RLS)
 
@@ -237,18 +279,7 @@ All tables have RLS enabled with policies:
 5. ⚠️ **Rate limit auth endpoints** - Configure in Supabase dashboard → **Authentication** → **Rate Limits**
 6. ⚠️ **Use strong passwords** - Enforce via validation (currently 6+ chars, consider increasing)
 
-## Next Steps
-
-Once authentication is working, you can:
-
-1. Add social login (Google, GitHub) via Supabase providers
-2. Implement spaced repetition (use `lesson_progress.last_updated`)
-3. Add achievement system (new `user_achievements` table)
-4. Build collaborative features (shared lessons, leaderboards)
-5. Add analytics dashboard (aggregate queries on `lesson_progress`)
-
 ## Support
 
 - Supabase docs: https://supabase.com/docs
 - Discord: https://discord.supabase.com
-- GitHub issues: [your-repo]/issues
