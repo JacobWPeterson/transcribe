@@ -102,17 +102,23 @@ npm run lint-fix
 ```
 src/
 ├── app/              # App shell (routing, navbar, settings)
-├── components/       # Reusable UI components
+├── components/       # Reusable UI components (Alert, Modal, ErrorBoundary, etc.)
+├── config/           # Configuration files and type definitions
+├── contexts/         # React contexts (ThemeContext, AuthContext)
+├── files/            # Lesson manifests, glosses, and resource definitions
+├── hooks/            # Custom React hooks (useAuth, etc.)
 ├── pages/            # Page components
-│   ├── Home/
+│   ├── Home/         # Landing page
+│   ├── Dashboard/    # User dashboard with progress tracking
 │   ├── Workspace/    # Main lesson interface
 │   │   ├── Mirador/           # IIIF viewer integration
 │   │   └── TranscriptionArea/ # Input & validation
-│   ├── Help/
-│   └── About/
-├── files/            # Lesson manifests and configurations
+│   ├── Help/         # Help pages (Guide, Glossary, Resources)
+│   ├── About/        # About page
+│   └── E404/         # 404 error page
+├── static/           # Static assets (fonts, icons, images, robots.txt)
 ├── styles/           # Global styles and theme variables
-└── utils/            # Utility functions
+└── utils/            # Utility functions (localStorage, validation, etc.)
 ```
 
 ## Contributing
