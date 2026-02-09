@@ -21,13 +21,9 @@ export const AccountRequirementModal = ({
       classes={styles.AccountRequirementModal}
     >
       <div className={styles.Content}>
-        <h2 className={styles.Heading}>Beginning March 1st</h2>
         <p className={styles.MainText}>
-          To help us support more users and improve your experience, we're transitioning to
-          requiring accounts for saving lesson progress and downloading reports.
-        </p>
-        <p className={styles.MainText}>
-          You can create an account anytime from the top navigation menu.
+          To support more users and improve your experience, we're transitioning to requiring
+          accounts for saving lesson progress and downloading reports.
         </p>
         <div className={styles.Details}>
           <h3 className={styles.Subheading}>What's changing?</h3>
@@ -49,6 +45,15 @@ export const AccountRequirementModal = ({
           <p className={styles.ReasonText}>
             Accounts allow us to provide better support, sync your progress across devices, and
             offer you more personalized learning features in the future.
+          </p>
+          <h3 className={styles.Subheading}>When?</h3>
+          <p className={styles.ReasonText}>
+            This change will take effect on <strong>March 1st</strong>.
+          </p>
+          <h3 className={styles.Subheading}>What to do?</h3>
+          <p className={styles.ReasonText}>
+            Create an account from the top navigation menu. Your current progress will be migrated
+            automatically.
           </p>
         </div>
         <button
