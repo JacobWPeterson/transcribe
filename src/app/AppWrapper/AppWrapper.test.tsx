@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import type { RenderResult } from '@testing-library/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { AuthProvider } from '@contexts/AuthProvider';
+import { MigrationProvider } from '@contexts/MigrationProvider';
 
 import { AppWrapper } from './AppWrapper';
 
@@ -55,7 +56,9 @@ vi.mock('../../utils/storageSync', () => ({
 const renderWithProviders = (): RenderResult => {
   return render(
     <AuthProvider>
-      <AppWrapper>child</AppWrapper>
+      <MigrationProvider>
+        <AppWrapper>child</AppWrapper>
+      </MigrationProvider>
     </AuthProvider>
   );
 };
