@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import manifests, { ManifestSets } from '@files/manifests';
 import { AuthProvider } from '@contexts/AuthProvider';
+import { MigrationProvider } from '@contexts/MigrationProvider';
 import * as useAuthModule from '@hooks/useAuth';
 import type { User, AuthError } from '@supabase/supabase-js';
 
@@ -15,9 +16,13 @@ vi.mock('@hooks/useAuth', () => ({
   useAuth: vi.fn()
 }));
 
-// Helper to render with AuthProvider
+// Helper to render with AuthProvider and MigrationProvider
 const renderWithAuth = (component: React.ReactElement): RenderResult => {
-  return render(<AuthProvider>{component}</AuthProvider>);
+  return render(
+    <AuthProvider>
+      <MigrationProvider>{component}</MigrationProvider>
+    </AuthProvider>
+  );
 };
 
 describe('TranscriptionArea', () => {
