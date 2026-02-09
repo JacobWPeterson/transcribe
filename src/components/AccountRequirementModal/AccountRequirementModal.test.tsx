@@ -11,7 +11,7 @@ describe('AccountRequirementModal', () => {
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     // Check for the main content text
     expect(
-      screen.getByText(/To help us support more users and improve your experience/)
+      screen.getByText(/To support more users and improve your experience/)
     ).toBeInTheDocument();
   });
 

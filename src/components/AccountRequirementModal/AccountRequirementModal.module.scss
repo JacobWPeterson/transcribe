@@ -2,6 +2,7 @@
 
 .AccountRequirementModal {
   max-width: 600px;
+  max-height: 90%;
 }
 
 .Content {
@@ -10,33 +11,28 @@
   align-items: center;
   gap: 12px;
   padding: 12px 18px;
+  overflow: auto;
 }
 
 .MainText {
   font-size: theme.$fontSizeDefault;
   color: theme.$text;
-  text-align: center;
   margin: 0;
 }
 
 .Details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   width: 100%;
   background-color: theme.$grey01;
   border-radius: 8px;
-  text-align: left;
-}
-
-.Heading {
-  color: theme.$primary03;
-  font-size: theme.$fontSizeLargest;
-  font-weight: 600;
-  margin: 0;
 }
 
 .Subheading {
   font-size: theme.$fontSizeLarger;
   font-weight: 600;
-  margin: 0 0 12px;
+  margin: 0;
 }
 
 .ChangeList {
@@ -54,8 +50,12 @@
 }
 
 .ReasonText {
-  margin: 0;
+  margin: 0 0 6px;
   line-height: 1.6;
+
+  strong {
+    color: theme.$primary03;
+  }
 }
 
 .PrimaryButton {
