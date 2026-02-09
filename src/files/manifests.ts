@@ -325,7 +325,7 @@ const manifests: ManifestSet = {
           text: 'β περι των αναιρεθεντων παιδιων'
         },
         {
-          text: 'γ πρωτοσ ιωαννησ εκηρυξεν βασιλειαν ουνω',
+          text: 'γ πρωτοσ ιωαννησ εκηρυξεν βασιλειαν ουνων',
           caption: 'The end of this line features a nomen sacrum plus final nu.'
         },
         {
