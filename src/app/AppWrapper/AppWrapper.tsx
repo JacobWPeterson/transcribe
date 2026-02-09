@@ -8,6 +8,7 @@ import { ContactModal } from '@components/ContactModal/ContactModal';
 import { SettingsMenu } from '@components/SettingsMenu/SettingsMenu';
 import { useAuth } from '@hooks/useAuth';
 import { useTheme } from '@hooks/useTheme';
+import { useMigration } from '@hooks/useMigration';
 import { ManifestSets } from '@files/manifests';
 import {
   migrateLocalProgressToSupabase,
@@ -25,6 +26,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
   const [resumeLessonId, setResumeLessonId] = useState<number | null>(null);
   const { settings } = useTheme();
   const { user, signOut, loading: authLoading } = useAuth();
+  const { setIsMigrating } = useMigration();
 
   // Migrate localStorage data to Supabase when user first signs in
   useEffect(() => {
@@ -33,7 +35,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
       const hasMigrated = localStorage.getItem(migrationKey);
 
       if (!hasMigrated) {
-        migrateLocalProgressToSupabase(user)
+        migrateLocalProgressToSupabase(user, setIsMigrating)
           .then(() => {
             localStorage.setItem(migrationKey, 'true');
           })
@@ -42,7 +44,7 @@ export const AppWrapper = ({ children }: PropsWithChildren): ReactElement => {
           });
       }
     }
-  }, [user]);
+  }, [user, setIsMigrating]);
 
   // Load saved lesson IDs and determine lesson to resume
   useEffect(() => {
