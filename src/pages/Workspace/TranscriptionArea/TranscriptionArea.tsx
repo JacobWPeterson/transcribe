@@ -9,6 +9,7 @@ import {
 import { StatusReport } from '@components/StatusReport/StatusReport';
 import type { Line, Manifest, ManifestSets } from '@files/manifests';
 import { useAuth } from '@hooks/useAuth';
+import { useMigration } from '@hooks/useMigration';
 import { buildDefaultLessonStatus } from '@utils/lessonStatus';
 import { loadLessonProgressSync, saveLessonProgressSync, STORAGE_PREFIX } from '@utils/storageSync';
 
@@ -34,6 +35,7 @@ export const TranscriptionArea = ({
 }: TranscriptionAreaProps): ReactElement => {
   const { lines, instruction } = manifest;
   const { user } = useAuth();
+  const { isMigrating } = useMigration();
 
   // Initialize with defaults; useEffect will load actual values from sync storage
   const [requireSpaces, setRequireSpaces] = useState<boolean>(false);
@@ -61,7 +63,8 @@ export const TranscriptionArea = ({
       clearTimeout(debounceTimeoutRef.current);
     }
     debounceTimeoutRef.current = setTimeout(() => {
-      if (isLoadingProgressRef.current || skipNextSaveRef.current) {
+      // Skip saves during migration to prevent race conditions
+      if (isLoadingProgressRef.current || skipNextSaveRef.current || isMigrating) {
         return;
       }
       const status = lessonsStatusRef.current;
@@ -84,7 +87,7 @@ export const TranscriptionArea = ({
         }
       }
     }, 500);
-  }, []);
+  }, [isMigrating]);
 
   useEffect(() => {
     // Keep refs in sync with latest props
@@ -230,6 +233,49 @@ export const TranscriptionArea = ({
     loadProgress();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id]);
+
+  // After migration completes, reload lesson data from Supabase to ensure consistency
+  useEffect(() => {
+    if (!isMigrating && userRef.current?.id === user?.id) {
+      const loadProgress = async (): Promise<void> => {
+        if (debounceTimeoutRef.current) {
+          clearTimeout(debounceTimeoutRef.current);
+        }
+        skipNextSaveRef.current = true;
+        setIsLoadingProgress(true);
+        try {
+          const savedProgress = await loadLessonProgressSync(
+            user,
+            setRef.current,
+            lessonNumberRef.current
+          );
+          if (savedProgress && Object.entries(savedProgress.answers).length) {
+            setLessonsStatus(savedProgress.status);
+            setSavedAnswers(savedProgress.answers);
+            setRequireSpaces(savedProgress.requireSpaces);
+            lessonsStatusRef.current = savedProgress.status;
+            savedAnswersRef.current = savedProgress.answers;
+            requireSpacesRef.current = savedProgress.requireSpaces;
+            try {
+              const key = `${STORAGE_PREFIX}${setRef.current}-${lessonNumberRef.current}`;
+              localStorage.setItem(key, JSON.stringify(savedProgress));
+            } catch (error) {
+              console.warn('Failed to update localStorage after migration:', error);
+            }
+            skipNextSaveRef.current = true;
+            // eslint-disable-next-line no-console
+            console.log('Reloaded lesson data after migration completed');
+          }
+        } catch (error) {
+          console.warn('Error reloading lesson progress after migration:', error);
+        } finally {
+          setIsLoadingProgress(false);
+        }
+      };
+
+      loadProgress();
+    }
+  }, [isMigrating, user]);
 
   // Keep refs updated when state changes
   useEffect(() => {

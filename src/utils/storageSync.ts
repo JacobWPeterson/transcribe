@@ -199,9 +199,15 @@ export const getStoredLessonIdsSync = async (
 
 /**
  * Migrate localStorage progress to Supabase for authenticated user
+ * @param user - The authenticated user
+ * @param onMigrationStateChange - Optional callback to notify when migration starts/completes
  */
-export const migrateLocalProgressToSupabase = async (user: User): Promise<void> => {
+export const migrateLocalProgressToSupabase = async (
+  user: User,
+  onMigrationStateChange?: (isMigrating: boolean) => void
+): Promise<void> => {
   console.log('Starting migration of localStorage data to Supabase...');
+  onMigrationStateChange?.(true);
 
   try {
     const keys = Object.keys(localStorage);
@@ -217,13 +223,25 @@ export const migrateLocalProgressToSupabase = async (user: User): Promise<void> 
         const progress: LessonProgress = JSON.parse(stored);
 
         // Extract set and lessonId from key (format: transcribe-progress-{set}-{id})
-        const parts = key.replace(STORAGE_PREFIX, '').split('-');
-        if (parts.length < 2) {
-          continue;
+        // More robust parsing: extract everything after STORAGE_PREFIX, then match known manifest sets
+        const afterPrefix = key.replace(STORAGE_PREFIX, '');
+
+        let set: ManifestSets | null = null;
+        let lessonId: string | null = null;
+
+        // Check for known manifest sets by trying to match from the start
+        for (const manifestSet of Object.values(ManifestSets)) {
+          if (afterPrefix.startsWith(manifestSet + '-')) {
+            set = manifestSet;
+            lessonId = afterPrefix.replace(manifestSet + '-', '');
+            break;
+          }
         }
 
-        const lessonId = parts.pop()!;
-        const set = parts.join('-') as ManifestSets;
+        if (!set || !lessonId || isNaN(Number(lessonId))) {
+          console.warn(`Failed to parse lesson ID from key: ${key} (afterPrefix: ${afterPrefix})`);
+          continue;
+        }
 
         // Upload to Supabase
         await supabase.from('lesson_progress').upsert(
@@ -269,8 +287,10 @@ export const migrateLocalProgressToSupabase = async (user: User): Promise<void> 
     }
 
     console.log('Migration completed successfully');
+    onMigrationStateChange?.(false);
   } catch (error) {
     console.error('Migration failed:', error);
+    onMigrationStateChange?.(false);
     throw error;
   }
 };
