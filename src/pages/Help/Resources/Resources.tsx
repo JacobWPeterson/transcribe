@@ -1,7 +1,7 @@
 import { Fragment, type ReactElement } from 'react';
+import type { ResourceCategories } from '@files/onlineResources';
 
 import styles from '../Help.module.scss';
-import type { ResourceCategories } from '../../../files/onlineResources';
 
 interface ResourcesProps {
   resources: ResourceCategories[];

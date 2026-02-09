@@ -1,13 +1,18 @@
 import { type ReactElement, useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router';
-
-import type { ManifestSets } from '../../files/manifests';
-import manifests from '../../files/manifests';
-import { E404 } from '../E404/E404';
-import { Alert } from '../../components/Alert/Alert';
-import { ExternalContentErrorBoundary } from '../../components/ErrorBoundary/ExternalContentErrorBoundary';
-import { OnboardingModal } from '../../components/OnboardingModal/OnboardingModal';
-import { hasSeenOnboarding } from '../../utils/localStorage';
+import { Alert } from '@components/Alert/Alert';
+import { ExternalContentErrorBoundary } from '@components/ErrorBoundary/ExternalContentErrorBoundary';
+import { OnboardingModal } from '@components/OnboardingModal/OnboardingModal';
+import { AccountRequirementModal } from '@components/AccountRequirementModal/AccountRequirementModal';
+import type { ManifestSets } from '@files/manifests';
+import manifests from '@files/manifests';
+import { useAuth } from '@hooks/useAuth';
+import {
+  hasSeenOnboardingSync,
+  hasSeenAccountRequirementSync,
+  markAccountRequirementAsSeenSync
+} from '@utils/storageSync';
+import { E404 } from '@pages/E404/E404';
 
 import { TranscriptionArea } from './TranscriptionArea/TranscriptionArea';
 import { Mirador } from './Mirador/index';
@@ -21,11 +26,12 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
   const currentManifest = manifestSet[id];
   const [pageNumber, setPageNumber] = useState<number>();
   const [showWrongPageAlert, setShowWrongPageAlert] = useState<boolean>(false);
+  const { user } = useAuth();
 
   const tutorialParam = searchParams.get('tutorial');
   const skipMarkAsSeen = tutorialParam === 'true';
-  const shouldShowOnboarding = skipMarkAsSeen || !hasSeenOnboarding();
-  const [showOnboarding, setShowOnboarding] = useState<boolean>(shouldShowOnboarding);
+  const [showOnboarding, setShowOnboarding] = useState<boolean>(false);
+  const [showAccountRequirement, setShowAccountRequirement] = useState<boolean>(false);
 
   const canvasIndex = currentManifest?.canvasIndex;
   const indexAdjustment = currentManifest?.canvasIndexToPageNumberAdj || 0;
@@ -38,6 +44,40 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
     }
     setShowWrongPageAlert(false);
   }, [pageNumber]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadOnboardingStatus = async (): Promise<void> => {
+      const hasSeen = await hasSeenOnboardingSync(user);
+      if (isMounted) {
+        setShowOnboarding(skipMarkAsSeen || !hasSeen);
+      }
+    };
+
+    loadOnboardingStatus();
+
+    return (): void => {
+      isMounted = false;
+    };
+  }, [user, skipMarkAsSeen]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadAccountRequirementStatus = async (): Promise<void> => {
+      const hasSeen = await hasSeenAccountRequirementSync();
+      if (isMounted) {
+        setShowAccountRequirement(!hasSeen);
+      }
+    };
+
+    loadAccountRequirementStatus();
+
+    return (): void => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     setShowWrongPageAlert(false);
@@ -66,12 +106,21 @@ export const Workspace = ({ set }: { set: ManifestSets }): ReactElement => {
     }
   };
 
+  const handleAccountRequirementClose = async (): Promise<void> => {
+    setShowAccountRequirement(false);
+    await markAccountRequirementAsSeenSync();
+  };
+
   return (
     <div className={styles.WorkspacePageWrapper}>
       <OnboardingModal
         isOpen={showOnboarding}
         onClose={handleOnboardingClose}
         skipMarkAsSeen={skipMarkAsSeen}
+      />
+      <AccountRequirementModal
+        isOpen={showAccountRequirement}
+        onClose={handleAccountRequirementClose}
       />
       <div className={styles.InvalidDevice}>
         <img src="/images/cog.svg" alt="Rotate device to landscape" className={styles.Image} />

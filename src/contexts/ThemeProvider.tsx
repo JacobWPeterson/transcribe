@@ -1,26 +1,9 @@
 import type { PropsWithChildren, ReactElement } from 'react';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { saveUserSettingsSync, loadUserSettingsSync } from '@utils/storageSync';
+import { useAuth } from '@hooks/useAuth';
 
-export type FontSize = 'S' | 'M' | 'L';
-
-export interface ThemeSettings {
-  darkMode: boolean;
-  fontSize: FontSize;
-  highContrast: boolean;
-  reducedMotion: boolean;
-}
-
-interface ThemeContextType {
-  settings: ThemeSettings;
-  toggleDarkMode: () => void;
-  setFontSize: (size: FontSize) => void;
-  toggleHighContrast: () => void;
-  toggleReducedMotion: () => void;
-}
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-const STORAGE_KEY = 'transcribe-theme-settings';
+import { ThemeContext, THEME_STORAGE_KEY, type ThemeSettings, type FontSize } from './ThemeContext';
 
 const getSystemReducedMotion = (): boolean => {
   if (typeof window === 'undefined') {
@@ -37,9 +20,11 @@ const defaultSettings: ThemeSettings = {
 };
 
 export const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => {
+  const { user, loading: authLoading } = useAuth();
+  const [isLoadingFromSupabase, setIsLoadingFromSupabase] = useState(false);
   const [settings, setSettings] = useState<ThemeSettings>(() => {
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
+      const stored = localStorage.getItem(THEME_STORAGE_KEY);
       if (stored) {
         return { ...defaultSettings, ...JSON.parse(stored) };
       }
@@ -56,13 +41,39 @@ export const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => 
     }
   });
 
+  // Load settings from Supabase when user is authenticated
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-    } catch {
-      // Ignore localStorage errors
+    if (!authLoading && user) {
+      setIsLoadingFromSupabase(true);
+      loadUserSettingsSync(user)
+        .then(syncedSettings => {
+          if (syncedSettings) {
+            setSettings({
+              darkMode: syncedSettings.darkMode,
+              fontSize: syncedSettings.fontSize,
+              highContrast: syncedSettings.highContrast,
+              reducedMotion: syncedSettings.reducedMotion
+            });
+          }
+        })
+        .finally(() => {
+          setIsLoadingFromSupabase(false);
+        });
     }
-  }, [settings]);
+  }, [user, authLoading]);
+
+  // Save settings to both localStorage and Supabase
+  useEffect(() => {
+    // Skip saving if we're currently loading from Supabase
+    if (isLoadingFromSupabase) {
+      return;
+    }
+
+    saveUserSettingsSync(user, settings).catch(error => {
+      console.warn('Failed to save settings:', error);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settings, user?.id]);
 
   const toggleDarkMode = (): void => {
     setSettings(prev => ({ ...prev, darkMode: !prev.darkMode }));
@@ -87,12 +98,4 @@ export const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => 
       {children}
     </ThemeContext.Provider>
   );
-};
-
-export const useTheme = (): ThemeContextType => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
 };

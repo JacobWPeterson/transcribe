@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
-
-import { LessonStatus } from '../../pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum';
+import { LessonStatus } from '@pages/Workspace/TranscriptionArea/SingleLine/singleLine.enum';
 
 import { StatusReport } from './StatusReport';
 

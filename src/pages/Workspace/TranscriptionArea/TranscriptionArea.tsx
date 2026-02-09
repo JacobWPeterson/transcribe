@@ -1,16 +1,16 @@
-import { type ReactElement, useEffect, useRef, useState } from 'react';
-import { jsPDF } from 'jspdf';
+import { type ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
+import { jsPDF } from 'jspdf';
 import { ArrowLeft, ArrowRight, Download } from 'react-feather';
-
-import type { Line, Manifest, ManifestSets } from '../../../files/manifests';
-import { StatusReport } from '../../../components/StatusReport/StatusReport';
 import {
   LocalStorageErrorBoundary,
   PDFErrorBoundary
-} from '../../../components/ErrorBoundary/SpecializedErrorBoundaries';
-import { loadLessonProgress, saveLessonProgress } from '../../../utils/localStorage';
-import { buildDefaultLessonStatus } from '../../../utils/lessonStatus';
+} from '@components/ErrorBoundary/SpecializedErrorBoundaries';
+import { StatusReport } from '@components/StatusReport/StatusReport';
+import type { Line, Manifest, ManifestSets } from '@files/manifests';
+import { useAuth } from '@hooks/useAuth';
+import { buildDefaultLessonStatus } from '@utils/lessonStatus';
+import { loadLessonProgressSync, saveLessonProgressSync, STORAGE_PREFIX } from '@utils/storageSync';
 
 import { SingleLine } from './SingleLine/SingleLine';
 import styles from './TranscriptionArea.module.scss';
@@ -33,16 +33,10 @@ export const TranscriptionArea = ({
   set
 }: TranscriptionAreaProps): ReactElement => {
   const { lines, instruction } = manifest;
+  const { user } = useAuth();
 
-  // Initialize from localStorage to avoid a false first toggle
-  const [requireSpaces, setRequireSpaces] = useState<boolean>(() => {
-    try {
-      const saved = loadLessonProgress(set, lessonNumber);
-      return saved?.requireSpaces ?? false;
-    } catch {
-      return false;
-    }
-  });
+  // Initialize with defaults; useEffect will load actual values from sync storage
+  const [requireSpaces, setRequireSpaces] = useState<boolean>(false);
   const transcriptionAreaRef = useRef<HTMLDivElement>(null);
   const inputContainerRef = useRef<HTMLDivElement>(null);
   const debounceTimeoutRef = useRef<NodeJS.Timeout>(null);
@@ -51,36 +45,25 @@ export const TranscriptionArea = ({
   const requireSpacesRef = useRef<boolean>(false);
   const setRef = useRef<ManifestSets>(set);
   const lessonNumberRef = useRef<number>(lessonNumber);
-  const [lessonsStatus, setLessonsStatus] = useState<Record<number, LessonStatus>>(() => {
-    try {
-      const saved = loadLessonProgress(set, lessonNumber);
-      if (saved && Object.entries(saved.answers).length) {
-        return saved.status;
-      }
-    } catch {
-      /* empty */
-    }
-    return buildDefaultLessonStatus(lines);
-  });
+  const userRef = useRef<typeof user>(user);
+  const [isLoadingProgress, setIsLoadingProgress] = useState<boolean>(false);
+  const isLoadingProgressRef = useRef<boolean>(false);
+  const skipNextSaveRef = useRef<boolean>(false);
+  const [lessonsStatus, setLessonsStatus] = useState<Record<number, LessonStatus>>(() =>
+    buildDefaultLessonStatus(lines)
+  );
 
-  const [savedAnswers, setSavedAnswers] = useState<Record<number, string>>(() => {
-    try {
-      const saved = loadLessonProgress(set, lessonNumber);
-      if (saved && Object.entries(saved.answers).length) {
-        return saved.answers;
-      }
-    } catch {
-      /* empty */
-    }
-    return {};
-  });
+  const [savedAnswers, setSavedAnswers] = useState<Record<number, string>>({});
 
   // Debounced save function
-  const scheduleSave = (): void => {
+  const scheduleSave = useCallback((): void => {
     if (debounceTimeoutRef.current) {
       clearTimeout(debounceTimeoutRef.current);
     }
     debounceTimeoutRef.current = setTimeout(() => {
+      if (isLoadingProgressRef.current || skipNextSaveRef.current) {
+        return;
+      }
       const status = lessonsStatusRef.current;
       if (status) {
         const progress = {
@@ -90,13 +73,18 @@ export const TranscriptionArea = ({
           lastUpdated: Date.now()
         };
         try {
-          saveLessonProgress(setRef.current, lessonNumberRef.current, progress);
+          saveLessonProgressSync(
+            userRef.current,
+            setRef.current,
+            lessonNumberRef.current,
+            progress
+          );
         } catch (error) {
           console.error('Error saving lesson progress:', error);
         }
       }
     }, 500);
-  };
+  }, []);
 
   useEffect(() => {
     // Keep refs in sync with latest props
@@ -105,42 +93,143 @@ export const TranscriptionArea = ({
   }, [set, lessonNumber]);
 
   useEffect(() => {
-    // Load saved progress when lesson or set changes
-    try {
-      const savedProgress = loadLessonProgress(set, lessonNumber);
-      if (savedProgress && Object.entries(savedProgress.answers).length) {
-        setLessonsStatus(savedProgress.status);
-        setSavedAnswers(savedProgress.answers);
-        setRequireSpaces(savedProgress.requireSpaces);
-        lessonsStatusRef.current = savedProgress.status;
-        savedAnswersRef.current = savedProgress.answers;
-        requireSpacesRef.current = savedProgress.requireSpaces;
-      } else {
-        // Initialize with default values if no saved progress
-        const lessonsStatusObj = buildDefaultLessonStatus(lines);
+    userRef.current = user;
+  }, [user]);
 
+  useEffect(() => {
+    isLoadingProgressRef.current = isLoadingProgress;
+  }, [isLoadingProgress]);
+
+  useEffect(() => {
+    // Load saved progress when lesson or set changes
+    const loadProgress = async (): Promise<void> => {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+      skipNextSaveRef.current = true;
+      setIsLoadingProgress(true);
+      try {
+        const savedProgress = await loadLessonProgressSync(user, set, lessonNumber);
+        if (savedProgress && Object.entries(savedProgress.answers).length) {
+          setLessonsStatus(savedProgress.status);
+          setSavedAnswers(savedProgress.answers);
+          setRequireSpaces(savedProgress.requireSpaces);
+          lessonsStatusRef.current = savedProgress.status;
+          savedAnswersRef.current = savedProgress.answers;
+          requireSpacesRef.current = savedProgress.requireSpaces;
+          try {
+            const key = `${STORAGE_PREFIX}${set}-${lessonNumber}`;
+            localStorage.setItem(key, JSON.stringify(savedProgress));
+          } catch (error) {
+            console.warn('Failed to update localStorage progress:', error);
+          }
+          skipNextSaveRef.current = true;
+        } else {
+          // Initialize with default values if no saved progress
+          const lessonsStatusObj = buildDefaultLessonStatus(lines);
+
+          setLessonsStatus(lessonsStatusObj);
+          setSavedAnswers({});
+          setRequireSpaces(false);
+          lessonsStatusRef.current = lessonsStatusObj;
+          savedAnswersRef.current = {};
+          requireSpacesRef.current = false;
+          try {
+            const key = `${STORAGE_PREFIX}${set}-${lessonNumber}`;
+            localStorage.setItem(
+              key,
+              JSON.stringify({
+                answers: {},
+                status: lessonsStatusObj,
+                requireSpaces: false,
+                lastUpdated: Date.now()
+              })
+            );
+          } catch (error) {
+            console.warn('Failed to save default progress to localStorage:', error);
+          }
+          skipNextSaveRef.current = true;
+        }
+      } catch (error) {
+        console.error('Error loading lesson progress:', error);
+        // Initialize with default values if loading failed
+        const lessonsStatusObj = buildDefaultLessonStatus(lines);
         setLessonsStatus(lessonsStatusObj);
         setSavedAnswers({});
         setRequireSpaces(false);
         lessonsStatusRef.current = lessonsStatusObj;
         savedAnswersRef.current = {};
         requireSpacesRef.current = false;
+        try {
+          const key = `${STORAGE_PREFIX}${set}-${lessonNumber}`;
+          localStorage.setItem(
+            key,
+            JSON.stringify({
+              answers: {},
+              status: lessonsStatusObj,
+              requireSpaces: false,
+              lastUpdated: Date.now()
+            })
+          );
+        } catch (error) {
+          console.warn('Failed to save default progress to localStorage after error:', error);
+        }
+        skipNextSaveRef.current = true;
       }
-    } catch (error) {
-      console.error('Error loading lesson progress:', error);
-      // Initialize with default values if loading failed
-      const lessonsStatusObj = buildDefaultLessonStatus(lines);
-      setLessonsStatus(lessonsStatusObj);
-      setSavedAnswers({});
-      setRequireSpaces(false);
-      lessonsStatusRef.current = lessonsStatusObj;
-      savedAnswersRef.current = {};
-      requireSpacesRef.current = false;
-    }
-    if (inputContainerRef.current) {
-      inputContainerRef.current.scrollTop = 0;
-    }
+      if (inputContainerRef.current) {
+        inputContainerRef.current.scrollTop = 0;
+      }
+      setIsLoadingProgress(false);
+    };
+
+    loadProgress();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [set, lessonNumber, lines]);
+
+  // Effect to handle user sign in/out: reload if user ID changes
+  useEffect(() => {
+    const userId = user?.id;
+    if (!userId) {
+      return; // Skip if no user
+    }
+
+    const loadProgress = async (): Promise<void> => {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+      skipNextSaveRef.current = true;
+      setIsLoadingProgress(true);
+      try {
+        const savedProgress = await loadLessonProgressSync(
+          user,
+          setRef.current,
+          lessonNumberRef.current
+        );
+        if (savedProgress && Object.entries(savedProgress.answers).length) {
+          setLessonsStatus(savedProgress.status);
+          setSavedAnswers(savedProgress.answers);
+          setRequireSpaces(savedProgress.requireSpaces);
+          lessonsStatusRef.current = savedProgress.status;
+          savedAnswersRef.current = savedProgress.answers;
+          requireSpacesRef.current = savedProgress.requireSpaces;
+          try {
+            const key = `${STORAGE_PREFIX}${setRef.current}-${lessonNumberRef.current}`;
+            localStorage.setItem(key, JSON.stringify(savedProgress));
+          } catch (error) {
+            console.warn('Failed to update localStorage progress on user change:', error);
+          }
+          skipNextSaveRef.current = true;
+        }
+      } catch (error) {
+        console.error('Error loading lesson progress on user change:', error);
+      } finally {
+        setIsLoadingProgress(false);
+      }
+    };
+
+    loadProgress();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id]);
 
   // Keep refs updated when state changes
   useEffect(() => {
@@ -157,13 +246,23 @@ export const TranscriptionArea = ({
 
   // Save progress with debouncing whenever it changes
   useEffect(() => {
+    // Skip saving if we're currently loading from Supabase
+    if (isLoadingProgress) {
+      return;
+    }
+
+    if (skipNextSaveRef.current) {
+      skipNextSaveRef.current = false;
+      return;
+    }
+
     scheduleSave();
     return (): void => {
       if (debounceTimeoutRef.current) {
         clearTimeout(debounceTimeoutRef.current);
       }
     };
-  }, [lessonsStatus, savedAnswers, requireSpaces]);
+  }, [lessonsStatus, savedAnswers, requireSpaces, scheduleSave, isLoadingProgress]);
 
   const handleClick = (type: 'next' | 'previous'): void => {
     changeManuscript(type);
@@ -281,16 +380,18 @@ export const TranscriptionArea = ({
             ) : (
               <div className={styles.DummyButton} />
             )}
-            <PDFErrorBoundary>
-              <button
-                className={classNames(styles.Button, styles.Download)}
-                onClick={handleDownloadPDF}
-                id="downloadButton"
-              >
-                Report
-                <Download className={styles.DownloadIcon} size={14} />
-              </button>
-            </PDFErrorBoundary>
+            {user && (
+              <PDFErrorBoundary>
+                <button
+                  className={classNames(styles.Button, styles.Download)}
+                  onClick={handleDownloadPDF}
+                  id="downloadButton"
+                >
+                  Report
+                  <Download className={styles.DownloadIcon} size={14} />
+                </button>
+              </PDFErrorBoundary>
+            )}
             {lessonNumber < numberOfLessons ? (
               <button
                 aria-label="Next"
@@ -301,14 +402,20 @@ export const TranscriptionArea = ({
                 <ArrowRight size={18} />
               </button>
             ) : (
-              <a
-                aria-label="results dashboard"
-                className={styles.Button}
-                href="/dashboard"
-                id="dashboardButton"
-              >
-                Dashboard
-              </a>
+              <>
+                {user ? (
+                  <a
+                    aria-label="results dashboard"
+                    className={styles.Button}
+                    href="/dashboard"
+                    id="dashboardButton"
+                  >
+                    Dashboard
+                  </a>
+                ) : (
+                  <div className={styles.DummyButton} />
+                )}
+              </>
             )}
           </div>
         </div>

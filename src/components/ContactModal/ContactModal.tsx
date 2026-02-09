@@ -74,7 +74,7 @@ export const ContactModal = ({ show, onHide }: ContactModalProps): ReactElement 
   return (
     <Modal
       isOpen={show}
-      handleClose={handleCancel}
+      onClose={handleCancel}
       isCloseDisabled={isSending}
       header="Contact form"
       classes={classNames(styles.Modal, {

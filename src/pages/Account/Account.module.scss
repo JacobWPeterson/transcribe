@@ -1,0 +1,166 @@
+@use '@styles/theme';
+
+.Container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+.Card {
+  background-color: theme.$grey00;
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: theme.$primary03;
+  margin: 0 0 12px;
+}
+
+.CardHeading {
+  font-size: theme.$fontSizeLarger;
+  font-weight: 600;
+  color: theme.$primary03;
+  margin: 0 0 12px;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid theme.$primary03;
+}
+
+.Section {
+  margin-bottom: 12px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.Email {
+  word-break: break-all;
+}
+
+.Button {
+  padding: 6px 12px;
+  font-size: theme.$fontSizeSmaller;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.PrimaryButton {
+  background-color: theme.$secondary04;
+  color: white;
+
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
+    background-color: theme.$secondary05;
+  }
+}
+
+.SecondaryButton {
+  background-color: theme.$grey00;
+  color: theme.$primary03;
+  border: 1px solid theme.$primary03;
+
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
+    background-color: theme.$primary03;
+    color: theme.$grey00;
+  }
+}
+
+.DangerButton {
+  background-color: theme.$error;
+  color: white;
+
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
+    opacity: 0.8;
+  }
+}
+
+.Alert {
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  font-size: theme.$fontSizeSmaller;
+  line-height: 1.6;
+}
+
+.AlertSuccess {
+  background-color: var(--success-bg, #efe);
+  color: var(--success-text, #060);
+  border: 1px solid var(--success-border, #cfc);
+  font-weight: 600;
+}
+
+.AlertError {
+  background-color: var(--error-bg, #fee);
+  color: theme.$error;
+  border: 1px solid theme.$error;
+}
+
+.Loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: theme.$primary03;
+  font-size: theme.$fontSizeLarger;
+}
+
+.ModalBody {
+  padding: 18px;
+
+  .ModalDescription {
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+
+  .ModalList {
+    text-align: left;
+    display: inline-block;
+    color: theme.$primary03;
+    margin-bottom: 12px;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .ModalConfirmText {
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .ModalButtons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}
+
+.PasswordDescription {
+  margin-bottom: 12px;
+}

@@ -126,7 +126,7 @@ export const Guide = (): ReactElement => {
           </tbody>
         </table>
         <h2 className={styles.H2} id="greekKeyboard">
-          Adding a Greek Keyboard
+          Adding a Greek keyboard
         </h2>
         <p className={styles.GuideText}>
           Xeirographa requires using unicode Greek characters. There may be variations between
@@ -150,7 +150,6 @@ export const Guide = (): ReactElement => {
             Windows
           </a>
         </p>
-
         <h2 className={styles.H2}>How-to</h2>
         <p className={styles.GuideText}>
           The lesson page features two main areas: the image viewer and the transcription workspace.
@@ -221,6 +220,36 @@ export const Guide = (): ReactElement => {
           Please use the contact form linked in the footer below to report any errors or bugs you
           have found. For errors, please indicate the manuscript and line number. For bugs, please
           provide detailed replication steps.
+        </p>
+        <h2 className={styles.H2} id="creatingAccount">
+          Creating an account
+        </h2>
+        <p className={styles.GuideText}>
+          To save your progress across lessons and devices, you can create a free Xeirographa
+          account. Here&apos;s how to get started:
+        </p>
+        <h3 className={styles.H3}>Sign up</h3>
+        <p className={styles.GuideText}>
+          Click the <b>Sign Up</b> button in the top navigation bar. Enter your email address and
+          create a secure password. You&apos;ll receive a confirmation email at the address you
+          provided. If you don&apos;t receive the email, check your spam folder or use the resend
+          option on the sign-up page. Once your email is confirmed, click the <b>Log In</b> button
+          in the top navigation bar and enter your email and password to access your account.
+        </p>
+        <p className={styles.GuideText}>
+          All that is stored is your email (for login purposes) and your lesson progress. No other
+          personal information is collected and you will not receive any marketing emails.
+        </p>
+        <h3 className={styles.H3}>Saved progress</h3>
+        <p className={styles.GuideText}>
+          Once logged in, your lesson progress is automatically saved to your account. You can start
+          a lesson on one device and pick up where you left off on another.
+        </p>
+        <h3 className={styles.H3}>Forgot your password?</h3>
+        <p className={styles.GuideText}>
+          On the <b>Log In</b> page, click the <b>Forgot password?</b> link. Enter your email
+          address and you&apos;ll receive a password reset link. Follow the link to create a new
+          password.
         </p>
       </div>
     </div>

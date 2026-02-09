@@ -7,9 +7,9 @@ import { Portal } from '../Portal/Portal';
 import styles from './Modal.module.scss';
 
 interface ModalProps {
-  handleClose: () => void;
+  onClose: () => void;
   header?: string;
-  isCloseDisabled: boolean;
+  isCloseDisabled?: boolean;
   isOpen: boolean;
   classes?: string;
 }
@@ -17,19 +17,18 @@ interface ModalProps {
 export const Modal = ({
   children,
   classes,
-  handleClose,
+  onClose,
   header,
-  isCloseDisabled,
+  isCloseDisabled = false,
   isOpen
 }: PropsWithChildren<ModalProps>): ReactElement => {
   useEffect(() => {
-    const closeOnEscapeKey = (e: KeyboardEvent): void =>
-      e.key === 'Escape' ? handleClose() : null;
+    const closeOnEscapeKey = (e: KeyboardEvent): void => (e.key === 'Escape' ? onClose() : null);
     document.body.addEventListener('keydown', closeOnEscapeKey);
     return (): void => {
       document.body.removeEventListener('keydown', closeOnEscapeKey);
     };
-  }, [handleClose]);
+  }, [onClose]);
 
   if (!isOpen) {
     return null;
@@ -39,12 +38,12 @@ export const Modal = ({
     <Portal>
       <div
         className={styles.Modal}
-        onClick={isCloseDisabled ? (): void => {} : handleClose}
+        onClick={isCloseDisabled ? (): void => {} : onClose}
         onKeyDown={(e): void => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             if (!isCloseDisabled) {
-              handleClose();
+              onClose();
             }
           }
         }}
@@ -66,7 +65,7 @@ export const Modal = ({
               </h2>
             )}
             <button
-              onClick={handleClose}
+              onClick={onClose}
               className={styles.CloseButton}
               disabled={isCloseDisabled}
               aria-label="Close modal"

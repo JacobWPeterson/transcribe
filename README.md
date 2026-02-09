@@ -14,9 +14,11 @@ Available at [xeirographa.com](https://www.xeirographa.com)
 
 - **Interactive Manuscript Viewer**: IIIF-powered viewer (Mirador 4.0) for high-resolution manuscript images
 - **Guided Transcription Lessons**: Step-by-step exercises with instant feedback
-- **Progress Tracking**: Automatic saving of lesson progress to browser storage
+- **User Accounts & Cloud Sync**: Optional sign-up to sync progress across devices (uses Supabase)
+- **Progress Tracking**: Automatic saving of lesson progress (local or cloud)
 - **Accessibility**: Dark mode, high contrast, and adjustable font sizes
 - **Printable Reports**: Download a report for each lesson showing progress
+- **Guest Mode**: Use without an account; all data stored locally
 
 ## Tech Stack
 
@@ -38,6 +40,17 @@ Available at [xeirographa.com](https://www.xeirographa.com)
 ```bash
 npm install
 ```
+
+### Optional: Set Up User Authentication
+
+To enable user accounts and cloud sync:
+
+1. Follow the detailed setup guide: [SUPABASE_SETUP.md](SUPABASE_SETUP.md)
+2. Create a Supabase project
+3. Run the database schema
+4. Add environment variables to `.env`
+
+**Note**: The app works without this setup! Users can continue as guests with local-only storage.
 
 ### Development
 
@@ -89,17 +102,23 @@ npm run lint-fix
 ```
 src/
 ├── app/              # App shell (routing, navbar, settings)
-├── components/       # Reusable UI components
+├── components/       # Reusable UI components (Alert, Modal, ErrorBoundary, etc.)
+├── config/           # Configuration files and type definitions
+├── contexts/         # React contexts (ThemeContext, AuthContext)
+├── files/            # Lesson manifests, glosses, and resource definitions
+├── hooks/            # Custom React hooks (useAuth, etc.)
 ├── pages/            # Page components
-│   ├── Home/
+│   ├── Home/         # Landing page
+│   ├── Dashboard/    # User dashboard with progress tracking
 │   ├── Workspace/    # Main lesson interface
 │   │   ├── Mirador/           # IIIF viewer integration
 │   │   └── TranscriptionArea/ # Input & validation
-│   ├── Help/
-│   └── About/
-├── files/            # Lesson manifests and configurations
+│   ├── Help/         # Help pages (Guide, Glossary, Resources)
+│   ├── About/        # About page
+│   └── E404/         # 404 error page
+├── static/           # Static assets (fonts, icons, images, robots.txt)
 ├── styles/           # Global styles and theme variables
-└── utils/            # Utility functions
+└── utils/            # Utility functions (localStorage, validation, etc.)
 ```
 
 ## Contributing

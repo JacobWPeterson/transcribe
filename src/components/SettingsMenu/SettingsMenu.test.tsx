@@ -1,16 +1,18 @@
 import type { RenderResult } from '@testing-library/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
-import { ThemeProvider } from '../../contexts/ThemeContext';
+import { AuthProvider } from '@contexts/AuthProvider';
+import { ThemeProvider } from '@contexts/ThemeProvider';
 
 import { SettingsMenu } from './SettingsMenu';
 
-const renderWithThemeProvider = (): RenderResult => {
+const renderWithProviders = (): RenderResult => {
   return render(
-    <ThemeProvider>
-      <SettingsMenu />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <SettingsMenu />
+      </ThemeProvider>
+    </AuthProvider>
   );
 };
 
@@ -20,14 +22,14 @@ describe('SettingsMenu', () => {
   });
 
   it('should render the settings menu button', () => {
-    renderWithThemeProvider();
+    renderWithProviders();
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     expect(settingsButton).toBeInTheDocument();
   });
 
   it('should render all menu items when dropdown is opened', async () => {
     const user = userEvent.setup();
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -41,7 +43,7 @@ describe('SettingsMenu', () => {
 
   it('should toggle dark mode when dark mode checkbox is clicked', async () => {
     const user = userEvent.setup();
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -58,7 +60,7 @@ describe('SettingsMenu', () => {
 
   it('should toggle high contrast when high contrast checkbox is clicked', async () => {
     const user = userEvent.setup();
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -75,7 +77,7 @@ describe('SettingsMenu', () => {
 
   it('should disable dark mode checkbox when high contrast is enabled', async () => {
     const user = userEvent.setup();
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -94,7 +96,7 @@ describe('SettingsMenu', () => {
 
   it('should change font size when font size button is clicked', async () => {
     const user = userEvent.setup();
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -117,7 +119,7 @@ describe('SettingsMenu', () => {
 
   it('should show reset confirmation modal when reset button is clicked', async () => {
     const user = userEvent.setup();
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -135,7 +137,7 @@ describe('SettingsMenu', () => {
 
   it('should close modal when cancel button is clicked', async () => {
     const user = userEvent.setup();
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -159,7 +161,7 @@ describe('SettingsMenu', () => {
     localStorage.setItem('transcribe-progress-UoEDiv-2', 'test data 2');
     localStorage.setItem('other-key', 'other data');
 
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -203,7 +205,7 @@ describe('SettingsMenu', () => {
 
   it('should have proper accessibility labels', async () => {
     const user = userEvent.setup();
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -223,7 +225,7 @@ describe('SettingsMenu', () => {
 
   it('should update aria-label when dark mode is toggled', async () => {
     const user = userEvent.setup();
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -240,7 +242,7 @@ describe('SettingsMenu', () => {
 
   it('should update aria-label when high contrast is toggled', async () => {
     const user = userEvent.setup();
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -257,7 +259,7 @@ describe('SettingsMenu', () => {
 
   it('should toggle reduce motion when checkbox is clicked', async () => {
     const user = userEvent.setup();
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -293,7 +295,7 @@ describe('SettingsMenu', () => {
     }));
 
     const user = userEvent.setup();
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -324,7 +326,7 @@ describe('SettingsMenu', () => {
     localStorage.clear();
 
     const user = userEvent.setup();
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -341,7 +343,7 @@ describe('SettingsMenu', () => {
     const user = userEvent.setup();
     localStorage.clear();
 
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
@@ -356,7 +358,7 @@ describe('SettingsMenu', () => {
 
   it('should update aria-label when reduce motion is toggled', async () => {
     const user = userEvent.setup();
-    renderWithThemeProvider();
+    renderWithProviders();
 
     const settingsButton = screen.getByRole('button', { name: 'Settings' });
     await user.click(settingsButton);
